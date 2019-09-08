@@ -12,12 +12,18 @@ use DesInventar\Common\Version;
 
 class CommonController extends ApiController
 {
+    /**
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
+     */
     public function routes($app)
     {
         $container = $this->container;
-        $app->get('/version', function (Request $request, Response $response, $args) use ($container) {
-            $version = new Version($container->get('config')->flags['mode']);
-            return (new JsonApiResponse($response))->data($version->getVersionArray());
-        });
+        $app->get(
+            '/version',
+            function (Request $request, Response $response, $args) use ($container) {
+                $version = new Version($container->get('config')->flags['mode']);
+                return (new JsonApiResponse($response))->data($version->getVersionArray());
+            }
+        );
     }
 }

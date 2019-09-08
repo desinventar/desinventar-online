@@ -12,9 +12,17 @@
     "mode": "DESINVENTAR_FLAGS_MODE",
     "env": "DESINVENTAR_FLAGS_ENV"
   },
+  "api": {
+    "rate_limit": "DESINVENTAR_API_RATE_LIMIT",
+    "rate_window": "DESINVENTAR_API_RATE_WINDOW"
+  },
   "logger": {
     "file": "DESINVENTAR_LOGGER_FILE",
     "level": "DESINVENTAR_LOGGER_LEVEL"
+  },
+  "redis": {
+    "host": "DESINVENTAR_REDIS_HOST",
+    "port": "DESINVENTAR_REDIS_PORT"
   },
   "debug": {
     "request": "DESINVENTAR_DEBUG_REQUEST",

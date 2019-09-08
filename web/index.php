@@ -19,6 +19,9 @@ use Api\Helpers\LoggerMiddleware;
 use Api\Middleware\AuthMiddleware;
 use Api\Middleware\DevelMiddleware;
 
+use RateLimit\Middleware\RateLimitMiddleware;
+use RateLimit\RateLimiterFactory;
+
 use Api\Controllers\AdminController;
 use Api\Controllers\CommonController;
 use Api\Controllers\DevelController;
@@ -98,6 +101,14 @@ $container['errorHandler'] = function ($container) {
 };
 
 $app->add(new SessionMiddleware($container));
+
+$app->add(RateLimitMiddleware::createDefault(
+    RateLimiterFactory::createRedisBackedRateLimiter([
+        'host' => $config->redis['host'],
+        'port' => intval($config->redis['port']),
+    ], $config->api['rate_limit'], $config->api['rate_window'])
+));
+
 if ($config->debug['request']) {
     $app->add(new LoggerMiddleware($container));
 }

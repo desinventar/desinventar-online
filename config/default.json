@@ -24,6 +24,10 @@
     "auto_login": 0,
     "general_secure_login": 0
   },
+  "api": {
+    "rate_limit": 2000,
+    "rate_window": 60
+  },
   "logger": {
     "file": "php://stdout",
     "level": 100
@@ -39,6 +43,10 @@
     "db_user": "",
     "db_passwd": "",
     "db_dir": "/var/local/desinventar/db"
+  },
+  "redis": {
+    "host": "127.0.0.1",
+    "port": 6379
   },
   "portal": {
     "mode": "development",
