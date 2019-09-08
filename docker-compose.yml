@@ -1,15 +1,11 @@
-version: '3'
+version: '2.1'
 services:
   web:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./Dockerfile
     image: desinventar/online:latest
-    command: bash -c '(/opt/app/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
-    ports:
-      - "8080:80"
     volumes:
-      - .:/opt/app
       - /opt/app/vendor
       - /opt/app/node_modules
       - /opt/app/backend/express/node_modules
@@ -25,41 +21,13 @@ services:
       - DESINVENTAR_DEBUG_RESPONSE
       - DESINVENTAR_MAPS_USE_REMOTE_LAYERS
       - DESINVENTAR_MAPS_GOOGLE_API_KEY
-    depends_on:
-      - redis
-  devel:
-    image: desinventar/online:latest
-    command: bash -c '(/opt/app/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
-    ports:
-      - "8081:80"
-    volumes:
-      - .:/opt/app
-      - /opt/app/vendor
-      - /opt/app/node_modules
-      - /opt/app/backend/express/node_modules
-      - /var/local/desinventar:/var/local/desinventar
-    environment:
-      - NODE_ENV
-      - APP_ENV
-      - DESINVENTAR_FLAGS_MODE
-      - DESINVENTAR_MODE
-      - DESINVENTAR_LOGGER_FILE
-      - DESINVENTAR_LOGGER_LEVEL
-      - DESINVENTAR_PATHS_CACHEDIR
-      - DESINVENTAR_DEBUG_REQUEST
-      - DESINVENTAR_DEBUG_RESPONSE
-      - DESINVENTAR_MAPS_USE_REMOTE_LAYERS
-      - DESINVENTAR_MAPS_GOOGLE_API_KEY
-    depends_on:
-      - web
-      - redis
   portal:
-    image: desinventar/online:latest
-    command: bash -c '(/opt/app/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
+    build:
+      context: .
+      dockerfile: ./portal/Dockerfile
     ports:
       - "8090:80"
     volumes:
-      - .:/opt/app
       - /opt/app/vendor
       - /opt/app/node_modules
     environment:
@@ -71,40 +39,13 @@ services:
       - TEST_PORTAL_URL
       - DESINVENTAR_LOGGER_FILE
       - DESINVENTAR_LOGGER_LEVEL
-    depends_on:
-      - devel
-  api:
+  test:
     build:
       context: .
-      dockerfile: ./docker/express/Dockerfile
-    ports:
-      - "3000:3000"
-    volumes:
-      - .:/src
-      - /src/node_modules
-      - /src/backend/express/node_modules
-    env_file:
-      - backend/.env
-    environment:
-      - NODE_ENV
-    depends_on:
-      - mysql
-      - redis
-  mysql:
-    build:
-      context: ./
-      dockerfile: docker/mysql/Dockerfile
-    volumes:
-      - mysql_data:/var/lib/mysql
-    environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - "3306:3306"
+      dockerfile: docker/e2e-test/Dockerfile
   redis:
     build:
       context: .
       dockerfile: docker/redis/Dockerfile
     ports:
       - "6379:6379"
-volumes:
-  mysql_data:
