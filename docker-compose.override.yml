@@ -1,0 +1,48 @@
+version: '2.1'
+services:
+  web-base:
+    extends: web
+    command: bash -c '(/opt/app/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/opt/app
+  devel:
+    extends: web
+    ports:
+      - "8081:80"
+    volumes:
+      - /var/local/desinventar:/var/local/desinventar
+  portal:
+    command: bash -c '(/opt/app/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
+    volumes:
+      - .:/opt/app
+  api:
+    build:
+      context: .
+      dockerfile: ./docker/express/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/src
+      - /src/node_modules
+      - /src/backend/express/node_modules
+    env_file:
+      - backend/.env
+    environment:
+      - NODE_ENV
+    depends_on:
+      - mysql
+      - redis
+  mysql:
+    build:
+      context: ./
+      dockerfile: docker/mysql/Dockerfile
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "3306:3306"
+volumes:
+  mysql_data:

@@ -4,43 +4,48 @@ orbs:
 jobs:
   build:
     machine:
+      image: ubuntu-1604:201903-01
       docker_layer_caching: true
     steps:
       - checkout
       - run:
+          name: Remove non-needed files
+          command: |
+            rm docker-compose.override.yml
+      - run:
           name: Start container and verify it's working
           command: |
             set -x
-            docker-compose -f docker-compose-production.yml up -d
+            docker-compose up -d
             docker run --network project_default \
               appropriate/curl --retry 60 --retry-delay 4 --retry-connrefused --verbose http://web:80/common/version
           environment:
-            - DOCKER_CLIENT_TIMEOUT: 120
-            - COMPOSE_HTTP_TIMEOUT: 120
+            DOCKER_CLIENT_TIMEOUT: "120"
+            COMPOSE_HTTP_TIMEOUT: "120"
       - run:
           name: Validate Code
           command: |
-            docker-compose -f docker-compose-production.yml exec web sh -c 'make php && make js'
+            docker-compose exec web sh -c 'make php && make js'
       - run:
           name: Running unit tests
           command: |
-            docker-compose -f docker-compose-production.yml exec web sh -c './vendor/bin/phpunit'
+            docker-compose exec web sh -c './vendor/bin/phpunit'
       - run:
           name: Running portal api tests
           command: |
-            docker-compose -f docker-compose-production.yml exec test sh -c 'TEST_API_URL=http://web:80 ./node_modules/.bin/jest tests/api-portal'
+            docker-compose exec test sh -c 'TEST_API_URL=http://web:80 ./node_modules/.bin/jest tests/api-portal'
       - run:
           name: Running api tests
           command: |
-            docker-compose -f docker-compose-production.yml exec test sh -c 'TEST_API_URL=http://web:80 ./node_modules/.bin/jest tests/api-app'
+            docker-compose exec test sh -c 'TEST_API_URL=http://web:80 ./node_modules/.bin/jest tests/api-app'
       - run:
           name: Running portal tests
           command: |
-            docker-compose -f docker-compose-production.yml exec test sh -c 'TEST_PORTAL_URL=http://portal:80 TEST_PORTAL_USERNAME=root TEST_PORTAL_PASSWD=desinventar ./node_modules/.bin/testcafe firefox:headless tests/portal'
+            docker-compose exec test sh -c 'TEST_PORTAL_URL=http://portal:80 TEST_PORTAL_USERNAME=root TEST_PORTAL_PASSWD=desinventar ./node_modules/.bin/testcafe firefox:headless tests/portal'
       - run:
           name: Running e2e tests
           command: |
-            docker-compose -f docker-compose-production.yml exec test sh -c 'TEST_WEB_URL=http://web:80 ./node_modules/.bin/testcafe firefox:headless tests/e2e'
+            docker-compose exec test sh -c 'TEST_WEB_URL=http://web:80 ./node_modules/.bin/testcafe firefox:headless tests/e2e'
       - store_test_results:
           path: /tmp/test-results
       - zulip/status:
