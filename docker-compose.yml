@@ -8,7 +8,6 @@ services:
     volumes:
       - /opt/app/vendor
       - /opt/app/node_modules
-      - /opt/app/backend/express/node_modules
     environment:
       - NODE_ENV
       - APP_ENV

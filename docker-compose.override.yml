@@ -12,7 +12,10 @@ services:
     ports:
       - "8081:80"
     volumes:
+      - .:/opt/app
       - /var/local/desinventar:/var/local/desinventar
+      - /opt/app/vendor
+      - /opt/app/node_modules
   portal:
     command: bash -c '(/opt/app/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
     volumes:
