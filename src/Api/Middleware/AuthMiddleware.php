@@ -8,14 +8,16 @@ use DesInventar\Models\Role;
 
 class AuthMiddleware
 {
-    protected $session = null;
     protected $pdo = null;
+    protected $logger = null;
+    protected $session = null;
     protected $minRoleValue = Role::ROLE_NONE;
 
-    public function __construct(Segment $session, $pdo, $minRoleValue)
+    public function __construct($pdo, $logger, Segment $session, $minRoleValue)
     {
-        $this->session = $session;
         $this->pdo = $pdo;
+        $this->logger = $logger;
+        $this->session = $session;
         $this->minRoleValue = $minRoleValue;
     }
 
@@ -27,7 +29,7 @@ class AuthMiddleware
         }
         $routeInfo = $request->getAttribute('routeInfo', []);
         $regionId = isset($routeInfo[2]['regionId']) ?  $routeInfo[2]['regionId'] : '';
-        $role = new Role($this->pdo);
+        $role = new Role($this->pdo, $this->logger);
         $userRole = Role::NONE;
         if ($regionId !== '') {
             $userRole = $role->getUserRole($userId, $regionId);

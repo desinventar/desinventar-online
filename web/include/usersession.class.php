@@ -6,7 +6,7 @@ use DesInventar\Models\Session;
 use DesInventar\Models\Role;
 use DesInventar\Helpers\Session as AuraSession;
 use DesInventar\Legacy\Model\Region;
-use \PDO;
+use PDO;
 
 define('ROLE_OBSERVER', 1);
 define('ROLE_USER', 2);
@@ -41,7 +41,7 @@ class UserSession
         $this->UserRoleValue     = Role::ROLE_NONE;
         $this->config = $config;
         $this->q = new Query(null, $config->database);
-        $this->session = new Session($this->q->core);
+        $this->session = new Session($this->q->core, null); // @TODO: Use a real logger here
         if (!empty($this->q->core)) {
             $this->load($this->sSessionId);
         }
@@ -480,7 +480,8 @@ class UserSession
         if ($prmRegionId == '') {
             $prmRegionId = $this->RegionId;
         }
-        $UserRole = (new Role($this->q->core))->getUserRole($this->UserId, $prmRegionId);
+        // @TODO: Add a real logger here
+        $UserRole = (new Role($this->q->core, null))->getUserRole($this->UserId, $prmRegionId);
         if ($UserRole === Role::NONE && (new Region($this, $this->RegionId))->isPublic()) {
             $UserRole = Role::OBSERVER;
         }

@@ -45,8 +45,8 @@ class SessionController extends ApiController
             return (new JsonApiResponse($response))->data(
                 (new UserLoginAction(
                     $container->get('db')->getCoreConnection(),
-                    $container->get('session')->getSegment(''),
-                    $container->get('logger')
+                    $container->get('logger'),
+                    $container->get('session')->getSegment('')
                 ))->execute(
                     $body['username'],
                     $body['password']
@@ -58,6 +58,7 @@ class SessionController extends ApiController
             return (new JsonApiResponse($response))->data(
                 (new UserLogoutAction(
                     $container->get('db')->getCoreConnection(),
+                    $container->get('logger'),
                     $container->get('session')
                 ))->execute()
             );

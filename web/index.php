@@ -122,8 +122,9 @@ $app->group('/admin/{regionId}', function () use ($app) {
     return (new AdminController($container, $container->get('logger')))->routes($app);
 })->add(
     new AuthMiddleware(
-        $container->get('session')->getSegment(''),
         $container->get('db')->getCoreConnection(),
+        $container->get('logger'),
+        $container->get('session')->getSegment(''),
         Role::ROLE_ADMINREGION
     )
 );

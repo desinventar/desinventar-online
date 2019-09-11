@@ -8,12 +8,14 @@ use Aura\Session\Segment;
 class UserLogoutAction
 {
     protected $pdo = null;
+    protected $logger = null;
     protected $session = null;
     protected $segment = null;
 
-    public function __construct($pdo, $session)
+    public function __construct($pdo, $logger, $session)
     {
         $this->pdo = $pdo;
+        $this->logger = $logger;
         $this->session = $session;
         $this->segment = $session->getSegment('');
     }
