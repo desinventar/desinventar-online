@@ -5,6 +5,7 @@ namespace Test\Model;
 use PHPUnit\Framework\TestCase;
 
 use Test\Helpers\Database;
+use Test\Helpers\Logger;
 
 use DesInventar\Models\Session;
 
@@ -30,7 +31,7 @@ final class SessionTest extends TestCase
 
     public function testUserLogin()
     {
-        $session = new Session($this->conn);
+        $session = new Session($this->conn, Logger::logger());
         $this->assertEquals(true, $session->login('root', md5('desinventar')));
         $this->assertEquals(false, $session->login('root', md5('wrongpasswd')));
     }

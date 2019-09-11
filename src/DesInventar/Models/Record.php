@@ -8,14 +8,16 @@ use Aura\SqlQuery\QueryFactory;
 class Record
 {
     protected $pdo = null;
+    protected $logger = null;
     protected $adapter = null;
     protected $factory = null;
     protected $fieldMap = array();
     protected $fields = array();
 
-    public function __construct(ExtendedPdo $pdo, $adapter = 'sqlite')
+    public function __construct(ExtendedPdo $pdo, $logger, $adapter = 'sqlite')
     {
         $this->pdo = $pdo;
+        $this->logger = $logger;
         $this->adapter = $adapter;
         $this->factory = new QueryFactory($this->adapter);
     }
