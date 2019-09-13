@@ -338,6 +338,7 @@ function genColors() {
   var m1 = (z1 - a1) / cnt
   var m2 = (z2 - a2) / cnt
   var m3 = (z3 - a3) / cnt
+  var h1, h2, h3, val
   for (var i = 0; i <= cnt; i++) {
     h1 = dechex(a1 + m1 * i)
     h2 = dechex(a2 + m2 * i)
