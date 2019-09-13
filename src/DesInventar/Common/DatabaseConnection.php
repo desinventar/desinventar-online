@@ -12,6 +12,7 @@ class DatabaseConnection
     protected $config = null;
     protected $core = null;
     protected $base = null;
+    protected $conns = [];
 
     private function __construct($config)
     {
@@ -31,6 +32,18 @@ class DatabaseConnection
     public function getCoreConnection()
     {
         return $this->core;
+    }
+
+    public function getDbConnection($regionId)
+    {
+        $filename = $this->config['db_dir'] . '/database/' . $regionId . '/desinventar.db';
+        if (!$this->conns[$regionId]) {
+            if (!file_exists($filename)) {
+                throw new Exception('Database file not found for : ' . substr($regionId, 0, 40));
+            }
+            $this->conns[$regionId] = $this->openSqliteDatabase($filename);
+        }
+        return $this->conns[$regionId];
     }
 
     protected function openSqliteDatabase($filename)
