@@ -23,6 +23,7 @@ use RateLimit\Middleware\RateLimitMiddleware;
 use RateLimit\RateLimiterFactory;
 
 use Api\Controllers\AdminController;
+use Api\Controllers\AdminGeographyController;
 use Api\Controllers\CommonController;
 use Api\Controllers\DevelController;
 use Api\Controllers\MapsController;
@@ -119,7 +120,7 @@ $app->map(['GET', 'POST'], '/', function (Request $request, Response $response, 
 
 $app->group('/admin/{regionId}', function () use ($app) {
     $container = $app->getContainer();
-    return (new AdminController($container, $container->get('logger')))->routes($app);
+    (new AdminController($container, $container->get('logger')))->routes($app);
 })->add(
     new AuthMiddleware(
         $container->get('db')->getCoreConnection(),
@@ -132,6 +133,13 @@ $app->group('/admin/{regionId}', function () use ($app) {
 $app->group('/devel', function () use ($app) {
     $container = $app->getContainer();
     (new DevelController($container, $container->get('logger')))->routes($app);
+})->add(
+    new DevelMiddleware($container->get('logger'))
+);
+
+$app->group('/devel/{regionId}', function () use ($app) {
+    $container = $app->getContainer();
+    (new AdminGeographyController($container, $container->get('logger')))->routes($app);
 })->add(
     new DevelMiddleware($container->get('logger'))
 );
