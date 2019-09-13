@@ -1136,6 +1136,7 @@ function setDICardFromId(
 function setDICard(prmRegionId, arr) {
   var diform = null
   var myForm = null
+  var varName
   diform = document.getElementById('DICard')
   myForm = jQuery('div.Datacard')
 

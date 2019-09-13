@@ -25,13 +25,16 @@ function enadisField(lnow, lnext, val) {
 function fillColumn(lnow, lnext, exclude) {
   var sour = document.getElementById(lnow)
   var dest = document.getElementById(lnext)
+  var test
   // clean dest list
   for (var i = dest.length - 1; i >= 0; i--) {
     dest.remove(i)
   }
   for (var i = 0; i < sour.length; i++) {
-    if (exclude) test = !sour[i].selected
-    else test = true
+    test = true
+    if (exclude) {
+      test = !sour[i].selected
+    }
     if (test) {
       var opt = document.createElement('option')
       opt.value = sour[i].value
