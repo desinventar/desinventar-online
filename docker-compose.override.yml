@@ -2,13 +2,14 @@ version: '2.1'
 services:
   web-base:
     extends: web
-    command: bash -c '(/opt/app/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
+    command: bash -c 'composer install && (/opt/app/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
     ports:
       - "8080:80"
     volumes:
       - .:/opt/app
   devel:
     extends: web
+    command: bash -c 'composer install && (/opt/app/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
     ports:
       - "8081:80"
     volumes:
@@ -17,7 +18,7 @@ services:
       - /opt/app/vendor
       - /opt/app/node_modules
   portal:
-    command: bash -c '(/opt/app/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
+    command: bash -c 'composer install && (/opt/app/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
     volumes:
       - .:/opt/app
   api:
