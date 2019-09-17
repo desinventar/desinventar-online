@@ -116,8 +116,10 @@ function onReadyGeolevels() {
         numberOfFilesUploaded++
       }
     })
+    var areAllFilesUploaded = numberOfFilesUploaded === numberOfFileUploadControls
+    var isDbfFileUploaded = jQuery('input.filename[name="filename.DBF"]').val() !== ''
     if (numberOfFilesUploaded > 0) {
-      if (numberOfFilesUploaded < numberOfFileUploadControls) {
+      if (!isDbfFileUploaded && !areAllFilesUploaded) {
         jQuery('div.status .statusMissingFiles').show()
         return unhighlightGeoLevelFields()
       }
