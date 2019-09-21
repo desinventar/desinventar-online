@@ -1,5 +1,6 @@
 <?php
 use DesInventar\Common\ConfigLoader;
+use DesInventar\Helpers\LoggerHelper;
 
 if (! isset($_SERVER['DESINVENTAR_WEB'])) {
     $_SERVER['DESINVENTAR_WEB'] = dirname(dirname(__FILE__));
@@ -12,6 +13,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 $config = new ConfigLoader($_SERVER['DESINVENTAR_SRC'] . '/config');
 $config->paths['src_dir'] = $_SERVER['DESINVENTAR_SRC'];
+$logger = LoggerHelper::logger($config->logger);
 
 if (isset($_SERVER['HTTP_HOST'])) {
     // Online Modes (HTTP)
@@ -95,7 +97,7 @@ if ($config->flags['env'] != 'command') {
 }
 // 2009-01-15 (jhcaiced) Start by create/recover the session
 // information, even for anonymous users
-$us = new \DesInventar\Legacy\UserSession($SessionId, $config);
+$us = new \DesInventar\Legacy\UserSession($SessionId, $logger, $config);
 if (!$us->isConnected()) {
     // Validate that main database exists (core.db)
     showErrorMsg(debug_backtrace(), null, 'Cannot initialize database connection');

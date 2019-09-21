@@ -23,14 +23,12 @@ class UserSession
     private $session = null;
     public $RegionId = '';
     public $RegionLangIsoCode = 'eng';
+    protected $logger = null;
 
-    public function __construct($sSessionId = null, $config = array())
+    public function __construct($sSessionId, $logger, $config = array())
     {
-        if (!empty($sSessionId)) {
-            $this->sSessionId = $sSessionId;
-        } else {
-            $this->sSessionId = session_id();
-        }
+        $this->sSessionId = empty($sSessionId) ? session_id() : $sSessionId;
+        $this->logger = $logger;
         $this->UserId            = '';
         $this->LangIsoCode       = '';
         $this->RegionId          = 'core';
@@ -40,7 +38,7 @@ class UserSession
         $this->UserRole          = '';
         $this->UserRoleValue     = Role::ROLE_NONE;
         $this->config = $config;
-        $this->q = new Query(null, $config->database);
+        $this->q = new Query(null, $this->logger, $config->database);
         $this->session = new Session($this->q->core, null); // @TODO: Use a real logger here
         if (!empty($this->q->core)) {
             $this->load($this->sSessionId);

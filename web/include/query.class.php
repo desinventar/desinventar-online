@@ -3,8 +3,8 @@ namespace DesInventar\Legacy;
 
 use Aura\SqlQuery\QueryFactory;
 use Aura\Sql\ExtendedPdo;
-use \Pdo;
-use \Exception;
+use PDO;
+use Exception;
 
 class Query
 {
@@ -14,9 +14,11 @@ class Query
     public $DBFile = '';
     public $config = null;
     protected $queryFactory = null;
+    protected $logger;
 
-    public function __construct($region_id, $config)
+    public function __construct($region_id, $logger, $config)
     {
+        $this->logger = $logger;
         $this->config = $config;
         // Open core.db - Users, Regions, Auths..
         $this->core = $this->openSqliteDatabase($this->config['db_dir'] . '/main/core.db');
@@ -1371,13 +1373,18 @@ class Query
     // Count number of records in result
     public function genSQLSelectCount($whr)
     {
-        $sql = "
-            SELECT COUNT(D.DisasterId) as counter
-            FROM Disaster AS D, EEData AS E, Event AS V, Cause AS C, Geography AS G ";
-        if ($this->chkSQLWhere($whr)) {
-            return ($sql . $whr);
+        $query = $this->queryFactory->newSelect();
+        $query
+            ->cols(['COUNT(D.DisasterId) AS counter'])
+            ->from('Disaster AS D')
+            ->join('INNER', 'EEData AS E', 'D.DisasterId = E.DisasterId')
+            ->join('INNER', 'Event AS V', 'D.EventId = V.EventId')
+            ->join('INNER', 'Cause AS C', 'D.CauseId = C.CauseId')
+            ->join('INNER', 'Geography AS G', 'D.GeographyId = G.GeographyId');
+        if (!$this->chkSQLWhere($whr)) {
+            return false;
         }
-        return false;
+        return $query->getStatement() . ' ' . $whr;
     }
 
     // Generate SQL to data lists
