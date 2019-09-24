@@ -98,7 +98,6 @@ common.updateDatabaseList = CountryIsoCode => {
     function(data) {
       if (parseInt(data.Status) > 0) {
         var iCount = 0
-        var RegionId = ''
 
         // Hide everything at start...
         jQuery('.databaseTitle').hide()
@@ -128,8 +127,7 @@ common.updateDatabaseList = CountryIsoCode => {
             .addClass('alt')
             .off('click')
             .on('click', function() {
-              RegionId = jQuery(this).attr('id')
-              displayRegionInfo(RegionId)
+              displayRegionInfo(jQuery(this).attr('id'))
               return false
             })
           jQuery('#regionBlock').show()
