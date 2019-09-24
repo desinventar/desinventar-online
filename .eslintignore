@@ -1,6 +1,5 @@
 portal/web/external
 portal/web/scripts
-web/admin2/ajax.js
 web/external/clickmenu
 web/js/**
 !web/js/extraeffects.js
