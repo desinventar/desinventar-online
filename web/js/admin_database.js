@@ -120,7 +120,6 @@ function setRegionPA(
   prmRegionActive,
   prmRegionPublic
 ) {
-  mod = 'regionpa'
   jQuery('#regionpaaddsect').show()
   jQuery('#frmRegionEdit #RegionId').val(prmRegionId)
   jQuery('#frmRegionEdit #CountryIso').val(prmCountryIso)
