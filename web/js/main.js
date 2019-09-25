@@ -10,7 +10,6 @@
   onReadyGeography,
   onReadyGeolevels,
   onReadyDatabaseEvents,
-  onReadyDatabaseCauses,
   onReadyUserPermAdmin,
   onReadyCommon,
   onReadyUserLogin,
@@ -29,6 +28,7 @@ import mainExt from './main_ext'
 import databaseCreate from './database_create'
 import adminUsers from './admin_users'
 import adminDatabase from './admin_database'
+import databaseCauses from './database_causes'
 
 export default {
   init: onReadyMain
@@ -44,7 +44,7 @@ function onReadyMain() {
   onReadyGeography()
   onReadyGeolevels()
   onReadyDatabaseEvents()
-  onReadyDatabaseCauses()
+  databaseCauses.init()
   adminUsers.init()
   onReadyUserPermAdmin()
   onReadyCommon()

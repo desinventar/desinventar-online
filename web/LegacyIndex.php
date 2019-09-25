@@ -305,10 +305,6 @@ class LegacyIndex
                 return htmlspecialchars(json_encode($answer), ENT_NOQUOTES, 'UTF-8');
                 break;
             case 'causes':
-            case 'cmdDatabaseCauses':
-                $t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
-                return $t->fetch('main_database_causes.tpl');
-                break;
             case 'cmdDatabaseCausesGetList':
                 $answer = array();
                 $iReturn = ERR_NO_ERROR;

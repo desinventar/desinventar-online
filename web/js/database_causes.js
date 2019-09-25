@@ -1,4 +1,5 @@
-function onReadyDatabaseCauses() {
+function init() {
+  console.log('databaseCauses::init')
   //Attach main events
   jQuery('body').on('cmdDatabaseCausesShow', function() {
     doDatabaseCausesPopulateLists()
@@ -194,4 +195,8 @@ function doDatabaseCausesPopulateList(tbodyId, CauseList) {
   jQuery('#' + tbodyId + ' .CauseId').hide()
   jQuery('#' + tbodyId + ' .CausePredefined').hide()
   jQuery('#' + tbodyId + ' tr:odd').addClass('under')
+}
+
+export default {
+  init
 }
