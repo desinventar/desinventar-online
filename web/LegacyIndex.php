@@ -614,9 +614,6 @@ class LegacyIndex
                     return htmlspecialchars(json_encode($answer), ENT_NOQUOTES, 'UTF-8');
                 }
                 break;
-            case 'cmdGeolevels':
-                return $t->fetch('main_database_geolevels.tpl');
-                break;
             case 'cmdGeolevelsGetList':
                 $answer = array();
                 $iReturn = ERR_NO_ERROR;

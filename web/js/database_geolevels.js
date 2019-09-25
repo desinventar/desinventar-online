@@ -1,12 +1,14 @@
-var geolevels_uploader = []
+/* global qq */
 
-function onReadyGeolevels() {
-  jQuery('div.Geolevels').on('cmdInitialize', function(event) {
+var uploader
+
+function init() {
+  jQuery('div.Geolevels').on('cmdInitialize', function() {
     doGeolevelsUploaderCreate()
   })
 
   jQuery('#tbodyGeolevels_List')
-    .on('click', 'tr', function(e) {
+    .on('click', 'tr', function() {
       jQuery('#frmGeolevel .GeoLevelId').val(jQuery('.GeoLevelId', this).text())
       jQuery('#frmGeolevel .GeoLevelName').val(
         jQuery('.GeoLevelName', this).text()
@@ -30,10 +32,10 @@ function onReadyGeolevels() {
         .text('')
         .show()
     })
-    .on('mouseover', 'tr', function(event) {
+    .on('mouseover', 'tr', function() {
       jQuery(this).addClass('highlight')
     })
-    .on('mouseout', 'tr', function(event) {
+    .on('mouseout', 'tr', function() {
       jQuery(this).removeClass('highlight')
     })
 
@@ -73,7 +75,7 @@ function onReadyGeolevels() {
     return false
   })
 
-  jQuery('#frmGeolevel .OptionImportGeographyCheckbox').change(function(event) {
+  jQuery('#frmGeolevel .OptionImportGeographyCheckbox').change(function() {
     var v = 0
     if (jQuery(this).is(':checked')) {
       v = 1
@@ -116,8 +118,10 @@ function onReadyGeolevels() {
         numberOfFilesUploaded++
       }
     })
-    var areAllFilesUploaded = numberOfFilesUploaded === numberOfFileUploadControls
-    var isDbfFileUploaded = jQuery('input.filename[name="filename.DBF"]').val() !== ''
+    var areAllFilesUploaded =
+      numberOfFilesUploaded === numberOfFileUploadControls
+    var isDbfFileUploaded =
+      jQuery('input.filename[name="filename.DBF"]').val() !== ''
     if (numberOfFilesUploaded > 0) {
       if (!isDbfFileUploaded && !areAllFilesUploaded) {
         jQuery('div.status .statusMissingFiles').show()
@@ -163,7 +167,7 @@ function onReadyGeolevels() {
               RegionId: jQuery('#desinventarRegionId').val(),
               GeoLevel: jQuery('#frmGeolevel').toObject()
             },
-            function(data) {
+            function() {
               jQuery('div.status span.statusCreatingGeography').hide()
               jQuery('div.status .statusUpdateOk').show()
               setTimeout(function() {
@@ -242,7 +246,6 @@ function doGeolevelsPopulateList(GeolevelsList) {
       value.GeoLevelLayerFile != undefined && value.GeoLevelLayerFile != ''
     jQuery('.HasMap :input', clonedRow).prop('checked', HasMap)
     jQuery('.GeoLevelLayerFile', clonedRow).html(value.GeoLevelLayerFile)
-    GeoLevelLayerParentCode = value.GeoLevelLayerCode
     jQuery('#tbodyGeolevels_List').append(clonedRow)
   })
   jQuery('#tblGeolevels_List .GeoLevelId').hide()
@@ -259,16 +262,12 @@ function doGeolevelsPopulateFieldList(prmSelector, prmValues) {
 }
 
 function doGeolevelsUploaderCreate() {
-  jQuery.each(geolevels_uploader, function(key, value) {
-    delete geolevels_uploader[key]
-  })
-
   jQuery('#frmGeolevel tr.FileUploader').each(function() {
     var fileExt = jQuery(this).data('ext')
     var fileUploaderControlId = jQuery(this)
       .find('.FileUploaderControl')
       .attr('id')
-    var uploader = new qq.FileUploader({
+    uploader = new qq.FileUploader({
       element: document.getElementById(fileUploaderControlId),
       action: jQuery('#desinventarURL').val() + '/',
       params: {
@@ -279,7 +278,7 @@ function doGeolevelsUploaderCreate() {
       debug: false,
       multiple: false,
       allowedExtensions: [fileExt],
-      onSubmit: function(id, Filename) {
+      onSubmit: function(id) {
         var ext = this.allowedExtensions[0]
         var row = jQuery('#frmGeolevel tr:data("ext=' + ext + '")')
         jQuery('.UploadId', row).val(id)
@@ -331,11 +330,10 @@ function doGeolevelsUploaderCreate() {
           }, 2000)
         }
       },
-      onCancel: function(id, Filename) {
+      onCancel: function() {
         doGeolevelsUploaderReset()
       }
     })
-    geolevels_uploader.push(uploader)
   })
   jQuery('#frmGeolevel .FileUploaderControl .qq-upload-button-text').html(
     jQuery('#msgGeolevels_UploadChooseFile').text()
@@ -358,4 +356,8 @@ function doGeolevelsUploaderReset() {
   jQuery('#frmGeolevel .ProgressMark').css('width', '0px')
   jQuery('#frmGeolevel .UploadCancel').hide()
   jQuery('#divGeolevels_FileUploaderControl .qq-upload-button-text').show()
+}
+
+export default {
+  init
 }
