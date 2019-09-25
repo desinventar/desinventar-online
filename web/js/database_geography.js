@@ -1,8 +1,7 @@
-function onReadyGeography() {
+function init() {
   jQuery('div.Geography').on('change', 'select.ListHeader', function() {
     var geography_id = jQuery(this).val()
-    var geolevel_id = jQuery(this).data('GeoLevelId')
-    load_geography_list(geography_id, geolevel_id)
+    load_geography_list(geography_id)
   })
 
   jQuery('div.Geography table.List tbody')
@@ -12,13 +11,13 @@ function onReadyGeography() {
     jQuery('div.Geography select.ListHeader:data("GeoLevelId=' + jQuery('.GeographyLevel', this).text() + '")').val(geography_id).change();
     */
     })
-    .on('mouseover', 'tr', function(event) {
+    .on('mouseover', 'tr', function() {
       jQuery(this).addClass('highlight')
     })
-    .on('mouseout', 'tr', function(event) {
+    .on('mouseout', 'tr', function() {
       jQuery(this).removeClass('highlight')
     })
-    .on('click', 'tr', function(event) {
+    .on('click', 'tr', function() {
       var form = jQuery('div.Geography form.Edit')
       jQuery('.GeographyId', form).val(jQuery('.GeographyId', this).text())
       jQuery('.GeographyCode', form).val(jQuery('.GeographyCode', this).text())
@@ -77,60 +76,55 @@ function onReadyGeography() {
   })
 
   jQuery('div.Geography form.Edit').submit(function() {
-    var bContinue = 1
     var w = ''
-    if (bContinue > 0) {
-      w = jQuery('div.Geography form.Edit input.GeographyCode')
-      if (w.val() == '') {
-        w.highlight()
-      }
+    w = jQuery('div.Geography form.Edit input.GeographyCode')
+    if (w.val() == '') {
+      w.highlight()
     }
-    if (bContinue > 0) {
-      w = jQuery('div.Geography form.Edit input.GeographyName')
-      if (w.val() == '') {
-        w.highlight()
-      }
+
+    w = jQuery('div.Geography form.Edit input.GeographyName')
+    if (w.val() == '') {
+      w.highlight()
     }
-    if (bContinue > 0) {
-      jQuery.post(
-        jQuery('#desinventarURL').val() + '/',
-        {
-          cmd: 'cmdGeographyUpdate',
-          RegionId: jQuery('#desinventarRegionId').val(),
-          Geography: jQuery('div.Geography form.Edit').toObject(),
-          ParentId: jQuery('div.Geography input.ParentId').val()
-        },
-        function(data) {
-          jQuery('div.Geography div.Status span').hide()
-          if (parseInt(data.Status) > 0) {
-            populate_geography_list(data.GeographyList, data.GeographyListCount)
-            jQuery('div.Geography div.Status span.Ok').show()
-            setTimeout(function() {
-              jQuery('div.Geography div.Status span').hide()
-              jQuery('div.Geography div.Add').show()
-              jQuery('div.Geography div.Edit').hide()
-            }, 2000)
-          }
-          switch (parseInt(data.Status)) {
-            case 1:
-              break
-            case -44:
-              jQuery('div.Geography div.Status span.DuplicatedCode').show()
-              break
-            case -48:
-              jQuery('div.Geography div.Status span.WithDatacards').show()
-              break
-            default:
-              jQuery('div.Geography div.Status span.Error').show()
-              break
-          }
+
+    jQuery.post(
+      jQuery('#desinventarURL').val() + '/',
+      {
+        cmd: 'cmdGeographyUpdate',
+        RegionId: jQuery('#desinventarRegionId').val(),
+        Geography: jQuery('div.Geography form.Edit').toObject(),
+        ParentId: jQuery('div.Geography input.ParentId').val()
+      },
+      function(data) {
+        jQuery('div.Geography div.Status span').hide()
+        if (parseInt(data.Status) > 0) {
+          populate_geography_list(data.GeographyList)
+          jQuery('div.Geography div.Status span.Ok').show()
           setTimeout(function() {
             jQuery('div.Geography div.Status span').hide()
-          }, 4000)
-        },
-        'json'
-      )
-    }
+            jQuery('div.Geography div.Add').show()
+            jQuery('div.Geography div.Edit').hide()
+          }, 2000)
+        }
+        switch (parseInt(data.Status)) {
+          case 1:
+            break
+          case -44:
+            jQuery('div.Geography div.Status span.DuplicatedCode').show()
+            break
+          case -48:
+            jQuery('div.Geography div.Status span.WithDatacards').show()
+            break
+          default:
+            jQuery('div.Geography div.Status span.Error').show()
+            break
+        }
+        setTimeout(function() {
+          jQuery('div.Geography div.Status span').hide()
+        }, 4000)
+      },
+      'json'
+    )
     return false
   })
 
@@ -196,7 +190,7 @@ function onReadyGeography() {
   jQuery('div.Geography form.Export input.Labels').val(labels)
 }
 
-function populate_geography_list(prmGeographyList, prmGeographyListCount) {
+function populate_geography_list(prmGeographyList) {
   var prmGeoLevelId = parseInt(jQuery('div.Geography input.GeoLevelId').val())
   var prmParentId = jQuery('div.Geography input.ParentId').val()
   var geolevel_count =
@@ -247,7 +241,7 @@ function populate_geography_list(prmGeographyList, prmGeographyListCount) {
   jQuery('div.Geography table.List tr:even').addClass('under')
 }
 
-function load_geography_list(prmGeographyId, prmGeoLevelId) {
+function load_geography_list(prmGeographyId) {
   jQuery.post(
     jQuery('#desinventarURL').val() + '/',
     {
@@ -259,11 +253,15 @@ function load_geography_list(prmGeographyId, prmGeoLevelId) {
       if (parseInt(data.Status) > 0) {
         jQuery('div.Geography input.ParentId').val(prmGeographyId)
         jQuery('div.Geography input.GeoLevelId').val(data.GeoLevelId)
-        populate_geography_list(data.GeographyList, data.GeographyListCount)
+        populate_geography_list(data.GeographyList)
         jQuery('div.Geography div.Add').show()
         jQuery('div.Geography div.Edit').hide()
       }
     },
     'json'
   )
+}
+
+export default {
+  init
 }

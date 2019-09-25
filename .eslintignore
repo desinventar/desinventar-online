@@ -6,6 +6,7 @@ web/js/**
 !web/js/admin_database*.js
 !web/js/database_causes.js
 !web/js/database_events.js
+!web/js/database_geography.js
 web/external/**
 web/templates/**
 web/scripts/**

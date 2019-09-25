@@ -27,7 +27,6 @@
 <script type="text/javascript" src="{-$desinventarURL-}/js/database_upload.js?version={-$jsversion-}"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/js/database_users.js?version={-$jsversion-}"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/js/database_geolevels.js?version={-$jsversion-}"></script>
-<script type="text/javascript" src="{-$desinventarURL-}/js/database_geography.js?version={-$jsversion-}"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/js/userperm_admin.js?version={-$jsversion-}"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/js/common.js?version={-$jsversion-}"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/js/dboperations.js?version={-$jsversion-}"></script>

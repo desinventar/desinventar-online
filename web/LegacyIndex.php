@@ -529,9 +529,6 @@ class LegacyIndex
                 $answer['Status'] = $iReturn;
                 return json_encode($answer);
                 break;
-            case 'cmdGeography':
-                return $t->fetch('main_database_geography.tpl');
-                break;
             case 'cmdGeographyGetList':
                 $answer = array();
                 $iReturn = ERR_NO_ERROR;
