@@ -102,14 +102,7 @@ function init() {
             data.CauseListDefault
           )
         } else {
-          switch (data.Status) {
-            case -15:
-              jQuery('#msgDatabaseCauses_ErrorCannotDelete').show()
-              break
-            default:
-              jQuery('#msgDatabaseCauses_UpdateError').show()
-              break
-          }
+          displayError(data.Status)
         }
         setTimeout(function() {
           jQuery('div.DatabaseCauses span.status').hide()
@@ -119,6 +112,14 @@ function init() {
     )
     return false
   })
+}
+
+function displayError(status) {
+  if (status == -15) {
+    jQuery('#msgDatabaseCauses_ErrorCannotDelete').show()
+    return
+  }
+  jQuery('#msgDatabaseCauses_UpdateError').show()
 }
 
 function highligthCauseError() {
