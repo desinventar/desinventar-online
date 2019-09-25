@@ -36,12 +36,6 @@ function init() {
   })
 
   jQuery('#frmRegionEdit').submit(function() {
-    // Validate Fields
-    var bContinue = true
-    /*
-    var a=new Array('CountryIso','RegionLabel','LangIsoCode','RegionUserAdmin');
-    var bContinue = checkForm('frmRegionEdit',a, '{-#errmsgfrm#-}');
-    */
     var RegionStatus = jQuery('#frmRegionEdit_RegionStatus')
     RegionStatus.val(0)
     if (jQuery('#frmRegionEdit_RegionActive').attr('checked')) {
@@ -53,28 +47,28 @@ function init() {
     jQuery('#frmRegionEdit_RegionId').removeAttr('disabled')
     var params = jQuery(this).serializeObject()
     jQuery('#frmRegionEdit_RegionId').attr('disabled', 'disabled')
-    if (bContinue) {
-      jQuery('#frmRegionEdit :input').unhighlight()
-      jQuery.post(
-        jQuery('#desinventarURL').val() + '/',
-        params,
-        function(data) {
-          if (parseInt(data.Status) > 0) {
-            jQuery('#divDatabaseEditResult').html(
-              data.Status + ' ' + data.RegionId
-            )
-            // (jhcaiced) Change this for a method to update only the
-            // affected row intead of loading all list again
-            updateList(
-              'dbl',
-              jQuery('#desinventarURL').val() + '/region.php',
-              'cmd=adminreg'
-            )
-          }
-        },
-        'json'
-      )
-    }
+
+    jQuery('#frmRegionEdit :input').unhighlight()
+    jQuery.post(
+      jQuery('#desinventarURL').val() + '/',
+      params,
+      function(data) {
+        if (parseInt(data.Status) > 0) {
+          jQuery('#divDatabaseEditResult').html(
+            data.Status + ' ' + data.RegionId
+          )
+          // (jhcaiced) Change this for a method to update only the
+          // affected row intead of loading all list again
+          updateList(
+            'dbl',
+            jQuery('#desinventarURL').val() + '/region.php',
+            'cmd=adminreg'
+          )
+        }
+      },
+      'json'
+    )
+
     return false
   })
 
