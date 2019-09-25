@@ -139,6 +139,7 @@ function blockChars(e, value, type) {
   if (value.length >= parseInt(opt[1])) {
     len = false
   }
+  var reg
   // Check datatype
   switch (opt[0]) {
     case 'date':

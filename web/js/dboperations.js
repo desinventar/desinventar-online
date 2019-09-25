@@ -17,14 +17,7 @@ function doUpdateDatabaseListByUser() {
         if (parseInt(data.NoOfDatabases) > 0) {
           jQuery('#divDatabaseFindList').show()
           jQuery('#divDatabaseFindError').hide()
-          RegionByRole = new Array(5)
-          RegionByRole['ADMINREGION'] = new Array()
-          RegionByRole['SUPERVISOR'] = new Array()
-          RegionByRole['USER'] = new Array()
-          RegionByRole['OBSERVER'] = new Array()
-          RegionByRole['NONE'] = new Array()
 
-          $RoleList = new Array(5)
           var iCount = 0
           jQuery('#divDatabaseFindList table.databaseList').each(function() {
             jQuery('tr:gt(0)', this).remove()
