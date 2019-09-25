@@ -1,4 +1,4 @@
-function onReadyDatabaseEvents() {
+function init() {
   //Attach main events
   jQuery('body').on('cmdDatabaseEventsShow', function() {
     doDatabaseEventsPopulateLists()
@@ -9,7 +9,7 @@ function onReadyDatabaseEvents() {
   jQuery(
     '#tbodyDatabaseEvents_EventListCustom,#tbodyDatabaseEvents_EventListDefault'
   )
-    .on('click', 'tr', function(event) {
+    .on('click', 'tr', function() {
       jQuery('#fldDatabaseEvents_EventId').val(jQuery('.EventId', this).text())
       jQuery('#fldDatabaseEvents_EventName').val(
         jQuery('.EventName', this).text()
@@ -28,10 +28,10 @@ function onReadyDatabaseEvents() {
       doEventsFormSetup()
       jQuery('#divDatabaseEvents_Edit').show()
     })
-    .on('mouseover', 'tr', function(event) {
+    .on('mouseover', 'tr', function() {
       jQuery(this).addClass('highlight')
     })
-    .on('mouseout', 'tr', function(event) {
+    .on('mouseout', 'tr', function() {
       jQuery(this).removeClass('highlight')
     })
 
@@ -69,7 +69,7 @@ function onReadyDatabaseEvents() {
     jQuery('#fldDatabaseEvents_EventActive').val(v)
   })
 
-  jQuery('#frmDatabaseEvents_Edit').on('submit', function(event) {
+  jQuery('#frmDatabaseEvents_Edit').on('submit', function() {
     if (jQuery.trim(jQuery('#fldDatabaseEvents_EventName').val()) === '') {
       jQuery('#fldDatabaseEvents_EventName').highlight()
       jQuery('#msgDatabaseEvents_ErrorEmtpyFields').show()
@@ -113,14 +113,7 @@ function onReadyDatabaseEvents() {
             data.EventListDefault
           )
         } else {
-          switch (data.Status) {
-            case -15:
-              jQuery('#msgDatabaseEvents_ErrorCannotDelete').show()
-              break
-            default:
-              jQuery('#msgDatabaseEvents_UpdateError').show()
-              break
-          }
+          displayError(data.Status)
         }
         setTimeout(function() {
           jQuery('div.DatabaseEvents span.status').hide()
@@ -130,6 +123,14 @@ function onReadyDatabaseEvents() {
     )
     return false
   })
+}
+
+function displayError(status) {
+  if (status === -15) {
+    jQuery('#msgDatabaseEvents_ErrorCannotDelete').show()
+    return
+  }
+  jQuery('#msgDatabaseEvents_UpdateError').show()
 }
 
 function doEventsFormSetup() {
@@ -185,7 +186,9 @@ function doDatabaseEventsPopulateList(tbodyId, EventList) {
     jQuery('.EventId', clonedRow).html(index)
     jQuery('.EventPredefined', clonedRow).html(value.EventPredefined)
     jQuery('.EventName', clonedRow).html(value.EventName)
-    jQuery('.EventDesc', clonedRow).html(value.EventDesc ? value.EventDesc.substring(0, 150) : '')
+    jQuery('.EventDesc', clonedRow).html(
+      value.EventDesc ? value.EventDesc.substring(0, 150) : ''
+    )
     jQuery('.EventDesc', clonedRow).prop('title', value.EventDesc)
     jQuery('.EventActive :input', clonedRow).prop(
       'checked',
@@ -196,4 +199,8 @@ function doDatabaseEventsPopulateList(tbodyId, EventList) {
   jQuery('#' + tbodyId + ' .EventId').hide()
   jQuery('#' + tbodyId + ' .EventPredefined').hide()
   jQuery('#' + tbodyId + ' tr:even').addClass('under')
+}
+
+export default {
+  init
 }

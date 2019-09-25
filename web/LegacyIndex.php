@@ -248,11 +248,6 @@ class LegacyIndex
                 $answer['Status'] = $iReturn;
                 return htmlspecialchars(json_encode($answer), ENT_NOQUOTES, 'UTF-8');
                 break;
-            case 'events':
-            case 'cmdDatabaseEvents':
-                $t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
-                return $t->fetch('main_database_events.tpl');
-                break;
             case 'cmdDatabaseEventsGetList':
                 $answer = array();
                 $iReturn = ERR_NO_ERROR;
