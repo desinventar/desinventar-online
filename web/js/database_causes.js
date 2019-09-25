@@ -1,5 +1,4 @@
 function init() {
-  console.log('databaseCauses::init')
   //Attach main events
   jQuery('body').on('cmdDatabaseCausesShow', function() {
     doDatabaseCausesPopulateLists()
@@ -10,7 +9,7 @@ function init() {
   jQuery(
     '#tbodyDatabaseCauses_CauseListCustom,#tbodyDatabaseCauses_CauseListDefault'
   )
-    .on('click', 'tr', function(event) {
+    .on('click', 'tr', function() {
       jQuery('#fldDatabaseCauses_CauseId').val(jQuery('.CauseId', this).text())
       jQuery('#fldDatabaseCauses_CauseName').val(
         jQuery('.CauseName', this).text()
@@ -29,10 +28,10 @@ function init() {
       doCausesFormSetup()
       jQuery('#divDatabaseCauses_Edit').show()
     })
-    .on('mouseover', 'tr', function(event) {
+    .on('mouseover', 'tr', function() {
       jQuery(this).addClass('highlight')
     })
-    .on('mouseout', 'tr', function(event) {
+    .on('mouseout', 'tr', function() {
       jQuery(this).removeClass('highlight')
     })
 
@@ -70,7 +69,7 @@ function init() {
     jQuery('#fldDatabaseCauses_CauseActive').val(v)
   })
 
-  jQuery('#frmDatabaseCauses_Edit').on('submit', function(event) {
+  jQuery('#frmDatabaseCauses_Edit').on('submit', function() {
     if (jQuery.trim(jQuery('#fldDatabaseCauses_CauseName').val()) === '') {
       return highligthCauseError()
     }
@@ -185,7 +184,9 @@ function doDatabaseCausesPopulateList(tbodyId, CauseList) {
     jQuery('.CauseId', clonedRow).html(index)
     jQuery('.CausePredefined', clonedRow).html(value.CausePredefined)
     jQuery('.CauseName', clonedRow).html(value.CauseName)
-    jQuery('.CauseDesc', clonedRow).html(value.CauseDesc ? value.CauseDesc.substring(0, 150) : '')
+    jQuery('.CauseDesc', clonedRow).html(
+      value.CauseDesc ? value.CauseDesc.substring(0, 150) : ''
+    )
     jQuery('.CauseDesc', clonedRow).prop('title', value.CauseDesc)
     jQuery('.CauseActive :input', clonedRow).prop(
       'checked',

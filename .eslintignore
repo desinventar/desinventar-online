@@ -4,6 +4,7 @@ web/external/clickmenu
 web/js/**
 !web/js/extraeffects.js
 !web/js/admin_database*.js
+!web/js/database_causes.js
 web/external/**
 web/templates/**
 web/scripts/**
