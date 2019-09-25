@@ -10,10 +10,10 @@
   sendList,
   doGetRegionInfo,
   updateList,
-  doDatabaseUploadShow,
-  doAdminDatabaseUpdateList,
+  doDatabaseUploadShow
 */
 import databaseCreate from './database_create.js'
+import adminDatabase from './admin_database'
 
 export default {
   init: onReadyExtJS
@@ -316,7 +316,7 @@ function doMainMenuHandler(item) {
     case 'mnuAdminDatabases':
       jQuery('.contentBlock').hide()
       jQuery('#divAdminDatabase').show()
-      doAdminDatabaseUpdateList()
+      adminDatabase.updateList()
       break
     case 'mnuHelpAbout':
       Ext.getCmp('wndDialog').show()

@@ -3,7 +3,9 @@ portal/web/scripts
 web/external/clickmenu
 web/js/**
 !web/js/extraeffects.js
-web/external
-web/scripts/
+!web/js/admin_database*.js
+web/external/**
+web/templates/**
+web/scripts/**
 **/vendor
 **/node_modules

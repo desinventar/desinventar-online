@@ -1,4 +1,5 @@
-function onReadyAdminDatabaseEdit() {
+/* global updateList */
+function init() {
   // Populate CountryList/LanguageList in frmRegionEdit form
   jQuery('#desinventarCountryList option')
     .clone()
@@ -83,7 +84,7 @@ function onReadyAdminDatabaseEdit() {
   })
 }
 
-function doAdminDatabaseGetInfo(RegionId) {
+function getInfo(RegionId) {
   // Load Information about database...
   jQuery.post(
     jQuery('#desinventarURL').val() + '/',
@@ -111,4 +112,9 @@ function doAdminDatabaseGetInfo(RegionId) {
     },
     'json'
   )
+}
+
+export default {
+  init,
+  getInfo
 }

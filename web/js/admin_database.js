@@ -1,5 +1,8 @@
-function onReadyAdminDatabase() {
-  onReadyAdminDatabaseEdit()
+/* global onReadyDatabaseExport */
+import adminDatabaseEdit from './admin_database_edit'
+
+function init() {
+  adminDatabaseEdit.init()
   onReadyDatabaseExport()
 
   // Highlight row on mouseOver
@@ -28,7 +31,7 @@ function onReadyAdminDatabase() {
   jQuery('#btnAdminDatabaseEdit').click(function() {
     jQuery('.clsAdminDatabase').hide()
     var RegionId = jQuery('#divAdminDatabaseUpdate .RegionId').text()
-    doAdminDatabaseGetInfo(RegionId)
+    adminDatabaseEdit.getInfo(RegionId)
     jQuery('#divAdminDatabaseEdit').show()
     return false
   })
@@ -61,7 +64,7 @@ function onReadyAdminDatabase() {
   })
 }
 
-function doAdminDatabaseUpdateList() {
+function updateList() {
   jQuery.post(
     jQuery('#desinventarURL').val() + '/',
     {
@@ -130,4 +133,9 @@ function setRegionPA(
   jQuery('#frmRegionEdit #RegionPublic').attr('checked', prmRegionPublic)
   // RegionId is readonly by default
   jQuery('#frmRegionEdit #RegionId').attr('disabled', 'disabled')
+}
+
+export default {
+  init,
+  updateList
 }

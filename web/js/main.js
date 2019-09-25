@@ -16,7 +16,6 @@
   onReadyUserLogin,
   onReadyUserAccount,
   onReadyDatacards,
-  onReadyAdminDatabase,
   onReadyExtraEffects,
   onReadyQueryResults,
   onReadyData,
@@ -29,6 +28,7 @@ import 'jquery-ui/ui/widgets/tabs'
 import mainExt from './main_ext'
 import databaseCreate from './database_create'
 import adminUsers from './admin_users'
+import adminDatabase from './admin_database'
 
 export default {
   init: onReadyMain
@@ -51,7 +51,7 @@ function onReadyMain() {
   onReadyUserLogin()
   onReadyUserAccount()
   onReadyDatacards()
-  onReadyAdminDatabase()
+  adminDatabase.init()
   onReadyExtraEffects()
   onReadyQueryResults()
   onReadyData()
