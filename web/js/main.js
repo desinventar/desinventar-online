@@ -9,7 +9,6 @@
   onReadyCommon,
   onReadyUserLogin,
   onReadyUserAccount,
-  onReadyDatacards,
   onReadyExtraEffects,
   onReadyQueryResults,
   onReadyData,
@@ -29,10 +28,8 @@ import databaseGeography from './database_geography'
 import databaseGeoLevels from './database_geolevels'
 import databaseUsers from './database_users'
 import databaseUpload from './database_upload'
-
-export default {
-  init: onReadyMain
-}
+import datacards from './datacards'
+import datacards2 from '../js2/datacards/datacards'
 
 function onReadyMain() {
   mainExt.init()
@@ -50,7 +47,8 @@ function onReadyMain() {
   onReadyCommon()
   onReadyUserLogin()
   onReadyUserAccount()
-  onReadyDatacards()
+  datacards.init()
+  datacards2.init()
   adminDatabase.init()
   onReadyExtraEffects()
   onReadyQueryResults()
@@ -160,4 +158,8 @@ function onReadyMain() {
     return false
   })
   jQuery(window).trigger('hashchange')
+}
+
+export default {
+  init: onReadyMain
 }

@@ -10,6 +10,7 @@ web/js/**
 !web/js/database_geolevels.js
 !web/js/database_users.js
 !web/js/database_upload.js
+!web/js/datacards.js
 web/external/**
 web/templates/**
 web/scripts/**
