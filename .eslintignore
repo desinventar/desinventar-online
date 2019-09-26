@@ -8,6 +8,7 @@ web/js/**
 !web/js/database_events.js
 !web/js/database_geography.js
 !web/js/database_geolevels.js
+!web/js/database_users.js
 web/external/**
 web/templates/**
 web/scripts/**

@@ -1,4 +1,5 @@
-function onReadyDatabaseUsers() {
+/* global Ext */
+function init() {
   jQuery('.clsDatabaseUsersStatus').hide()
   jQuery('#divDatabaseUsers_Edit').hide()
 
@@ -103,7 +104,7 @@ function onReadyDatabaseUsers() {
       ) {
         if (jQuery('#frmUsers .UserRole').val() == 'ADMINREGION') {
           bContinue = false
-          sAdminNew = jQuery(
+          const sAdminNew = jQuery(
             '#frmUsers .UserId option[value="' +
               jQuery('#frmUsers .UserId').val() +
               '"]'
@@ -116,7 +117,7 @@ function onReadyDatabaseUsers() {
             }
           })
 
-          sConfirmMsg =
+          const sConfirmMsg =
             jQuery('#msgDatabaseUsers_ConfirmManagerPrompt1').text() +
             ' ' +
             sAdminCurrent +
@@ -125,7 +126,6 @@ function onReadyDatabaseUsers() {
             ' ' +
             sAdminNew +
             ' ?'
-          //jQuery('#msgDatabaseUsers_ConfirmManagerPrompt3').text();
           Ext.Msg.show({
             title: jQuery('#msgDatabaseUsers_ConfirmManagerTitle').text(),
             msg: sConfirmMsg,
@@ -138,17 +138,10 @@ function onReadyDatabaseUsers() {
                 jQuery('#frmUsers').data('ReloadPageAfter', true)
                 jQuery('#frmUsers').trigger('submit')
               }
-              /*
-              else
-              {
-                jQuery('#frmUsers .UserRole').val(jQuery('#frmUsers .UserRolePrev').val());
-              }
-              */
             }
           })
         }
       }
-      //Ext.MessageBox.confirm('Confirm','Are you sure you want to do that ?', doDatabaseUsersSaveRole);
       if (bContinue) {
         jQuery('#frmUsers').trigger('submit')
       }
@@ -324,4 +317,8 @@ function doDatabaseUsersUpdateRole(userId, userRole) {
     },
     'json'
   )
+}
+
+export default {
+  init
 }

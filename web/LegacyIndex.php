@@ -351,9 +351,6 @@ class LegacyIndex
                 $answer['Status'] = $iReturn;
                 return htmlspecialchars(json_encode($answer), ENT_NOQUOTES, 'UTF-8');
                 break;
-            case 'cmdDatabaseUsers':
-                return $t->fetch('main_database_users.tpl');
-                break;
             case 'cmdDatabaseUsersGetList':
                 $answer = array();
                 $iReturn = ERR_NO_ERROR;
