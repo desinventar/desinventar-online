@@ -18,6 +18,7 @@ const userHelper = {
       )
       .click('form#frmUserLogin a.button.Send')
       .expect(Selector('table#mnuUser button[type="button"]').textContent)
+      .ok()
   }
 }
 
