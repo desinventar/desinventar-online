@@ -1,6 +1,8 @@
- var database_uploader = []
+/* global Ext, qq */
 
-function onReadyDatabaseUpload() {
+var uploader
+
+function init() {
   jQuery('#divDatabaseUploadControl').show()
   jQuery('#divDatabaseUploadParameters').hide()
   jQuery('#txtDatabaseUploadFilename').attr('readonly', true)
@@ -8,7 +10,7 @@ function onReadyDatabaseUpload() {
 
   doDatabaseUploadCreate()
 
-  jQuery('div.DatabaseUpload').on('cmdInitialize', function(event) {
+  jQuery('div.DatabaseUpload').on('cmdInitialize', function() {
     doAdminDatabaseCreateUploader()
   })
 
@@ -85,8 +87,8 @@ function onReadyDatabaseUpload() {
           RegionId: jQuery('#desinventarRegionId').val(),
           Filename: jQuery('#txtDatabaseUploadFilename').val()
         },
-        function(data) {
-          doDatabaseUploadReset(false)
+        function() {
+          reset(false)
           Ext.getCmp('wndDatabaseUpload').hide()
         },
         'json'
@@ -99,11 +101,8 @@ function onReadyDatabaseUpload() {
 }
 
 function doAdminDatabaseCreateUploader() {
-  jQuery.each(database_uploader, function(key, value) {
-    delete database_uploader[key]
-  })
   jQuery('#divFileUploaderControl').each(function() {
-    var uploader = new qq.FileUploader({
+    uploader = new qq.FileUploader({
       element: document.getElementById(jQuery(this).attr('id')),
       action: jQuery('#desinventarURL').val() + '/',
       params: {
@@ -147,20 +146,12 @@ function doAdminDatabaseCreateUploader() {
           jQuery('#divDatabaseUploadControl').hide()
           jQuery('#divDatabaseUploadParameters').show()
         } else {
-          doDatabaseUploadReset(false)
-          switch (parseInt(data.Status)) {
-            case -130: //ERR_INVALID_ZIPFILE
-              doDatabaseUploadStatusMsg('msgDatabaseUploadErrorNoInfo')
-              break
-            default:
-              doDatabaseUploadStatusMsg('msgDatabaseUploadErrorOnUpload')
-              break
-          }
+          reset(false)
+          displayError(data.Status)
         }
       },
-      onCancel: function(id, Filename) {}
+      onCancel: function() {}
     })
-    database_uploader.push(uploader)
   })
   jQuery('#divFileUploaderControl .qq-upload-button-text').html(
     jQuery('#msgDatabaseUploadChooseFile').val()
@@ -170,13 +161,23 @@ function doAdminDatabaseCreateUploader() {
   jQuery('#btnDatabaseUploadCancel')
     .unbind('click')
     .click(function() {
-      doDatabaseUploadReset(true)
+      reset(true)
       uploader.cancel(jQuery('#txtDatabaseUploadId').val())
       return false
     })
 }
 
-function doDatabaseUploadReset(prmShowRegionInfo) {
+function displayError(status) {
+  //ERR_INVALID_ZIPFILE
+  if (status === -130) {
+    doDatabaseUploadStatusMsg('msgDatabaseUploadErrorNoInfo')
+    return
+  }
+  doDatabaseUploadStatusMsg('msgDatabaseUploadErrorOnUpload')
+  return
+}
+
+function reset(prmShowRegionInfo) {
   doAdminDatabaseCreateUploader()
   doDatabaseUploadStatusMsg('')
   jQuery('#txtDatabaseUploadFilename').val('')
@@ -236,10 +237,6 @@ function doDatabaseUploadSetParameters(RegionInfo) {
   }
 }
 
-function doDatabaseUploadSelectFile() {
-  jQuery('#divFileUploaderControl input').trigger('click')
-}
-
 function doDatabaseUploadStatusMsg(Id) {
   jQuery('.clsDatabaseUploadStatusMsg').hide()
   if (Id != '') {
@@ -275,16 +272,7 @@ function doDatabaseUploadCreate() {
   jQuery('.clsDatabaseUploadStatusMsg').hide()
 }
 
-function doDatabaseUploadShow(prmMode) {
-  jQuery('#fldDatabaseUploadMode').val(prmMode)
-  if (prmMode == 'Copy') {
-    Ext.getCmp('wndDatabaseUpload').setTitle(jQuery('#mnuDatabaseCopy').text())
-  } else {
-    Ext.getCmp('wndDatabaseUpload').setTitle(
-      jQuery('#mnuDatabaseReplace').text()
-    )
-  }
-  jQuery('.clsDatabaseUpload').hide()
-  doDatabaseUploadReset(true)
-  Ext.getCmp('wndDatabaseUpload').show()
+export default {
+  init,
+  reset
 }

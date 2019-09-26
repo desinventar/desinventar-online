@@ -4,7 +4,6 @@
   showtip,
   onReadyDBConfigCauses,
   onReadyDatabaseList,
-  onReadyDatabaseUpload,
   onReadyQueryDesign,
   onReadyUserPermAdmin,
   onReadyCommon,
@@ -29,6 +28,7 @@ import databaseEvents from './database_events'
 import databaseGeography from './database_geography'
 import databaseGeoLevels from './database_geolevels'
 import databaseUsers from './database_users'
+import databaseUpload from './database_upload'
 
 export default {
   init: onReadyMain
@@ -37,7 +37,7 @@ export default {
 function onReadyMain() {
   mainExt.init()
   onReadyDatabaseList()
-  onReadyDatabaseUpload()
+  databaseUpload.init()
   databaseCreate.init()
   databaseUsers.init()
   onReadyQueryDesign()

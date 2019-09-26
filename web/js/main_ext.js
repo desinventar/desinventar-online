@@ -10,10 +10,10 @@
   sendList,
   doGetRegionInfo,
   updateList,
-  doDatabaseUploadShow
 */
 import databaseCreate from './database_create.js'
 import adminDatabase from './admin_database'
+import databaseUpload from './database_upload'
 
 export default {
   init: onReadyExtJS
@@ -337,6 +337,20 @@ function doMainMenuHandler(item) {
       window.open('http://www.desinventar.org/', '', '')
       break
   }
+}
+
+function doDatabaseUploadShow(prmMode) {
+  jQuery('#fldDatabaseUploadMode').val(prmMode)
+  if (prmMode == 'Copy') {
+    Ext.getCmp('wndDatabaseUpload').setTitle(jQuery('#mnuDatabaseCopy').text())
+  } else {
+    Ext.getCmp('wndDatabaseUpload').setTitle(
+      jQuery('#mnuDatabaseReplace').text()
+    )
+  }
+  jQuery('.clsDatabaseUpload').hide()
+  databaseUpload.reset(true)
+  Ext.getCmp('wndDatabaseUpload').show()
 }
 
 function hideQueryDesign() {
