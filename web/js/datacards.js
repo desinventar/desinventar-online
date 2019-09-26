@@ -136,7 +136,7 @@ function init() {
       } else {
         jQuery('#divDatacard #GeographyId').val(myGeographyId)
         if (NextGeographyLevel < GeoLevelCount) {
-          updateGeoLevelSelect(jQuery(this).val(), true)
+          updateGeoLevelSelect(jQuery(this).val())
         }
       }
       jQuery(this).focus()
@@ -755,7 +755,7 @@ function doDatacardEdit() {
           var mySelect = jQuery('#divDatacard .tblGeography #GeoLevel' + i)
           mySelect.disable()
         }
-        updateGeoLevelSelect(jQuery('#DICard #GeographyId').val(), true)
+        updateGeoLevelSelect(jQuery('#DICard #GeographyId').val())
         navigation.setStatus('EDIT')
       } else {
         datacards2.showStatus('msgDatacardIsLocked')
