@@ -431,7 +431,6 @@ function doDatacardInitialize() {
   var fieldCount = 0
   var max_column = 3
   jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
-    console.log(`key: ${key} value: ${JSON.stringify(value)}`)
     var field = value['id']
     var label = value['name']
     var tooltip = value['description']
