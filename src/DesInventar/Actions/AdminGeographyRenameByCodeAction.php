@@ -49,8 +49,10 @@ class AdminGeographyRenameByCodeAction
         if ($oldParentCode === $newParentCode) {
             // Rename geography in the same level, no id change just change the code
             $this->logger->debug("Rename geography in the same level: ${code} => ${newCode}");
-            return (new Geography($this->pdo, $this->logger))
-                ->update($oldId, ['GeographyCode' => $newCode]);
+            $geography = new Geography($this->pdo, $this->logger);
+            return
+                $geography->update($oldId, ['GeographyCode' => $newCode]) &&
+                $geography->updateFQNameByCode($newCode);
         }
         $newParent = $this->findGeographyByCode($newParentCode);
         $newParentId = $newParent['GeographyId'];
@@ -62,10 +64,12 @@ class AdminGeographyRenameByCodeAction
             "{$code}/{$oldParentCode}/{$oldId} " .
             "{$newCode}/{$newParentCode}/{$newParentId}/{$newId}");
         $this->pdo->beginTransaction();
-        (new Geography($this->pdo, $this->logger))->update(
+        $geography = new Geography($this->pdo, $this->logger);
+        $geography->update(
             $oldId,
             ['GeographyCode' => $newCode, 'GeographyId' => $newId]
         );
+        $geography->updateFQNameByCode($newCode);
         (new Disaster($this->pdo, $this->logger))->updateGeography($oldId, $newId);
         $this->pdo->commit();
         return $oldParentCode;

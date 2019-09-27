@@ -74,4 +74,23 @@ class Geography extends Record
             $sth = $this->pdo->perform($query->getStatement(), $query->getBindValues());
             return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function updateFQNameByCode($code)
+    {
+        $geography = $this->findByCode($code);
+        if (!$geography) {
+            return false;
+        }
+        $FQName = $geography['GeographyId'] . ' => ';
+        $names = [];
+        $id = '';
+        for ($i = 0; $i < floor(strlen($geography['GeographyId'])/5); $i++) {
+            $id .= substr($geography['GeographyId'], $i * 5, 5);
+            $name = ($this->findById($id))['GeographyName'];
+            $names[] = $name;
+        }
+        $FQName = implode('/', $names);
+        $this->update($geography['GeographyId'], ['GeographyFQName' => $FQName]);
+        return $FQName;
+    }
 }
