@@ -6,6 +6,7 @@ services:
       dockerfile: ./Dockerfile
     image: desinventar/online:latest
     volumes:
+      - .:/opt/app
       - /opt/app/vendor
       - /opt/app/node_modules
     environment:
@@ -31,6 +32,7 @@ services:
     ports:
       - "8090:80"
     volumes:
+      - .:/opt/app
       - /opt/app/vendor
       - /opt/app/node_modules
     environment:

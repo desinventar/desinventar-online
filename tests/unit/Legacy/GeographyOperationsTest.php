@@ -15,7 +15,7 @@ final class GeographyOperationsTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->db = new Database(Database::REGION);
+        $this->db = new Database(Database::REGION, Logger::logger());
         $this->db->copyDatabase();
     }
 

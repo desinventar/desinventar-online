@@ -7,8 +7,8 @@ use DesInventar\Helpers\LoggerHelper;
 
 class Logger
 {
-    public static function logger()
+    public static function logger($output = '/dev/null')
     {
-        return LoggerHelper::logger(['file' => '/dev/null', 'level' => BaseLogger::DEBUG]);
+        return LoggerHelper::logger(['file' => $output, 'level' => BaseLogger::DEBUG]);
     }
 }

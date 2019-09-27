@@ -16,7 +16,7 @@ final class SessionTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->db = new Database(Database::CORE);
+        $this->db = new Database(Database::CORE, Logger::logger());
         $this->db->copyDatabase();
         $this->conn = $this->db->getConnection();
         $this->db->seedFromArray('User', [

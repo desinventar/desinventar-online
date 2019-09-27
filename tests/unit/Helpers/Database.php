@@ -13,15 +13,17 @@ class Database
     public const CORE = __DIR__ . '/../../../files/database/core.db';
 
     protected $sourceDb = null;
+    protected $logger = null;
     protected $filename = null;
     protected $removeWhenDone = true;
 
-    public function __construct($sourceDb)
+    public function __construct($sourceDb, $logger)
     {
         if (!file_exists($sourceDb)) {
             throw new Exception('Cannot find source database: ' . $sourceDb);
         }
         $this->sourceDb = $sourceDb;
+        $this->logger = $logger;
     }
 
     public function copyDatabase($filename = null)
@@ -36,7 +38,9 @@ class Database
         if (!$filename) {
             return false;
         }
-        copy($this->sourceDb, $filename);
+        if (!copy($this->sourceDb, $filename)) {
+            throw new Exception('Failed to copy filename: ' . $this->sourceDb . ' => ' . $filename);
+        };
         $this->filename = $filename;
         return $filename;
     }
@@ -52,6 +56,9 @@ class Database
 
     public function getConnection()
     {
+        if (!file_exists($this->filename)) {
+            throw new Exception('Database::getConnection(): Cannot find database file: ' . $this->filename);
+        }
         return new ExtendedPdo('sqlite:' . $this->filename);
     }
 
@@ -79,6 +86,7 @@ class Database
             $query->cols($row);
             $query->addRow();
         }
-        $this->getConnection()->perform($query->getStatement(), $query->getBindValues());
+        $conn = $this->getConnection();
+        $conn->perform($query->getStatement(), $query->getBindValues());
     }
 }

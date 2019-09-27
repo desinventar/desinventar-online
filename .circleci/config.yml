@@ -18,10 +18,16 @@ jobs:
             set -x
             docker-compose up -d
             docker run --network project_default \
-              appropriate/curl --retry 60 --retry-delay 4 --retry-connrefused --verbose http://web:80/common/version
+              appropriate/curl --retry 30 --retry-delay 4 --retry-connrefused http://web:80/common/version
+            docker-compose logs
           environment:
             DOCKER_CLIENT_TIMEOUT: "120"
             COMPOSE_HTTP_TIMEOUT: "120"
+            DESINVENTAR_REDIS_HOST: "redis"
+      - run:
+          name: Build artifacts
+          command: |
+            docker-compose exec web sh -c 'make && make database'
       - run:
           name: Validate Code
           command: |
