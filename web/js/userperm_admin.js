@@ -1,4 +1,5 @@
-function onReadyUserPermAdmin() {
+/* global Ext */
+function init() {
   doUserPermAdminSetup()
 }
 
@@ -30,7 +31,7 @@ function doUserPermAdminSetup() {
 
   // Send Button - Validate data and send command to backend
   jQuery('#btnUserPermAdminSend').click(function() {
-    iReturn = doUserPermAdminValidate()
+    let iReturn = doUserPermAdminValidate()
     if (iReturn > 0) {
       jQuery('#btnUserPermAdminSend').attr('readonly', true)
       jQuery.post(
@@ -68,16 +69,6 @@ function doUserPermAdminSetup() {
   jQuery('#btnUserPermAdminSend').hide()
 }
 
-function doUserPermAdminShow() {
-  jQuery('.clsUserPermAdminStatus').hide()
-
-  // In this windows, always update information
-  doUserPermAdminPopulateLists()
-
-  Ext.getCmp('wndUserPermAdmin').show()
-  jQuery('#fldUserPermAdmin_UserId').focus()
-}
-
 function doUserPermAdminValidate() {
   if (jQuery('#fldUserPermAdmin_UserId').val() === '') {
     return -1
@@ -94,26 +85,6 @@ function doUserPermAdminUpdateUserAdmin(UserAdmin) {
   jQuery('#txtUserPermAdminCurrent').html(txtUserAdmin)
 }
 
-function doUserPermAdminPopulateLists() {
-  // async UserList field
-  jQuery.post(
-    jQuery('#desinventarURL').val() + '/',
-    {
-      cmd: 'cmdGetUserPermList',
-      RegionId: jQuery('#desinventarRegionId').val()
-    },
-    function(data) {
-      if (parseInt(data.Status) > 0) {
-        jQuery('#fldUserPermAdmin_UserId').empty()
-        jQuery.each(data.UserList, function(key, value) {
-          jQuery('#fldUserPermAdmin_UserId').append(
-            jQuery('<option>', { value: key }).text(value)
-          )
-        })
-        doUserPermAdminUpdateUserAdmin(data.UserAdmin)
-        jQuery('#btnUserPermAdminSend').show()
-      }
-    },
-    'json'
-  )
+export default {
+  init
 }

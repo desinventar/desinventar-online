@@ -5,7 +5,6 @@
   onReadyDBConfigCauses,
   onReadyDatabaseList,
   onReadyQueryDesign,
-  onReadyUserPermAdmin,
   onReadyCommon,
   onReadyUserLogin,
   onReadyUserAccount,
@@ -30,6 +29,7 @@ import databaseUsers from './database_users'
 import databaseUpload from './database_upload'
 import datacards from './datacards'
 import datacards2 from '../js2/datacards/datacards'
+import userPermAdmin from './userperm_admin'
 
 function onReadyMain() {
   mainExt.init()
@@ -43,7 +43,7 @@ function onReadyMain() {
   databaseEvents.init()
   databaseCauses.init()
   adminUsers.init()
-  onReadyUserPermAdmin()
+  userPermAdmin.init()
   onReadyCommon()
   onReadyUserLogin()
   onReadyUserAccount()

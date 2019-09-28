@@ -23,7 +23,6 @@
 <script type="text/javascript" src="{-$desinventarURL-}/js/query_results.js?version={-$jsversion-}"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/js/stat_params.js?version={-$jsversion-}"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/js/database_export.js?version={-$jsversion-}"></script>
-<script type="text/javascript" src="{-$desinventarURL-}/js/userperm_admin.js?version={-$jsversion-}"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/js/common.js?version={-$jsversion-}"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/js/dboperations.js?version={-$jsversion-}"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/js/diadmin.js?version={-$jsversion-}"></script>
