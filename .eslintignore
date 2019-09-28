@@ -18,6 +18,7 @@ web/js/**
 !web/js/query_design.js
 !web/js/main.js
 !web/js/init.js
+!web/js/main_ext.js
 web/external/**
 web/templates/**
 web/scripts/**

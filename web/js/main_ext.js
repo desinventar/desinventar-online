@@ -170,7 +170,7 @@ function doMainChangeLanguage(LangIsoCode) {
     {
       language: LangIsoCode
     },
-    function(data) {
+    function() {
       jQuery('body').trigger('cmdWindowReload')
     },
     'json'
@@ -186,6 +186,73 @@ function doMainMenuHandler(item) {
     menuCmd = item.id
   }
   var RegionId = jQuery('#desinventarRegionId').val()
+  menuHandlerForUser(menuCmd)
+  menuHandlerForQuery(menuCmd)
+  switch (menuCmd) {
+    case 'mnuDatacardEdit':
+      jQuery('#cardsRecordNumber').val(0)
+      jQuery('#cardsRecordSource').val('')
+      jQuery('body').trigger('cmdDatacardShow')
+      break
+    case 'mnuDatacardImport':
+      hideQueryDesign()
+      jQuery('.contentBlock').hide()
+      jQuery('#divDatacardsImport').show()
+      updateList(
+        'divDatacardsImport',
+        jQuery('#desinventarURL').val() + '/import.php',
+        'r=' + RegionId
+      )
+      break
+    case 'mnuDatacardSetup':
+      hideQueryDesign()
+      doMainMenuToggle(false)
+      Ext.getCmp('mnuDatacard').enable()
+      Ext.getCmp('mnuDatacardEdit').hide()
+      Ext.getCmp('mnuDatacardSetup').hide()
+      Ext.getCmp('mnuDatacardSetupEnd').show()
+      Ext.getCmp('mnuDatacardSetupEnd').enable()
+      jQuery('.contentBlock').hide()
+      jQuery('.classDBConfig_tabs:first').trigger('click')
+      jQuery('#divDatabaseConfiguration').show()
+      jQuery('#tabDatabaseConfiguration').show()
+      break
+    case 'mnuDatacardSetupEnd':
+      doMainMenuToggle(true)
+      jQuery('body').trigger('cmdMainMenuUpdate')
+      jQuery('body').trigger('cmdDatabaseLoadData')
+      break
+    case 'mnuUserAccountManagement':
+      jQuery('div.AdminUsers').trigger('cmdLoadData')
+      Ext.getCmp('wndAdminUsers').show()
+      break
+    case 'mnuAdminDatabases':
+      jQuery('.contentBlock').hide()
+      jQuery('#divAdminDatabase').show()
+      adminDatabase.updateList()
+      break
+    case 'mnuHelpAbout':
+      Ext.getCmp('wndDialog').show()
+      break
+    case 'mnuHelpWebsite':
+      window.open('http://www.desinventar.org', '', '')
+      break
+    case 'mnuHelpMethodology':
+      var url = 'http://www.desinventar.org'
+      if (jQuery('#desinventarLang').val() == 'spa') {
+        url = url + '/es/metodologia'
+      } else {
+        url = url + '/en/methodology'
+      }
+      window.open(url, '', '')
+      break
+    case 'mnuHelpDocumentation':
+      window.open('http://www.desinventar.org/', '', '')
+      break
+  }
+}
+
+function menuHandlerForUser(menuCmd) {
   switch (menuCmd) {
     case 'mnuUserLogin':
     case 'mnuUserChangeLogin':
@@ -209,6 +276,36 @@ function doMainMenuHandler(item) {
     case 'mnuFileLanguageFrench':
       doMainChangeLanguage('fr')
       break
+    case 'mnuFileInfo':
+      jQuery('.contentBlock').hide()
+      jQuery('#divQueryResults').show()
+      jQuery('#dcr').hide()
+      jQuery('#divRegionInfo').show()
+      doGetRegionInfo(jQuery('#desinventarRegionId').val())
+      Ext.getCmp('westm').collapse()
+      break
+    case 'mnuFileOpen':
+      window.location.hash = ''
+      break
+    case 'mnuFileDownload':
+      jQuery('.clsAdminDatabaseExport').hide()
+      Ext.getCmp('wndDatabaseExport').show()
+      jQuery('body').trigger('cmdDatabaseExport')
+      break
+    case 'mnuFileUploadCopy':
+      doDatabaseUploadShow('Copy')
+      break
+    case 'mnuFileUploadReplace':
+      doDatabaseUploadShow('Replace')
+      break
+    case 'mnuFileCreate':
+      databaseCreate.show()
+      break
+  }
+}
+
+function menuHandlerForQuery(menuCmd) {
+  switch (menuCmd) {
     // DesConsultar Menu Options
     case 'mnuQueryViewDesign':
       if (jQuery('#desinventarRegionId').val() != '') {
@@ -250,91 +347,6 @@ function doMainMenuHandler(item) {
       break
     case 'mnuQueryResultPrint':
       jQuery('#btnResultPrint').trigger('click')
-      break
-    case 'mnuFileInfo':
-      jQuery('.contentBlock').hide()
-      jQuery('#divQueryResults').show()
-      jQuery('#dcr').hide()
-      jQuery('#divRegionInfo').show()
-      doGetRegionInfo(jQuery('#desinventarRegionId').val())
-      Ext.getCmp('westm').collapse()
-      break
-    case 'mnuFileOpen':
-      window.location.hash = ''
-      break
-    case 'mnuDatacardEdit':
-      jQuery('#cardsRecordNumber').val(0)
-      jQuery('#cardsRecordSource').val('')
-      jQuery('body').trigger('cmdDatacardShow')
-      break
-    case 'mnuDatacardImport':
-      hideQueryDesign()
-      jQuery('.contentBlock').hide()
-      jQuery('#divDatacardsImport').show()
-      updateList(
-        'divDatacardsImport',
-        jQuery('#desinventarURL').val() + '/import.php',
-        'r=' + RegionId
-      )
-      break
-    case 'mnuFileDownload':
-      jQuery('.clsAdminDatabaseExport').hide()
-      Ext.getCmp('wndDatabaseExport').show()
-      jQuery('body').trigger('cmdDatabaseExport')
-      break
-    case 'mnuFileUploadCopy':
-      doDatabaseUploadShow('Copy')
-      break
-    case 'mnuFileUploadReplace':
-      doDatabaseUploadShow('Replace')
-      break
-    case 'mnuDatacardSetup':
-      hideQueryDesign()
-      doMainMenuToggle(false)
-      Ext.getCmp('mnuDatacard').enable()
-      Ext.getCmp('mnuDatacardEdit').hide()
-      Ext.getCmp('mnuDatacardSetup').hide()
-      Ext.getCmp('mnuDatacardSetupEnd').show()
-      Ext.getCmp('mnuDatacardSetupEnd').enable()
-      jQuery('.contentBlock').hide()
-      jQuery('.classDBConfig_tabs:first').trigger('click')
-      jQuery('#divDatabaseConfiguration').show()
-      jQuery('#tabDatabaseConfiguration').show()
-      break
-    case 'mnuDatacardSetupEnd':
-      doMainMenuToggle(true)
-      jQuery('body').trigger('cmdMainMenuUpdate')
-      jQuery('body').trigger('cmdDatabaseLoadData')
-      break
-    case 'mnuFileCreate':
-      databaseCreate.show()
-      break
-    case 'mnuUserAccountManagement':
-      jQuery('div.AdminUsers').trigger('cmdLoadData')
-      Ext.getCmp('wndAdminUsers').show()
-      break
-    case 'mnuAdminDatabases':
-      jQuery('.contentBlock').hide()
-      jQuery('#divAdminDatabase').show()
-      adminDatabase.updateList()
-      break
-    case 'mnuHelpAbout':
-      Ext.getCmp('wndDialog').show()
-      break
-    case 'mnuHelpWebsite':
-      window.open('http://www.desinventar.org', '', '')
-      break
-    case 'mnuHelpMethodology':
-      var url = 'http://www.desinventar.org'
-      if (jQuery('#desinventarLang').val() == 'spa') {
-        url = url + '/es/metodologia'
-      } else {
-        url = url + '/en/methodology'
-      }
-      window.open(url, '', '')
-      break
-    case 'mnuHelpDocumentation':
-      window.open('http://www.desinventar.org/', '', '')
       break
   }
 }
@@ -1015,7 +1027,7 @@ function doDialogsCreate() {
       {
         text: jQuery('#msgViewGraphButtonClear').text(),
         handler: function() {
-          formReset('frmGraphParams')
+          resetForm('frmGraphParams')
           jQuery('#prmGraphTypeHistogram').change()
         }
       },
@@ -1052,7 +1064,7 @@ function doDialogsCreate() {
       {
         text: jQuery('#msgViewStdButtonClear').text(),
         handler: function() {
-          formReset('frmStatParams')
+          resetForm('frmStatParams')
         }
       },
       {
