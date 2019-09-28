@@ -25,12 +25,6 @@
             <script type="text/javascript" src="//maps.google.com/maps/api/js?key={-$appOptions.google_api_key-}"></script>
         {-/if-}
     <link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/external/checktree/checktree.css"/>
-
-        <script type="text/javascript">
-            jQuery(document).ready(function() {
-                onReadyInit();
-            });
-        </script>
     <script type="text/javascript" src="{-$desinventarURL-}/scripts/bundle.js?version={-$jsversion-}"></script>
         {-if $appOptions.IsOnline > 0-}
             {-include file="ga.tpl"-}

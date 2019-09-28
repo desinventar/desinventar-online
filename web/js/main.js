@@ -29,8 +29,10 @@ import thematicMap from './thematicmap'
 import statParams from './stat_params'
 import statistic from './statistic'
 import queryDesign from './query_design'
+import initialize from './init'
 
-function onReadyMain() {
+function init() {
+  initialize.init()
   mainExt.init()
   onReadyDatabaseList()
   databaseUpload.init()
@@ -143,14 +145,7 @@ function onReadyMain() {
         },
         function(data) {
           me.find('.content').html(data)
-          switch (cmd) {
-            case 'cmdDBInfoCause':
-              onReadyDBConfigCauses()
-              break
-            default:
-              onReadyExtraEffects()
-              break
-          }
+          initTabEvents(cmd)
         }
       )
     }
@@ -159,6 +154,15 @@ function onReadyMain() {
   jQuery(window).trigger('hashchange')
 }
 
+function initTabEvents(cmd) {
+  if (cmd === 'cmdDBInfoCause') {
+    onReadyDBConfigCauses()
+    return
+  }
+  onReadyExtraEffects()
+  return
+}
+
 export default {
-  init: onReadyMain
+  init
 }

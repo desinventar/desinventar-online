@@ -1,18 +1,16 @@
-function onReadyInit() {
+/* global desinventar */
+
+function init() {
   jQuery('body').on('cmdDatabaseLoadData', function(e, params) {
     doDatabaseLoadData(params)
   })
 
-  jQuery(window).bind('hashchange', function(e) {
+  jQuery(window).bind('hashchange', function() {
     var url = jQuery.param.fragment()
     var options = url.split('/')
-    switch (options[0]) {
-      default:
-        var RegionId = options[0]
-        jQuery('#desinventarRegionId').val(RegionId)
-        jQuery('body').trigger('cmdDatabaseLoadData')
-        break
-    }
+    var RegionId = options[0]
+    jQuery('#desinventarRegionId').val(RegionId)
+    jQuery('body').trigger('cmdDatabaseLoadData')
   })
 }
 
@@ -42,7 +40,7 @@ function doDatabaseLoadData(params) {
           jQuery('body').data('RecordCount', data.RecordCount)
 
           var dataItems = jQuery('body').data()
-          jQuery.each(dataItems, function(index, value) {
+          jQuery.each(dataItems, function(index) {
             if (index.substr(0, 13) === 'GeographyList') {
               jQuery('body').removeData(index)
             }
@@ -77,4 +75,8 @@ function doDatabaseLoadData(params) {
     },
     'json'
   )
+}
+
+export default {
+  init
 }
