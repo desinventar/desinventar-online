@@ -221,12 +221,13 @@ function init() {
         jQuery('div.QueryDesign select.Event').append(option)
       }
     })
-    let option = jQuery('<option>', { value: '' }).text('---')
-    option.attr('disabled', 'disabled')
-    jQuery('div.QueryDesign select.Event').append(option)
+    let optionDefault = jQuery('<option>', { value: '' }).text('---')
+    optionDefault.attr('disabled', 'disabled')
+    jQuery('div.QueryDesign select.Event').append(optionDefault)
+
     jQuery.each(jQuery('body').data('EventList'), function(key, value) {
       if (parseInt(value.EventPredefined) < 1) {
-        var option = jQuery('<option>', { value: key }).text(value.EventName)
+        let option = jQuery('<option>', { value: key }).text(value.EventName)
         option.data('help', value.EventDesc)
         option.addClass('withHelpOver')
         jQuery('div.QueryDesign select.Event').append(option)
@@ -243,9 +244,10 @@ function init() {
       }
     })
 
-    option = jQuery('<option>', { value: '' }).text('---')
-    option.attr('disabled', 'disabled')
-    jQuery('div.QueryDesign select.Cause').append(option)
+    optionDefault = jQuery('<option>', { value: '' }).text('---')
+    optionDefault.attr('disabled', 'disabled')
+    jQuery('div.QueryDesign select.Cause').append(optionDefault)
+
     jQuery.each(jQuery('body').data('CauseList'), function(key, value) {
       if (parseInt(value.CausePredefined) < 1) {
         let option = jQuery('<option>', { value: key }).text(value.CauseName)
