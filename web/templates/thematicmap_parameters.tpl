@@ -95,7 +95,7 @@
                               </select>%
                             </td>
                             <td class="right">
-                              <a class="button" onClick="genColors();"><span>{-#mcolorgrad#-}</span></a>
+                              <a class="button" id="viewMapParamsGenColors"><span>{-#mcolorgrad#-}</span></a>
                             </td>
                           </tr>
                         </table>

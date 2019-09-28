@@ -96,6 +96,13 @@ function doViewMapParamsInitialize() {
     )
   })
   field_list.val(jQuery('option:first', field_list).val())
+
+  jQuery('div.ViewMapParams').on('click', '#viewMapParamsGenColors', function(
+    event
+  ) {
+    genColors()
+    event.preventDefault()
+  })
 }
 
 function createThematicMap() {
@@ -348,6 +355,5 @@ function genColors() {
 
 export default {
   init,
-  createThematicMap,
-  genColors
+  createThematicMap
 }
