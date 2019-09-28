@@ -12,7 +12,6 @@
 <script type="text/javascript" src="{-$desinventarURL-}/external/Math.uuid.js"></script>
 
 <script type="text/javascript" src="{-$desinventarURL-}/js/database_list.js?version={-$jsversion-}"></script>
-<script type="text/javascript" src="{-$desinventarURL-}/js/query_design.js?version={-$jsversion-}"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/js/extraeffects.js?version={-$jsversion-}"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/js/data.js?version={-$jsversion-}"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/js/graphic.js?version={-$jsversion-}"></script>

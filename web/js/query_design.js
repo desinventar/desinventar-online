@@ -1,4 +1,5 @@
-function onReadyQueryDesign() {
+/* global showtip, setAdvQuery */
+function init() {
   jQuery('div.QueryDesign')
     .on('mouseover', '.withHelpOver', function() {
       showtip(jQuery(this).data('help'))
@@ -26,10 +27,10 @@ function onReadyQueryDesign() {
     })
 
   jQuery('div.QueryDesign div.GeographyList')
-    .on('click', 'li.item input:checkbox', function(event) {
+    .on('click', 'li.item input:checkbox', function() {
       jQuery(this).trigger('GeographyUpdate')
     })
-    .on('click', 'li.item span.label', function(event) {
+    .on('click', 'li.item span.label', function() {
       jQuery(this)
         .parent()
         .find('input:checkbox')
@@ -47,7 +48,9 @@ function onReadyQueryDesign() {
         var isChecked = jQuery('input:checkbox', this).prop('checked')
 
         if (isChecked) {
-          GeographyList = jQuery('body').data('GeographyList-' + GeographyId)
+          var GeographyList = jQuery('body').data(
+            'GeographyList-' + GeographyId
+          )
           if (GeographyList == undefined) {
             jQuery.post(
               jQuery('#desinventarURL').val() + '/',
@@ -100,17 +103,17 @@ function onReadyQueryDesign() {
     })
 
   jQuery('div.QueryDesign table.EffectList')
-    .on('click', 'input:checkbox', function(event) {
+    .on('click', 'input:checkbox', function() {
       jQuery(this).trigger('EffectUpdate')
     })
-    .on('click', 'span.label', function(event) {
+    .on('click', 'span.label', function() {
       var checkbox = jQuery(this)
         .parent()
         .find('input:checkbox')
       checkbox.prop('checked', !checkbox.prop('checked'))
       jQuery(this).trigger('EffectUpdate')
     })
-    .on('change', 'select.operator', function(event) {
+    .on('change', 'select.operator', function() {
       var value = jQuery(this).val()
       jQuery(this).trigger('HideValues')
       if (value == '>=' || value == '<=' || value == '=' || value == '-3') {
@@ -120,7 +123,7 @@ function onReadyQueryDesign() {
         }
       }
     })
-    .on('EffectUpdate', 'td div', function(event) {
+    .on('EffectUpdate', 'td div', function() {
       if (jQuery('input:checkbox', this).prop('checked')) {
         jQuery('span.options', this).show()
         jQuery('select.operator', this)
@@ -133,27 +136,26 @@ function onReadyQueryDesign() {
           .change()
       }
     })
-    .on('HideValues', 'td div', function(event) {
+    .on('HideValues', 'td div', function() {
       jQuery('span.firstvalue', this).hide()
       jQuery('span.firstvalue input', this).disable()
       jQuery('span.lastvalue', this).hide()
       jQuery('span.lastvalue input', this).disable()
     })
-    .on('ShowFirstValue', 'td div', function(event) {
+    .on('ShowFirstValue', 'td div', function() {
       jQuery('span.firstvalue', this).show()
       jQuery('span.firstvalue input', this).enable()
     })
-    .on('ShowLastValue', 'td div', function(event) {
+    .on('ShowLastValue', 'td div', function() {
       jQuery('span.lastvalue', this).show()
       jQuery('span.lastvalue input', this).enable()
     })
 
   jQuery('div.QueryDesign table.QueryCustom')
-    .on('click', 'div.field', function(event) {
+    .on('click', 'div.field', function() {
       setAdvQuery(jQuery(this).data('field'), jQuery(this).data('type'))
     })
-    .on('click', 'div.field input', function(event) {
-      // Bug #140: Enable click on this field and propagate event
+    .on('click', 'div.field input', function() {
       return true
     })
 
@@ -213,13 +215,13 @@ function onReadyQueryDesign() {
     jQuery('div.QueryDesign select.Event').empty()
     jQuery.each(jQuery('body').data('EventList'), function(key, value) {
       if (parseInt(value.EventPredefined) > 0) {
-        var option = jQuery('<option>', { value: key }).text(value.EventName)
+        let option = jQuery('<option>', { value: key }).text(value.EventName)
         option.data('help', value.EventDesc)
         option.addClass('withHelpOver')
         jQuery('div.QueryDesign select.Event').append(option)
       }
     })
-    var option = jQuery('<option>', { value: '' }).text('---')
+    let option = jQuery('<option>', { value: '' }).text('---')
     option.attr('disabled', 'disabled')
     jQuery('div.QueryDesign select.Event').append(option)
     jQuery.each(jQuery('body').data('EventList'), function(key, value) {
@@ -234,7 +236,7 @@ function onReadyQueryDesign() {
     jQuery('div.QueryDesign select.Cause').empty()
     jQuery.each(jQuery('body').data('CauseList'), function(key, value) {
       if (parseInt(value.CausePredefined) > 0) {
-        var option = jQuery('<option>', { value: key }).text(value.CauseName)
+        let option = jQuery('<option>', { value: key }).text(value.CauseName)
         option.data('help', value.CauseDesc)
         option.addClass('withHelpOver')
         jQuery('div.QueryDesign select.Cause').append(option)
@@ -246,7 +248,7 @@ function onReadyQueryDesign() {
     jQuery('div.QueryDesign select.Cause').append(option)
     jQuery.each(jQuery('body').data('CauseList'), function(key, value) {
       if (parseInt(value.CausePredefined) < 1) {
-        var option = jQuery('<option>', { value: key }).text(value.CauseName)
+        let option = jQuery('<option>', { value: key }).text(value.CauseName)
         option.data('help', value.CauseDesc)
         option.addClass('withHelpOver')
         jQuery('div.QueryDesign select.Cause').append(option)
@@ -358,7 +360,9 @@ function onReadyQueryDesign() {
     )
 
     // Load EffectAdditional List (EEFieldList)
-    var effectAdditionalList = jQuery('div.QueryDesign table.EffectAdditionalList')
+    var effectAdditionalList = jQuery(
+      'div.QueryDesign table.EffectAdditionalList'
+    )
     effectAdditionalList.find('tr:gt(0)').remove()
     jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
       var field = value['id']
@@ -476,4 +480,8 @@ function onReadyQueryDesign() {
     jQuery('body').trigger('cmdMainQueryUpdate')
     jQuery('div.QueryDesign dt.QueryDatacard').trigger('mousedown')
   })
+}
+
+export default {
+  init
 }

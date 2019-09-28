@@ -2,7 +2,6 @@
   showtip,
   onReadyDBConfigCauses,
   onReadyDatabaseList,
-  onReadyQueryDesign,
   onReadyCommon,
   onReadyUserLogin,
   onReadyUserAccount,
@@ -29,6 +28,7 @@ import userPermAdmin from './userperm_admin'
 import thematicMap from './thematicmap'
 import statParams from './stat_params'
 import statistic from './statistic'
+import queryDesign from './query_design'
 
 function onReadyMain() {
   mainExt.init()
@@ -36,7 +36,7 @@ function onReadyMain() {
   databaseUpload.init()
   databaseCreate.init()
   databaseUsers.init()
-  onReadyQueryDesign()
+  queryDesign.init()
   databaseGeography.init()
   databaseGeoLevels.init()
   databaseEvents.init()

@@ -15,6 +15,7 @@ web/js/**
 !web/js/thematicmap.js
 !web/js/stat_params.js
 !web/js/statistic.js
+!web/js/query_design.js
 web/external/**
 web/templates/**
 web/scripts/**
