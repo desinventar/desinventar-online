@@ -99,24 +99,3 @@ function doStatOrderByField(field, dir) {
   )
 }
 
-function setTotalize(lnow, lnext) {
-  var sour = $(lnow)
-  var dest = $(lnext)
-  // clean dest list
-  for (var i = dest.length - 1; i >= 0; i--) {
-    dest.remove(i)
-  }
-  for (var i = 0; i < sour.length; i++) {
-    if (!sour[i].selected) {
-      var opt = document.createElement('option')
-      opt.value = sour[i].value
-      opt.text = sour[i].text
-      var pto = dest.options[i]
-      try {
-        dest.add(opt, pto)
-      } catch (ex) {
-        dest.add(opt, i)
-      }
-    }
-  }
-}

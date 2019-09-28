@@ -1,4 +1,6 @@
-function onReadyStatParams() {
+/* global Ext */
+
+function init() {
   jQuery('#fldStatParam_FirstLev').change(function() {
     setTotalize('fldStatParam_FirstLev', 'fldStatParam_SecondLev')
     jQuery('#fldStatParam_ThirdLev').empty()
@@ -13,9 +15,31 @@ function onReadyStatParams() {
     jQuery('#fldStatParam_FirstLev').trigger('change')
   })
 
-  jQuery('div.ViewStatParams').on('cmdInitialize', function(event) {
+  jQuery('div.ViewStatParams').on('cmdInitialize', function() {
     doViewStatParamsInitialize()
   })
+}
+
+function setTotalize(lnow, lnext) {
+  var sour = $(lnow)
+  var dest = $(lnext)
+  // clean dest list
+  for (let i = dest.length - 1; i >= 0; i--) {
+    dest.remove(i)
+  }
+  for (let i = 0; i < sour.length; i++) {
+    if (!sour[i].selected) {
+      var opt = document.createElement('option')
+      opt.value = sour[i].value
+      opt.text = sour[i].text
+      var pto = dest.options[i]
+      try {
+        dest.add(opt, pto)
+      } catch (ex) {
+        dest.add(opt, i)
+      }
+    }
+  }
 }
 
 function doViewStatParamsInitialize() {
@@ -129,4 +153,8 @@ function doViewStatParamsInitialize() {
       )
     }
   )
+}
+
+export default {
+  init
 }

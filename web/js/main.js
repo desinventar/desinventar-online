@@ -11,7 +11,6 @@
   onReadyQueryResults,
   onReadyData,
   onReadyGraphic,
-  onReadyStatParams
 */
 
 import 'jquery-ui/ui/widgets/tabs'
@@ -29,6 +28,7 @@ import datacards from './datacards'
 import datacards2 from '../js2/datacards/datacards'
 import userPermAdmin from './userperm_admin'
 import thematicMap from './thematicmap'
+import statParams from './stat_params'
 
 function onReadyMain() {
   mainExt.init()
@@ -54,7 +54,7 @@ function onReadyMain() {
   onReadyData()
   onReadyGraphic()
   thematicMap.init()
-  onReadyStatParams()
+  statParams.init()
 
   jQuery('#frmMainQuery').submit(function() {
     var myURL = jQuery(this).attr('action')
