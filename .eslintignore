@@ -12,6 +12,7 @@ web/js/**
 !web/js/database_upload.js
 !web/js/datacards.js
 !web/js/userperm_admin.js
+!web/js/thematicmap.js
 web/external/**
 web/templates/**
 web/scripts/**

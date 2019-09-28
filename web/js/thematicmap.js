@@ -1,13 +1,15 @@
+/* global Ext, OpenLayers, google */
+
 // Do not remove this line, initialize map=null
 // to avoid an error with IE and the maps
 var map = null
 
-function onReadyThematicMap() {
+function init() {
   jQuery('body').on('cmdViewMapParams', function() {
     Ext.getCmp('wndViewMapParams').show()
   })
   //Initialize
-  jQuery('div.ViewMapParams').on('cmdInitialize', function(event) {
+  jQuery('div.ViewMapParams').on('cmdInitialize', function() {
     doViewMapParamsInitialize()
   })
 }
@@ -139,7 +141,6 @@ function createThematicMap() {
   map.addControl(new OpenLayers.Control.NavToolbar())
 
   // WMS Local Base Map
-  mapServer = jQuery('#prmMapServer').val()
   var base = new OpenLayers.Layer.WMS(
     'Local BaseMap',
     jQuery('#desinventarURL').val() + '/wms/',
@@ -182,7 +183,7 @@ function createThematicMap() {
       .find(':eq(2)')
       .text()
       .trim()
-    var layer = new OpenLayers.Layer.WMS(
+    var effectLayer = new OpenLayers.Layer.WMS(
       'DesInventar/' +
         jQuery(this)
           .find(':eq(0)')
@@ -199,7 +200,8 @@ function createThematicMap() {
         isBaseLayer: false
       }
     )
-    map.addLayer(layer)
+    map.addLayer(effectLayer)
+
     jQuery('#MapAdminLayers div').each(function() {
       var layername = jQuery(this)
         .find(':eq(1)')
@@ -236,7 +238,7 @@ function createThematicMap() {
   pt2.transform(prj1, map.getProjectionObject())
   bounds.extend(pt1)
   bounds.extend(pt2)
-  zoom = base.getZoomForExtent(bounds)
+  const zoom = base.getZoomForExtent(bounds)
   map.setCenter(bounds.getCenterLonLat(), zoom)
   if (lon == 0 && lat == 0) {
     map.zoomToMaxExtent()
@@ -249,75 +251,11 @@ function createThematicMap() {
   })
 }
 
-function addRowToTable() {
-  var tbl = $('tbl_range')
-  var lastRow = tbl.rows.length
-  // if there's no header row in the table, then iteration = lastRow + 1
-  var iteration = lastRow
-  var row = tbl.insertRow(lastRow)
-  var cellBeg = row.insertCell(0)
-  var textNode = document.createTextNode(iteration + 1)
-  cellBeg.appendChild(textNode)
-  // left cell
-  var cellLeft = row.insertCell(1)
-  var lim = document.createElement('input')
-  lim.setAttribute('type', 'text')
-  lim.setAttribute('size', '5')
-  lim.setAttribute('class', 'line')
-  lim.setAttribute('name', '_M+limit[' + iteration + ']')
-  lim.setAttribute('id', '_M+limit[' + iteration + ']')
-  lim.setAttribute(
-    'onBlur',
-    "miv=parseInt($('_M+limit[" +
-      iteration -
-      1 +
-      "]').value)+1; $('_M+legend[" +
-      iteration +
-      "]').value='{-#mbetween#-} '+ miv +' - '+ this.value;"
-  )
-  cellLeft.appendChild(lim)
-  // center cell
-  var cellCenter = row.insertCell(2)
-  var leg = document.createElement('input')
-  leg.setAttribute('type', 'text')
-  leg.setAttribute('size', '20')
-  leg.setAttribute('class', 'line')
-  leg.setAttribute('name', '_M+legend[' + iteration + ']')
-  leg.setAttribute('id', '_M+legend[' + iteration + ']')
-  cellCenter.appendChild(leg)
-  // right cell
-  var cellRight = row.insertCell(3)
-  var ic = document.createElement('input')
-  ic.setAttribute('type', 'text')
-  ic.setAttribute('size', '3')
-  ic.setAttribute('class', 'line')
-  ic.setAttribute('id', '_M+ic[' + iteration + ']')
-  ic.setAttribute('style', 'background:#00ff00;')
-  ic.setAttribute(
-    'onClick',
-    "showColorGrid2('_M+color[" + iteration + "]','_M+ic[" + iteration + "]');"
-  )
-  cellRight.appendChild(ic)
-  var col = document.createElement('input')
-  col.setAttribute('type', 'hidden')
-  col.setAttribute('name', '_M+color[' + iteration + ']')
-  col.setAttribute('id', '_M+color[' + iteration + ']')
-  col.setAttribute('value', '00ff00;')
-  cellRight.appendChild(col)
-}
-
-function removeRowFromTable() {
-  var tbl = $('tbl_range')
-  var lastRow = tbl.rows.length
-  if (lastRow > 2) tbl.deleteRow(lastRow - 1)
-}
-
 function dechex(dec) {
   var Char_hexadecimales = '0123456789ABCDEF'
   var low = dec % 16
   var high = (dec - low) / 16
-  hex = '' + Char_hexadecimales.charAt(high) + Char_hexadecimales.charAt(low)
-  return hex
+  return '' + Char_hexadecimales.charAt(high) + Char_hexadecimales.charAt(low)
 }
 
 function hexdec(hex) {
@@ -407,3 +345,9 @@ function genColors() {
   //parent.document.getElementById('frmwait').innerHTML='';
 
   */
+
+export default {
+  init,
+  createThematicMap,
+  genColors
+}

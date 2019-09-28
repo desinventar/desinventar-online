@@ -1,5 +1,4 @@
 /* global
-  createThematicMap,
   onReadyStatistic,
   showtip,
   onReadyDBConfigCauses,
@@ -12,7 +11,6 @@
   onReadyQueryResults,
   onReadyData,
   onReadyGraphic,
-  onReadyThematicMap,
   onReadyStatParams
 */
 
@@ -30,6 +28,7 @@ import databaseUpload from './database_upload'
 import datacards from './datacards'
 import datacards2 from '../js2/datacards/datacards'
 import userPermAdmin from './userperm_admin'
+import thematicMap from './thematicmap'
 
 function onReadyMain() {
   mainExt.init()
@@ -54,7 +53,7 @@ function onReadyMain() {
   onReadyQueryResults()
   onReadyData()
   onReadyGraphic()
-  onReadyThematicMap()
+  thematicMap.init()
   onReadyStatParams()
 
   jQuery('#frmMainQuery').submit(function() {
@@ -85,7 +84,7 @@ function onReadyMain() {
             jQuery('body').trigger('cmdViewDataUpdate')
             break
           case 'cmdMapShow':
-            createThematicMap()
+            thematicMap.createThematicMap()
             break
           case 'cmdGraphShow':
             break

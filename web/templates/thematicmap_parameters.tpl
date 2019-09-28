@@ -32,10 +32,6 @@
                         <b>{-#mranlegcol#-}</b>&nbsp; &nbsp; &nbsp; &nbsp;
                       </td>
                       <td class="top">
-                        <!--
-                        <a class="button hidden" onclick="addRowToTable();"><span>+</span></a>
-                        <a class="button hidden" onclick="removeRowFromTable();"><span>-</span></a>
-                        -->
                       </td>
                     </tr>
                     <tr>
