@@ -14,6 +14,7 @@ web/js/**
 !web/js/userperm_admin.js
 !web/js/thematicmap.js
 !web/js/stat_params.js
+!web/js/statistic.js
 web/external/**
 web/templates/**
 web/scripts/**

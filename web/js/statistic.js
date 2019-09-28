@@ -1,4 +1,4 @@
-function onReadyStatistic() {
+function init() {
   jQuery('#btnStatGotoFirstPage').click(function() {
     doStatDisplayPage(1)
     return false
@@ -40,7 +40,7 @@ function onReadyStatistic() {
 
 function doStatDisplayPage(page) {
   var mypag = page
-  now = parseInt(jQuery('#StatCurPage').val())
+  var now = parseInt(jQuery('#StatCurPage').val())
   if (page == 'prev') {
     mypag = now - 1
   } else if (page == 'next') {
@@ -99,3 +99,6 @@ function doStatOrderByField(field, dir) {
   )
 }
 
+export default {
+  init
+}

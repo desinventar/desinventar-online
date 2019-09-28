@@ -1,5 +1,4 @@
 /* global
-  onReadyStatistic,
   showtip,
   onReadyDBConfigCauses,
   onReadyDatabaseList,
@@ -29,6 +28,7 @@ import datacards2 from '../js2/datacards/datacards'
 import userPermAdmin from './userperm_admin'
 import thematicMap from './thematicmap'
 import statParams from './stat_params'
+import statistic from './statistic'
 
 function onReadyMain() {
   mainExt.init()
@@ -89,7 +89,7 @@ function onReadyMain() {
           case 'cmdGraphShow':
             break
           case 'cmdStatShow':
-            onReadyStatistic()
+            statistic.init()
             break
           default:
             break
