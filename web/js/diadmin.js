@@ -1,5 +1,6 @@
+/* global Ext */
+
 var mod = ''
-var opt = ''
 var reg = ''
 
 function uploadMsg(msg) {
@@ -9,8 +10,8 @@ function uploadMsg(msg) {
   }
 }
 
-function updateList(div, url, pars, callback) {
-  jQuery('#' + div).load(url, pars, function(response, status, xhr) {
+function updateList(divSelector, url, pars, callback) {
+  jQuery('#' + divSelector).load(url, pars, function(response, status, xhr) {
     // Hide first two columns (EventId,EventPredefined)
     jQuery('td:nth-child(1)', '#tblEventListUser,#tblEventListPredef').hide()
     jQuery('td:nth-child(2)', '#tblEventListUser,#tblEventListPredef').hide()
@@ -104,30 +105,6 @@ function setLevGeo(key, val, val2, val3, ly1, ly2, ly3, module) {
   }
 }
 
-function setadmingeo(reg, k, l) {
-  reg = jQuery('#desinventarRegionId').val()
-  var v = k.split('|')
-  mod = 'geo'
-  uploadMsg('')
-  if (v[0] == -1) {
-    setLevGeo('', '', '', 1, '', '', '', 'geo')
-    if (l == 0) {
-      $('aGeoParentId').value = ''
-    }
-    $('alev' + l).style.display = 'none'
-  } else if (v[0] == -2) {
-    $('geoaddsect').style.display = 'none'
-  } else {
-    setLevGeo(v[0], v[1], v[2], v[3], '', '', '', 'geo')
-    $('aGeoParentId').value = v[0]
-    updateList(
-      'alev' + l,
-      jQuery('#desinventarURL').val() + '/geography.php',
-      'r=' + reg + '&cmd=list&GeographyId=' + v[0]
-    )
-  }
-}
-
 function setUserPA(login, name, email, pass, cnt, city, active) {
   mod = 'userpa'
   $(mod + 'addsect').style.display = 'block'
@@ -184,7 +161,9 @@ function getForm(fobj) {
   return str
 }
 
-function getGeoItems(reg, geoid, l, lev, src) {
+function getGeoItems(regionId, geoid, l, lev, src) {
+  let ele
+  let div
   if (src == 'DATA') {
     div = window.parent.frames['dif'].document.getElementById('lev' + l)
     ele = window.parent.frames['dif'].document.getElementById('geolev' + l)
@@ -192,66 +171,24 @@ function getGeoItems(reg, geoid, l, lev, src) {
     div = $('lev' + l)
     ele = $('geolev' + l)
   }
-  geo = geoid.substr(0, (l + 1) * 5)
+  const geo = geoid.substr(0, (l + 1) * 5)
   for (var w = 0; w < ele.length; w++) {
     if (ele.options[w].value == geo) ele.selectedIndex = w
   }
   if (l < lev) {
-    new Ajax.Updater(
-      div,
-      jQuery('#desinventarURL').val() + '/cards.php',
-      {
-        method: 'get',
-        parameters:
-          'r=' +
-          reg +
-          '&cmd=list&GeographyId=' +
-          geo +
-          '&t=' +
-          new Date().getTime(),
-        onComplete: function(request) {
-          getGeoItems(reg, geoid, l + 1, lev, src)
-        }
+    new Ajax.Updater(div, jQuery('#desinventarURL').val() + '/cards.php', {
+      method: 'get',
+      parameters:
+        'r=' +
+        regionId +
+        '&cmd=list&GeographyId=' +
+        geo +
+        '&t=' +
+        new Date().getTime(),
+      onComplete: function() {
+        getGeoItems(reg, geoid, l + 1, lev, src)
       }
-    )
-  }
-}
-
-function showinfo(mydiv) {
-  if ($(mydiv).style.display == 'none') {
-    $(mydiv).style.display = 'block'
-  } else {
-    $(mydiv).style.display = 'none'
-  }
-}
-
-function CheckIsIE() {
-  if (navigator.appName.toUpperCase() == 'MICROSOFT INTERNET EXPLORER') {
-    return true
-  } else {
-    return false
-  }
-}
-
-function saveRes(cmd, typ) {
-  if ($('DCRes').value != '') {
-    switch ($('DCRes').value) {
-      case 'D':
-        $('_D+saveopt').value = typ
-        sendList(cmd)
-        break
-      case 'M':
-        // SaveMap to PNG Format
-        sendMap(cmd)
-        break
-      case 'G':
-        sendGraphic(cmd)
-        break
-      case 'S':
-        $('_S+saveopt').value = typ
-        sendStatistic(cmd)
-        break
-    }
+    })
   }
 }
 

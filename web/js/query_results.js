@@ -82,6 +82,28 @@ function onReadyQueryResults() {
   jQuery('body').trigger('cmdMainQueryUpdate')
 }
 
+function saveRes(cmd, typ) {
+  if ($('DCRes').value != '') {
+    switch ($('DCRes').value) {
+      case 'D':
+        $('_D+saveopt').value = typ
+        sendList(cmd)
+        break
+      case 'M':
+        // SaveMap to PNG Format
+        sendMap(cmd)
+        break
+      case 'G':
+        sendGraphic(cmd)
+        break
+      case 'S':
+        $('_S+saveopt').value = typ
+        sendStatistic(cmd)
+        break
+    }
+  }
+}
+
 function validateQueryDefinition() {
   var iReturn = 1
   return iReturn
