@@ -7,7 +7,6 @@
   onReadyUserAccount,
   onReadyExtraEffects,
   onReadyQueryResults,
-  onReadyData,
 */
 
 import 'jquery-ui/ui/widgets/tabs'
@@ -30,6 +29,7 @@ import statistic from './statistic'
 import queryDesign from './query_design'
 import initialize from './init'
 import graphics from './graphic'
+import viewData from './data'
 
 function init() {
   initialize.init()
@@ -53,7 +53,7 @@ function init() {
   adminDatabase.init()
   onReadyExtraEffects()
   onReadyQueryResults()
-  onReadyData()
+  viewData.init()
   graphics.init()
   thematicMap.init()
   statParams.init()

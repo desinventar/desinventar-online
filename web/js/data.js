@@ -1,4 +1,6 @@
-function onReadyData() {
+/* global Ext */
+
+function init() {
   jQuery('body').on('click', '.ViewData', function() {
     jQuery(this).toggleClass('highlight')
   })
@@ -67,7 +69,9 @@ function doDataInitialize() {
     )
   })
   jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
-    field_list.append(jQuery('<option>', { value: 'E.' + value['id'] }).text(value['name']))
+    field_list.append(
+      jQuery('<option>', { value: 'E.' + value['id'] }).text(value['name'])
+    )
   })
 
   var selectFieldShow = jQuery('div.ViewDataParams select.FieldsShow')
@@ -141,4 +145,8 @@ function doDataDisplayPage(page) {
       )
     }
   }
+}
+
+export default {
+  init
 }
