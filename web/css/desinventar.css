@@ -732,3 +732,6 @@ table.UserList {
   table-layout: auto;
   width: 100%;
 }
+.sweetalert2-confirm-button {
+  min-height: 40px;
+}

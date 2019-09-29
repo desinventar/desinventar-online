@@ -1,4 +1,5 @@
 /* global Ext, qq */
+import Swal from 'sweetalert2'
 
 var uploader
 
@@ -35,8 +36,12 @@ function init() {
         if (parseInt(data.Status) > 0) {
           jQuery('#divDatabaseUploadParameters').hide()
           doDatabaseUploadStatusMsg('msgDatabaseUploadUpdateOk')
-          alert(jQuery('#msgDatabaseUploadReplaceComplete').val())
-          jQuery('body').trigger('cmdWindowReload')
+          displayConfirmationDialog(
+            jQuery('#msgDatabaseUploadReplaceComplete').val(),
+            function() {
+              jQuery('body').trigger('cmdWindowReload')
+            }
+          )
         } else {
           jQuery('.clsDatabaseUploadButtons').show()
           doDatabaseUploadStatusMsg('msgDatabaseUploadUpdateError')
@@ -63,11 +68,16 @@ function init() {
         if (parseInt(data.Status) > 0) {
           jQuery('#divDatabaseUploadParameters').hide()
           doDatabaseUploadStatusMsg('msgDatabaseUploadUpdateOk')
-          alert(jQuery('#msgDatabaseUploadCopyComplete').val())
-          window.location =
-            jQuery('#desinventarURL').val() +
-            '/' +
-            jQuery('#txtDatabaseUploadRegionId').text()
+          displayConfirmationDialog(
+            jQuery('#msgDatabaseUploadCopyComplete').val(),
+            function() {
+              window.location =
+                jQuery('#desinventarURL').val() +
+                '/#' +
+                jQuery('#txtDatabaseUploadRegionId').text()
+              jQuery('body').trigger('cmdWindowReload')
+            }
+          )
         } else {
           jQuery('.clsDatabaseUploadButtons').show()
           doDatabaseUploadStatusMsg('msgDatabaseUploadUpdateError')
@@ -97,6 +107,20 @@ function init() {
       Ext.getCmp('wndDatabaseUpload').hide()
     }
     return false
+  })
+}
+
+function displayConfirmationDialog(message, onAfterCloseCallback) {
+  Swal.fire({
+    title: '',
+    text: message,
+    type: 'info',
+    confirmationButtonText: jQuery('#msgDatabaseUploadButtonClose').text(),
+    allowOutsideClick: false,
+    customClass: {
+      confirmButton: 'sweetalert2-confirm-button'
+    },
+    onAfterClose: onAfterCloseCallback
   })
 }
 
