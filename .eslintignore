@@ -19,6 +19,7 @@ web/js/**
 !web/js/main.js
 !web/js/init.js
 !web/js/main_ext.js
+!web/js/graphic.js
 web/external/**
 web/templates/**
 web/scripts/**

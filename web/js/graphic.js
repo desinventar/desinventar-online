@@ -1,4 +1,5 @@
-function onReadyGraphic() {
+/* global enab, disab, showtip, Ext */
+function init() {
   // 2010-02-21 (jhcaiced) This jQuery calls ensures that the Period and Stat
   // parameters are not empty at the same time.
   jQuery('#prmGraphPeriod').change(function() {
@@ -90,7 +91,7 @@ function onReadyGraphic() {
   })
 
   jQuery('#prmGraphKind').change(function() {
-    comp = jQuery('#prmGraphTypeComparative').val()
+    let comp = jQuery('#prmGraphTypeComparative').val()
     if (comp != '') {
       comp = parseInt(comp)
     } else {
@@ -152,15 +153,15 @@ function onReadyGraphic() {
     Ext.getCmp('wndViewGraphParams').show()
   })
 
-  jQuery('div.ViewGraphParams').on('cmdInitialize', function(event) {
+  jQuery('div.ViewGraphParams').on('cmdInitialize', function() {
     doViewGraphParamsInitialize()
   })
 }
 
 function doUpdateGraphParameters() {
-  kind = jQuery('#prmGraphKind').val()
-  field0 = jQuery('#prmGraphField0').val()
-  field1 = jQuery('#prmGraphField1').val()
+  let kind = jQuery('#prmGraphKind').val()
+  let field0 = jQuery('#prmGraphField0').val()
+  let field1 = jQuery('#prmGraphField1').val()
   if (kind == 'BAR') {
     if (field0 != '' && field1 != '') {
       jQuery('#prmGraphFeel option.3D').enable()
@@ -189,7 +190,9 @@ function doViewGraphParamsInitialize() {
 
   // GraphTypeComparative - By Geolevels
   var geolevelList = jQuery('body').data('GeolevelsList')
-  var selectTypeComparative = jQuery('div.ViewGraphParams select.TypeComparative')
+  var selectTypeComparative = jQuery(
+    'div.ViewGraphParams select.TypeComparative'
+  )
   jQuery(selectTypeComparative)
     .find('option.Geolevel')
     .remove()
@@ -213,4 +216,8 @@ function disabAxis2() {
 
 function enabAxis2() {
   jQuery('#divVerticalAxis2').show()
+}
+
+export default {
+  init
 }

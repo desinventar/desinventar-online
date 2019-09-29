@@ -8,7 +8,6 @@
   onReadyExtraEffects,
   onReadyQueryResults,
   onReadyData,
-  onReadyGraphic,
 */
 
 import 'jquery-ui/ui/widgets/tabs'
@@ -30,6 +29,7 @@ import statParams from './stat_params'
 import statistic from './statistic'
 import queryDesign from './query_design'
 import initialize from './init'
+import graphics from './graphic'
 
 function init() {
   initialize.init()
@@ -54,7 +54,7 @@ function init() {
   onReadyExtraEffects()
   onReadyQueryResults()
   onReadyData()
-  onReadyGraphic()
+  graphics.init()
   thematicMap.init()
   statParams.init()
 
