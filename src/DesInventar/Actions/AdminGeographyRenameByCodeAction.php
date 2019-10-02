@@ -52,7 +52,7 @@ class AdminGeographyRenameByCodeAction
             $geography = new Geography($this->pdo, $this->logger);
             return
                 $geography->update($oldId, ['GeographyCode' => $newCode]) &&
-                $geography->updateFQNameByCode($newCode);
+                $geography->updateFQNameByCode($newCode, '');
         }
         $newParent = $this->findGeographyByCode($newParentCode);
         $newParentId = $newParent['GeographyId'];
@@ -63,15 +63,13 @@ class AdminGeographyRenameByCodeAction
         $this->logger->debug("Rename geography between levels: " .
             "{$code}/{$oldParentCode}/{$oldId} " .
             "{$newCode}/{$newParentCode}/{$newParentId}/{$newId}");
-        $this->pdo->beginTransaction();
         $geography = new Geography($this->pdo, $this->logger);
         $geography->update(
             $oldId,
             ['GeographyCode' => $newCode, 'GeographyId' => $newId]
         );
-        $geography->updateFQNameByCode($newCode);
+        $geography->updateFQNameByCode($newCode, '');
         (new Disaster($this->pdo, $this->logger))->updateGeography($oldId, $newId);
-        $this->pdo->commit();
         return $oldParentCode;
     }
 

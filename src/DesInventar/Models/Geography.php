@@ -71,26 +71,41 @@ class Geography extends Record
             ->bindValue('id', "{$id}%")
             ->bindValue('level', $level)
             ->orderBy(['GeographyCode']);
-            $sth = $this->pdo->perform($query->getStatement(), $query->getBindValues());
-            return $sth->fetchAll(PDO::FETCH_ASSOC);
+        $sth = $this->pdo->perform($query->getStatement(), $query->getBindValues());
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function updateFQNameByCode($code)
+    public function updateFQNameByCode($code, $parentFQName)
     {
         $geography = $this->findByCode($code);
+        $this->logger->debug('update: ' . $code . ' ' . $geography['GeographyId'] . ' ' . $parentFQName);
         if (!$geography) {
             return false;
         }
-        $FQName = $geography['GeographyId'] . ' => ';
+        $FQName = $parentFQName . '/' . $geography['GeographyName'];
+        if (!is_null($parentFQName) || strlen($parentFQName . '') === 0) {
+            $FQName = $this->getFQName($geography['GeographyId']);
+        }
+        $this->logger->debug($FQName);
+        $this->update($geography['GeographyId'], ['GeographyFQName' => $FQName]);
+
+        // Find children and update them too
+        foreach ($this->findChildren($geography['GeographyId']) as $child) {
+            $this->updateFQNameByCode($child['code'], $FQName);
+        }
+        return $FQName;
+    }
+
+    public function getFQName($id)
+    {
         $names = [];
-        $id = '';
-        for ($i = 0; $i < floor(strlen($geography['GeographyId'])/5); $i++) {
-            $id .= substr($geography['GeographyId'], $i * 5, 5);
-            $name = ($this->findById($id))['GeographyName'];
+        $currentId = '';
+        for ($i = 0; $i < floor(strlen($id)/5); $i++) {
+            $currentId .= substr($id, $i * 5, 5);
+            $name = ($this->findById($currentId))['GeographyName'];
+            //$this->logger->debug($id . ' ' . $currentId . ' ' . $name);
             $names[] = $name;
         }
-        $FQName = implode('/', $names);
-        $this->update($geography['GeographyId'], ['GeographyFQName' => $FQName]);
-        return $FQName;
+        return implode('/', $names);
     }
 }

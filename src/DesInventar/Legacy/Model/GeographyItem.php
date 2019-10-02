@@ -119,6 +119,7 @@ class GeographyItem extends Record
             SELECT * FROM Geography
             WHERE GeographyId LIKE '" . $prmMyParentId . "%'
               AND LENGTH(GeographyId)=" . ($iGeographyLevel + 1) * 5 . "
+            ORDER BY GeographyId
         ");
         $TmpStr = '';
         foreach ($this->conn->query($sQuery) as $row) {

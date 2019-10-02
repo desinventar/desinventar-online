@@ -18,7 +18,7 @@ class AdminGeographyUpdateFQNameByCodeAction
 
     public function execute($code)
     {
-        $geography = (new Geography($this->pdo, $this->logger))->updateFQNameByCode($code);
+        $geography = (new Geography($this->pdo, $this->logger))->updateFQNameByCode($code, '');
         if (!$geography) {
             throw new Exception('Cannot find geography item with code: ' . $code);
         }
