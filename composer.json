@@ -22,7 +22,7 @@
     "guzzlehttp/guzzle": "^6.3",
     "squizlabs/php_codesniffer": "*",
     "phpunit/phpunit": "^8.0.0",
-    "phpstan/phpstan": "0.11.1"
+    "phpstan/phpstan": "^0.11.16"
   },
   "repositories": [
     {
