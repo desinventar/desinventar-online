@@ -20,7 +20,6 @@ import databaseGeoLevels from './database_geolevels'
 import databaseUsers from './database_users'
 import databaseUpload from './database_upload'
 import datacards from './datacards'
-import datacards2 from '../js2/datacards/datacards'
 import userPermAdmin from './userperm_admin'
 import thematicMap from './thematicmap'
 import statParams from './stat_params'
@@ -50,7 +49,6 @@ function init() {
   userLogin.init()
   onReadyUserAccount()
   datacards.init()
-  datacards2.init()
   adminDatabase.init()
   onReadyExtraEffects()
   onReadyQueryResults()
