@@ -34,19 +34,8 @@ core.db: .FORCE
 desinventar.db: .FORCE
 	/bin/rm -f desinventar.db && cp ../../migrations/region.sqlite3 desinventar.db
 
-lang: lang_spa lang_eng lang_por lang_fre
-
-lang_spa: interface_strings.xml
-	php ../../scripts/xml2conf.php --file=interface_strings.xml --language=spa > spa.conf && cp spa.conf ../../web/conf/spa.conf
-
-lang_eng: interface_strings.xml
-	php ../../scripts/xml2conf.php --file=interface_strings.xml --language=eng > eng.conf && cp eng.conf ../../web/conf/eng.conf
-
-lang_por: interface_strings.xml
-	php ../../scripts/xml2conf.php --file=interface_strings.xml --language=por > por.conf && cp por.conf ../../web/conf/por.conf
-
-lang_fre: interface_strings.xml
-	php ../../scripts/xml2conf.php --file=interface_strings.xml --language=fre > fre.conf && cp fre.conf ../../web/conf/fre.conf
+lang:
+	node compileLanguage.js && cp *.conf ../../web/conf/
 
 clean:
 	/bin/rm -f *.db *.conf

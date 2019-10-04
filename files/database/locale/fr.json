@@ -1,0 +1,3763 @@
+{
+    "portal.di_slogan": {
+        "translation": "Système d'inventaire des effets des catastrophes",
+        "notes": ""
+    },
+    "portal.tdititle": {
+        "translation": "Système d'inventaire des effets des catastrophes",
+        "notes": ""
+    },
+    "portal.tcountries": {
+        "translation": "Régions",
+        "notes": ""
+    },
+    "portal.tvirtualreg": {
+        "translation": "Régions Virtuelles",
+        "notes": ""
+    },
+    "portal.hlostconn": {
+        "translation": "Échec de la communication. Vérifiez votre connexion Internet",
+        "notes": ""
+    },
+    "portal.tdbavail": {
+        "translation": "Inventaires de Désastres disponibles",
+        "notes": ""
+    },
+    "portal.tdbnotavail": {
+        "translation": "Il n'existe pas de bases de données disponibles",
+        "notes": ""
+    },
+    "portal.tmoreinfo": {
+        "translation": "Plus d'informations",
+        "notes": ""
+    },
+    "portal.talerdiwin": {
+        "translation": "Êtes-vous sûr de vouloir arrêter de fumer?",
+        "notes": ""
+    },
+    "portal.tstartpage": {
+        "translation": "Accueil",
+        "notes": ""
+    },
+    "portal.tlang": {
+        "translation": "Langue",
+        "notes": ""
+    },
+    "portal.tusers": {
+        "translation": "Utilisateur",
+        "notes": ""
+    },
+    "portal.msgUserAccess": {
+        "translation": "L'accès des utilisateurs",
+        "notes": ""
+    },
+    "portal.msgUserLogin": {
+        "translation": "Connexion",
+        "notes": ""
+    },
+    "portal.msgUserLogout": {
+        "translation": "Déconnexion",
+        "notes": ""
+    },
+    "portal.msgRegionList": {
+        "translation": "La liste de base de données",
+        "notes": ""
+    },
+    "portal.msgRegionOpenDB": {
+        "translation": "Ouvrir base de données",
+        "notes": ""
+    },
+    "portal.tcredits": {
+        "translation": "En alliance stratégique avec",
+        "notes": ""
+    },
+    "portal.msgRegionAfrica": {
+        "translation": "Afrique",
+        "notes": ""
+    },
+    "portal.msgRegionAsia": {
+        "translation": "Asie",
+        "notes": ""
+    },
+    "portal.msgRegionSouthAmerica": {
+        "translation": "Amérique du Sud",
+        "notes": ""
+    },
+    "portal.msgRegionCentralAmerica": {
+        "translation": "Amérique centrale",
+        "notes": ""
+    },
+    "portal.msgRegionNorthAmerica": {
+        "translation": "Amérique du Nord",
+        "notes": ""
+    },
+    "portal.msgRegionSouthernCone": {
+        "translation": "Cône Sud",
+        "notes": ""
+    },
+    "portal.msgregionGranChaco": {
+        "translation": "Gran Chaco",
+        "notes": ""
+    },
+    "portal.msgRegionAndean": {
+        "translation": "Sous-région andine",
+        "notes": ""
+    },
+    "portal.msgRegionCities": {
+        "translation": "Villes",
+        "notes": ""
+    },
+    "portal.msgRegionGreatAmericanChaco": {
+        "translation": "Gran Chaco Americano",
+        "notes": ""
+    },
+    "portal.msgRegionLatinAmerica": {
+        "translation": "Amérique latine",
+        "notes": ""
+    },
+    "portal.msgRegionCaribbean": {
+        "translation": "La région des Caraïbes",
+        "notes": ""
+    },
+    "portal.msgRegionPacific": {
+        "translation": "Pacifique Sud",
+        "notes": ""
+    },
+    "portal.tcopyright": {
+        "translation": "(c) 1998-2018 Corporación OSSO - Colombia",
+        "notes": ""
+    },
+    "portal.tcountryARG": {
+        "translation": "Argentine",
+        "notes": ""
+    },
+    "portal.tcountryBOL": {
+        "translation": "Bolivie",
+        "notes": ""
+    },
+    "portal.tcountryCHL": {
+        "translation": "Chile",
+        "notes": ""
+    },
+    "portal.tcountryCOL": {
+        "translation": "Colombie",
+        "notes": ""
+    },
+    "portal.tcountryCRI": {
+        "translation": "Costa Rica",
+        "notes": ""
+    },
+    "portal.tcountryDOM": {
+        "translation": "Rép Dominicaine",
+        "notes": ""
+    },
+    "portal.tcountryECU": {
+        "translation": "Équateur",
+        "notes": ""
+    },
+    "portal.tcountryGTM": {
+        "translation": "Guatemala",
+        "notes": ""
+    },
+    "portal.tcountryGUY": {
+        "translation": "Guyana",
+        "notes": ""
+    },
+    "portal.tcountryHND": {
+        "translation": "Honduras",
+        "notes": ""
+    },
+    "portal.tcountryHTI": {
+        "translation": "Haïti",
+        "notes": ""
+    },
+    "portal.tcountryIDN": {
+        "translation": "Indonésie",
+        "notes": ""
+    },
+    "portal.tcountryIND": {
+        "translation": "Inde",
+        "notes": ""
+    },
+    "portal.tcountryIRN": {
+        "translation": "Iran",
+        "notes": ""
+    },
+    "portal.tcountryJAM": {
+        "translation": "Jamaïque",
+        "notes": ""
+    },
+    "portal.tcountryJOR": {
+        "translation": "Jordan",
+        "notes": ""
+    },
+    "portal.tcountryLKA": {
+        "translation": "Sri Lanka",
+        "notes": ""
+    },
+    "portal.tcountryMEX": {
+        "translation": "Mexique",
+        "notes": ""
+    },
+    "portal.tcountryMOZ": {
+        "translation": "Mozambique",
+        "notes": ""
+    },
+    "portal.tcountryNPL": {
+        "translation": "Népal",
+        "notes": ""
+    },
+    "portal.tcountryNIC": {
+        "translation": "Nicaragua",
+        "notes": ""
+    },
+    "portal.tcountryPAN": {
+        "translation": "Panama",
+        "notes": ""
+    },
+    "portal.tcountryPER": {
+        "translation": "Pérou",
+        "notes": ""
+    },
+    "portal.tcountryPRY": {
+        "translation": "Paraguay",
+        "notes": ""
+    },
+    "portal.tcountrySLV": {
+        "translation": "El Salvador",
+        "notes": ""
+    },
+    "portal.tcountryTTO": {
+        "translation": "Trinité-et-Tobago",
+        "notes": ""
+    },
+    "portal.tcountryVEN": {
+        "translation": "Venezuela",
+        "notes": ""
+    },
+    "portal.tcountryVUT": {
+        "translation": "Vanuatu",
+        "notes": ""
+    },
+    "portal.txtVersion": {
+        "translation": "Version",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFile": {
+        "translation": "Fichier",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileCreate": {
+        "translation": "Créer base de données",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileOpen": {
+        "translation": "Ouvrez base de données",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileDownload": {
+        "translation": "Télécharger",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileUpload": {
+        "translation": "Charger",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileUploadCopy": {
+        "translation": "Nouvelle",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileUploadReplace": {
+        "translation": "Remplacer",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileInfo": {
+        "translation": "Description de base de données",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileLanguage": {
+        "translation": "Langue",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileLanguageEnglish": {
+        "translation": "Anglaise\/English",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileLanguageSpanish": {
+        "translation": "Espagnole\/Español",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileLanguagePortuguese": {
+        "translation": "Portugaise\/Português",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileLanguageFrench": {
+        "translation": "Française",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileLogout": {
+        "translation": "Fermer la session",
+        "notes": ""
+    },
+    "grpMainMenu.mnuUser": {
+        "translation": "Utilisateur",
+        "notes": ""
+    },
+    "grpMainMenu.mnuUserLogin": {
+        "translation": "Se connecter",
+        "notes": ""
+    },
+    "grpMainMenu.mnuUserChangeLogin": {
+        "translation": "Se connecter avec un autre compte",
+        "notes": ""
+    },
+    "grpMainMenu.mnuUserChangePasswd": {
+        "translation": "Le changement de mot de passe",
+        "notes": ""
+    },
+    "grpMainMenu.mnuUserAccountManagement": {
+        "translation": "Créer\/modifier des comptes utilisateur",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQuery": {
+        "translation": "Requête",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryViewDesign": {
+        "translation": "Dessin de consultation",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryViewData": {
+        "translation": "Voir les cartes de données",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryViewMap": {
+        "translation": "Cartes",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryViewGraph": {
+        "translation": "Graphiques",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryViewStd": {
+        "translation": "Consolidés",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryOption": {
+        "translation": "Les options",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryOptionNew": {
+        "translation": "Nouvelle requête",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryOptionSave": {
+        "translation": "Enregistrer la requête",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryOptionOpen": {
+        "translation": "Ouvrez requête",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryResultSave": {
+        "translation": "Enregistrer",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryResultSaveAs": {
+        "translation": "Enregistrer en",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryResultSaveAsXLS": {
+        "translation": "Enregistrer en tant que fichier Excel",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryResultSaveAsCSV": {
+        "translation": "Enregistrer en tant que fichier CSV",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryResultPrint": {
+        "translation": "Imprimer",
+        "notes": ""
+    },
+    "grpMainMenu.mnuDatacard": {
+        "translation": "La saisie des données",
+        "notes": ""
+    },
+    "grpMainMenu.mnuDatacardEdit": {
+        "translation": "Créer\/modifier de carte de données",
+        "notes": ""
+    },
+    "grpMainMenu.mnuDatacardSetup": {
+        "translation": "Configurer",
+        "notes": ""
+    },
+    "grpMainMenu.mnuDatacardSetupEnd": {
+        "translation": "Finaliser la configuration",
+        "notes": ""
+    },
+    "grpMainMenu.mnuDatacardImport": {
+        "translation": "Importation de carte de données",
+        "notes": ""
+    },
+    "grpMainMenu.mnuHelp": {
+        "translation": "Aide",
+        "notes": ""
+    },
+    "grpMainMenu.mnuHelpWebsite": {
+        "translation": "Site web DésInventer",
+        "notes": ""
+    },
+    "grpMainMenu.mnuHelpMethodology": {
+        "translation": "Guide méthodologique",
+        "notes": ""
+    },
+    "grpMainMenu.mnuHelpDocumentation": {
+        "translation": "Documentation logiciel",
+        "notes": ""
+    },
+    "grpMainMenu.mnuHelpAbout": {
+        "translation": "À propos de ",
+        "notes": ""
+    },
+    "grpMenuUser.tuser": {
+        "translation": "Utilisateur",
+        "notes": ""
+    },
+    "grpMenuUser.tname": {
+        "translation": "Nom",
+        "notes": ""
+    },
+    "grpMenuUser.tpassword": {
+        "translation": "Mot de passe",
+        "notes": ""
+    },
+    "grpMenuUser.temail": {
+        "translation": "E-mail",
+        "notes": ""
+    },
+    "grpMenuUser.toldpassword": {
+        "translation": "Introduisez votre mot de passe",
+        "notes": ""
+    },
+    "grpMenuUser.tnewpassword": {
+        "translation": "Nouveau mot de passe",
+        "notes": ""
+    },
+    "grpMenuUser.tnewpassword2": {
+        "translation": "Réintroduisez",
+        "notes": ""
+    },
+    "grpMenuUser.tcountry": {
+        "translation": "Pays",
+        "notes": ""
+    },
+    "grpMenuUser.tcity": {
+        "translation": "Ville",
+        "notes": ""
+    },
+    "grpMenuUser.tactive": {
+        "translation": "Actif",
+        "notes": ""
+    },
+    "grpMenuUser.baddoption": {
+        "translation": "Ajouter",
+        "notes": ""
+    },
+    "grpMenuUser.bsave": {
+        "translation": "Enregistrer",
+        "notes": ""
+    },
+    "grpMenuUser.bsend": {
+        "translation": "Générer",
+        "notes": ""
+    },
+    "grpMenuUser.bcancel": {
+        "translation": "Annuler",
+        "notes": ""
+    },
+    "grpMenuUser.benter": {
+        "translation": "Se connecter",
+        "notes": ""
+    },
+    "grpMenuUser.tpasslost": {
+        "translation": "Vous avez oublié votre mot de passe?",
+        "notes": ""
+    },
+    "grpMenuUser.msgEmptyFields": {
+        "translation": "Les champs ne peuvent pas être vide",
+        "notes": ""
+    },
+    "grpMenuUser.msgUserLoggedIn": {
+        "translation": "Succesfull connexion",
+        "notes": ""
+    },
+    "grpMenuUser.msgInvalidPasswd": {
+        "translation": "Nom d'utilisateur ou mot de passe",
+        "notes": ""
+    },
+    "grpMenuUser.msgConnectionError": {
+        "translation": "La connexion a échoué",
+        "notes": ""
+    },
+    "grpMenuUser.toptions": {
+        "translation": "Options",
+        "notes": ""
+    },
+    "grpMenuUser.tmyregions": {
+        "translation": "Mes bases",
+        "notes": ""
+    },
+    "grpMenuUser.thello": {
+        "translation": "Salut",
+        "notes": ""
+    },
+    "grpMenuUser.tdetails": {
+        "translation": "Accès",
+        "notes": ""
+    },
+    "grpMenuUser.tuserprefer": {
+        "translation": "Édition du compte usager",
+        "notes": ""
+    },
+    "grpMenuUser.tuseremail": {
+        "translation": "Courrier électronique(<i>e-mail<\/i>)",
+        "notes": ""
+    },
+    "grpMenuUser.tadminperms": {
+        "translation": "Autorisations administratives",
+        "notes": ""
+    },
+    "grpMenuUser.tyourrol": {
+        "translation": "Vos rôles et vos bases de données sont:",
+        "notes": ""
+    },
+    "grpMenuUser.tadminof": {
+        "translation": "Administrateur",
+        "notes": ""
+    },
+    "grpMenuUser.tobservof": {
+        "translation": "Observateur",
+        "notes": ""
+    },
+    "grpMenuUser.tuserof": {
+        "translation": "Alimentation",
+        "notes": ""
+    },
+    "grpMenuUser.tsupervof": {
+        "translation": "Superviseur",
+        "notes": ""
+    },
+    "grpMenuUser.tnorol": {
+        "translation": "Néant",
+        "notes": ""
+    },
+    "grpMenuUser.tgetemailpass": {
+        "translation": "Rappel d'usager et de mot de passe",
+        "notes": ""
+    },
+    "grpMenuUser.tmsgpasslost": {
+        "translation": "Si vous avez oublié votre mot de passe",
+        "notes": ""
+    },
+    "grpMenuUser.msgsendemail": {
+        "translation": "Votre usager est:",
+        "notes": ""
+    },
+    "grpMenuUser.msgsendemail2": {
+        "translation": "Votre mot de passe est:",
+        "notes": ""
+    },
+    "grpMenuUser.errsendemail": {
+        "translation": "Le courrier électronique n'est pas enregistré. Essayez de nouveau.",
+        "notes": ""
+    },
+    "grpMenuUser.terror": {
+        "translation": "Erreur",
+        "notes": ""
+    },
+    "grpMenuUser.errinvaliduser": {
+        "translation": "Usager ou mot de passe non valable",
+        "notes": ""
+    },
+    "grpMenuUser.errmsgfrmregist": {
+        "translation": "Erreur dans l'envoi d'ENREGISTREMENT. Remplissez tous les champs obligatoires et essayez de nouveau.",
+        "notes": ""
+    },
+    "grpMenuUser.msginsertsucc": {
+        "translation": "Accès réussi d'un nouvel usager. ",
+        "notes": ""
+    },
+    "grpMenuUser.msgupdatesucc": {
+        "translation": "Mise à jour réussie d'un usager.",
+        "notes": ""
+    },
+    "grpMenuUser.errinsert": {
+        "translation": "Impossibilité d'introduire un usager. ",
+        "notes": ""
+    },
+    "grpMenuUser.errupdate": {
+        "translation": "Mise à jour impossible de l'usager.",
+        "notes": ""
+    },
+    "grpMenuUser.errbadpasswd": {
+        "translation": "Mot de passe incorrect.",
+        "notes": ""
+    },
+    "grpMenuUser.errnomatch": {
+        "translation": "Le nouveau mot de passe et la nouvelle entrée ne coïncident pas",
+        "notes": ""
+    },
+    "grpMenuUser.erremptyfields": {
+        "translation": "Champs ne peuvent pas être vide",
+        "notes": ""
+    },
+    "grpMenuUser.msgUserEditFormStatusOk": {
+        "translation": "Usuário actualização da informação",
+        "notes": ""
+    },
+    "grpMenuUser.msgUserEditFormStatusError": {
+        "translation": "Erreur lors de la mise à jour des informations utilisateur",
+        "notes": ""
+    },
+    "grpMenuUser.msgUserEditFormStatusDuplicateId": {
+        "translation": "Nom d'utilisateur en double",
+        "notes": ""
+    },
+    "grpMenuUser.msgUserEditFormStatusEmptyFields": {
+        "translation": "Les champs doivent avoir une valeur",
+        "notes": ""
+    },
+    "grpMenuRegion.ttname": {
+        "translation": "Gestion de base de données",
+        "notes": ""
+    },
+    "grpMenuRegion.tregionuuid": {
+        "translation": "Base ID",
+        "notes": ""
+    },
+    "grpMenuRegion.tregnamlist": {
+        "translation": "Nom de base",
+        "notes": ""
+    },
+    "grpMenuRegion.tregcntlist": {
+        "translation": "Pays",
+        "notes": ""
+    },
+    "grpMenuRegion.tregadmlist": {
+        "translation": "Administrateur",
+        "notes": ""
+    },
+    "grpMenuRegion.tregactlist": {
+        "translation": "Actif",
+        "notes": ""
+    },
+    "grpMenuRegion.tregpublist": {
+        "translation": "Publique",
+        "notes": ""
+    },
+    "grpMenuRegion.tcredits": {
+        "translation": "Crédits",
+        "notes": ""
+    },
+    "grpMenuRegion.tmethodology": {
+        "translation": "Méthodologie",
+        "notes": ""
+    },
+    "grpMenuRegion.tstaff": {
+        "translation": "Évènenent important",
+        "notes": ""
+    },
+    "grpMenuRegion.tsupport": {
+        "translation": "Maintenance",
+        "notes": ""
+    },
+    "grpMenuRegion.tdescription": {
+        "translation": "Description",
+        "notes": ""
+    },
+    "grpMenuRegion.tnopublic": {
+        "translation": "Base de données en construction. Accès restreint aux usagers de la base.",
+        "notes": ""
+    },
+    "grpMenuRegion.tvalregid": {
+        "translation": "Base ID disponible",
+        "notes": ""
+    },
+    "grpMenuRegion.tinvregid": {
+        "translation": "Base ID non disponible",
+        "notes": ""
+    },
+    "grpMenuRegion.tinsert": {
+        "translation": "Créée et ",
+        "notes": ""
+    },
+    "grpMenuRegion.tupdate": {
+        "translation": "Mise à jour et",
+        "notes": ""
+    },
+    "grpMenuRegion.tsetrole": {
+        "translation": "Assignée",
+        "notes": ""
+    },
+    "grpMenuRegion.terrinsupd": {
+        "translation": "Impossible d'introduire la base",
+        "notes": ""
+    },
+    "grpMenuRegion.terrsetrole": {
+        "translation": "Non assignée",
+        "notes": ""
+    },
+    "grpMenuRegion.baddoption": {
+        "translation": "Ajouter",
+        "notes": ""
+    },
+    "grpMenuRegion.bloaddir": {
+        "translation": "Lire le répertoire",
+        "notes": ""
+    },
+    "grpMenuRegion.bupzipfile": {
+        "translation": "Créer une base depuis un fichier ZIP",
+        "notes": ""
+    },
+    "grpMenuRegion.bsave": {
+        "translation": "Enregistrer",
+        "notes": ""
+    },
+    "grpMenuRegion.bcancel": {
+        "translation": "Annuler",
+        "notes": ""
+    },
+    "grpMenuRegion.tviewdbase": {
+        "translation": "Sélectionnez la base de données que vous souhaitez afficher",
+        "notes": ""
+    },
+    "grpMenuRegion.tmoddescon": {
+        "translation": "generación de mapas",
+        "notes": ""
+    },
+    "grpMenuRegion.tmoddesinv": {
+        "translation": "administracion bases de datos",
+        "notes": ""
+    },
+    "grpMenuRegion.RegionDatabasePeriod": {
+        "translation": "Période",
+        "notes": ""
+    },
+    "grpMenuRegion.trepnum": {
+        "translation": "Cartes de données",
+        "notes": ""
+    },
+    "grpMenuRegion.tlastupd": {
+        "translation": "Dernière mise á jour",
+        "notes": ""
+    },
+    "grpMenuRegion.RegionDatacardPeriod": {
+        "translation": "Période de cartes de données",
+        "notes": ""
+    },
+    "grpMenuRegion.msgInfoGeneral": {
+        "translation": "Informations générales",
+        "notes": ""
+    },
+    "grpMenuRegion.msgInfoCredits": {
+        "translation": "Crédits",
+        "notes": ""
+    },
+    "grpMenuRegion.msgInfoSources": {
+        "translation": "Sources",
+        "notes": ""
+    },
+    "grpMenuRegion.msgInfoSynopsis": {
+        "translation": "Synopsis",
+        "notes": ""
+    },
+    "grpRegionInfo.baddoption": {
+        "translation": "Ajouter",
+        "notes": ""
+    },
+    "grpRegionInfo.bsave": {
+        "translation": "Enregistrer",
+        "notes": ""
+    },
+    "grpRegionInfo.bcancel": {
+        "translation": "Annuler",
+        "notes": ""
+    },
+    "grpRegionInfo.terror": {
+        "translation": "Erreur",
+        "notes": ""
+    },
+    "grpRegionInfo.msgupdinfo": {
+        "translation": "Base mise à jour avec succès!",
+        "notes": ""
+    },
+    "grpRegionInfo.errupdinfo": {
+        "translation": "Erreur dans la mise à jour de la base",
+        "notes": ""
+    },
+    "grpRegionInfo.msgupdrole": {
+        "translation": "Rôle de l'usager mis à jour avec succès!",
+        "notes": ""
+    },
+    "grpRegionInfo.errupdrole": {
+        "translation": "Erreur dans la mise à jour du rôle de l'usager",
+        "notes": ""
+    },
+    "grpRegionInfo.msginslog": {
+        "translation": "Bloc-notes créé avec succès!",
+        "notes": ""
+    },
+    "grpRegionInfo.errinslog": {
+        "translation": "Erreur dans l'accès au bloc-notes ",
+        "notes": ""
+    },
+    "grpRegionInfo.msgupdlog": {
+        "translation": "Bloc-notes mis à jour avec succès",
+        "notes": ""
+    },
+    "grpRegionInfo.errupdlog": {
+        "translation": "Erreur dans la mise à jour du bloc-notes",
+        "notes": ""
+    },
+    "grpRegionInfo.errmsgfrm": {
+        "translation": "Enregistrez tous les champs de la CARTE DE DONNÉES DÉSINVENTER. Remplissez tous les champs obligatoires et essayez de nouveau",
+        "notes": ""
+    },
+    "grpRegionInfo.errmsgfrmrol": {
+        "translation": "RÔLES: Remplissez tous les champs obligatoires et essayez de nouveau",
+        "notes": ""
+    },
+    "grpRegionInfo.errmsgfrmlog": {
+        "translation": "BLOC-NOTES: Remplissez tous les champs obligatoires et essayez de nouveau",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Title": {
+        "translation": "Unités Géographie",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Header1": {
+        "translation": "Sélectionnez le niveau pour ajouter ou modifier une unité de la géographie",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Header2": {
+        "translation": "Cliquez sur une ligne pour modifier l'unité de la géographie",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_All": {
+        "translation": "Tous",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Edit": {
+        "translation": "Éditer",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Code": {
+        "translation": "Code",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Name": {
+        "translation": "Nom",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Active": {
+        "translation": "Actif",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Inactive": {
+        "translation": "Inactif",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_New": {
+        "translation": "Nouveau",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Check": {
+        "translation": "Vérifier",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Status": {
+        "translation": "État",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Export": {
+        "translation": "Exporter",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_ExportTooltip": {
+        "translation": "Exporter la géographie en tant que fichier CSV",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Add": {
+        "translation": "Ajouter",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Save": {
+        "translation": "Enregistrer",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Cancel": {
+        "translation": "Annuler",
+        "notes": ""
+    },
+    "grpAdminGeography.baddoption": {
+        "translation": "Ajouter",
+        "notes": ""
+    },
+    "grpAdminGeography.bsave": {
+        "translation": "Enregistrer",
+        "notes": ""
+    },
+    "grpAdminGeography.bcancel": {
+        "translation": "Annuler",
+        "notes": ""
+    },
+    "grpAdminGeography.terror": {
+        "translation": "Erreur",
+        "notes": ""
+    },
+    "grpAdminGeography.errchkname": {
+        "translation": "Impossibilité d'utiliser le nom de cause car il existe déjà",
+        "notes": ""
+    },
+    "grpAdminGeography.msginslev": {
+        "translation": "Niveau créé avec succès!",
+        "notes": ""
+    },
+    "grpAdminGeography.errinslev": {
+        "translation": "Impossibilité d'introduire un nouveau niveau ",
+        "notes": ""
+    },
+    "grpAdminGeography.msgupdlev": {
+        "translation": "Niveau mis à jour avec succès!",
+        "notes": ""
+    },
+    "grpAdminGeography.errupdlev": {
+        "translation": "Impossibilité de mise à jour du niveau",
+        "notes": ""
+    },
+    "grpAdminGeography.errchkcode": {
+        "translation": "Code de géographie déjà existant",
+        "notes": ""
+    },
+    "grpAdminGeography.errchkstatus": {
+        "translation": "La cause ne peut pas être désactivée car elle est déjà assignée",
+        "notes": ""
+    },
+    "grpAdminGeography.msgDBConfigGeographyInsert": {
+        "translation": "Géographie créée avec succès",
+        "notes": ""
+    },
+    "grpAdminGeography.errinsgeo": {
+        "translation": "Impossibilité de créer un élément géographique",
+        "notes": ""
+    },
+    "grpAdminGeography.msgDBConfigGeographyUpdate": {
+        "translation": "Géographie mise à jour avec succès!",
+        "notes": ""
+    },
+    "grpAdminGeography.msgDBConfigGeographyError": {
+        "translation": "Impossibilité de mise à jour de l'élément géographique ",
+        "notes": ""
+    },
+    "grpAdminGeography.errmsgfrmlev": {
+        "translation": "NIVEAU: Remplissez tous les champs obligatoires et essayez de nouveau",
+        "notes": ""
+    },
+    "grpAdminGeography.errmsgfrmgeo": {
+        "translation": "GÉOGRAPHIE: Remplissez tous les champs obligatoires et essayez de nouveau",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_StatusOk": {
+        "translation": "Géographie mise à jour avec succès!",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_StatusDuplicatedCode": {
+        "translation": "Code géographie existe déjà",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_StatusWithDatacards": {
+        "translation": "Impossible de désactiver des unités géographiques avec des cartes de données affectés",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_StatusError": {
+        "translation": "L'enregistrement des modifications d'erreur à la géographie",
+        "notes": ""
+    },
+    "grpDatabaseEvents.msgDatabaseEvents_CustomEventTitle": {
+        "translation": "Types d'évènements",
+        "notes": ""
+    },
+    "grpDatabaseEvents.msgEvents_Predefined": {
+        "translation": "Événement prédéfini",
+        "notes": ""
+    },
+    "grpDatabaseEvents.msgEvents_Custom": {
+        "translation": "Evénement personnalisé",
+        "notes": ""
+    },
+    "grpDatabaseEvents.msgDatabaseEvents_Add": {
+        "translation": "Ajouter",
+        "notes": ""
+    },
+    "grpDatabaseEvents.msgDatabaseEvents_Save": {
+        "translation": "Enregistrer",
+        "notes": ""
+    },
+    "grpDatabaseEvents.msgDatabaseEvents_Cancel": {
+        "translation": "Annuler",
+        "notes": ""
+    },
+    "grpDatabaseEvents.msgDatabaseEvents_UpdateOk": {
+        "translation": "Type d'évènement mis à jour avec succès",
+        "notes": ""
+    },
+    "grpDatabaseEvents.msgDatabaseEvents_UpdateError": {
+        "translation": "Erreur dans la mise à jour du Type d'évènement",
+        "notes": ""
+    },
+    "grpDatabaseEvents.msgDatabaseEvents_ErrorEmptyFields": {
+        "translation": "Enregistrez tous les champs de la CARTE DE DONNÉES DÉSINVENTER. Remplissez tous les champs obligatoires et essayez de nouveau",
+        "notes": ""
+    },
+    "grpDatabaseEvents.msgDatabaseUsers_ErrorDuplicateName": {
+        "translation": "Impossibilité d'utiliser le nom de event car il existe déjà",
+        "notes": ""
+    },
+    "grpDatabaseEvents.msgDatabaseEvents_ErrorCannotDelete": {
+        "translation": "Le event ne peut pas être désactivée car il a été affecté à un ou plusieurs enregistrements",
+        "notes": ""
+    },
+    "grpDatabaseCauses.msgDatabaseCauses_CustomCauseTitle": {
+        "translation": "Types d'causes",
+        "notes": ""
+    },
+    "grpDatabaseCauses.msgCauses_Predefined": {
+        "translation": "Cause prédéfini",
+        "notes": ""
+    },
+    "grpDatabaseCauses.msgCauses_Custom": {
+        "translation": "Cause personnalisé",
+        "notes": ""
+    },
+    "grpDatabaseCauses.msgDatabaseCauses_Add": {
+        "translation": "Ajouter",
+        "notes": ""
+    },
+    "grpDatabaseCauses.msgDatabaseCauses_Save": {
+        "translation": "Enregistrer",
+        "notes": ""
+    },
+    "grpDatabaseCauses.msgDatabaseCauses_Cancel": {
+        "translation": "Annuler",
+        "notes": ""
+    },
+    "grpDatabaseCauses.msgDatabaseCauses_UpdateOk": {
+        "translation": "Type d'cause mis à jour avec succès",
+        "notes": ""
+    },
+    "grpDatabaseCauses.msgDatabaseCauses_UpdateError": {
+        "translation": "Erreur dans la mise à jour du Type d'cause",
+        "notes": ""
+    },
+    "grpDatabaseCauses.msgDatabaseCauses_ErrorEmptyFields": {
+        "translation": "Enregistrez tous les champs de la CARTE DE DONNÉES DÉSINVENTER. Remplissez tous les champs obligatoires et essayez de nouveau",
+        "notes": ""
+    },
+    "grpDatabaseCauses.msgDatabaseUsers_ErrorDuplicateName": {
+        "translation": "Impossibilité d'utiliser le nom de event car il existe déjà",
+        "notes": ""
+    },
+    "grpDatabaseCauses.msgDatabaseCauses_ErrorCannotDelete": {
+        "translation": "Le event ne peut pas être désactivée car il a été affecté à un ou plusieurs enregistrements",
+        "notes": ""
+    },
+    "grpAdminExtraEffects.baddoption": {
+        "translation": "Ajouter",
+        "notes": ""
+    },
+    "grpAdminExtraEffects.bsave": {
+        "translation": "Enregistrer",
+        "notes": ""
+    },
+    "grpAdminExtraEffects.bcancel": {
+        "translation": "Annuler",
+        "notes": ""
+    },
+    "grpAdminExtraEffects.terror": {
+        "translation": "Erreur",
+        "notes": ""
+    },
+    "grpAdminExtraEffects.msgupdeef": {
+        "translation": "Champ d'effets mis à jour avec succès",
+        "notes": ""
+    },
+    "grpAdminExtraEffects.errupdeef": {
+        "translation": "Impossible de mettre à jourl il ya un champ avec le même nom",
+        "notes": ""
+    },
+    "grpAdminExtraEffects.errmsgfrmeef": {
+        "translation": "EFFETS: Remplissez tous les champs obligatoires et essayez de nouveau",
+        "notes": ""
+    },
+    "grpAdminExtraEffects.typeinteger": {
+        "translation": "Numérique",
+        "notes": ""
+    },
+    "grpAdminExtraEffects.typefloat": {
+        "translation": "Monnaie",
+        "notes": ""
+    },
+    "grpAdminExtraEffects.typedate": {
+        "translation": "Date",
+        "notes": ""
+    },
+    "grpAdminExtraEffects.typetext": {
+        "translation": "Texte",
+        "notes": ""
+    },
+    "grpAdminImport.ttitle": {
+        "translation": "Des fichiers CSV",
+        "notes": ""
+    },
+    "grpAdminImport.tsuccess": {
+        "translation": "Importation réussie",
+        "notes": ""
+    },
+    "grpAdminImport.tfail": {
+        "translation": "L'importation n'a pas été effectuée",
+        "notes": ""
+    },
+    "grpAdminImport.tfound1": {
+        "translation": "Existence",
+        "notes": ""
+    },
+    "grpAdminImport.tfound2": {
+        "translation": "erreurs",
+        "notes": ""
+    },
+    "grpAdminImport.tfile": {
+        "translation": "Rangée",
+        "notes": ""
+    },
+    "grpAdminImport.tsend": {
+        "translation": "Générer",
+        "notes": ""
+    },
+    "grpDatacard.ttitle": {
+        "translation": "DesInventar",
+        "notes": ""
+    },
+    "grpDatacard.mprint": {
+        "translation": "Imprimer",
+        "notes": ""
+    },
+    "grpDatacard.mloading": {
+        "translation": "Patientez SVP",
+        "notes": ""
+    },
+    "grpDatacard.bnew": {
+        "translation": "Nouvelle",
+        "notes": ""
+    },
+    "grpDatacard.tnewtitle": {
+        "translation": "Créer une carte de données",
+        "notes": ""
+    },
+    "grpDatacard.tnewdesc": {
+        "translation": "Introduire un nouveau registre dans la base de données ",
+        "notes": ""
+    },
+    "grpDatacard.bupdate": {
+        "translation": "Éditer",
+        "notes": ""
+    },
+    "grpDatacard.tupdtitle": {
+        "translation": "Éditer une carte de données",
+        "notes": ""
+    },
+    "grpDatacard.tupddesc": {
+        "translation": "Éditer un registre déjà existant dans la base de données",
+        "notes": ""
+    },
+    "grpDatacard.bsave": {
+        "translation": "Enregistrer",
+        "notes": ""
+    },
+    "grpDatacard.tsavtitle": {
+        "translation": "Enregistrer la carte de données",
+        "notes": ""
+    },
+    "grpDatacard.tsavdesc": {
+        "translation": "Enregistrer enregistrer sur base de données n'oubliez pas d'inclure tous les champs obligatoires",
+        "notes": ""
+    },
+    "grpDatacard.datacardCloneTitle": {
+        "translation": "Copier le datacard",
+        "notes": ""
+    },
+    "grpDatacard.datacardCloneTooltip": {
+        "translation": "Créez un nouveau datacard en utilisant les informations générales de ce datacard",
+        "notes": ""
+    },
+    "grpDatacard.bcancel": {
+        "translation": "Annuler",
+        "notes": ""
+    },
+    "grpDatacard.tcantitle": {
+        "translation": "Abandonner la carte de données",
+        "notes": ""
+    },
+    "grpDatacard.tcandesc": {
+        "translation": "Les informations ne seront ni sauvegardées ni modifiées",
+        "notes": ""
+    },
+    "grpDatacard.bclean": {
+        "translation": "Effacer",
+        "notes": ""
+    },
+    "grpDatacard.tclntitle": {
+        "translation": "Nettoyer la carte de données",
+        "notes": ""
+    },
+    "grpDatacard.tclndesc": {
+        "translation": "la información será borrada de la actual forma",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardSerialFind": {
+        "translation": "Chercher",
+        "notes": ""
+    },
+    "grpDatacard.tooltipDatacardFind": {
+        "translation": "Chercher des cartes de données",
+        "notes": ""
+    },
+    "grpDatacard.texpdesc": {
+        "translation": "Écrivez le numéro de série de la carte de données que vous souhaitez afficher",
+        "notes": ""
+    },
+    "grpDatacard.bfirst": {
+        "translation": "Première",
+        "notes": ""
+    },
+    "grpDatacard.bprev": {
+        "translation": "Précédente",
+        "notes": ""
+    },
+    "grpDatacard.bnext": {
+        "translation": "Suivante",
+        "notes": ""
+    },
+    "grpDatacard.blast": {
+        "translation": "Dernière",
+        "notes": ""
+    },
+    "grpDatacard.ttotal": {
+        "translation": "Total",
+        "notes": ""
+    },
+    "grpDatacard.thelp": {
+        "translation": "Définition",
+        "notes": ""
+    },
+    "grpDatacard.tdidescinfo": {
+        "translation": "Cliquez sur le titre souhaité pour voir la description de cet élément",
+        "notes": ""
+    },
+    "grpDatacard.mgeography": {
+        "translation": "Unités Géographiques",
+        "notes": ""
+    },
+    "grpDatacard.mevents": {
+        "translation": "Types d'évènements",
+        "notes": ""
+    },
+    "grpDatacard.mcauses": {
+        "translation": "Types de causes",
+        "notes": ""
+    },
+    "grpDatacard.tbaseffects": {
+        "translation": "Effets basiques",
+        "notes": ""
+    },
+    "grpDatacard.textraeffect": {
+        "translation": "Effets additionnels",
+        "notes": ""
+    },
+    "grpDatacard.teffects": {
+        "translation": "Personnes et biens",
+        "notes": ""
+    },
+    "grpDatacard.tsectors": {
+        "translation": "Secteurs",
+        "notes": ""
+    },
+    "grpDatacard.tlosses": {
+        "translation": "Pertes économiques",
+        "notes": ""
+    },
+    "grpDatacard.tcreatedate": {
+        "translation": "Créée:",
+        "notes": ""
+    },
+    "grpDatacard.tcreateby": {
+        "translation": "Par:",
+        "notes": ""
+    },
+    "grpDatacard.tcreateupdate": {
+        "translation": "Modifiée:",
+        "notes": ""
+    },
+    "grpDatacard.tstatus": {
+        "translation": "État",
+        "notes": ""
+    },
+    "grpDatacard.tsend": {
+        "translation": "Générer",
+        "notes": ""
+    },
+    "grpDatacard.tclear": {
+        "translation": "Nettoyer",
+        "notes": ""
+    },
+    "grpDatacard.tclose": {
+        "translation": "Fermer",
+        "notes": ""
+    },
+    "grpDatacard.tsince": {
+        "translation": "Depuis",
+        "notes": ""
+    },
+    "grpDatacard.tuntil": {
+        "translation": "Jusqu'à",
+        "notes": ""
+    },
+    "grpDatacard.tqueryresults": {
+        "translation": "Résultats",
+        "notes": ""
+    },
+    "grpDatacard.tqueryshowcard": {
+        "translation": "Voir carte de données",
+        "notes": ""
+    },
+    "grpDatacard.tcheckquit": {
+        "translation": "Voulez-vous réellement quitter DésInventer?",
+        "notes": ""
+    },
+    "grpDatacard.tmsgeditcard": {
+        "translation": "Pour éditer cette carte de données",
+        "notes": ""
+    },
+    "grpDatacard.tmsgnewcard": {
+        "translation": "Appuyer sur Nouveau pour introduire une carte de données",
+        "notes": ""
+    },
+    "grpDatacard.tmsgsearchdup": {
+        "translation": "Introduisez les mots pour localiser des cartes de données déjà existantes",
+        "notes": ""
+    },
+    "grpDatacard.tmsgsearchcards": {
+        "translation": "Introduisez les mots pour effectuer la recherche",
+        "notes": ""
+    },
+    "grpDatacard.tmsgnewcardfill": {
+        "translation": "Remplissez les champs et appuyez sur Prêt pour enregistrer",
+        "notes": ""
+    },
+    "grpDatacard.tmsgeditcardfill": {
+        "translation": "Éditez les champs et appuyer sur Prêt pour enregistrer",
+        "notes": ""
+    },
+    "grpDatacard.tmsgviewcard": {
+        "translation": "Cliquez sur la rangée que vous voulez afficher",
+        "notes": ""
+    },
+    "grpDatacard.errmsgfrm": {
+        "translation": "Enregistrez tous les champs de la CARTE DE DONNÉES DÉSINVENTER. Remplissez tous les champs obligatoires et essayez de nouveau",
+        "notes": ""
+    },
+    "grpDatacard.tstatpublished": {
+        "translation": "Publiée",
+        "notes": ""
+    },
+    "grpDatacard.tstatready": {
+        "translation": "En cours d'approbation",
+        "notes": ""
+    },
+    "grpDatacard.tstatdraft": {
+        "translation": "Projet",
+        "notes": ""
+    },
+    "grpDatacard.tstatrash": {
+        "translation": "À éliminer",
+        "notes": ""
+    },
+    "grpDatacard.tstatdeleted": {
+        "translation": "Éliminer!",
+        "notes": ""
+    },
+    "grpDatacard.tdcerror": {
+        "translation": "La carte de données n'a pas été enregistrée",
+        "notes": ""
+    },
+    "grpDatacard.tdisererr": {
+        "translation": "Numéro de série non valable (assigné ou incorrect)",
+        "notes": ""
+    },
+    "grpDatacard.tdiserok": {
+        "translation": "Numéro de série valable",
+        "notes": ""
+    },
+    "grpDatacard.tdccreated": {
+        "translation": "Carte de données créée avec succès",
+        "notes": ""
+    },
+    "grpDatacard.tdcupdated": {
+        "translation": "Carte de données mise à jour avec succès",
+        "notes": ""
+    },
+    "grpDatacard.tdconuse": {
+        "translation": "Carte de données est en cours de modification par un autre utilisateur",
+        "notes": ""
+    },
+    "grpDatacard.teffhav": {
+        "translation": "Il y en a eu",
+        "notes": ""
+    },
+    "grpDatacard.teffhavnot": {
+        "translation": "Il n'y en a pas eu",
+        "notes": ""
+    },
+    "grpDatacard.teffdontknow": {
+        "translation": "Ne sait pas",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardDuplicatedSerial": {
+        "translation": "Valeur du champ de série existe déjà; record ne peut être sauvé",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardInvalidIntegerNumber": {
+        "translation": "Blancs format de nombre",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardInvalidFloatNumber": {
+        "translation": "Blancs format de nombre utilisez point comme séparateur décimal",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_WithoutStatus": {
+        "translation": "Impossible d'enregistrer la carte de données sans état",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardInvalidStatus": {
+        "translation": "Pas assez de permissions pour enregistrer la carte de données avec cet état",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardWithoutSource": {
+        "translation": "Datacard sans source d'information ne peut pas être publié remplissez la source ou l'enregistrer en tant que projet",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardInvalidGeography": {
+        "translation": "Géographie n'a pas été sélectionné",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardWithoutEffects": {
+        "translation": "Record sans effets ne peuvent pas être sauvés",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardOutsideOfPeriod": {
+        "translation": "Date de commence de catastrophe est hors de la période de base de données",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardNetworkError": {
+        "translation": "Erreur de réseau; s'il vous plaît essayer à nouveau.",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_ErrorSaving": {
+        "translation": "Erreur lors de l'enregistrement de données de carte, s'il vous plaît vérifier les données d'entrée",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardNotFound": {
+        "translation": "La carte de données recherchée n'existe pas",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardFound": {
+        "translation": "Record trouvé et chargé",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterBeginTime": {
+        "translation": "Date de début",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterBeginTime_Helptext": {
+        "translation": "In this field; the year; month and date of the occurrence of the disaster is registered.",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterSource": {
+        "translation": "Sources",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterSource_Tooltip": {
+        "translation": "Formatted text",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterSource_Helptext": {
+        "translation": "Sources of information used to obtain the data registered in the Record. One or more sources may be included; depending on the case. These may be: one or more media information sources; pre-existing databases and the organisation or organisations from which the information was obtained.",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_RecordStatus": {
+        "translation": "État",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterSerial": {
+        "translation": "Série",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterSerial_Tooltip": {
+        "translation": "No duplicates. Max 40 characters",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterSerial_Helptext": {
+        "translation": "Number which identifies each record. Symbols\/Acronyms\/Abbreviations or codes may be used. Use of sequential numbering is recommended. Letters; dashes and other characters may be used. The identifier or Serial number is unique for every record.",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterGeographyId": {
+        "translation": "Géographie",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterSiteNotes": {
+        "translation": "Lieu",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterSiteNotes_Helptext": {
+        "translation": "Specific place in which the disaster occurred. If the Place name is the same as the lowest of the geographic levels reported; it is not necessary to re-input this. In the case of rural disasters; Place can be a location; a village; a river; a territory which covers various geographic units; a farm or country house; a geographic accident; etc. In the case of urban disasters; Place should include the address and\/or neighbourhood. If the Place name is the same as the lowest of the geographic levels reported; it is not necessary to re-input this. In the case of rural disasters; Place can be a location; a village; a river; a territory which covers various geographic units; a farm or country house; a geographic accident; etc. In the case of urban disasters; Place should include the address and\/or neighbourhood.",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterLatitude": {
+        "translation": "Latitude",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterLongitude": {
+        "translation": "Longitude",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EventName": {
+        "translation": "Type d'évènement",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EventMagnitude": {
+        "translation": "Ampleur",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EventDuration": {
+        "translation": "Durée",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EventDuration_Helptext": {
+        "translation": "The number of days an Event lasted. The majority of events may last a few minutes (ie; earthquakes; landslides; flashfloods) or hours (ie; flooding or fires). Events such as droughts or prolonged flooding may last months.",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EventNotes": {
+        "translation": "Observation sur l'événement",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EventNotes_Helptext": {
+        "translation": "A brief description of the occurrence of the event. In the case of chain events or simultaneous events; these should also be included in the description.",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_CauseName": {
+        "translation": "Type de cause",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_CauseNotes": {
+        "translation": "Observations sur la cause",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_CauseNotes_Helptext": {
+        "translation": "A brief annotation of the relationship between the cause and the event. This field is a very important in terms of analysis of the database because here would be described those causes which complement or contextualise the one registered in the field Cause.",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_InputDoubleTooltip": {
+        "translation": "Nombre à virgule flottante utilisez point comme séparateur décimal",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EffectOtherLosses": {
+        "translation": "Autres pertes",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EffectOtherLosses_Tooltip": {
+        "translation": "Text",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EffectOtherLosses_Helptext": {
+        "translation": "A description of other losses not included in the fields of the basic record. For example: religious buildings and monuments; architectural or cultural heritage buildings; theatres and public installations; public administration buildings relating to banks; commerce and tourism; vehicles or buses lost; bridges.",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EffectNotes": {
+        "translation": "Observations sur les effets",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EffectNotes_Tooltip": {
+        "translation": "Text",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EffectNotes_Helptext": {
+        "translation": "Notes or detail about the effects of the disaster. This field should be used to register discrepancies between effect figures when there is more than one source. In accordance; with the sequence of fields in the Basic Record; it is recommended to use the following codes for observations (first type the code and then the corresponding observation): R. Relocated; T. Transport; Vd. Homes destroyed; Ac. Aqueduct; Va. Homes Affected; En. Energy; V. Routes; I. Industry; A. Agriculture; Al. Sewerage; P. Fishing; C. Communications; S. Health; Ma. Magnitude; Ed. Education; Fe. Date of the end of an event which covers a long period. Vp. Loss Value. De acuerdo con la secuencia de campos de la Ficha Básica; se recomienda utilizar las siguientes claves para las observaciones (se debe digitar la clave y a continuación la observación correspondiente): R. Reubicados; T. Transporte; Vd. Viviendas destruidas; Ac. Acueducto; Va. Viviendas afectadas; En. Energía; V. Vías; I. Industria; A. Agricultura; Al. Alcantarillado; P. Pecuario; C. Comunicaciones; S. Salud; Ma. Magnitud; Ed. Educación; Fe. Fecha de fín de un evento de largo período; Vp. Valor pérdidas. Conforme à seqüência de campos do Formulário Básico; recomenda-se utilizar as seguintes chaves para as observações: (deve-se digitar a chave e em seguida a observação correspondente): R. Desabrigados; T. Transporte; Vd. Residências destruídas; Ac. Aqueduto; Va. Residências afetadas; En. Energia; V. Estradas; I. Indústria; A. Agricultura; Al. Esgoto; P. Pecuária; C. Comunicações; S. Saúde; Ma. Magnitude; Ed. Educação; Fe. Data do fim de um evento de período comprido; Vp. Valor das perdas. In accordance; with the sequence of fields in the Basic Record; it is recommended to use the following codes for observations (first type the code and then the corresponding observation): R. Relocated; T. Transport; Vd. Homes destroyed; Ac. Aqueduct; Va. Homes Affected; En. Energy; V. Routes; I. Industry; A. Agriculture; Al. Sewerage; P. Fishing; C. Communications; S. Health; Ma. Magnitude; Ed. Education; Fe. Date of the end of an event which covers a long period. Vp. Loss Value.",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_RecordAuthor": {
+        "translation": "Auteur",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_RecordCreation": {
+        "translation": "Date de création",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_RecordUpdate": {
+        "translation": "Mise à jour",
+        "notes": ""
+    },
+    "grpMainStrings.twelcome": {
+        "translation": "Bienvenue",
+        "notes": ""
+    },
+    "grpMainStrings.tdititle": {
+        "translation": "Système d'inventaire d'effets de désastres",
+        "notes": ""
+    },
+    "grpMainStrings.hlostconn": {
+        "translation": "Communication défaillante: Vérifiez la connexion Internet",
+        "notes": ""
+    },
+    "grpMainStrings.tdbnotavail": {
+        "translation": "Il n'y a pas de bases de données disponibles pour l'instant",
+        "notes": ""
+    },
+    "grpMainStrings.msgMain_NoPerms": {
+        "translation": "Vous n'avez pas les permissions d'utiliser cette base de données",
+        "notes": ""
+    },
+    "grpMainStrings.tmoreinfo": {
+        "translation": "Plus d'information",
+        "notes": ""
+    },
+    "grpMainStrings.talerdiwin": {
+        "translation": "DésInventer est en usage. Voulez-vous vraiment quitter?",
+        "notes": ""
+    },
+    "grpMainStrings.tstartpage": {
+        "translation": "Accueil",
+        "notes": ""
+    },
+    "grpMainStrings.tcopyright": {
+        "translation": "(c) 1998-2018 Corporación OSSO - Colombie",
+        "notes": ""
+    },
+    "grpMainStrings.labelsoftwareversion": {
+        "translation": "Version de logiciel",
+        "notes": ""
+    },
+    "grpMainStrings.ttitle": {
+        "translation": "DesInventar",
+        "notes": ""
+    },
+    "grpMainStrings.tsubtitle": {
+        "translation": "Dessin de consultation",
+        "notes": ""
+    },
+    "grpMainStrings.tsubtitlemsg": {
+        "translation": "Annoter limiter restreindre votre consultation en sélectionnant les champs qui vous intéressent",
+        "notes": ""
+    },
+    "grpMainStrings.tsubtitle2": {
+        "translation": "Résultats",
+        "notes": ""
+    },
+    "grpMainStrings.tsubtitle2msg": {
+        "translation": "seleccione una de las herramientas de análisis Datos",
+        "notes": ""
+    },
+    "grpMainStrings.mfile": {
+        "translation": "Fichier",
+        "notes": ""
+    },
+    "grpMainStrings.mprint": {
+        "translation": "Imprimer",
+        "notes": ""
+    },
+    "grpMainStrings.mgeosection": {
+        "translation": "Géographie",
+        "notes": ""
+    },
+    "grpMainStrings.mmapsection": {
+        "translation": "Carte",
+        "notes": ""
+    },
+    "grpMainStrings.meffsection": {
+        "translation": "Effets",
+        "notes": ""
+    },
+    "grpMainStrings.mextsection": {
+        "translation": "Effets additionnels",
+        "notes": ""
+    },
+    "grpMainStrings.mevesection": {
+        "translation": "Types d'évènements",
+        "notes": ""
+    },
+    "grpMainStrings.mcausection": {
+        "translation": "Types de causes",
+        "notes": ""
+    },
+    "grpMainStrings.mdcsection": {
+        "translation": "Carte de données",
+        "notes": ""
+    },
+    "grpMainStrings.madvsection": {
+        "translation": "Consultation avancée",
+        "notes": ""
+    },
+    "grpMainStrings.mreginfo": {
+        "translation": "Fiche technique",
+        "notes": ""
+    },
+    "grpMainStrings.msgDBConfig_Geolevels": {
+        "translation": "Niveaux Géographiques",
+        "notes": ""
+    },
+    "grpMainStrings.msgGeolevels_Tooltip": {
+        "translation": "",
+        "notes": ""
+    },
+    "grpMainStrings.msgGeolevels_HelpText": {
+        "translation": "In order to understand and use the geography in DesInventar; two basic concepts should be kept in mind: the resolution; which corresponds to the level of spatial detail with which the data should be registered; and which should be the same for all records in the database; and the hierarchy of zoning or geographic levels; which implies that the highest zoning level (that of the least resolution) includes subordinate levels; until you arrive at the chosen level as a resolution in the database. ",
+        "notes": ""
+    },
+    "grpMainStrings.mgeography": {
+        "translation": "Unités Géographiques",
+        "notes": ""
+    },
+    "grpMainStrings.msgGeography_Tooltip": {
+        "translation": "",
+        "notes": ""
+    },
+    "grpMainStrings.msgDBConfig_Events": {
+        "translation": "Types d'évènements",
+        "notes": ""
+    },
+    "grpMainStrings.mcauses": {
+        "translation": "Types de causes",
+        "notes": ""
+    },
+    "grpMainStrings.meeffects": {
+        "translation": "Effets additionnels",
+        "notes": ""
+    },
+    "grpMainStrings.msgDBConfig_RolesAndDiffusion": {
+        "translation": "Diffusion et rôles",
+        "notes": ""
+    },
+    "grpMainStrings.tmapnotavail": {
+        "translation": "Carte non disponible",
+        "notes": ""
+    },
+    "grpMainStrings.msgResultSaveTooltip": {
+        "translation": "Vous permet d'enregistrer le résultat déployé (tableaux et images)",
+        "notes": ""
+    },
+    "grpMainStrings.msgResultPrintTooltip": {
+        "translation": "Pour imprimer le résultat sur l'écran",
+        "notes": ""
+    },
+    "grpMainStrings.msgViewData": {
+        "translation": "Voir les cartes de données",
+        "notes": ""
+    },
+    "grpMainStrings.msgViewDataTooltip": {
+        "translation": "Pour afficher les cartes de données sur un tableau",
+        "notes": ""
+    },
+    "grpMainStrings.msgViewMap": {
+        "translation": "Cartes",
+        "notes": ""
+    },
+    "grpMainStrings.msgViewMapTooltip": {
+        "translation": "Pour réaliser des cartes thématiques des effets",
+        "notes": ""
+    },
+    "grpMainStrings.msgViewGraph": {
+        "translation": "Graphiques",
+        "notes": ""
+    },
+    "grpMainStrings.msgViewGraphTooltip": {
+        "translation": "Représente les données sur des histogrames et des graphiques comparatifs",
+        "notes": ""
+    },
+    "grpMainStrings.msgViewStd": {
+        "translation": "Consolidés",
+        "notes": ""
+    },
+    "grpMainStrings.msgViewStdTooltip": {
+        "translation": "Totalize effets en utilisant les différents niveaux de agrupation",
+        "notes": ""
+    },
+    "grpMainStrings.gopttitle": {
+        "translation": "Titre",
+        "notes": ""
+    },
+    "grpMainStrings.goptsubtit": {
+        "translation": "Sous-titre",
+        "notes": ""
+    },
+    "grpMainStrings.ghistogram": {
+        "translation": "Histogramme",
+        "notes": ""
+    },
+    "grpMainStrings.gcomparative": {
+        "translation": "Comparatif",
+        "notes": ""
+    },
+    "grpMainStrings.gseaday": {
+        "translation": "Quotidien",
+        "notes": ""
+    },
+    "grpMainStrings.gtendline": {
+        "translation": "Ligne de tendance",
+        "notes": ""
+    },
+    "grpMainStrings.glinearreg": {
+        "translation": "Régression linéaire",
+        "notes": ""
+    },
+    "grpMainStrings.GHISTOANNUAL": {
+        "translation": "Histogramme multiannuel",
+        "notes": ""
+    },
+    "grpMainStrings.gseaweek": {
+        "translation": "Hebdomadaire",
+        "notes": ""
+    },
+    "grpMainStrings.gseamonth": {
+        "translation": "Mensuel",
+        "notes": ""
+    },
+    "grpMainStrings.gperannual": {
+        "translation": "Annuel",
+        "notes": ""
+    },
+    "grpMainStrings.gperweek": {
+        "translation": "Hebdomadaire",
+        "notes": ""
+    },
+    "grpMainStrings.gpermonth": {
+        "translation": "Mensuel",
+        "notes": ""
+    },
+    "grpMainStrings.gperday": {
+        "translation": "Quotidien",
+        "notes": ""
+    },
+    "grpMainStrings.gscalin": {
+        "translation": "Linéaire",
+        "notes": ""
+    },
+    "grpMainStrings.gscalog": {
+        "translation": "Logarithmique",
+        "notes": ""
+    },
+    "grpMainStrings.gfee2d": {
+        "translation": "2D",
+        "notes": ""
+    },
+    "grpMainStrings.gfee3d": {
+        "translation": "3D",
+        "notes": ""
+    },
+    "grpMainStrings.gkndbars": {
+        "translation": "Barres",
+        "notes": ""
+    },
+    "grpMainStrings.gkndlines": {
+        "translation": "Lignes",
+        "notes": ""
+    },
+    "grpMainStrings.gkndpie": {
+        "translation": "Gâteau",
+        "notes": ""
+    },
+    "grpMainStrings.gmodnormal": {
+        "translation": "Normal",
+        "notes": ""
+    },
+    "grpMainStrings.gmodaccumul": {
+        "translation": "Accumulé",
+        "notes": ""
+    },
+    "grpMainStrings.gmodovercome": {
+        "translation": "Superposé",
+        "notes": ""
+    },
+    "grpMainStrings.gshwval": {
+        "translation": "Valeurs",
+        "notes": ""
+    },
+    "grpMainStrings.gshwperce": {
+        "translation": "Pourcentage",
+        "notes": ""
+    },
+    "grpMainStrings.gshwnone": {
+        "translation": "Désactiver",
+        "notes": ""
+    },
+    "grpMainStrings.ghoraxis": {
+        "translation": "Axe horizontal",
+        "notes": ""
+    },
+    "grpMainStrings.gveraxis": {
+        "translation": "Axe vertical",
+        "notes": ""
+    },
+    "grpMainStrings.mareaid": {
+        "translation": "Identification des Aires",
+        "notes": ""
+    },
+    "grpMainStrings.mareashownam": {
+        "translation": "Afficher des noms",
+        "notes": ""
+    },
+    "grpMainStrings.mareashowcod": {
+        "translation": "Afficher des codes",
+        "notes": ""
+    },
+    "grpMainStrings.mareashowval": {
+        "translation": "Afficher des valeurs",
+        "notes": ""
+    },
+    "grpMainStrings.mareanotshow": {
+        "translation": "Ne pas afficher d'identification",
+        "notes": ""
+    },
+    "grpMainStrings.mranlegcol": {
+        "translation": "Légendes et couleurs",
+        "notes": ""
+    },
+    "grpMainStrings.mrange": {
+        "translation": "Limite de préférences",
+        "notes": ""
+    },
+    "grpMainStrings.mlegend": {
+        "translation": "Légende",
+        "notes": ""
+    },
+    "grpMainStrings.mcolor": {
+        "translation": "Couleur",
+        "notes": ""
+    },
+    "grpMainStrings.mbetween": {
+        "translation": "Entre",
+        "notes": ""
+    },
+    "grpMainStrings.mrepreselev": {
+        "translation": "Niveau de représentation",
+        "notes": ""
+    },
+    "grpMainStrings.mviewfields": {
+        "translation": "Variable à représenter",
+        "notes": ""
+    },
+    "grpMainStrings.mcolorgrad": {
+        "translation": "Variation de couleur",
+        "notes": ""
+    },
+    "grpMainStrings.mcoltransp": {
+        "translation": "Transparence",
+        "notes": ""
+    },
+    "grpMainStrings.savailfields": {
+        "translation": "Champs disponibles",
+        "notes": ""
+    },
+    "grpMainStrings.sviewfields": {
+        "translation": "Champs visibles et ordre",
+        "notes": ""
+    },
+    "grpMainStrings.sresxpage": {
+        "translation": "Résultats par page",
+        "notes": ""
+    },
+    "grpMainStrings.stotallevels": {
+        "translation": "Sélectionnez les niveaux de totalisation",
+        "notes": ""
+    },
+    "grpMainStrings.txtOrderBy": {
+        "translation": "Ordonner par",
+        "notes": ""
+    },
+    "grpMainStrings.txtOrderBySerial": {
+        "translation": "Numéro de série",
+        "notes": ""
+    },
+    "grpMainStrings.txtOrderByDateEventGeography": {
+        "translation": "Date\/Événement\/Géographie",
+        "notes": ""
+    },
+    "grpMainStrings.txtOrderByDateGeographyEvent": {
+        "translation": "Date\/Géographie\/Événement",
+        "notes": ""
+    },
+    "grpMainStrings.txtOrderByGeographyEventDate": {
+        "translation": "Géographie\/Événement\/Date",
+        "notes": ""
+    },
+    "grpMainStrings.txtOrderByEventDateGeography": {
+        "translation": "Événement\/Date\/Géographie",
+        "notes": ""
+    },
+    "grpMainStrings.txtOrderByRecordCreation": {
+        "translation": "Création de la fiche",
+        "notes": ""
+    },
+    "grpMainStrings.txtOrderByRecordUpdate": {
+        "translation": "Date of mettre á jour",
+        "notes": ""
+    },
+    "grpMainStrings.serrmsgfrm": {
+        "translation": "Vous devez choisir un niveau de totalisation et au moins un champ à afficher",
+        "notes": ""
+    },
+    "grpMainStrings.derrmsgfrm": {
+        "translation": "Vous devez sélectionner au moins un champ",
+        "notes": ""
+    },
+    "grpMainStrings.balls": {
+        "translation": "Tous",
+        "notes": ""
+    },
+    "grpMainStrings.bnone": {
+        "translation": "Nettoyer",
+        "notes": ""
+    },
+    "grpMainStrings.msgViewStd_EventDuration": {
+        "translation": "Durée de l'événement",
+        "notes": ""
+    },
+    "grpMainStrings.tand": {
+        "translation": "et",
+        "notes": ""
+    },
+    "grpMainStrings.tor": {
+        "translation": "ou",
+        "notes": ""
+    },
+    "grpMainStrings.ttitegp": {
+        "translation": "Personnes et biens",
+        "notes": ""
+    },
+    "grpMainStrings.ttiteis": {
+        "translation": "Secteurs",
+        "notes": ""
+    },
+    "grpMainStrings.ttitloss": {
+        "translation": "Pertes Économiques",
+        "notes": ""
+    },
+    "grpMainStrings.msgQueryDesign_DateRange": {
+        "translation": "Période",
+        "notes": ""
+    },
+    "grpMainStrings.ttitsince": {
+        "translation": "Depuis",
+        "notes": ""
+    },
+    "grpMainStrings.ttituntil": {
+        "translation": "Jusqu'à",
+        "notes": ""
+    },
+    "grpMainStrings.tonly": {
+        "translation": "Uniquement",
+        "notes": ""
+    },
+    "grpMainStrings.texclude": {
+        "translation": "Exclure",
+        "notes": ""
+    },
+    "grpMainStrings.tinclude": {
+        "translation": "Inclure",
+        "notes": ""
+    },
+    "grpMainStrings.tclear": {
+        "translation": "Nettoyer",
+        "notes": ""
+    },
+    "grpMainStrings.tsend": {
+        "translation": "Générer",
+        "notes": ""
+    },
+    "grpMainStrings.tclose": {
+        "translation": "Fermer",
+        "notes": ""
+    },
+    "grpMainStrings.tmguidedef": {
+        "translation": "Définition",
+        "notes": ""
+    },
+    "grpMainStrings.hmoreinfo": {
+        "translation": "Guide méthodologique",
+        "notes": ""
+    },
+    "grpMainStrings.tdescinfo": {
+        "translation": "Cliquez sur le champ souhaité pour voir la description de cet élément",
+        "notes": ""
+    },
+    "grpMainStrings.tcntclick": {
+        "translation": "Ctrl Clic pour une sélection multiple ou pour désélectionner",
+        "notes": ""
+    },
+    "grpMainStrings.tauxhave": {
+        "translation": "Existence",
+        "notes": ""
+    },
+    "grpMainStrings.tauxaffect": {
+        "translation": "Affectation",
+        "notes": ""
+    },
+    "grpMainStrings.trepnum": {
+        "translation": "Données",
+        "notes": ""
+    },
+    "grpMainStrings.tabout": {
+        "translation": "Courrier électronique: désinventer@désinventer.org",
+        "notes": ""
+    },
+    "grpMainStrings.tserialmsg": {
+        "translation": "Peut inclure ou exclure un ou plusieurs numéros de série. Les numéros de série doivent être séparés par des espaces",
+        "notes": ""
+    },
+    "grpMainStrings.tserial": {
+        "translation": "Numéros de série",
+        "notes": ""
+    },
+    "grpMainStrings.tdcstatus": {
+        "translation": "État de la carte de données",
+        "notes": ""
+    },
+    "grpMainStrings.tdcpublished": {
+        "translation": "Publiée",
+        "notes": ""
+    },
+    "grpMainStrings.tdcready": {
+        "translation": "En cours d'approbation",
+        "notes": ""
+    },
+    "grpMainStrings.tdcdraft": {
+        "translation": "Projet",
+        "notes": ""
+    },
+    "grpMainStrings.tdctrash": {
+        "translation": "À éliminer",
+        "notes": ""
+    },
+    "grpMainStrings.tdcdeleted": {
+        "translation": "Supprimé",
+        "notes": ""
+    },
+    "grpMainStrings.msgQueryDesign_DateFormat": {
+        "translation": "Format AAAA MM DD",
+        "notes": ""
+    },
+    "grpMainStrings.thlpquery": {
+        "translation": "Si aucune option n'est choisie la base de données entière sera interrogé",
+        "notes": ""
+    },
+    "grpMainStrings.teffhav": {
+        "translation": "Il y en a eu",
+        "notes": ""
+    },
+    "grpMainStrings.teffhavnot": {
+        "translation": "Il n'y en a pas eu",
+        "notes": ""
+    },
+    "grpMainStrings.teffdontknow": {
+        "translation": "Ne sait pas",
+        "notes": ""
+    },
+    "grpMainStrings.teffmajor": {
+        "translation": "Supérieur ou égal à",
+        "notes": ""
+    },
+    "grpMainStrings.teffminor": {
+        "translation": "Inférieur ou égal à ",
+        "notes": ""
+    },
+    "grpMainStrings.teffequal": {
+        "translation": "Égal à",
+        "notes": ""
+    },
+    "grpMainStrings.teffbetween": {
+        "translation": "Entre",
+        "notes": ""
+    },
+    "grpMainStrings.tlike": {
+        "translation": "Expression",
+        "notes": ""
+    },
+    "grpMainStrings.tadvqryhelp": {
+        "translation": "Sélectionnez un champ suivi d'un opérateur et de la valeur correspondante",
+        "notes": ""
+    },
+    "grpMainStrings.taqlessthan": {
+        "translation": "Recherche de cartes de données ayant des valeurs inférieures à la valeur spécifiée. Ex.: date début < 1920 ou Morts < 10",
+        "notes": ""
+    },
+    "grpMainStrings.taqgreathan": {
+        "translation": "Recherche de cartes de données d'une valeur supérieure à la valeur spécifiée. Ex.: date début> 1999 o Sinistrés > 1000",
+        "notes": ""
+    },
+    "grpMainStrings.taqequalto": {
+        "translation": "Recherche de cartes de données d'une valeur exactement égale à la valeur spécifiée: ex.: date début",
+        "notes": ""
+    },
+    "grpMainStrings.taqnoteqto": {
+        "translation": "Recherche de cartes de données ayant des valeurs différentes à la valeur spécifiée: ex.: Morts <> 10 ",
+        "notes": ""
+    },
+    "grpMainStrings.taqlike": {
+        "translation": "Recherche d'un mot ou d'une phrase dans les champs de texte.",
+        "notes": ""
+    },
+    "grpMainStrings.taqwere": {
+        "translation": "Recherche de cartes de données où l'effet s'est présenté ou il a affecté le secteur",
+        "notes": ""
+    },
+    "grpMainStrings.taqwerent": {
+        "translation": "Recherche de cartes de données où l'effet ne s'est pas produit ou il n'a pas affecté le secteur",
+        "notes": ""
+    },
+    "grpMainStrings.taqdntknow": {
+        "translation": "Recherche de cartes de données où l'on ne sait pas si des effets se sont présentés ou non",
+        "notes": ""
+    },
+    "grpMainStrings.taqandopt": {
+        "translation": "Recherche de cartes de données satisfaisant à la condition de vérité des éléments connectés",
+        "notes": ""
+    },
+    "grpMainStrings.taqoropt": {
+        "translation": "Recherche de cartes de données satisfaisant à la condition de vérité d'un ou des deux éléments connectés",
+        "notes": ""
+    },
+    "dc_qdetails.geo": {
+        "translation": "Géographie",
+        "notes": ""
+    },
+    "dc_qdetails.eve": {
+        "translation": "Types d'évènements",
+        "notes": ""
+    },
+    "dc_qdetails.cau": {
+        "translation": "Types de causes",
+        "notes": ""
+    },
+    "dc_qdetails.eff": {
+        "translation": "Effets",
+        "notes": ""
+    },
+    "dc_qdetails.beg": {
+        "translation": "Depuis",
+        "notes": ""
+    },
+    "dc_qdetails.end": {
+        "translation": "Jusqu'à",
+        "notes": ""
+    },
+    "dc_qdetails.sou": {
+        "translation": "Source",
+        "notes": ""
+    },
+    "dc_qdetails.ser": {
+        "translation": "Numéros de série",
+        "notes": ""
+    },
+    "dc_data.ttitle": {
+        "translation": "Données",
+        "notes": ""
+    },
+    "dc_data.tpage": {
+        "translation": "Pages:",
+        "notes": ""
+    },
+    "dc_data.msgData_PageOf": {
+        "translation": "de",
+        "notes": ""
+    },
+    "dc_data.trepnum": {
+        "translation": "Données",
+        "notes": ""
+    },
+    "dc_data.trow": {
+        "translation": "Ligne",
+        "notes": ""
+    },
+    "dc_thematicmap.ttitle": {
+        "translation": "Guide méthodologique",
+        "notes": ""
+    },
+    "dc_thematicmap.tmapof": {
+        "translation": "Carte de",
+        "notes": ""
+    },
+    "dc_thematicmap.tdrawpoint": {
+        "translation": "Points et polygones",
+        "notes": ""
+    },
+    "dc_thematicmap.trepnum": {
+        "translation": "Cartes de données",
+        "notes": ""
+    },
+    "dc_thematicmap.tgetgearth": {
+        "translation": "Voir dans GoogleEarth",
+        "notes": ""
+    },
+    "dc_thematicmap.msgMapNoData": {
+        "translation": "Sans aucune donnée",
+        "notes": ""
+    },
+    "dc_thematicmap.msgViewMap_Level": {
+        "translation": "Niveau",
+        "notes": ""
+    },
+    "dc_thematicmap.msgViewMap_From": {
+        "translation": "Depuis",
+        "notes": ""
+    },
+    "dc_thematicmap.msgViewMap_Until": {
+        "translation": "Jusqu'à",
+        "notes": ""
+    },
+    "dc_thematicmap.msgViewMap_Records": {
+        "translation": "Données",
+        "notes": ""
+    },
+    "dc_graphic.ttitle": {
+        "translation": "Résumé Guide méthodologique",
+        "notes": ""
+    },
+    "dc_graphic.trepnum": {
+        "translation": "Cartes de données",
+        "notes": ""
+    },
+    "dc_graphic.tnodata": {
+        "translation": "Sans aucune donnée",
+        "notes": ""
+    },
+    "dc_statistic.ttitle": {
+        "translation": "Résumé Guide méthodologique",
+        "notes": ""
+    },
+    "dc_statistic.tpage": {
+        "translation": "Pages:",
+        "notes": ""
+    },
+    "dc_statistic.msgStatistic_PageOf": {
+        "translation": "de",
+        "notes": ""
+    },
+    "dc_statistic.trepnum": {
+        "translation": "Cartes de données",
+        "notes": ""
+    },
+    "dc_statistic.tsumnum": {
+        "translation": "Nombre de consolidés",
+        "notes": ""
+    },
+    "dc_statistic.ttotals": {
+        "translation": "Totaux",
+        "notes": ""
+    },
+    "dc_statistic.trow": {
+        "translation": "Ligne",
+        "notes": ""
+    },
+    "di_doc.metguide_Title": {
+        "translation": "Guide méthodologique",
+        "notes": ""
+    },
+    "di_doc.tintro": {
+        "translation": "Introduction",
+        "notes": ""
+    },
+    "di_doc.twhatis": {
+        "translation": "Que signifie DésInventer",
+        "notes": ""
+    },
+    "di_doc.tgenpres": {
+        "translation": "Présentation Générale",
+        "notes": ""
+    },
+    "di_doc.tregion": {
+        "translation": "Région",
+        "notes": ""
+    },
+    "di_doc.tgeography": {
+        "translation": "Géographie",
+        "notes": ""
+    },
+    "di_doc.tevents": {
+        "translation": "Types d'évènements",
+        "notes": ""
+    },
+    "di_doc.tcauses": {
+        "translation": "Types de causes",
+        "notes": ""
+    },
+    "di_doc.textraeff": {
+        "translation": "Effets Additionnels",
+        "notes": ""
+    },
+    "di_doc.tdatacards": {
+        "translation": "Données",
+        "notes": ""
+    },
+    "di_doc.treferences": {
+        "translation": "Références",
+        "notes": ""
+    },
+    "di_doc.thlptitle": {
+        "translation": "Introduction à Désinventer",
+        "notes": ""
+    },
+    "di_doc.thlpintro": {
+        "translation": "Introduction",
+        "notes": ""
+    },
+    "di_doc.thlpportal": {
+        "translation": "Portail DésInventer",
+        "notes": ""
+    },
+    "di_doc.thlppordemo": {
+        "translation": "Démonstration Portail",
+        "notes": ""
+    },
+    "di_doc.thlpdimod": {
+        "translation": "Module DésInventer",
+        "notes": ""
+    },
+    "di_doc.thlpdcmod": {
+        "translation": "Module Déconsulter",
+        "notes": ""
+    },
+    "di_doc.thlpdemreg": {
+        "translation": "Démonstration Région",
+        "notes": ""
+    },
+    "di_doc.thlpdemgeo": {
+        "translation": "Démonstration Géographie",
+        "notes": ""
+    },
+    "di_doc.thlpdemeve": {
+        "translation": "Démonstration Évènements",
+        "notes": ""
+    },
+    "di_doc.thlpdemcau": {
+        "translation": "Démonstration Causes",
+        "notes": ""
+    },
+    "di_doc.thlpdemdc": {
+        "translation": "Démonstration cartes de données",
+        "notes": ""
+    },
+    "grpUserEdit.msgUserEdit_UserId": {
+        "translation": "Utilisateur",
+        "notes": ""
+    },
+    "grpUserEdit.msgUserEdit_UserName": {
+        "translation": "Nom",
+        "notes": ""
+    },
+    "grpUserEdit.msgUserEdit_UserEmail": {
+        "translation": "E-mail",
+        "notes": ""
+    },
+    "grpUserEdit.msgUserEdit_UserActive": {
+        "translation": "Actif",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_Title": {
+        "translation": "Niveaux géographiques et la carte",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_GeoLevelName": {
+        "translation": "Nom du niveau",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_GeoLevelDesc": {
+        "translation": "Description du niveau",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_HasMap": {
+        "translation": "Carte",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_GeoLevelActive": {
+        "translation": "Actif",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_Add": {
+        "translation": "Ajouter",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_GeoLevelSubtitle": {
+        "translation": "Niveau de géographie",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_Save": {
+        "translation": "Enregistrer",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_Cancel": {
+        "translation": "Annuler",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_UpdateOk": {
+        "translation": "Fiche mise à jour avec succès",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_UpdateError": {
+        "translation": "Erreur lors de la mise à jour d'enregistrement",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_Subtitle": {
+        "translation": "Cartographie",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_Code": {
+        "translation": "Colonne de code",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_CodeTooltip": {
+        "translation": "C'est le nom de la colonne avec le code d'identification pour les unités géographiques (code soit ou Id)",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_ParentCode": {
+        "translation": "Colonne de code parent",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_ParentCodeTooltip": {
+        "translation": "",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_Name": {
+        "translation": "Colonne de nom",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_NameTooltip": {
+        "translation": "C'est le nom de la colonne avec le nom descriptif des unités géographiques (nom)",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_ImportGeography": {
+        "translation": "Créer des unités géographiques",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_ImportGeographyTooltip": {
+        "translation": "Utilisez cette option pour forcer la création d'unités de la géographie à ce niveau toutes les unités existantes seront supprimées.",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_File": {
+        "translation": "Fichier",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_UploadOk": {
+        "translation": "Fichier téléchargé avec succès",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_UploadError": {
+        "translation": "Erreur lors du téléchargement de fichiers",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_UpdateOk": {
+        "translation": "Cartographie à jour avec succès",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_UpdateError": {
+        "translation": "Erreur lors de la mise à jour de cartographie",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_MissingFiles": {
+        "translation": "Tous les fichiers doivent être téléchargés avant d'enregistrer",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_RequiredFields": {
+        "translation": "Les champs obligatoires ne peut pas être vide",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_CreatingGeography": {
+        "translation": "Création d'éléments de géographie",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_UploadChooseFile": {
+        "translation": "Choisissez fichier",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_UploadCancel": {
+        "translation": "Annuler",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_TitleOptions": {
+        "translation": "Diffusion de la base de données",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_TitleRoles": {
+        "translation": "Les rôles des utilisateurs",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RegionActive": {
+        "translation": "Actif",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RegionPublic": {
+        "translation": "Publique",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RegionOrder": {
+        "translation": "Catégorie",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_CategoryNormal": {
+        "translation": "Ordinaire",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_CategoryOfficial": {
+        "translation": "Officiel",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RegionActiveTooltip": {
+        "translation": "La base de données sera disponible dans votre liste de base de données",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RegionPublicTooltip": {
+        "translation": "Cochez cette option pour autoriser les requêtes du public à la base",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_UserId": {
+        "translation": "Utilisateur",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_UserRole": {
+        "translation": "Rôle",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RoleNone": {
+        "translation": "Néant",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RoleObserver": {
+        "translation": "Observateur",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RoleFeeder": {
+        "translation": "Alimentation",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RoleSupervisor": {
+        "translation": "Superviseur",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RoleAdminRegion": {
+        "translation": "Administrateur",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_Edit": {
+        "translation": "Éditer",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_Add": {
+        "translation": "Ajouter",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_Save": {
+        "translation": "Enregistrer",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_Cancel": {
+        "translation": "Annuler",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_OptionsStatusOk": {
+        "translation": "Base mise à jour avec succès!",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_OptionsStatusError": {
+        "translation": "Erreur dans la mise à jour de la base",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RoleListStatusOk": {
+        "translation": "Base mise à jour avec succès!",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RoleListStatusError": {
+        "translation": "Erreur dans la mise à jour de la base",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RoleListEmptyFields": {
+        "translation": "Les champs ne peuvent pas être vide",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RoleListCannotRemoveAdminRole": {
+        "translation": "Désolé vous ne pouvez pas supprimer votre rôle en tant que gestionnaire",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_ConfirmManagerTitle": {
+        "translation": "Confirmer",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_ConfirmManagerPrompt1": {
+        "translation": "Voulez-vous transférer le rôle de gestionnaire du",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_ConfirmManagerPrompt2": {
+        "translation": "à",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_ConfirmManagerPrompt3": {
+        "translation": "Page d'application se rechargera après ce changement",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_Yes": {
+        "translation": "Envoyer",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_No": {
+        "translation": "Annuler",
+        "notes": ""
+    },
+    "grpDatabaseEdit.msgDatabaseEditCountryIso": {
+        "translation": "Pays",
+        "notes": ""
+    },
+    "grpDatabaseEdit.msgDatabaseEditRegionId": {
+        "translation": "Identificateur",
+        "notes": ""
+    },
+    "grpDatabaseEdit.msgDatabaseEditRegionLabel": {
+        "translation": "Nom de base",
+        "notes": ""
+    },
+    "grpDatabaseEdit.msgDatabaseEditLangIsoCode": {
+        "translation": "Langue",
+        "notes": ""
+    },
+    "grpDatabaseEdit.msgDatabaseEditRegionActive": {
+        "translation": "Actif",
+        "notes": ""
+    },
+    "grpDatabaseEdit.msgDatabaseEditRegionPublic": {
+        "translation": "Publique",
+        "notes": ""
+    },
+    "grpDatabaseEdit.msgDatabaseEditRegionActiveTooltip": {
+        "translation": "La base de données sera disponible dans votre liste de base de données",
+        "notes": ""
+    },
+    "grpDatabaseEdit.msgDatabaseEditRegionPublicTooltip": {
+        "translation": "Cochez cette option pour autoriser les requêtes du public à la base",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateTitle": {
+        "translation": "Créer nouvelle base de données",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateSend": {
+        "translation": "Créer",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateCancel": {
+        "translation": "Annuler",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateOk": {
+        "translation": "Base de données créée correctement l'ouverture nouvelle base de données...",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateError": {
+        "translation": "Il y avait une erreur lors de la création de la base de données s'il vous plaît vérifier les données et essayer de nouveau",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateFormError": {
+        "translation": "Le formulaire contient des données incorrectes ou certains champs obligatoires sont vides s'il vous plaît vérifier les données et essayer de nouveau.",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateMsg1": {
+        "translation": "Base de données a été créée avec l'identifiant",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateMsg2": {
+        "translation": "Maintenant vous devez configurer la base de données aide l'option Configurer la base de données dans le menu saisie des données Les éléments suivants sont obligatoires",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateMsg2A": {
+        "translation": "Créer des niveaux géographiques",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateMsg2B": {
+        "translation": "Insérez les unités géographiques à chaque niveau",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateMsg3": {
+        "translation": "La base de données peuvent être personnalisées avec les options suivantes",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateMsg4": {
+        "translation": "Envoyer",
+        "notes": ""
+    },
+    "grpUserPermAdmin.msgUserPermAdminTitle": {
+        "translation": "Database Administrator",
+        "notes": ""
+    },
+    "grpUserPermAdmin.msgUserPermAdminMsg1": {
+        "translation": "Utilisez ce formulaire pour configurer l'utilisateur qui est l'administrateur de base",
+        "notes": ""
+    },
+    "grpUserPermAdmin.msgUserPermAdminCurrentAdmin": {
+        "translation": "Administrateur courant",
+        "notes": ""
+    },
+    "grpUserPermAdmin.msgUserPermAdminNewAdmin": {
+        "translation": "Nouvelle administrateur",
+        "notes": ""
+    },
+    "grpUserPermAdmin.msgUserPermAdminSend": {
+        "translation": "Envoyer",
+        "notes": ""
+    },
+    "grpUserPermAdmin.msgUserPermAdminCancel": {
+        "translation": "Annuler",
+        "notes": ""
+    },
+    "grpUserPermAdmin.msgUserPermAdminOk": {
+        "translation": "Administrateur de base de données à jour avec succès",
+        "notes": ""
+    },
+    "grpUserPermAdmin.msgUserPermAdminError": {
+        "translation": "Erreur lors de la mise à jour administrateur de la base s'il vous plaît essayez de nouveau",
+        "notes": ""
+    },
+    "grpUserPermAdmin.msgUserPermAdminFormError": {
+        "translation": "Le formulaire contient des données incorrectes ou certains champs obligatoires sont vides s'il vous plaît vérifier les données et essayer de nouveau.",
+        "notes": ""
+    },
+    "grpAdminUsers.msgAdminUsers_Title": {
+        "translation": "",
+        "notes": ""
+    },
+    "grpAdminUsers.msgAdminUsers_AddUser": {
+        "translation": "Ajouter",
+        "notes": ""
+    },
+    "grpDatabaseExport.msgDatabaseExportTitle": {
+        "translation": "Télécharger base de données",
+        "notes": ""
+    },
+    "grpDatabaseExport.msgDatabaseExportComplete": {
+        "translation": "Backup a été crée et peut être téléchargé dès maintenant.",
+        "notes": ""
+    },
+    "grpDatabaseExport.msgDatabaseExportWait": {
+        "translation": "S'il vous plaît patienter pendant que le fichier est créé. Cela peut prendre plusieurs minutes selon votre connexion internet et la taille de la base.",
+        "notes": ""
+    },
+    "grpDatabaseExport.msgDatabaseExportError": {
+        "translation": "Il ya eu une erreur lors de la création de la sauvegarde",
+        "notes": ""
+    },
+    "grpDatabaseExport.msgDatabaseExportButtonSend": {
+        "translation": "Générer",
+        "notes": ""
+    },
+    "grpDatabaseExport.msgDatabaseExportButtonClose": {
+        "translation": "Fermer",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadTitle": {
+        "translation": "Charger base de données",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadMsg1": {
+        "translation": "Sélectionnez la base de données d'être téléchargées",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadFilename": {
+        "translation": "Nom du fichier",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadCancel": {
+        "translation": "Annuler",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadUpdateOk": {
+        "translation": "Base de données mis à jour correctement",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadErrorNoInfo": {
+        "translation": "Uploaded file doesn't appear to be a DesInventar database",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadErrorOnUpload": {
+        "translation": "Erreur lors du téléchargement de fichiers",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadUpdateError": {
+        "translation": "Base de datos no pueden ser creados o actualizados",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadWaitForUpload": {
+        "translation": "Le fichier est copié",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadWaitForUpdate": {
+        "translation": "S'il vous plaît patienter pendant que base de données est mise à jour...",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadWaitForCopy": {
+        "translation": "S'il vous plaît patienter pendant que base de données est mise à jour...",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadRegionId": {
+        "translation": "Identifiant",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadRegionLabel": {
+        "translation": "Nom",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadCountryIso": {
+        "translation": "Pays",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadLastUpdate": {
+        "translation": "Dernière mise à jour",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadNumberOfRecords": {
+        "translation": "Dossiers",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadCopyComplete": {
+        "translation": "Base de données a été copié correctement",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadReplaceComplete": {
+        "translation": "Base de données a été correctement mis à jour",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadConfirmStart": {
+        "translation": "Vous êtes sur le point de remplacer le contenu de la base de données",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadConfirmReplace": {
+        "translation": "Base de données actuelle sera remplacé par le fichier:",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadConfirmCopy": {
+        "translation": "Le fichier à copier est",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadButtonStart": {
+        "translation": "Continuer",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadButtonCopy": {
+        "translation": "Envoyer",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadButtonCancel": {
+        "translation": "Annuler",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadButtonReplace": {
+        "translation": "Remplacer",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadChooseFile": {
+        "translation": "Choisissez fichier",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadButtonClose": {
+        "translation": "Fermer",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadFileSpec": {
+        "translation": "Fichier doit avoir l'extension zip et doit avoir été téléchargé à partir DesInventar ligne",
+        "notes": ""
+    },
+    "grpDBEdit.msgDBEditRegionId": {
+        "translation": "Id",
+        "notes": ""
+    },
+    "grpDBEdit.msgDBEDitRegionLabel": {
+        "translation": "Nom",
+        "notes": ""
+    },
+    "grpDBEdit.msgDBEDitLangIsoCode": {
+        "translation": "Langue",
+        "notes": ""
+    },
+    "grpDBEdit.msgDBEditCountryIso": {
+        "translation": "Pays",
+        "notes": ""
+    },
+    "querydef.msgOperator": {
+        "translation": "Opérateur",
+        "notes": ""
+    },
+    "grpDatabaseFind.msgDatabaseFind_Title": {
+        "translation": "Inventaires de Désastres disponibles",
+        "notes": ""
+    },
+    "grpDatabaseFind.msgDatabaseFind_NoDatabases": {
+        "translation": "Il n'y a pas de bases de données installé sur ce serveur",
+        "notes": ""
+    },
+    "grpDatabaseFind.msgDatabaseFind_RoleADMINREGION": {
+        "translation": "Administrateur",
+        "notes": ""
+    },
+    "grpDatabaseFind.msgDatabaseFind_RoleSUPERVISOR": {
+        "translation": "Superviseur",
+        "notes": ""
+    },
+    "grpDatabaseFind.msgDatabaseFind_RoleUSER": {
+        "translation": "Alimentation",
+        "notes": ""
+    },
+    "grpDatabaseFind.msgDatabaseFind_RoleOBSERVER": {
+        "translation": "Observateur",
+        "notes": ""
+    },
+    "grpDatabaseFind.msgDatabaseFind_RoleNONE": {
+        "translation": "Bases de données publiques",
+        "notes": ""
+    },
+    "grpDatabaseFind.msgDatabaseFind_Delete": {
+        "translation": "Effacer",
+        "notes": ""
+    },
+    "grpDatabaseDelete.msgDatabaseDelete_Title": {
+        "translation": "Supprimer la base de données",
+        "notes": ""
+    },
+    "grpDatabaseDelete.msgDatabaseDelete_Subtitle": {
+        "translation": "Vous êtes sur le point de supprimer la base de données suivant",
+        "notes": ""
+    },
+    "grpDatabaseDelete.msgDatabaseDelete_RegionId": {
+        "translation": "Identificateur",
+        "notes": ""
+    },
+    "grpDatabaseDelete.msgDatabaseDelete_RegionLabel": {
+        "translation": "Nom",
+        "notes": ""
+    },
+    "grpDatabaseDelete.msgDatabaseDelete_Ok": {
+        "translation": "Accepter",
+        "notes": ""
+    },
+    "grpDatabaseDelete.msgDatabaseDelete_Cancel": {
+        "translation": "Annuler",
+        "notes": ""
+    },
+    "grpDatabaseDelete.msgDatabaseDelete_Close": {
+        "translation": "Fermer",
+        "notes": ""
+    },
+    "grpDatabaseDelete.msgDatabaseDelete_StatusOk": {
+        "translation": "Base de données a été supprimé",
+        "notes": ""
+    },
+    "grpDatabaseDelete.msgDatabaseDelete_StatusError": {
+        "translation": "Il y avait une erreur lors de la suppression de la base de données",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_01": {
+        "translation": "Janv",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_02": {
+        "translation": "Févr",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_03": {
+        "translation": "Mars",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_04": {
+        "translation": "Avril",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_05": {
+        "translation": "Mai",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_06": {
+        "translation": "Juin",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_07": {
+        "translation": "Juil",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_08": {
+        "translation": "Août",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_09": {
+        "translation": "Sept",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_10": {
+        "translation": "Oct",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_11": {
+        "translation": "Nov",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_12": {
+        "translation": "Déc",
+        "notes": ""
+    },
+    "user.msgUser_Username": {
+        "translation": "Utilisateur",
+        "notes": ""
+    },
+    "user.msgUser_Password": {
+        "translation": "Mot de passe",
+        "notes": ""
+    },
+    "user.msgUser_Login": {
+        "translation": "Se connecter",
+        "notes": ""
+    },
+    "user.msgUser_EmptyFields": {
+        "translation": "Les champs ne peuvent pas être vide",
+        "notes": ""
+    },
+    "user.msgUser_LoggedIn": {
+        "translation": "Succesfull connexion",
+        "notes": ""
+    },
+    "user.msgUser_InvalidPasswd": {
+        "translation": "Nom d'utilisateur ou mot de passe",
+        "notes": ""
+    },
+    "portal.tcountryBLZ": {
+        "translation": "Belize",
+        "notes": ""
+    },
+    "portal.tcountryBRB": {
+        "translation": "Barbade",
+        "notes": ""
+    },
+    "portal.tcountryMLI": {
+        "translation": "Mali",
+        "notes": ""
+    },
+    "portal.tcountryURY": {
+        "translation": "Uruguay",
+        "notes": ""
+    },
+    "portal.tcountryUSA": {
+        "translation": "EE.UU",
+        "notes": ""
+    },
+    "region_list.txtRoleADMINREGION": {
+        "translation": "Administrateur",
+        "notes": ""
+    },
+    "region_list.txtRoleSUPERVISOR": {
+        "translation": "Superviseur",
+        "notes": ""
+    },
+    "region_list.txtRoleUSER": {
+        "translation": "Alimentation",
+        "notes": ""
+    },
+    "region_list.txtRoleOBSERVER": {
+        "translation": "Observateur",
+        "notes": ""
+    },
+    "region_list.txtRoleNONE": {
+        "translation": "Bases de données publiques",
+        "notes": ""
+    },
+    "region_list.txtAvailableDB": {
+        "translation": "Inventaires de désastres disponibles",
+        "notes": ""
+    },
+    "region_info.RegionDatabasePeriod": {
+        "translation": "Période",
+        "notes": ""
+    },
+    "region_info.trepnum": {
+        "translation": "Cartes de données",
+        "notes": ""
+    },
+    "region_info.tlastupd": {
+        "translation": "Dernière mise á jour",
+        "notes": ""
+    },
+    "region_info.RegionDatacardPeriod": {
+        "translation": "Période de cartes de données",
+        "notes": ""
+    },
+    "region_info.msgInfoGeneral": {
+        "translation": "Informations générales",
+        "notes": ""
+    },
+    "region_info.msgInfoCredits": {
+        "translation": "Crédits",
+        "notes": ""
+    },
+    "region_info.msgInfoSources": {
+        "translation": "Sources",
+        "notes": ""
+    },
+    "region_info.msgInfoSynopsis": {
+        "translation": "Synopsis",
+        "notes": "",
+        "context": "Pantalla de Información de Región en el portal de DesInventar"
+    },
+    "grpGeoLevels.msgGeocarto_Charset": {
+        "translation": "Encodage de caractères",
+        "notes": "Character encoding used in the DBF file being imported"
+    },
+    "grpGeoLevels.msgGeocarto_CharsetTooltip": {
+        "translation": "Sélectionner le codage des caractères utilisé pour les noms géographiques dans le fichier DBF",
+        "notes": ""
+    },
+    "events.ACCIDENT.name": {
+        "translation": "Accident",
+        "notes": ""
+    },
+    "events.ACCIDENT.desc": {
+        "translation": "Accident de transport routier, ferroviaire, aérien ou maritime. Ne concerne que les accidents causés par des phénomènes naturels comme des glissements de terrain, des séismes, des ouragans, des pluies ou des conditions atmosphériques adverses, etc. Sont inclus les accidents de transport provoquant des écoulements de substances toxiques, quelle qu’en soit la cause. Mots clés: accident routier, accident ferroviaire, accident d’avion, accident maritime.",
+        "notes": ""
+    },
+    "events.AVALANCHE.name": {
+        "translation": "Avalanche",
+        "notes": ""
+    },
+    "events.AVALANCHE.desc": {
+        "translation": "Détachement de masses de glace et\/ou de neige. Mots clés: avalanche.",
+        "notes": ""
+    },
+    "events.ALLUVION.name": {
+        "translation": "Alluvion",
+        "notes": ""
+    },
+    "events.ALLUVION.desc": {
+        "translation": "Crues torrentielles entraînant avec elles de grandes quantités de matériaux solides (cailloux, gravas et rochers), se produisant dans les régions sèches ou dans les lits secs des cours d’eau dans lesquels les pluies occasionnelles produisent ces phénomènes. Mots clés: crue torrentielle, “huayco”, “lloclla” (en langue quechua).",
+        "notes": ""
+    },
+    "events.SPATE.name": {
+        "translation": "Crue torrentielle",
+        "notes": ""
+    },
+    "events.SPATE.desc": {
+        "translation": "Flux violent d’eau dans un bassin, quelquefois appelé crue (montée rapide des eaux) ou torrent. Ce terme est utilisé lorsque l’on parle dans les rapports d’ –avalanche-, à savoir quand les eaux transportent des troncs d’arbres et\/ou d’abondants sédiments soit très fins soit de gros blocs de pierres. Elles peuvent être provoquées par des pluies, une rupture de barrage ou par d’abondants glissements de terrain dans un  bassin. En sont exclus les avalanches car celles-ci impliquent des détachements de glace ou de neige. Mots clés: crue subite ou rapide, torrent. ",
+        "notes": ""
+    },
+    "events.BIOLOGICAL.name": {
+        "translation": "Mortalité biologique",
+        "notes": ""
+    },
+    "events.BIOLOGICAL.desc": {
+        "translation": "Mortalité ou migration d’espèces biologiques. En dernier ressort, elle peut être associée à une pollution ou à des changements drastiques de paramètres environnementaux. Un exemple en est la –marée rouge-, le réchauffement des eaux par le phénomène du Niño ou la diminution des quantités optimales d’oxygène imposée par l’Homme à certaines espèces suite à la construction d’obstacles tels que des digues ou des barrages.",
+        "notes": ""
+    },
+    "events.POLLUTION.name": {
+        "translation": "Pollution",
+        "notes": ""
+    },
+    "events.POLLUTION.desc": {
+        "translation": "Concentration de substances polluantes dans l'air, dans l'eau et sur les sols, atteignant des niveaux dangereux pour la santé humaine, pour les cultures ou pour les espèces animales, pouvant causer des intoxications, la mort d'espèces animales ou végétales, des maladies etc.",
+        "notes": ""
+    },
+    "events.LANDSLIDE.name": {
+        "translation": "Glissement de terrain",
+        "notes": ""
+    },
+    "events.LANDSLIDE.desc": {
+        "translation": "Mouvement de masse se produisant sur la superficie terrestre et causant des crues torrentielles, des tsunamis, des sédimentations, etc. Mots clés: éboulement, dépôt, glissement, reptation, déplacement, enfoncement, formation de crevasses, effondrement de cavernes ou de mines, chute de pierres, éboulement (lent ou rapide) sur des versants ou sur des coteaux, de masses de terre ou de rocher, faille sur des flancs ou des talus de pentes, de voies, de canaux, d'excavations.",
+        "notes": ""
+    },
+    "events.EPIDEMIC.name": {
+        "translation": "Épidémie",
+        "notes": ""
+    },
+    "events.EPIDEMIC.desc": {
+        "translation": "Maladie qui s’attaque dans une même zone à un ou à plusieurs individus (jours, semaines, mois) en dépassant la fréquence attendue; comme le choléra, la fièvre typhoïde, la peste bubonique, etc. Il est important de rappeler que la déclaration d’une épidémie dépend des conditions endémiques de celle-ci et de la région. Mots clés: maladie, endémie, pandémie.",
+        "notes": ""
+    },
+    "events.ERUPTION.name": {
+        "translation": "Activité volcanique",
+        "notes": ""
+    },
+    "events.ERUPTION.desc": {
+        "translation": "Eruption et émission de matières solides, liquides ou gazeuses par des ouvertures ou des crevasses de la croûte terrestre, causant des crues torrentielles, des tsunamis, de la contamination (par des gaz, la chute de cendres). Mots clés: émission de lave, émission de vapeur, émission de cendres, émission de boue, émission d'eau, émision de roches.",
+        "notes": ""
+    },
+    "events.LEAK.name": {
+        "translation": "Fuite",
+        "notes": ""
+    },
+    "events.LEAK.desc": {
+        "translation": "Écoulement ou fuite de substances toxiques, liquides, solides ou gazeuses (p. ex. fuite de gaz propane), radioactives ou non,  provoqué par exemple par des accidents technologiques, par une erreur humaine ou par une négligence.",
+        "notes": ""
+    },
+    "events.STRUCTURE.name": {
+        "translation": "Effondrement structurel",
+        "notes": ""
+    },
+    "events.STRUCTURE.desc": {
+        "translation": "Dommage ou effondrement de tous types de structures (y compris celles liées aux réseaux électriques, aux canalisations d’eau, au tout-à-l’égout), dû à des phénomènes de surcharges dans des espaces publics et sur les ponts, à un manque de maintenance, à la fatigue des matériaux, à des conceptions défaillantes. Cela comprend des dommages à des structures qui, sans les faire s’effondrer, rendent celles-ci inutilisables et sont souvent mentionnés comme –des failles- (dans le sens d’une faille structurelle). Les dommages dans les structures induits par des phénomènes naturels (par ex. des séismes, des glissements de terrain, des inondations, etc.) sont désignés comme des effets issus de ceux-ci. Mots clés: faille structurelle.",
+        "notes": ""
+    },
+    "events.EXPLOSION.name": {
+        "translation": "Explosion",
+        "notes": ""
+    },
+    "events.EXPLOSION.desc": {
+        "translation": "Brusque dégagement d’une grande quantité d’énergie (thermique, chimique ou nucléaire), accompagné d’un grand bruit et d’un bris violent du récipient qui la contient, produisant de la chaleur, de la lumière et des gaz. Elle inclut les explosions liées à des erreurs humaines ou à des failles dans des systèmes d’infrastructure. Dans les inventaires (typiques) avec DésInventer, on exclut les actes de guerre ou de terrorisme.",
+        "notes": ""
+    },
+    "events.FORESTFIRE.name": {
+        "translation": "Incendie de forêt",
+        "notes": ""
+    },
+    "events.FORESTFIRE.desc": {
+        "translation": "Comprend tous les incendies à ciel ouvert dans des zones rurales, dans des forêts naturelles, dans des forêts cultivées,  dans des prairies, etc.",
+        "notes": ""
+    },
+    "events.HAILSTORM.name": {
+        "translation": "Grêle",
+        "notes": ""
+    },
+    "events.HAILSTORM.desc": {
+        "translation": "Eau congelée qui tombe avec force des nuages sous forme de grêlons plus ou moins durs et plus ou moins gros, mais pas en flocons comme  la neige. Mots clés: grêle.",
+        "notes": ""
+    },
+    "events.FROST.name": {
+        "translation": "Gelée",
+        "notes": ""
+    },
+    "events.FROST.desc": {
+        "translation": "Chute de la température entraînant des effets nocifs sur la population, les cultures, les biens et les services. Mots clés: vague de froid, brusque chute de température",
+        "notes": ""
+    },
+    "events.HURRICANE.name": {
+        "translation": "Ouragan",
+        "notes": ""
+    },
+    "events.HURRICANE.desc": {
+        "translation": "Dépression tropicale qui correspond à une anomalie atmosphérique se présentant sous la forme d’un tourbillon qui se caractérise par des vents forts accompagnés de pluies. Ils se produisent dans la Mer de la Caraïbe et dans l’Océan Pacifique Tropical et ce sont les équivalents des cyclones dans l’Océan Indien et des typhons dans l’Océan pacifique Occidental. Lorsque le terme –ouragan- sera utilisé dans les sources pour désigner des vents d’ouragan, des vents de tempêtes locaux, des tourbillons, des bourrasques, on les désignera comme des –vents de tempête. Les tourmentes locales seront désignées par le terme de –tempête-. Mots clés: dépression tropicale, cyclone, typhon.",
+        "notes": ""
+    },
+    "events.FIRE.name": {
+        "translation": "Incendie",
+        "notes": ""
+    },
+    "events.FIRE.desc": {
+        "translation": "Incendies urbains, industriels ou ruraux, autres que les incendies de forêt. ",
+        "notes": ""
+    },
+    "events.FLOOD.name": {
+        "translation": "Inondation",
+        "notes": ""
+    },
+    "events.FLOOD.desc": {
+        "translation": "Inondations ou eaux recouvrant des terres habitées,  cultivées, occupées par des biens ou des infrastructures. Les inondations produites par des vagues marines dans des zones littorales seront reportées  sous le terme de -mer houleuse-.",
+        "notes": ""
+    },
+    "events.LIQUEFACTION.name": {
+        "translation": "Liquéfaction",
+        "notes": ""
+    },
+    "events.LIQUEFACTION.desc": {
+        "translation": "Comportement momentané d’un sol granulaire saturé en eau qui perd sa capacité à supporter des charges. Bien qu’il s’agisse d’un phénomène secondaire ou causé par un –séisme-, il a été inclus ici comme une cause de pertes et de dommages dans de nombreuses zones habitées, à la fois maritimes et continentales. Mots clés : Liquéfaction.",
+        "notes": ""
+    },
+    "events.COASTLINE.name": {
+        "translation": "Modification de la ligne côtière",
+        "notes": ""
+    },
+    "events.COASTLINE.desc": {
+        "translation": "Modification de la ligne côtière et\/ou des zones maritimes proches de la côte, comprenant la formation ou la destruction d'îles, de plages et de bancs de sable, l'érosion de falaises ayant des effets sur les populations, la navigation, etc. ",
+        "notes": ""
+    },
+    "events.RAIN.name": {
+        "translation": "Pluies",
+        "notes": ""
+    },
+    "events.RAIN.desc": {
+        "translation": "Précipitation pluviale. Cela comprend des pluies ponctuelles, persistantes ou torrentielles dans une région spécifique, ainsi que de longues périodes de précipitations. Mots clés: ondée, averse, averse orageuse, déluge, «páramo» (pluie persistante lorsqu’elle conduit à un désastre, par exemple dans des régions arides ou semi-arides), grain.",
+        "notes": ""
+    },
+    "events.SURGE.name": {
+        "translation": "Houle",
+        "notes": ""
+    },
+    "events.SURGE.desc": {
+        "translation": "Arrivée de grandes vagues sur le littoral causées par des ouragans, des vents de tempêtes, des tempêtes suite à une coïncidence des vents et des périodes de marée haute, ou à des augmentations du niveau moyen de la mer durant le phénomène du Niño. A certains endroits, on appelle –crue- ou montée des eaux- la montée des marées jusqu’à des niveaux maximum quinquennaux et –tempêtes d’équinoxe- aux maximaux annuels. Cela exclut les rapports associés au tsunami ou au raz-de-marée. Mots clés: crue, montée des eaux, marée d’équinoxe, coups de houle, houle.",
+        "notes": ""
+    },
+    "events.FOG.name": {
+        "translation": "Brouillard",
+        "notes": ""
+    },
+    "events.FOG.desc": {
+        "translation": "Masse de nuages qui descend au sol ou qui apparaît sur celui-ci, provoquant des effets sur le transport ou sur toute autre activité du fait de la perte de visibilité qu’elle provoque. Le manque de visibilité dû à la pollution en est exclu, même s’il est dû à des incendies, quels qu’ils soient. Mots clés: Brouillard",
+        "notes": ""
+    },
+    "events.SNOWSTORM.name": {
+        "translation": "Chute de neige",
+        "notes": ""
+    },
+    "events.SNOWSTORM.desc": {
+        "translation": "Chute et accumulation de neige. Mots clés: neige.",
+        "notes": ""
+    },
+    "events.HEATWAVE.name": {
+        "translation": "Vague de chaleur",
+        "notes": ""
+    },
+    "events.HEATWAVE.desc": {
+        "translation": "Hausse des températures dans une région ayant des effets sur les populations humaines, les cultures, les biens et les services.",
+        "notes": ""
+    },
+    "events.PANIC.name": {
+        "translation": "Panique",
+        "notes": ""
+    },
+    "events.PANIC.desc": {
+        "translation": "Panique ou hystérie collective dans des lieux où se produisent des évènements publics de masse (stades, salles de cinéma, etc.) et provoquant des morts, des blessés et\/ou des dégâts matériels. Lorsque la panique a été induite par des phénomènes naturels (par ex. des séismes, des glissements de terrain, des inondations, etc.), elle sera rapportée comme étant une conséquence de ceux-ci, à condition qu’il y ait des dommages et des effets associés.",
+        "notes": ""
+    },
+    "events.PLAGUE.name": {
+        "translation": "Fléau",
+        "notes": ""
+    },
+    "events.PLAGUE.desc": {
+        "translation": "Prolifération d'organismes affectant des communautés, l'agriculture, l'élevage ou des biens périssables stockés Par exemple: les rats, les sauterelles, les abeilles africaines, etc.",
+        "notes": ""
+    },
+    "events.SEDIMENTATION.name": {
+        "translation": "Sédimentation",
+        "notes": ""
+    },
+    "events.SEDIMENTATION.desc": {
+        "translation": "Dépôt de matériaux solides produit par des mouvements de masse sur des coteaux suite à une érosion superficielle, dans les lits des fleuves et des rivières, par des inondations, des crues torrentielles, des avalanches, la houle ou le tsunami.",
+        "notes": ""
+    },
+    "events.DROUGHT.name": {
+        "translation": "Sécheresse",
+        "notes": ""
+    },
+    "events.DROUGHT.desc": {
+        "translation": "Période sèche, sans pluies ou présentant un déficit en pluies. En général, il s’agit de périodes prolongées (mois, années, y compris décennies) qui peuvent se produire dans des zones continentales restreintes ou à l’échelle régionale. On en exclut la –Vague de chaleur-, bien qu’une -vague de chaleur- puisse se produire durant une période de -Sécheresse-.",
+        "notes": ""
+    },
+    "events.EARTHQUAKE.name": {
+        "translation": "Séisme",
+        "notes": ""
+    },
+    "events.EARTHQUAKE.desc": {
+        "translation": "On appelle séisme ou tremblement de terre les brusques secousses de la terre causées par le mouvement des plaques tectoniques. Mots clés: tremblement de terre, mouvement tellurique, tremblement, tremblement de terre, séisme.",
+        "notes": ""
+    },
+    "events.STORM.name": {
+        "translation": "Tempête",
+        "notes": ""
+    },
+    "events.STORM.desc": {
+        "translation": "Pluie accompagnée de vents forts et\/ou de décharges électriques (foudre, éclairs). En général, et également en raison de connotations régionales, il est possible de ne pas pouvoir faire la différence entre -tempête- et -coup de vent-. Mots clés: orage.",
+        "notes": ""
+    },
+    "events.ELECTRICSTORM.name": {
+        "translation": "Orage",
+        "notes": ""
+    },
+    "events.ELECTRICSTORM.desc": {
+        "translation": "Concentration de décharges statiques atmosphériques (foudre), ayant des effets sur les hommes, les animaux et les biens domestiques, les infrastructures (par exemple sur les réseaux électriques, provoquant des pannes de courant), ou sur l’industrie. Il se différencie de la –tempête- en ce qu’il n’est pas accompagné de pluies et de vents forts. ",
+        "notes": ""
+    },
+    "events.TORNADO.name": {
+        "translation": "Tornade",
+        "notes": ""
+    },
+    "events.TORNADO.desc": {
+        "translation": "Colonne de vents forts se déplaçant en tourbillon sous forme d'entonnoir qui s'abat sur terre depuis des nuages cumulonimbus. Peut inclure de la pluie, de la grêle et de  la foudre. ",
+        "notes": ""
+    },
+    "events.TSUNAMI.name": {
+        "translation": "Tsunami",
+        "notes": ""
+    },
+    "events.TSUNAMI.desc": {
+        "translation": "Terme appliqué aux vagues produites par des mouvements au fond de la mer générés par des séismes, des éruptions volcaniques ou des glissements de terrain. Les termes de mer agitée, coup de houle, marée d’équinoxe ou houle seront reportés comme –mer agitée-, s’ils ne correspondent pas à –Tsunami- au sens strict du mot. Mots clés: Raz-de-marée.",
+        "notes": ""
+    },
+    "events.STRONGWIND.name": {
+        "translation": "Coup de vent",
+        "notes": ""
+    },
+    "events.STRONGWIND.desc": {
+        "translation": "Perturbation atmospérique entraînant des vents forts et destructifs, généralement sans pluie. Exclut la -Tornade- et le Cyclone. Mots clés: tempête, vent violent, tourbillon, bourrasque, vent fort, bourrasque de neige,  trombe, rafale de vent.",
+        "notes": ""
+    },
+    "events.OTHER.name": {
+        "translation": "Autre",
+        "notes": ""
+    },
+    "events.OTHER.desc": {
+        "translation": "Lorsque le désastre ne correspond à aucun des types d’évènements cités ci-dessus. Avant d’utiliser ce type d’évènement, il faut épuiser toutes les options de sélectionner l’un des évènements de la liste. Si l’évènement est récurrent dans votre inventaire et qu’aucun terme ne lui correspond dans la liste, nous suggérons de créer un nouvel évènement.",
+        "notes": ""
+    },
+    "causes.UNKNOWN.name": {
+        "translation": "Inconnue ",
+        "notes": ""
+    },
+    "causes.UNKNOWN.desc": {
+        "translation": "La cause ayant provoqué l'évènement est méconnue ou elle ne peut être précisée. ",
+        "notes": ""
+    },
+    "causes.ATMOSPHCONDITION.name": {
+        "translation": "Conditions atmosphériques",
+        "notes": ""
+    },
+    "causes.ATMOSPHCONDITION.desc": {
+        "translation": "On fait référence à des conditions atmosphériques adverses comme des fortes pluies, du brouillard, des vents, des orages, ou une combinaison de tous ces évènements. Cela peut être dû à la circulation régionale, océanique ou continentale de masses d'air comme des fronts froids ou à la zone de convergence intertropicale.",
+        "notes": ""
+    },
+    "causes.BEHAVIOR.name": {
+        "translation": "Comportement",
+        "notes": ""
+    },
+    "causes.BEHAVIOR.desc": {
+        "translation": "Coutumes ou pratiques culturelles qui induisent la présence d'un évènement socio-naturel ou anthropique. Cela peut faire référence à des situations de désastre ou d'urgence causées par la panique; bougies ou lampes d'éclairage; non respect des mesures de sécurité; établissements humains en zones inondables ou sur des versants présentant des risques de glissement  suite à une méconnaissance de leurs effets ou à une transgression de la norme. Mots clés: manque de prévention.",
+        "notes": ""
+    },
+    "causes.CONTAMINATION.name": {
+        "translation": "Pollution",
+        "notes": ""
+    },
+    "causes.CONTAMINATION.desc": {
+        "translation": "Concentration de substances polluantes dans l'air, dans l'eau et sur les sols, atteignant des niveaux dangereux pour la santé humaine, pour les cultures ou pour les espèces animales, pouvant causer des intoxications, la mort d'espèces animales ou végétales, des maladies etc.",
+        "notes": ""
+    },
+    "causes.SHORTCIRCUIT.name": {
+        "translation": "Court-circuit",
+        "notes": ""
+    },
+    "causes.SHORTCIRCUIT.desc": {
+        "translation": "Court-circuits se produisant accidentellement par le contact entre deux conducteurs de pôles opposés provoquant une décharge électrique. Dans les immeubels d'habitation, dans l'industrie, dans le commerce ou dans des réseaux électriques externes, causant des incendies.",
+        "notes": ""
+    },
+    "causes.OVERFLOW.name": {
+        "translation": "Crue",
+        "notes": ""
+    },
+    "causes.OVERFLOW.desc": {
+        "translation": "Crue ou décrue rapide ou lente, sur des petites surfaces ou sur de vastes régions,  dépassant le débit naturel des cours d'eau (fleuves, rivières, lacs, lagunes), sur des barrages hydrauliques ou des systèmes d'écoulement, causant des inondations, des crues torrentielles.",
+        "notes": ""
+    },
+    "causes.LANDSLIDE.name": {
+        "translation": "Glissement de terrain",
+        "notes": ""
+    },
+    "causes.LANDSLIDE.desc": {
+        "translation": "Mouvement de masse se produisant sur la superficie terrestre et causant des crues torrentielles, des tsunamis, des sédimentations, etc. Mots clés: éboulement, dépôt, glissement, reptation, déplacement, enfoncement, formation de crevasses, effondrement de cavernes ou de mines, chute de pierres, éboulement (lent ou rapide) sur des versants ou sur des coteaux, de masses de terre ou de rocher, faille sur des flancs ou des talus de pentes, de voies, de canaux, d'excavations.",
+        "notes": ""
+    },
+    "causes.DETERIORATION.name": {
+        "translation": "Détérioration",
+        "notes": ""
+    },
+    "causes.DETERIORATION.desc": {
+        "translation": "Perte ou diminution des conditions normales d'une construction ou d'une infrastructure. Applicable à des immeubles d'habitation, de services, à des institutions ainsi qu'à des systèmes de réseaux souterrains (égoûts, adduction d'eau, etc.), à des réseaux, à des ponts, etc. qui, du fait de leur détérioration dû à l'usage ou à un manque de maintenance adéquat, conduisent à des circontances propres à elles-mêmes ou à cause d'un phénomène externe, à leur mauvais fonctionnement, à leur effondrement, à leur incendie.",
+        "notes": ""
+    },
+    "causes.DESIGNERROR.name": {
+        "translation": "Dessin",
+        "notes": ""
+    },
+    "causes.DESIGNERROR.desc": {
+        "translation": "Erreurs ou failles dans la conception et\/ou la construction d'oeuvres civiles, d'installations industrielles, de systèmes d'infrastructure, etc. conduisant à des effondrements, des accidents, des explosions, des fuites, des glissements, des crues et des innondations (par exemple lors de la rupture de digues ou de barrages). ",
+        "notes": ""
+    },
+    "causes.ENSO_KID.name": {
+        "translation": "Le Niño",
+        "notes": ""
+    },
+    "causes.ENSO_KID.desc": {
+        "translation": "Phénomène qui entraîne des anomalies climatiques sur le plan mondial ou régional, telles que les sècheresses, les vagues de chaleur, les épidémies, mais aussi les pluies, les innondations et les alluvions, ainsi que les gelées entre autres. De nombreuses informations dans les journaux attribuent des périodes de moindre ou de plus fortes quantités de pluies au Niño. Il faudra donc être strict et n'inclure que les évènements causés par le Niño (ou - ENSO) et reportés comme tels.  Pour les deux dernières décennies, il s'agit de 1982 à 1983 (très fort), de 1987 (modéré), de 1991 à 1992 (modéré) et de 1997 à 1998 (modéré). Il ne faudra utiliser la cause du Niño ou de la Niña que dans les cas où son rapport avec l'évènement aura été confirmé par une source officielle et\/ou scientifique. Mots clés: phase chaude d'ENOS.",
+        "notes": ""
+    },
+    "causes.ENSO_GIRL.name": {
+        "translation": "La Niña",
+        "notes": ""
+    },
+    "causes.ENSO_GIRL.desc": {
+        "translation": "Phénomène -symétrique- au Niño. Mots clés: phase froide d'ENOS.",
+        "notes": ""
+    },
+    "causes.HUMANERROR.name": {
+        "translation": "Erreur humaine",
+        "notes": ""
+    },
+    "causes.HUMANERROR.desc": {
+        "translation": "Erreur ou action incorrecte commise au cours d'une opération dans des établissements industriels, dans le maniement de machines ou de systèmes d'infrastructure provoquant des évènements technologiques comme des incendies, des explosions, des fuites, des accidents, des effondrements structurels, etc.",
+        "notes": ""
+    },
+    "causes.EROSION.name": {
+        "translation": "Érosion",
+        "notes": ""
+    },
+    "causes.EROSION.desc": {
+        "translation": "Affaiblissement de la superficie terrestre par des agents externes comme l'eau et le vent, y compris l'érosion hydraulique, éolienne et l'érosion par les eaux souterraines, causant des glissements de terrain.",
+        "notes": ""
+    },
+    "causes.ERUPTION.name": {
+        "translation": "Activité volcanique",
+        "notes": ""
+    },
+    "causes.ERUPTION.desc": {
+        "translation": "Eruption et émission de matières solides, liquides ou gazeuses par des ouvertures ou des crevasses de la croûte terrestre, y compris éruption de boues provenant de volcans (diapiros) présents dans certaines régions. Mots clés: émission de lave, émission de vapeur, émission de cendres, émission de boue, émission d'eau, émision de roches. ",
+        "notes": ""
+    },
+    "causes.LEAK.name": {
+        "translation": "Fuite",
+        "notes": ""
+    },
+    "causes.LEAK.desc": {
+        "translation": "Écoulement ou fuite de substances toxiques, liquides, solides ou gazeuses, radioactives ou non, causant des glissements de terrain, des incendies, des intoxications, etc. Excluant les effets dûs à l'éruption volcanique.",
+        "notes": ""
+    },
+    "causes.EXPLOSION.name": {
+        "translation": "Explosion",
+        "notes": ""
+    },
+    "causes.EXPLOSION.desc": {
+        "translation": "Brusque dégagement d'une grande quantité d'énergie (thermique, chimique ou nucléaire), accompagné de fracas et de bris violent de récipient la contenant, produisant de la chaleur, de la lumière et des gaz, causant des incendies, des glissements, etc.",
+        "notes": ""
+    },
+    "causes.FAILURE.name": {
+        "translation": "Faille",
+        "notes": ""
+    },
+    "causes.FAILURE.desc": {
+        "translation": "Rupture de la croûte terrestre due à l'accumulation de forces tectoniques ou de pression à l'intérieur des volcans, causant des séismes. Excluant  tout ce qui se rapporte à une faille due au mauvais fonctionnement de matériels ou de réseaux ou à une cause de glissements.",
+        "notes": ""
+    },
+    "causes.FLOOD.name": {
+        "translation": "Innondation",
+        "notes": ""
+    },
+    "causes.FLOOD.desc": {
+        "translation": "Inondation ou recouvrement par de l'eau d'un terrain habité, cultivé, occupé par des biens ou des infrasrtuctures, causant des sédimentations, des épidémies, des glissements.",
+        "notes": ""
+    },
+    "causes.THERMALINVERSION.name": {
+        "translation": "Inversion thermique",
+        "notes": ""
+    },
+    "causes.THERMALINVERSION.desc": {
+        "translation": "Présence d'une couche d'air chaud entre deux couches d'air froid, une situation qui se présente fréquemment lors de matins froids au creux des vallées ayant une faible circulation atmosphérique. Elle est utilisée lorsqu'elle est associée à des polluants atmosphériques qui causent des dommages à la santé des êtres vivants.",
+        "notes": ""
+    },
+    "causes.LOCALIZATION.name": {
+        "translation": "Localisation",
+        "notes": ""
+    },
+    "causes.LOCALIZATION.desc": {
+        "translation": "Conditions physiques de sites de population ou d'infrastructure vulnérables tels que l'occupation de zones instables ou inondables par des établissements humains, planifiés ou non (quartiers illégaux, invasions, ou leurs dénominations locales telles que (Jeunes villages, villages précaires, favelas, etc.)",
+        "notes": ""
+    },
+    "causes.RAIN.name": {
+        "translation": "Pluies",
+        "notes": ""
+    },
+    "causes.RAIN.desc": {
+        "translation": "Précipitations pluviales comme cause première ou déclencheur d'inondations, de crues torrentielles, de glissements, d'accidents, etc. Mots clés: ondée, averse, averse orageuse, déluge, étendue désertique en altitude, grain.",
+        "notes": ""
+    },
+    "causes.FOG.name": {
+        "translation": "Brouillard",
+        "notes": ""
+    },
+    "causes.FOG.desc": {
+        "translation": "Masses de nuages qui descendent jusqu'à ou depuis la superficie terrestre, impliquant une perte de visibilité pouvant causer des accidents. Mots clés: brouillard.",
+        "notes": ""
+    },
+    "causes.NEGLIGENCE.name": {
+        "translation": "Négligence",
+        "notes": ""
+    },
+    "causes.NEGLIGENCE.desc": {
+        "translation": "Action ou omission d'actions entraînant des conséquenes adverses pour un individu ou une communauté. Imputable à des personnes occupant des postes de responsabilité, à des organismes ou des institutions gouvernementales, non-gouvernementales ou privées. Applicable à des désastres dans lesquels la cause principale identifiée est la négligence de responsables bien définis dans des activités de prestation de services basiques ou de prévention et de mitigation spécifiquement identifiés avec antériorité.",
+        "notes": ""
+    },
+    "causes.OTHER.name": {
+        "translation": "Autre cause",
+        "notes": ""
+    },
+    "causes.OTHER.desc": {
+        "translation": "À n'utiliser que lorsque la cause n'est pas définie dans la liste des causes officielles de DésInventer. Il faudra réaliser une description de celle-ci. Si c'est une cause fréquente dans votre inventaire et qu'elle ne peut  être introduite dans aucune des causes prédéfinies, vous pouvez la créer comme une nouvelle cause.",
+        "notes": ""
+    },
+    "causes.PLAGUE.name": {
+        "translation": "Fléaux ",
+        "notes": ""
+    },
+    "causes.PLAGUE.desc": {
+        "translation": "Prolifération d'organismes affectant des communautés, l'agriculture, l'élevage ou des biens périssables stockés pouvant causer des épidémies, de la pollution, etc.",
+        "notes": ""
+    },
+    "causes.DROUGHT.name": {
+        "translation": "Sécheresse",
+        "notes": ""
+    },
+    "causes.DROUGHT.desc": {
+        "translation": "Période sèche, sans pluie, ou avec un fort déficit en pluie, pouvant causer des incendies de forêts, des effets biologiques (perte ou migration massive d'animaux).",
+        "notes": ""
+    },
+    "causes.EARTHQUAKE.name": {
+        "translation": "Séisme",
+        "notes": ""
+    },
+    "causes.EARTHQUAKE.desc": {
+        "translation": "Brusques secousses de terrain causées par le mouvement des plaques tectoniques, provoquant des tsunamis, des glissements de terrain, des liquéfactions, des crues torrentielles, des effondrements structurels, des incendies, des explosions, des accidents, des changements de la ligne côtière, etc. Mots clés: tremblement de terre, mouvement télurique, tremblement, séisme.",
+        "notes": ""
+    },
+    "causes.DEFORESTATION.name": {
+        "translation": "Déboisement",
+        "notes": ""
+    },
+    "causes.DEFORESTATION.desc": {
+        "translation": "Equivalent à déboisement, causant des inondations, des glissements de terrain, des effets biologiques etc.",
+        "notes": ""
+    },
+    "causes.STORM.name": {
+        "translation": "Tempête",
+        "notes": ""
+    },
+    "causes.STORM.desc": {
+        "translation": "Pluie accompagnée de vents forts et\/ou de décharges électriques, causant des inondations.",
+        "notes": ""
+    },
+    "causes.STRONGWIND.name": {
+        "translation": "Orages",
+        "notes": ""
+    },
+    "causes.STRONGWIND.desc": {
+        "translation": "Perturbation atmosphérique produisant des vents forts et destructeurs, généralement sans pluie, causant des glissements de terrain. Mots clés: tempête, vents d'ouragan, tourbillons de vent, bourrasque, vent fort, bourrasque de neige, trombe, rafale.",
+        "notes": ""
+    }
+}
