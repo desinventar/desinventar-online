@@ -1,4 +1,9 @@
-function onReadyUserLogin() {
+/* global desinventar, Ext */
+
+import util from '../js/util'
+import md5 from 'md5'
+
+function init() {
   // hide all status messages on start
   doUserLoginUpdateMsg('')
 
@@ -36,6 +41,60 @@ function onReadyUserLogin() {
     if (code == 13) {
       jQuery('div.UserLogin a.Send').trigger('click')
     }
+  })
+
+  jQuery('#frmUserLogin').on('submit', function() {
+    var UserId = jQuery('#fldUserId').val()
+    var UserPasswd = jQuery('#fldUserPasswd').val()
+    var url = desinventar.config.params.url
+    var sessionId = util.getSessionId()
+
+    if (
+      desinventar.config.flags.mode !== 'devel' &&
+      desinventar.config.flags.general_secure_login
+    ) {
+      // Force use of https/ssl for user operations
+      url = url.replace(/^http:/g, 'https:')
+    }
+    doUserLoginUpdateMsg('')
+
+    if (UserId === '' || UserPasswd === '') {
+      doUserLoginUpdateMsg('msgEmptyFields')
+      return false
+    }
+    jQuery
+      .post(
+        url,
+        {
+          cmd: 'cmdUserLogin',
+          RegionId: jQuery('#desinventarRegionId').val(),
+          UserId: UserId,
+          UserPasswd: md5(UserPasswd),
+          SessionId: sessionId
+        },
+        function(data) {
+          if (parseInt(data.Status, 10) < 0) {
+            doUserLoginUpdateMsg('msgInvalidPasswd')
+            return false
+          }
+          doUserLoginUpdateMsg('msgUserLoggedIn')
+          jQuery('#fldUserId').val('')
+          jQuery('fldUserPasswd').val('')
+
+          // Update UserInfo Fields...
+          doUserUpdateInfo(data.User)
+
+          Ext.getCmp('wndUserLogin').hide()
+          // Trigger Event and Update User Menu etc.
+          jQuery('body').trigger('cmdMainWindowUpdate')
+        },
+        'json'
+      )
+      .fail(function() {
+        doUserLoginUpdateMsg('msgConnectionError')
+        return false
+      })
+    return false
   })
 
   //Initialization code
@@ -114,4 +173,8 @@ function doUserLoginShow() {
   if (w != undefined) {
     w.show()
   }
+}
+
+export default {
+  init
 }

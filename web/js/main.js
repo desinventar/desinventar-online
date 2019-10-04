@@ -3,7 +3,6 @@
   onReadyDBConfigCauses,
   onReadyDatabaseList,
   onReadyCommon,
-  onReadyUserLogin,
   onReadyUserAccount,
   onReadyExtraEffects,
   onReadyQueryResults,
@@ -30,6 +29,7 @@ import queryDesign from './query_design'
 import initialize from './init'
 import graphics from './graphic'
 import viewData from './data'
+import userLogin from './user_login'
 
 function init() {
   initialize.init()
@@ -46,7 +46,7 @@ function init() {
   adminUsers.init()
   userPermAdmin.init()
   onReadyCommon()
-  onReadyUserLogin()
+  userLogin.init()
   onReadyUserAccount()
   datacards.init()
   datacards2.init()
