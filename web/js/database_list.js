@@ -1,4 +1,6 @@
-function onReadyDatabaseList() {
+/* global Ext */
+
+function init() {
   doDatabaseDeleteCreate()
 
   jQuery('#divDatabaseFindList table.databaseList')
@@ -100,4 +102,62 @@ function doDatabaseDeleteShow() {
   jQuery('div.DatabaseDelete input.HasDeleted').val(0)
   //Show
   Ext.getCmp('wndDatabaseDelete').show()
+}
+
+function doUpdateDatabaseListByUser() {
+  jQuery('.contentBlock').hide()
+  jQuery('#divRegionList').show()
+  // Hide everything at start...
+  jQuery('.databaseTitle').hide()
+  jQuery('.databaseList').hide()
+
+  jQuery.post(
+    jQuery('#desinventarURL').val() + '/',
+    {
+      cmd: 'cmdSearchDB',
+      searchDBQuery: '',
+      searchDBCountry: 0
+    },
+    function(data) {
+      if (parseInt(data.Status) > 0) {
+        if (parseInt(data.NoOfDatabases) > 0) {
+          jQuery('#divDatabaseFindList').show()
+          jQuery('#divDatabaseFindError').hide()
+
+          jQuery('#divDatabaseFindList table.databaseList').each(function() {
+            jQuery('tr:gt(0)', this).remove()
+            jQuery('tr', this).hide()
+          })
+          jQuery.each(data.RegionList, function(RegionId, value) {
+            jQuery('#divRegionList #title_' + value.Role).show()
+            jQuery('#divRegionList #list_' + value.Role).show()
+            var list = jQuery('#divRegionList #list_' + value.Role).show()
+            var item = jQuery('tr:last', list)
+              .clone()
+              .show()
+            jQuery('td.RegionId', item).text(RegionId)
+            jQuery('td span.RegionLabel', item).text(value.RegionLabel)
+            jQuery('td a.RegionLink', item).attr(
+              'href',
+              jQuery('#desinventarURL').val() + '/#' + RegionId + '/'
+            )
+            list.append(item)
+          })
+          jQuery('#divDatabaseFindList td.RegionDelete').hide()
+          if (jQuery('#desinventarUserRoleValue').val() >= 5) {
+            jQuery('#divDatabaseFindList td.RegionDelete').show()
+          }
+        } else {
+          jQuery('#divDatabaseFindList').hide()
+          jQuery('#divDatabaseFindError').show()
+        }
+      }
+    },
+    'json'
+  )
+}
+
+export default {
+  init,
+  doUpdateDatabaseListByUser
 }

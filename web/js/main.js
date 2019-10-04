@@ -1,7 +1,6 @@
 /* global
   showtip,
   onReadyDBConfigCauses,
-  onReadyDatabaseList,
   onReadyCommon,
   onReadyUserAccount,
   onReadyExtraEffects,
@@ -29,12 +28,13 @@ import initialize from './init'
 import graphics from './graphic'
 import viewData from './data'
 import userLogin from './user_login'
-import regionInfo from '../js/region_info'
+import regionInfo from './region_info'
+import databaseList from './database_list'
 
 function init() {
   initialize.init()
   mainExt.init()
-  onReadyDatabaseList()
+  databaseList.init()
   databaseUpload.init()
   databaseCreate.init()
   databaseUsers.init()

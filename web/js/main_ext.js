@@ -4,16 +4,15 @@
   showtip,
   sendGraphic,
   sendStatistic,
-  doUpdateDatabaseListByUser,
   saveQuery,
   sendMap,
   sendList,
-  doGetRegionInfo,
   updateList,
 */
 import databaseCreate from './database_create.js'
 import adminDatabase from './admin_database'
 import databaseUpload from './database_upload'
+import databaseList from './database_list'
 
 export default {
   init: onReadyExtJS
@@ -159,7 +158,7 @@ function doViewportShow() {
     Ext.getCmp('westm').hide()
     Ext.getCmp('viewport').doLayout()
     jQuery('#divRegionList').show()
-    doUpdateDatabaseListByUser()
+    databaseList.doUpdateDatabaseListByUser()
   }
   jQuery(document).attr('title', title)
 }
@@ -1092,4 +1091,65 @@ function doDialogsCreate() {
 function resetForm(id) {
   var form = document.getElementById(id)
   form.reset()
+}
+
+function doGetRegionInfo(RegionId) {
+  jQuery('#divRegionInfo #divRegionLogo').html(
+    '<img src="' +
+      jQuery('#desinventarURL').val() +
+      '/images/loading.gif" alt="" />'
+  )
+  jQuery.post(
+    jQuery('#desinventarURL').val() + '/',
+    {
+      cmd: 'cmdDatabaseGetInfo',
+      RegionId: RegionId,
+      LangIsoCode: jQuery('#desinventarLang').val()
+    },
+    function(data) {
+      if (parseInt(data.Status) > 0) {
+        var i = data.RegionInfo
+        jQuery('#divRegionInfo').show()
+        jQuery('#divRegionInfo #divRegionLogo').html(
+          '<img src="' +
+            jQuery('#desinventarURL').val() +
+            '/?cmd=cmdDatabaseGetLogo&RegionId=' +
+            RegionId +
+            '" alt="" />'
+        )
+        jQuery('#divRegionInfo #txtRegionLabel').text(i.RegionLabel)
+        jQuery('#divRegionInfo #txtRegionPeriod').text(
+          i.PeriodBeginDate + ' - ' + i.PeriodEndDate
+        )
+        jQuery('#divRegionInfo #txtRegionNumberOfRecords').text(
+          i.NumberOfRecords
+        )
+        jQuery('#divRegionInfo #txtRegionLastUpdate').text(i.RegionLastUpdate)
+
+        jQuery('div.RegionInfo div.InfoGeneral').hide()
+        if (i.InfoGeneral != '') {
+          jQuery('div.RegionInfo div.InfoGeneral span.text').html(i.InfoGeneral)
+          jQuery('div.RegionInfo div.InfoGeneral').show()
+        }
+        jQuery('div.RegionInfo div.InfoCredits').hide()
+        if (i.InfoCredits != '') {
+          jQuery('div.RegionInfo div.InfoCredits span.text').html(i.InfoCredits)
+          jQuery('div.RegionInfo div.InfoCredits').show()
+        }
+        jQuery('div.RegionInfo div.InfoSources').hide()
+        if (i.InfoSources != '') {
+          jQuery('div.RegionInfo div.InfoSources span.text').html(i.InfoSources)
+          jQuery('div.RegionInfo div.InfoSources').show()
+        }
+        jQuery('div.RegionInfo div.InfoSynopsis').hide()
+        if (i.InfoSynopsis != '') {
+          jQuery('div.RegionInfo div.InfoSynopsis span.text').html(
+            i.InfoSynopsis
+          )
+          jQuery('div.RegionInfo div.InfoSynopsis').show()
+        }
+      }
+    },
+    'json'
+  )
 }
