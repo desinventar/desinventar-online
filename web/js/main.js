@@ -2,7 +2,6 @@
   showtip,
   onReadyDBConfigCauses,
   onReadyCommon,
-  onReadyUserAccount,
   onReadyExtraEffects,
   onReadyQueryResults,
 */
@@ -30,6 +29,7 @@ import viewData from './data'
 import userLogin from './user_login'
 import regionInfo from './region_info'
 import databaseList from './database_list'
+import userAccount from './user_account'
 
 function init() {
   initialize.init()
@@ -47,7 +47,7 @@ function init() {
   userPermAdmin.init()
   onReadyCommon()
   userLogin.init()
-  onReadyUserAccount()
+  userAccount.init()
   datacards.init()
   adminDatabase.init()
   onReadyExtraEffects()

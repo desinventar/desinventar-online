@@ -145,9 +145,6 @@ class LegacyIndex
                 $answer['User']   = $user;
                 return htmlspecialchars(json_encode($answer), ENT_NOQUOTES, 'UTF-8');
                 break;
-            case 'cmdUserAccount':
-                return $t->fetch('main_user_account.tpl');
-                break;
             case 'cmdUserPasswdUpdate':
                 $answer = array();
                 $iReturn = ERR_NO_ERROR;

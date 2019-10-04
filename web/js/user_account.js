@@ -1,4 +1,8 @@
-function onReadyUserAccount() {
+/* global Ext */
+
+import md5 from 'md5'
+
+function init() {
   jQuery('div.UserAccount .status').hide()
 
   jQuery('div.UserAccount .btnSubmit').click(function() {
@@ -34,8 +38,8 @@ function onReadyUserAccount() {
         {
           cmd: 'cmdUserPasswdUpdate',
           UserId: jQuery('#desinventarUserId').val(),
-          UserPasswd: hex_md5(UserPasswd),
-          UserPasswd2: hex_md5(UserPasswd2)
+          UserPasswd: md5(UserPasswd),
+          UserPasswd2: md5(UserPasswd2)
         },
         function(data) {
           jQuery('.status', form).hide()
@@ -109,4 +113,8 @@ function doUserAccountCreate() {
       })
     })
   })
+}
+
+export default {
+  init
 }
