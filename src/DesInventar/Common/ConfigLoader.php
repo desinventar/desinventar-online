@@ -2,6 +2,8 @@
 
 namespace DesInventar\Common;
 
+use Exception;
+
 class ConfigLoader
 {
     public $options = array();
@@ -12,11 +14,11 @@ class ConfigLoader
             $configDir = $this->getConfigDirFromEnv();
         }
         if (empty($configDir) || !file_exists($configDir)) {
-            throw new \Exception('Configuration directory doesn\'t exist: ' . $configDir);
+            throw new Exception('Configuration directory doesn\'t exist: ' . $configDir);
         }
         $defaultConfigFile = $configDir . '/default.json';
         if (!file_exists($defaultConfigFile)) {
-            throw new \Exception('Cannot find default configuration file: ' . $defaultConfigFile);
+            throw new Exception('Cannot find default configuration file: ' . $defaultConfigFile);
         }
 
         $this->options = $this->readConfigFile($defaultConfigFile);

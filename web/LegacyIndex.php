@@ -1067,11 +1067,13 @@ class LegacyIndex
                 return $answerstr;
                 break;
             case 'getCountryName':
-                    $LangIsoCode = getParameter('LangIsoCode', $lg);
-                    $CountryIso = getParameter('CountryIso', '');
-                    $CountryName = $us->q->getCountryName($CountryIso, $LangIsoCode);
-                    $answer = array('Status' => 1,
-                                    'CountryName' => $CountryName);
+                $LangIsoCode = getParameter('LangIsoCode', $lg);
+                $CountryIso = getParameter('CountryIso', '');
+                $CountryName = $us->q->getCountryName($CountryIso, $LangIsoCode);
+                $answer = array(
+                    'Status' => 1,
+                    'CountryName' => $CountryName
+                );
                 if (isset($_GET['callback'])) {
                     return $_GET['callback'] . '(' . json_encode($answer) . ')';
                 } else {

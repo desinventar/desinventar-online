@@ -103,7 +103,8 @@ class MapServer
         // First range is No data
         $range = [0 => [0, '= 0', '255 255 255']];
         // generate range hash with limit, legend and color
-        for ($j = 0; $j < count($lim); $j++) {
+        $limCount = count($lim);
+        for ($j = 0; $j < $limCount; $j++) {
             if (! isset($lim[$j])) {
                 continue;
             }
