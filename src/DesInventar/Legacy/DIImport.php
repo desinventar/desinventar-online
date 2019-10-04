@@ -73,6 +73,7 @@ class DIImport
                 )
             ];
         }
+        $list = [];
         foreach ($def as $fieldName => $values) {
             $list[] = [
                 'name'=> $fieldName,
