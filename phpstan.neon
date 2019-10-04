@@ -1,8 +1,8 @@
 parameters:
   autoload_files:
     - vendor/autoload.php
-  level:
-    7
+  level: 7
+  inferPrivatePropertyTypeFromConstructor: true
   ignoreErrors:
     - '#Call to an undefined method PDO::sqliteCreateFunction()#'
     - '#Call to an undefined method Aura\\SqlQuery\\Common\\InsertInterface\:\:addRow\(\)#'
