@@ -1,6 +1,5 @@
 /* global uploadMsg, updateList */
-// eslint-disable-next-line no-unused-vars
-function onReadyExtraEffects() {
+function init() {
   jQuery('.msgEEFieldStatus').hide()
 
   jQuery('#btnEEFieldAdd')
@@ -112,4 +111,8 @@ function setExtraEff(id, name, description, type, size, isActive, isPublic) {
   jQuery('#EEFieldSize').val(size)
   jQuery('#EEFieldActive').prop('checked', parseInt(isActive, 10) > 0)
   jQuery('#EEFieldPublic').prop('checked', parseInt(isPublic, 10) > 0)
+}
+
+export default {
+  init
 }

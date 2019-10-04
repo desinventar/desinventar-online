@@ -2,7 +2,6 @@
   showtip,
   onReadyDBConfigCauses,
   onReadyCommon,
-  onReadyExtraEffects,
   onReadyQueryResults,
 */
 
@@ -30,6 +29,7 @@ import userLogin from './user_login'
 import regionInfo from './region_info'
 import databaseList from './database_list'
 import userAccount from './user_account'
+import extraEffects from './extraeffects'
 
 function init() {
   initialize.init()
@@ -50,7 +50,7 @@ function init() {
   userAccount.init()
   datacards.init()
   adminDatabase.init()
-  onReadyExtraEffects()
+  extraEffects.init()
   onReadyQueryResults()
   viewData.init()
   graphics.init()
@@ -159,7 +159,7 @@ function initTabEvents(cmd) {
     onReadyDBConfigCauses()
     return
   }
-  onReadyExtraEffects()
+  extraEffects.init()
   return
 }
 

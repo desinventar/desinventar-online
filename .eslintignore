@@ -12,6 +12,7 @@ web/js/**
 !web/js/database_users.js
 !web/js/database_upload.js
 !web/js/datacards.js
+!web/js/extraeffects.js
 !web/js/userperm_admin.js
 !web/js/thematicmap.js
 !web/js/stat_params.js
