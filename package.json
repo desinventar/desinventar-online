@@ -24,7 +24,9 @@
     "db:core": "npx knex-migrate --knexfile migrations/knexfile-core.js up",
     "db:base": "npx knex-migrate --knexfile migrations/knexfile-base.js up",
     "db:region": "npx knex-migrate --knexfile migrations/knexfile-region.js up",
-    "db": "npm run db:core && npm run db:base && npm run db:region"
+    "db": "npm run db:core && npm run db:base && npm run db:region",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "husky": {
     "hooks": {
@@ -92,6 +94,8 @@
     "showdown": "^1.9.0",
     "sqlite3": "^4.0.6",
     "sweetalert2": "^8.17.6",
-    "winston": "^3.2.1"
-  }
+    "winston": "^3.2.1",
+    "snyk": "^1.230.5"
+  },
+  "snyk": true
 }
