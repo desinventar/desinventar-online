@@ -23,6 +23,7 @@ web/js/**
 !web/js/data.js
 !web/js/util.js
 !web/js/user_login.js
+!web/js/region_info.js
 web/external/**
 web/templates/**
 web/scripts/**

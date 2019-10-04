@@ -18,7 +18,6 @@
         <script type="text/javascript" src="{-$desinventarURL-}/external/jquery.jec-1.3.3.js"></script>
         <script type="text/javascript" src="{-$desinventarLibs-}/valums-fileuploader/valums-fileuploader-b3b20b1-patched/fileuploader.js"></script>
         {-include file="js.tpl"-}
-        {-include file="js2.tpl"-}
 
         {-include file="maps_include.tpl"-}
         {-if $appOptions.UseRemoteMaps > 0-}
@@ -46,7 +45,7 @@
             </div>
 
             <!-- Central Content Area -->
-            <div id="container" style="heigth:100%;">
+            <div id="container" style="height:100%;">
                 {-include file="database_delete_ext.tpl"-}
                 {-include file="block_content.tpl"-}
             </div>

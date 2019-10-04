@@ -30,6 +30,7 @@ import initialize from './init'
 import graphics from './graphic'
 import viewData from './data'
 import userLogin from './user_login'
+import regionInfo from '../js/region_info'
 
 function init() {
   initialize.init()
@@ -57,6 +58,7 @@ function init() {
   graphics.init()
   thematicMap.init()
   statParams.init()
+  regionInfo.init()
 
   jQuery('#frmMainQuery').submit(function() {
     var myURL = jQuery(this).attr('action')
