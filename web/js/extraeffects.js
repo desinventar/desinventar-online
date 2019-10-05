@@ -1,6 +1,5 @@
-/* global uploadMsg, updateList */
-
 import { showtip } from './common'
+import { uploadMsg, updateList } from './diadmin'
 
 function init() {
   jQuery('.msgEEFieldStatus').hide()

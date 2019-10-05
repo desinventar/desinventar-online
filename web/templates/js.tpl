@@ -11,7 +11,6 @@
 <script type="text/javascript" src="{-$desinventarURL-}/external/checktree/checktree.js"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/external/Math.uuid.js"></script>
 
-<script type="text/javascript" src="{-$desinventarURL-}/js/diadmin.js?version={-$jsversion-}"></script>
 <script type="text/javascript">
     // Global hook for all functions
     var desinventar = {};

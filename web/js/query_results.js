@@ -1,5 +1,7 @@
-/* global Ext, selectall, combineForms */
+/* global Ext, selectall */
+
 import thematicMap from './thematicmap'
+import { combineForms } from './diadmin'
 
 function init() {
   jQuery('#queryBeginYear').blur(function() {

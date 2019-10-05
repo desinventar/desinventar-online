@@ -1,5 +1,5 @@
-/* global uploadMsg */
 import $ from 'jquery'
+import { uploadMsg } from './diadmin'
 
 function init() {
   $('body')

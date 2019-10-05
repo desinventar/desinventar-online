@@ -81,3 +81,10 @@ function combineForms(dcf, ref) {
   }
 }
 
+module.exports = exports = {
+  uploadMsg,
+  updateList,
+  enab,
+  disab,
+  combineForms
+}

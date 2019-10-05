@@ -1,4 +1,5 @@
-/* global updateList */
+import { updateList } from './diadmin'
+
 function init() {
   // Populate CountryList/LanguageList in frmRegionEdit form
   jQuery('#desinventarCountryList option')

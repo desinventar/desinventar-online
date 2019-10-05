@@ -1,6 +1,7 @@
-/* global enab, disab, Ext */
+/* global Ext */
 
 import { showtip } from './common'
+import { enab, disab } from './diadmin'
 
 function init() {
   // 2010-02-21 (jhcaiced) This jQuery calls ensures that the Period and Stat

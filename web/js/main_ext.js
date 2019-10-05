@@ -1,9 +1,7 @@
 /* global
   Ext,
   DesInventar,
-  updateList,
   selectall,
-  combineForms
 */
 import databaseCreate from './database_create.js'
 import adminDatabase from './admin_database'
@@ -12,6 +10,7 @@ import databaseList from './database_list'
 import queryResults from './query_results'
 
 import { showtip } from './common'
+import { combineForms, updateList } from './diadmin'
 
 export default {
   init: onReadyExtJS

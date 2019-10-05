@@ -1,5 +1,5 @@
-/* global enab, disab */
 import { showtip } from './common'
+import { enab, disab } from './diadmin'
 
 function init() {
   jQuery('div.QueryDesign')
