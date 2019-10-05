@@ -2,7 +2,6 @@
   showtip,
   onReadyDBConfigCauses,
   onReadyCommon,
-  onReadyQueryResults,
 */
 
 import 'jquery-ui/ui/widgets/tabs'
@@ -30,6 +29,7 @@ import regionInfo from './region_info'
 import databaseList from './database_list'
 import userAccount from './user_account'
 import extraEffects from './extraeffects'
+import queryResults from './query_results'
 
 function init() {
   initialize.init()
@@ -51,7 +51,7 @@ function init() {
   datacards.init()
   adminDatabase.init()
   extraEffects.init()
-  onReadyQueryResults()
+  queryResults.init()
   viewData.init()
   graphics.init()
   thematicMap.init()

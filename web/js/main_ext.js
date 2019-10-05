@@ -2,17 +2,14 @@
   Ext,
   DesInventar,
   showtip,
-  sendGraphic,
-  sendStatistic,
   saveQuery,
-  sendMap,
-  sendList,
   updateList,
 */
 import databaseCreate from './database_create.js'
 import adminDatabase from './admin_database'
 import databaseUpload from './database_upload'
 import databaseList from './database_list'
+import queryResults from './query_results'
 
 export default {
   init: onReadyExtJS
@@ -954,7 +951,7 @@ function doDialogsCreate() {
       {
         text: jQuery('#msgViewDataButtonSend').text(),
         handler: function() {
-          if (sendList('result')) {
+          if (queryResults.sendList('result')) {
             $('DCRes').value = 'D'
             jQuery('body').trigger('cmdQueryResultsButtonShow')
             Ext.getCmp('wndViewDataParams').hide()
@@ -993,7 +990,7 @@ function doDialogsCreate() {
       {
         text: jQuery('#msgViewMapButtonSend').text(),
         handler: function() {
-          if (sendMap('result')) {
+          if (queryResults.sendMap('result')) {
             $('DCRes').value = 'M'
             Ext.getCmp('wndViewMapParams').hide()
             jQuery('body').trigger('cmdQueryResultsButtonShow')
@@ -1033,7 +1030,7 @@ function doDialogsCreate() {
       {
         text: jQuery('#msgViewGraphButtonSend').text(),
         handler: function() {
-          sendGraphic('result')
+          queryResults.sendGraphic('result')
           $('DCRes').value = 'G'
           Ext.getCmp('wndViewGraphParams').hide()
           jQuery('body').trigger('cmdQueryResultsButtonShow')
@@ -1069,7 +1066,7 @@ function doDialogsCreate() {
       {
         text: jQuery('#msgViewStdButtonSend').text(),
         handler: function() {
-          if (sendStatistic('result')) {
+          if (queryResults.sendStatistic('result')) {
             $('DCRes').value = 'S'
             Ext.getCmp('wndViewStdParams').hide()
             jQuery('body').trigger('cmdQueryResultsButtonShow')

@@ -1,4 +1,6 @@
-function onReadyQueryResults() {
+/* global Ext, selectall, combineForms, map */
+
+function init() {
   jQuery('#queryBeginYear').blur(function() {
     validateBeginYear()
   })
@@ -104,11 +106,6 @@ function saveRes(cmd, typ) {
   }
 }
 
-function validateQueryDefinition() {
-  var iReturn = 1
-  return iReturn
-}
-
 function validateBeginYear() {
   var prmQueryMinYear = jQuery('#prmQueryMinYear').val()
   var MinYear = jQuery('#queryBeginYear').val()
@@ -123,4 +120,179 @@ function validateEndYear() {
   if (parseInt(MaxYear) != MaxYear - 0) {
     jQuery('#queryEndYear').val(prmQueryMaxYear)
   }
+}
+
+function printRes() {
+  window.print()
+}
+
+function sendList(cmd) {
+  if (cmd == 'result') {
+    jQuery('#prmQueryCommand').val('cmdGridShow')
+  } else {
+    jQuery('#prmQueryCommand').val('cmdGridSave')
+  }
+  if ($('_D+Field[]').length > 0) {
+    $('_D+cmd').value = cmd
+    selectall('_D+Field[]')
+    var ob = $('_D+Field[]')
+    var mystr = ''
+    for (var i = 0; i < ob.length; i++) {
+      mystr += ob[i].value + ','
+    }
+    mystr += 'D.DisasterId'
+    $('_D+FieldH').value = mystr
+    combineForms('frmMainQuery', 'CD')
+    Ext.getCmp('westm').show()
+    Ext.getCmp('westm').collapse()
+    $('frmMainQuery').action = jQuery('#desinventarURL').val() + '/data.php'
+    jQuery('#frmMainQuery').attr('target', 'dcr')
+    if (cmd != 'result') {
+      jQuery('#frmMainQuery').attr('target', 'iframeDownload')
+    }
+    jQuery('#frmMainQuery').submit()
+    //hideMap();
+    return true
+  } else {
+    return false
+  }
+}
+
+function sendMap(cmd) {
+  jQuery('#prmQueryCommand').val('cmdMapShow')
+  if ($('_M+Type').length > 0) {
+    $('_M+cmd').value = cmd
+    if (cmd == 'export') {
+      jQuery('#prmQueryCommand').val('cmdMapSave')
+
+      // to export image save layers and extend..
+      var mm = map
+      //var mm = dcr.map;
+      var extent = mm.getExtent()
+      var layers = mm.layers
+      var activelayers = []
+      for (var i in layers) {
+        if (
+          layers[i].visibility &&
+          layers[i].calculateInRange() &&
+          !layers[i].isBaseLayer
+        ) {
+          activelayers[activelayers.length] = layers[i].params['LAYERS']
+        }
+      }
+
+      jQuery('form.MapSave').attr(
+        'action',
+        jQuery('#desinventarURL').val() + '/thematicmap.php'
+      )
+      jQuery('form.MapSave').attr('target', 'iframeDownload')
+      jQuery('form.MapSave input.Extent').val(
+        [extent.left, extent.bottom, extent.right, extent.top].join(',')
+      )
+      jQuery('form.MapSave input.Layers').val(activelayers)
+      jQuery('form.MapSave input.Id').val(jQuery('#prmMapId').val())
+      jQuery('form.MapSave input.Title').val(jQuery('#MapTitle').val())
+      jQuery('form.MapSave').trigger('submit')
+    } else {
+      combineForms('frmMainQuery', 'CM')
+      Ext.getCmp('westm').show()
+      Ext.getCmp('westm').collapse()
+      $('frmMainQuery').action =
+        jQuery('#desinventarURL').val() + '/thematicmap.php'
+      jQuery('#frmMainQuery').attr('target', 'dcr')
+      if (cmd != 'result') {
+        jQuery('#frmMainQuery').attr('target', 'iframeDownload')
+      }
+      jQuery('#frmMainQuery').submit()
+      //hideMap();
+    }
+    return true
+  } else {
+    return false
+  }
+}
+
+function sendGraphic(cmd) {
+  if (cmd == 'result') {
+    jQuery('#prmQueryCommand').val('cmdGraphShow')
+  } else {
+    jQuery('#prmQueryCommand').val('cmdGraphSave')
+  }
+  jQuery('#prmGraphCommand').val(cmd)
+  jQuery('#frmGraphParams input.TendencyLabel0').val(
+    jQuery('#frmGraphParams #prmGraphTendency0 option:selected').text()
+  )
+  jQuery('#frmGraphParams #prmGraphFieldLabel0').val(
+    jQuery('#frmGraphParams #prmGraphField0 option:selected').text()
+  )
+  jQuery('#frmGraphParams #prmGraphFieldLabel1').val(
+    jQuery('#frmGraphParams #prmGraphField1 option:selected').text()
+  )
+
+  combineForms('frmMainQuery', 'frmGraphParams')
+  Ext.getCmp('westm').show()
+  Ext.getCmp('westm').collapse()
+  $('frmMainQuery').action = jQuery('#desinventarURL').val() + '/'
+  jQuery('#frmMainQuery').attr('target', 'dcr')
+
+  if (cmd != 'result') {
+    jQuery('#frmMainQuery').attr('target', 'iframeDownload')
+  }
+  jQuery('#frmMainQuery').submit()
+  //hideMap();
+}
+
+function sendStatistic(cmd) {
+  if (cmd == 'result') {
+    jQuery('#prmQueryCommand').val('cmdStatShow')
+  } else {
+    jQuery('#prmQueryCommand').val('cmdStatSave')
+  }
+  if (
+    jQuery('#fldStatParam_FirstLev').val() != '' &&
+    $('fldStatFieldSelect').length > 0
+  ) {
+    $('_S+cmd').value = cmd
+    var field = 'D.DisasterId||'
+    var fieldlabel = jQuery('#txtStatRecords').text()
+    jQuery('#fldStatFieldSelect option').each(function() {
+      field +=
+        ',' +
+        jQuery(this)
+          .val()
+          .replace(/,/, '')
+      fieldlabel +=
+        ',' +
+        jQuery(this)
+          .text()
+          .replace(/,/, '')
+    })
+    jQuery('#fldStatField').val(field)
+    jQuery('#fldStatFieldLabel').val(fieldlabel)
+
+    jQuery('#frmStatParams td.StatGroup').each(function() {
+      jQuery('input', this).val(jQuery('select option:selected', this).text())
+    })
+    combineForms('frmMainQuery', 'frmStatParams')
+    Ext.getCmp('westm').show()
+    Ext.getCmp('westm').collapse()
+    $('frmMainQuery').action =
+      jQuery('#desinventarURL').val() + '/statistic.php'
+    jQuery('#frmMainQuery').attr('target', 'dcr')
+    if (cmd != 'result') {
+      jQuery('#frmMainQuery').attr('target', 'iframeDownload')
+    }
+    jQuery('#frmMainQuery').submit()
+    return true
+  } else {
+    return false
+  }
+}
+
+export default {
+  init,
+  sendList,
+  sendMap,
+  sendGraphic,
+  sendStatistic
 }
