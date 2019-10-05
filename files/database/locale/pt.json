@@ -2860,7 +2860,7 @@
         "notes": ""
     },
     "grpDatabaseExport.msgDatabaseExportWait": {
-        "translation": "Por favor aguarde enquanto o arquivo é criado. Isto pode levar alguns minutos dependendo da sua conexão de internet eo tamanho da base de dados.",
+        "translation": "Por favor aguarde enquanto o arquivo é criado. Isto pode levar alguns minutos dependendo da sua conexão de internet e o tamanho da base de dados.",
         "notes": ""
     },
     "grpDatabaseExport.msgDatabaseExportError": {
