@@ -1,3 +1,4 @@
+/* global Ext */
 function init() {
   doDatabaseExportCreate()
   jQuery('body').on('cmdDatabaseExport', function() {

@@ -65,7 +65,7 @@ function doKeepSessionAwake() {
     {
       cmd: 'cmdSessionAwake'
     },
-    function(data) {},
+    function() {},
     'json'
   )
 }
