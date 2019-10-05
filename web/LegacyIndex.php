@@ -444,15 +444,6 @@ class LegacyIndex
                 $answer['Status'] = $iReturn;
                 return htmlspecialchars(json_encode($answer), ENT_NOQUOTES, 'UTF-8');
                 break;
-            case 'admin':
-            case 'cmdAdminMain':
-            case 'cmdAdminDB':
-                $t->assign('CountryList', $us->q->getCountryList());
-                $t->assign('ctl_adminreg', true);
-                $t->assign('ctl_reglist', true);
-                $t->assign('ctl_admregmess', true);
-                return $t->fetch('main_region.tpl');
-                break;
             case 'cmdAdminUsersGetList':
                 $answer = array();
                 $iReturn = ERR_NO_ERROR;

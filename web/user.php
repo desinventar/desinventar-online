@@ -65,11 +65,6 @@ switch ($cmd) {
         }
         echo $Answer;
         break;
-    case 'changepasswd':
-        $t->assign('UserId', $us->UserId);
-        $t->force_compile   = true;
-        $t->display('user_changepasswd.tpl');
-        break;
     case 'updatepasswd':
         // Check if password is correct (ask to dicore). if is OK show dialog to change it.
         if (!$us->validateUser($us->UserId, $_POST['UserPasswd'], UserSession::PASSWORD_IS_HASHED)) {

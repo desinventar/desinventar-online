@@ -1,3 +1,4 @@
+/* global Ext */
 function onReadyCommon() {
   // Initialize tooltip for elements with title attribute
   jQuery('[title]').tooltip()
@@ -163,27 +164,4 @@ function blockChars(e, value, type) {
   // Block special characters: (like !@#$%^&'*" etc)
   val = !(key == 92 || key == 13 || key == 16)
   return val && ((chk && len) || spckey)
-}
-
-function onlyText(e) {
-  var keynum
-  var keychar
-  var numcheck
-  if (window.event) {
-    // IE
-    keynum = e.keyCode
-  } else if (e.which) {
-    // Netscape/Firefox/Opera
-    keynum = e.which
-  }
-  keychar = String.fromCharCode(keynum)
-  numcheck = /\d/
-  return !numcheck.test(keychar)
-}
-
-function onlyNumber(e) {
-  if (e.keyCode < 48 || e.keyCode > 57) {
-    return false
-  }
-  return true
 }
