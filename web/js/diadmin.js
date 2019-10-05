@@ -40,127 +40,6 @@ function updateUserBar(url, cmd, user, pass) {
   )
 }
 
-function setEveCau(id, name, desc, active, is_pred, module) {
-  mod = module
-  $(mod + 'addsect').style.display = 'block'
-  uploadMsg('')
-  if (module == 'event') {
-    $('EventName').value = name
-    $('aEventDesc').value = desc
-    if (active == '1') {
-      $('aEventActive').checked = true
-    } else {
-      $('aEventActive').checked = false
-    }
-    if (is_pred == '1') {
-      $('aEventDesc').disabled = true
-    } else {
-      $('aEventDesc').disabled = false
-    }
-    $('aEventPredefined').value = is_pred
-    $('aEventId').value = id
-  } else if (module == 'cause') {
-    $('aCauseName').value = name
-    $('aCauseDesc').value = desc
-    if (active == '1') {
-      $('aCauseActive').checked = true
-    } else {
-      $('aCauseActive').checked = false
-    }
-    if (is_pred == '1') {
-      $('aCauseDesc').disabled = true
-    } else {
-      $('aCauseDesc').disabled = false
-    }
-    $('aCausePredefined').value = is_pred
-    $('aCauseId').value = id
-  }
-}
-
-function setRolLog(key, val, module) {
-  mod = module
-  $(mod + 'addsect').style.display = 'block'
-  if (module == 'role') {
-    $('UserId').value = key
-    $('AuthAuxValue').value = val
-  } else if (module == 'log') {
-    $('DBLogType').value = key
-    $('DBLogNotes').value = val
-  }
-}
-
-function setLevGeo(key, val, val2, val3, ly1, ly2, ly3, module) {
-  mod = module
-  $(mod + 'addsect').style.display = 'block'
-  if (module == 'lev') {
-    $('GeoLevelId').value = key
-    $('GeoLevelName').value = val
-    $('GeoLevelDesc').value = val2
-    $('GeoLevelLayerCode').value = ly2
-    $('GeoLevelLayerName').value = ly3
-  } else if (module == 'geo') {
-    $('aGeographyId').value = key
-    $('aGeographyCode').value = val
-    $('aGeographyName').value = val2
-  }
-}
-
-function setUserPA(login, name, email, pass, cnt, city, active) {
-  mod = 'userpa'
-  $(mod + 'addsect').style.display = 'block'
-  $('UserId').value = login
-  $('UserFullName').value = name
-  $('UserEMail').value = email
-  $('UserPasswd').value = pass
-  $('UserCountry').value = cnt
-  $('UserCity').value = city
-  if (active == '1') {
-    $('UserActive').checked = true
-  } else {
-    $('UserActive').checked = false
-  }
-}
-
-function setfocus(a_field_id) {
-  $(a_field_id).focus()
-}
-
-function getForm(fobj) {
-  var str = ''
-  var ft = ''
-  var fv = ''
-  var fn = ''
-  var els = ''
-  for (var i = 0; i < fobj.elements.length; i++) {
-    els = fobj.elements[i]
-    ft = els.title
-    fv = els.value
-    fn = els.name
-    switch (els.type) {
-      case 'text':
-      case 'hidden':
-      case 'password':
-      case 'textarea':
-        // is it a required field?
-        if (encodeURI(ft) == 'required' && encodeURI(fv).length < 1) {
-          els.focus()
-          return false
-        }
-        str += fn + '=' + encodeURI(fv) + '&'
-        break
-      case 'checkbox':
-      case 'radio':
-        if (els.checked) str += fn + '=' + encodeURI(fv) + '&'
-        break
-      case 'select-one':
-        str += fn + '=' + els.options[els.selectedIndex].value + '&'
-        break
-    }
-  }
-  str = str.substr(0, str.length - 1)
-  return str
-}
-
 function getGeoItems(regionId, geoid, l, lev, src) {
   let ele
   let div
@@ -192,24 +71,6 @@ function getGeoItems(regionId, geoid, l, lev, src) {
   }
 }
 
-function saveQuery() {
-  jQuery('#prmQueryCommand').val('cmdQuerySave')
-  selectall('_D+Field[]')
-  combineForms('frmMainQuery', 'CD')
-  combineForms('frmMainQuery', 'CM')
-  combineForms('frmMainQuery', 'frmGraphParams')
-  selectall('fldStatFieldSelect')
-  combineForms('frmMainQuery', 'frmStatParams')
-  jQuery('#_CMD').val('savequery')
-  $('frmMainQuery').action =
-    jQuery('#desinventarURL').val() +
-    '/?r=' +
-    jQuery('#desinventarRegionId').val()
-  jQuery('#frmMainQuery').attr('target', 'iframeDownload')
-  jQuery('#frmMainQuery').submit()
-  return true
-}
-
 function disab(field) {
   if (field != null) {
     field.disabled = true
@@ -221,36 +82,6 @@ function enab(field) {
   if (field != null) {
     field.disabled = false
     field.className = ''
-  }
-}
-
-// Effects options
-function showeff(val, x, y) {
-  if (val == '>=' || val == '<=' || val == '=' || val == '-3') {
-    $(x).style.display = 'inline'
-    if (val == '-3') {
-      $(y).style.display = 'inline'
-    } else {
-      $(y).style.display = 'none'
-    }
-  }
-  if (val == '' || val == '0' || val == '-1' || val == '-2') {
-    $(x).style.display = 'none'
-    $(y).style.display = 'none'
-  }
-}
-
-function enadisEff(id, chk) {
-  if (chk) {
-    $('o' + id).style.display = 'inline'
-    enab($(id + '[0]'))
-    enab($(id + '[1]'))
-    enab($(id + '[2]'))
-  } else {
-    $('o' + id).style.display = 'none'
-    disab($(id + '[0]'))
-    disab($(id + '[1]'))
-    disab($(id + '[2]'))
   }
 }
 
@@ -267,62 +98,6 @@ function combineForms(dcf, ref) {
       ih.name = rf[i].name
       dc.appendChild(ih)
     }
-  }
-}
-
-function setAdvQuery(value, ope) {
-  $('QueryCustom').value += value + ' '
-  switch (ope) {
-    case 'text':
-      disab($('<'))
-      disab($('>'))
-      enab($('='))
-      $('=').value = "=''"
-      enab($('<>'))
-      $('<>').value = "<>''"
-      enab($("LIKE '%%'"))
-      disab($('=-1'))
-      disab($('=0'))
-      disab($('=-2'))
-      break
-    case 'date':
-      enab($('<'))
-      $('<').value = "<''"
-      enab($('>'))
-      $('>').value = ">''"
-      enab($('='))
-      $('=').value = "=''"
-      enab($('<>'))
-      $('<>').value = "<>''"
-      enab($("LIKE '%%'"))
-      disab($('=-1'))
-      disab($('=0'))
-      disab($('=-2'))
-      break
-    case 'number':
-      enab($('<'))
-      $('<').value = '<'
-      enab($('>'))
-      $('>').value = '>'
-      enab($('='))
-      $('=').value = '='
-      enab($('<>'))
-      $('<>').value = '<>'
-      disab($("LIKE '%%'"))
-      enab($('=-1'))
-      enab($('=0'))
-      enab($('=-2'))
-      break
-    case 'boolean':
-      disab($('<'))
-      disab($('>'))
-      disab($('='))
-      disab($('<>'))
-      disab($("LIKE '%%'"))
-      enab($('=-1'))
-      enab($('=0'))
-      enab($('=-2'))
-      break
   }
 }
 

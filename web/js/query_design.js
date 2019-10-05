@@ -1,5 +1,4 @@
-/* global setAdvQuery */
-
+/* global enab, disab */
 import { showtip } from './common'
 
 function init() {
@@ -485,6 +484,62 @@ function init() {
     jQuery('body').trigger('cmdMainQueryUpdate')
     jQuery('div.QueryDesign dt.QueryDatacard').trigger('mousedown')
   })
+}
+
+function setAdvQuery(value, ope) {
+  $('QueryCustom').value += value + ' '
+  switch (ope) {
+    case 'text':
+      disab($('<'))
+      disab($('>'))
+      enab($('='))
+      $('=').value = "=''"
+      enab($('<>'))
+      $('<>').value = "<>''"
+      enab($("LIKE '%%'"))
+      disab($('=-1'))
+      disab($('=0'))
+      disab($('=-2'))
+      break
+    case 'date':
+      enab($('<'))
+      $('<').value = "<''"
+      enab($('>'))
+      $('>').value = ">''"
+      enab($('='))
+      $('=').value = "=''"
+      enab($('<>'))
+      $('<>').value = "<>''"
+      enab($("LIKE '%%'"))
+      disab($('=-1'))
+      disab($('=0'))
+      disab($('=-2'))
+      break
+    case 'number':
+      enab($('<'))
+      $('<').value = '<'
+      enab($('>'))
+      $('>').value = '>'
+      enab($('='))
+      $('=').value = '='
+      enab($('<>'))
+      $('<>').value = '<>'
+      disab($("LIKE '%%'"))
+      enab($('=-1'))
+      enab($('=0'))
+      enab($('=-2'))
+      break
+    case 'boolean':
+      disab($('<'))
+      disab($('>'))
+      disab($('='))
+      disab($('<>'))
+      disab($("LIKE '%%'"))
+      enab($('=-1'))
+      enab($('=0'))
+      enab($('=-2'))
+      break
+  }
 }
 
 export default {

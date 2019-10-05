@@ -1,8 +1,9 @@
 /* global
   Ext,
   DesInventar,
-  saveQuery,
   updateList,
+  selectall,
+  combineForms
 */
 import databaseCreate from './database_create.js'
 import adminDatabase from './admin_database'
@@ -1150,4 +1151,22 @@ function doGetRegionInfo(RegionId) {
     },
     'json'
   )
+}
+
+function saveQuery() {
+  jQuery('#prmQueryCommand').val('cmdQuerySave')
+  selectall('_D+Field[]')
+  combineForms('frmMainQuery', 'CD')
+  combineForms('frmMainQuery', 'CM')
+  combineForms('frmMainQuery', 'frmGraphParams')
+  selectall('fldStatFieldSelect')
+  combineForms('frmMainQuery', 'frmStatParams')
+  jQuery('#_CMD').val('savequery')
+  $('frmMainQuery').action =
+    jQuery('#desinventarURL').val() +
+    '/?r=' +
+    jQuery('#desinventarRegionId').val()
+  jQuery('#frmMainQuery').attr('target', 'iframeDownload')
+  jQuery('#frmMainQuery').submit()
+  return true
 }
