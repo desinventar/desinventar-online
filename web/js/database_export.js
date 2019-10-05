@@ -1,4 +1,4 @@
-function onReadyDatabaseExport() {
+function init() {
   doDatabaseExportCreate()
   jQuery('body').on('cmdDatabaseExport', function() {
     doDatabaseExportAction()
@@ -65,4 +65,8 @@ function doDatabaseExportAction() {
     },
     'json'
   )
+}
+
+module.exports = exports = {
+  init
 }

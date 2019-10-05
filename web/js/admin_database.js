@@ -1,9 +1,9 @@
-/* global onReadyDatabaseExport */
 import adminDatabaseEdit from './admin_database_edit'
+import databaseExport from './database_export'
 
 function init() {
   adminDatabaseEdit.init()
-  onReadyDatabaseExport()
+  databaseExport.init()
 
   // Highlight row on mouseOver
   jQuery('#tblDatabaseList tr').live({
