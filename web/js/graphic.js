@@ -1,4 +1,7 @@
-/* global enab, disab, showtip, Ext */
+/* global enab, disab, Ext */
+
+import { showtip } from './common'
+
 function init() {
   // 2010-02-21 (jhcaiced) This jQuery calls ensures that the Period and Stat
   // parameters are not empty at the same time.

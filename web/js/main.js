@@ -1,8 +1,3 @@
-/* global
-  showtip,
-  onReadyCommon,
-*/
-
 import 'jquery-ui/ui/widgets/tabs'
 import mainExt from './main_ext'
 import databaseCreate from './database_create'
@@ -29,6 +24,7 @@ import databaseList from './database_list'
 import userAccount from './user_account'
 import extraEffects from './extraeffects'
 import queryResults from './query_results'
+import common from './common'
 
 function init() {
   initialize.init()
@@ -44,7 +40,7 @@ function init() {
   databaseCauses.init()
   adminUsers.init()
   userPermAdmin.init()
-  onReadyCommon()
+  common.init()
   userLogin.init()
   userAccount.init()
   datacards.init()
@@ -123,7 +119,7 @@ function init() {
   jQuery('#DBConfig_tabs').tabs()
   jQuery('.classDBConfig_tabs').on('click', function() {
     var me = jQuery(jQuery(this).attr('href'))
-    showtip(me.find('.helptext').text())
+    common.showtip(me.find('.helptext').text())
     var cmd = jQuery(this).data('cmd')
     if (cmd == undefined || cmd == '') {
       jQuery(me).trigger('show')

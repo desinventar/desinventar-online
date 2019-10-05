@@ -2,14 +2,14 @@
 {-** EXTRAEFFECTS: Interface to Edit ExtraEffects.. **-}
 {-if $ctl_admineef-}
 <!-- FIELDS -->
-    <b onMouseOver="showtip('{-$dic.DBExtraEffect[2]-}');">{-$dic.DBExtraEffect[0]-}</b><br />
+    <b class="show-help" data-tooltip="{-$dic.DBExtraEffect[2]-}">{-$dic.DBExtraEffect[0]-}</b><br />
     <div class="dwin" style="width:600px; height:120px;">
         <table class="width100 grid database-admin-eefield-list">
             <thead>
                 <tr>
-                    <td class="header" onMouseOver="showtip('{-$dic.DBEEFieldLabel[2]-}');">
+                    <td class="header show-help" data-tooltip="{-$dic.DBEEFieldLabel[2]-}">
                         <b>{-$dic.DBEEFieldLabel[0]-}</b></td>
-                    <td class="header" onMouseOver="showtip('{-$dic.DBEEFieldDesc[2]-}');">
+                    <td class="header show-help" data-tooltip="{-$dic.DBEEFieldDesc[2]-}">
                         <b>{-$dic.DBEEFieldDesc[0]-}</b></td>
                 </tr>
             </thead>
@@ -47,16 +47,16 @@
     <div id="extraeffaddsect" style="display:none; width:600px;">
         <form name="eeffrm" id="frmEEFieldEdit" method="post">
             {-$dic.DBEEFieldLabel[0]-}<b style="color:darkred;">*</b><br />
-            <input type="text" id="EEFieldLabel" name="EEField[EEFieldLabel]" class="line clsValidateField" style="width:500px;"
-                tabindex="1" onFocus="showtip('{-$dic.DBEEFieldLabel[2]-}')" />
+            <input type="text" id="EEFieldLabel" name="EEField[EEFieldLabel]" class="line clsValidateField show-help" style="width:500px;"
+                tabindex="1" data-tooltip="{-$dic.DBEEFieldLabel[2]-}" />
             <br /><br />
             {-$dic.DBEEFieldDesc[0]-}<b style="color:darkred;">*</b><br />
-            <textarea id="EEFieldDesc" name="EEField[EEFieldDesc]" style="width:500px;" class="clsValidateField"
-                tabindex="2" onFocus="showtip('{-$dic.DBEEFieldDesc[2]-}')"></textarea>
+            <textarea id="EEFieldDesc" name="EEField[EEFieldDesc]" style="width:500px;" class="clsValidateField show-help"
+                tabindex="2" data-tooltip="{-$dic.DBEEFieldDesc[2]-}"></textarea>
             <br /><br />
             {-$dic.DBEEFieldType[0]-}<b style="color:darkred;">*</b><br />
-            <select id="EEFieldType" name="EEField[EEFieldType]" class="line clsValidateField" style="width:500px;"
-                tabindex="3" onFocus="showtip('{-$dic.DBEEFieldType[2]-}');">
+            <select id="EEFieldType" name="EEField[EEFieldType]" class="line clsValidateField show-help" style="width:500px;"
+                tabindex="3" data-tooltip="{-$dic.DBEEFieldType[2]-}">
                 <option value=""></option>
                 <option value="INTEGER">{-#typeinteger#-}</option>
                 <option value="CURRENCY">{-#typefloat#-}</option>
@@ -65,12 +65,12 @@
             </select>
             <br /><br />
             {-$dic.DBEEFieldActive[0]-}
-            <input type="checkbox" id="EEFieldActive" name="EEField[EEFieldActive]"
-                tabindex="4" onFocus="showtip('{-$dic.DBEEFieldActive[2]-}')" />
+            <input type="checkbox" id="EEFieldActive" name="EEField[EEFieldActive]" class="show-help"
+                tabindex="4" data-tooltip="{-$dic.DBEEFieldActive[2]-}" />
             <br /><br />
             {-$dic.DBEEFieldPublic[0]-}
-            <input type="checkbox" id="EEFieldPublic" name="EEField[EEFieldPublic]"
-                tabindex="5" onFocus="showtip('{-$dic.DBEEFieldPublic[2]-}')" />
+            <input type="checkbox" id="EEFieldPublic" name="EEField[EEFieldPublic]" class="show-help"
+                tabindex="5" data-tooltip="{-$dic.DBEEFieldPublic[2]-}" />
             <br /> <br />
             <p class="center" style="width:500px;">
                 <input id="RegionId" name="RegionId" type="hidden" value="{-$reg-}" />

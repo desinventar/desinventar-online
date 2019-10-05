@@ -1,7 +1,6 @@
 /* global
   Ext,
   DesInventar,
-  showtip,
   saveQuery,
   updateList,
 */
@@ -10,6 +9,8 @@ import adminDatabase from './admin_database'
 import databaseUpload from './database_upload'
 import databaseList from './database_list'
 import queryResults from './query_results'
+
+import { showtip } from './common'
 
 export default {
   init: onReadyExtJS

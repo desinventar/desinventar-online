@@ -1,4 +1,7 @@
-/* global showtip, setAdvQuery */
+/* global setAdvQuery */
+
+import { showtip } from './common'
+
 function init() {
   jQuery('div.QueryDesign')
     .on('mouseover', '.withHelpOver', function() {

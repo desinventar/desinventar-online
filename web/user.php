@@ -32,22 +32,6 @@ switch ($cmd) {
         $us->logout();
         echo json_encode(array('Status' => ERR_NO_ERROR));
         break;
-    case 'passlost':
-        // PASSLOST: Allows to recover a user's password by sending
-        // an e-mail with the login information
-        if (isset($_GET['opt']) && ($_GET['opt']) == 'sendnewpass') {
-            if ($us->sendPasswdReminder($_GET['UserEMail']) != '') {
-                $t->force_compile   = true;
-                $t->display('user_msgsend.tpl');
-            } else {
-                $t->force_compile   = true;
-                $t->display('user_errsend.tpl');
-            }
-        } else {
-            $t->force_compile   = true;
-            $t->display('user_passwdreminder.tpl');
-        }
-        break;
     case 'getUserInfo':
         $user = null;
         $UserId = getParameter('UserId', '');

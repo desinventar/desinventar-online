@@ -82,25 +82,25 @@
                             <td title="{-$LabelsDisaster.DisasterBeginTime[1]-}">
                                 {-#msgDatacard_DisasterBeginTime#-}<b class="required">*</b><br />
                                 <input id="DisasterBeginTime0" name="DisasterBeginTime[0]" style="width:36px;" type="text"
-                                    class="line inputInteger" tabindex="{-$MyTabIndex-}" maxlength="4" onFocus="showtip('{-$LabelsDisaster.DisasterBeginTime[2]-}', '#d4baf6')" />
+                                    class="line inputInteger show-help" tabindex="{-$MyTabIndex-}" maxlength="4" data-tooltip="{-$LabelsDisaster.DisasterBeginTime[2]-}" data-tooltip-color="#d4baf6" />
                                 {-counter-}
                                 <input id="DisasterBeginTime1" name="DisasterBeginTime[1]" style="width:18px;" type="text"
-                                    class="line inputInteger" tabindex="{-$MyTabIndex-}" maxlength="2" onFocus="showtip('{-$LabelsDisaster.DisasterBeginTime[2]-}', '#d4baf6')" />
+                                    class="line inputInteger show-help" tabindex="{-$MyTabIndex-}" maxlength="2" data-tooltip="{-$LabelsDisaster.DisasterBeginTime[2]-}" data-tooltip-color="#d4baf6" />
                                 {-counter-}
                                 <input id="DisasterBeginTime2" name="DisasterBeginTime[2]" style="width:18px;" type="text"
-                                    class="line inputInteger" tabindex="{-$MyTabIndex-}"  maxlength="2" onFocus="showtip('{-$LabelsDisaster.DisasterBeginTime[2]-}', '#d4baf6')" />
+                                    class="line inputInteger show-help" tabindex="{-$MyTabIndex-}"  maxlength="2" data-tooltip="{-$LabelsDisaster.DisasterBeginTime[2]-}" data-tooltip-color="#d4baf6" />
                                 {-counter-}
                             </td>
                             <td title="{-$LabelsDisaster.DisasterSource[1]-}" >
                                 {-#msgDatacard_DisasterSource#-}<b class="required">*</b><br />
                                 <input id="DisasterSource" name="DisasterSource" type="text" size="50"
-                                    class="line inputText" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsDisaster.DisasterSource[2]-}', '#d4baf6')" />
+                                    class="line inputText show-help" tabindex="{-$MyTabIndex-}" data-tooltip="{-$LabelsDisaster.DisasterSource[2]-}" data-tooltip-color="#d4baf6" />
                                 {-counter-}
                             </td>
                             <td>
                                 {-#msgDatacard_RecordStatus#-}<b class="required">*</b><br />
                                 <select name="RecordStatus" id="RecordStatus"  title="{-$LabelsRecord1.RecordStatus[1]-}"
-                                    class="line RecordStatus" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsRecord1.RecordStatus[1]-}', '')">
+                                    class="line RecordStatus" tabindex="{-$MyTabIndex-}">
                                     <option value=""></option>
                                     <option value="PUBLISHED">{-#tstatpublished#-}</option>
                                     <option value="READY"    >{-#tstatready#-}</option>
@@ -113,7 +113,7 @@
                             <td title="{-$LabelsDisaster.DisasterSerial[1]-}">
                                 {-#msgDatacard_DisasterSerial#-}<b class="required">*</b><br />
                                 <input id="DisasterSerial" name="DisasterSerial" type="text" size="24"
-                                    class="line inputAlphaNumber" tabindex="{-$MyTabIndex-}" maxlength="50" onFocus="showtip('{-$LabelsDisaster.DisasterSerial[2]-}', '#d4baf6')" />
+                                    class="line inputAlphaNumber show-help" tabindex="{-$MyTabIndex-}" maxlength="50" data-tooltip="{-$LabelsDisaster.DisasterSerial[2]-}" data-tooltip-color="#d4baf6" />
                                 {-counter-}
                                 <a href="#" id="linkDatacardSuggestSerial"><img src="{-$desinventarURL-}/images/reload.jpg" alt="" />
                                 </a>
@@ -160,15 +160,15 @@
                             <td title="{-$LabelsDisaster.DisasterSiteNotes[1]-}">
                                 {-#msgDatacard_DisasterSiteNotes#-}<br />
                                 <textarea id="DisasterSiteNotes" name="DisasterSiteNotes" style="height: 40px;" cols="25" maxlength="4096"
-                                    class="inputText" tabindex="{-$MyTabIndex-}"
-                                    onFocus="showtip('{-$LabelsDisaster.DisasterSiteNotes[2]-}', '#d4baf6')"></textarea>
+                                    class="inputText show-help" tabindex="{-$MyTabIndex-}"
+                                    data-tooltip="{-$LabelsDisaster.DisasterSiteNotes[2]-}" data-tooltip-color="#d4baf6"></textarea>
                                 {-counter-}
                             </td>
                             <td>
                                 <span title="{-#msgDatacard_InputDoubleTooltip#-}">
                                     {-#msgDatacard_DisasterLatitude#-}<br />
                                     <input id="DisasterLatitude" name="DisasterLatitude" type="text" size="10" maxlength="10" value="0.0"
-                                        class="line inputLatLon" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsDisaster.DisasterLatitude[2]-}', '#d4baf6')" />
+                                        class="line inputLatLon show-help" tabindex="{-$MyTabIndex-}" data-tooltip="{-$LabelsDisaster.DisasterLatitude[2]-}" data-tooltip-color="#d4baf6" />
                                 </span>
                                 {-counter-}
                                 <br />
@@ -176,7 +176,7 @@
                                     {-#msgDatacard_DisasterLongitude#-}
                                     <br />
                                     <input id="DisasterLongitude" name="DisasterLongitude" type="text" size="10" maxlength="10" value="0.0"
-                                        class="line inputLatLon" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsDisaster.DisasterLongitude[2]-}', '#d4baf6')" />
+                                        class="line inputLatLon show-help" tabindex="{-$MyTabIndex-}" data-tooltip="{-$LabelsDisaster.DisasterLongitude[2]-}" data-tooltip-color="#d4baf6" />
                                 </span>
                                 {-counter-}
                                 <br />
@@ -354,19 +354,19 @@
                             <td title="{-$LabelsEvent.EventMagnitude[1]-}">
                                 {-#msgDatacard_EventMagnitude#-}<br />
                                 <input id="EventMagnitude" name="EventMagnitude" type="text" size="5"
-                                    class="line inputText" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsEvent.EventMagnitude[2]-}', 'lightblue')" />
+                                    class="line inputText show-help" tabindex="{-$MyTabIndex-}" data-tooltip="{-$LabelsEvent.EventMagnitude[2]-}" data-tooltip-color="lightblue" />
                                 {-counter-}
                             </td>
                             <td title="{-$LabelsEvent.EventDuration[1]-}">
                                 {-#msgDatacard_EventDuration#-}<br />
                                 <input id="EventDuration" name="EventDuration" type="text" size="5" maxlength="8"
-                                    class="line inputInteger" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsEvent.EventDuration[2]-}', 'lightblue')" />
+                                    class="line inputInteger show-help" tabindex="{-$MyTabIndex-}" data-tooltip="{-$LabelsEvent.EventDuration[2]-}" data-tooltip-color="lightblue" />
                                 {-counter-}
                             </td>
                             <td title="{-$LabelsEvent.EventNotes[1]-}">
                                 {-#msgDatacard_EventNotes#-}<br />
                                 <input type="text" id="EventNotes" name="EventNotes" style="width: 350px;"
-                                    class="line inputText" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsEvent.EventNotes[2]-}', 'lightblue')" />
+                                    class="line inputText show-help" tabindex="{-$MyTabIndex-}" data-tooltip="{-$LabelsEvent.EventNotes[2]-}" data-tooltip-color="lightblue" />
                                 {-counter-}
                             </td>
                         </tr>
@@ -393,7 +393,7 @@
                             <td title="{-$LabelsCause.CauseNotes[1]-}">
                                 {-#msgDatacard_CauseNotes#-}<br />
                                 <input type="text" id="CauseNotes" name="CauseNotes" style="width: 450px;"
-                                    class="line inputText" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsCause.CauseNotes[2]-}', '#ffffc0')" />
+                                    class="line inputText show-help" tabindex="{-$MyTabIndex-}" data-tooltip="{-$LabelsCause.CauseNotes[2]-}" data-tooltip-color="#ffffc0" />
                                 {-counter-}
                             </td>
                         </tr>

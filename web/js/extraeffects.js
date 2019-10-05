@@ -1,4 +1,7 @@
 /* global uploadMsg, updateList */
+
+import { showtip } from './common'
+
 function init() {
   jQuery('.msgEEFieldStatus').hide()
 
@@ -65,6 +68,12 @@ function init() {
     .on('click', '#btnCancel', function(event) {
       jQuery('#extraeffaddsect').hide()
       event.preventDefault()
+    })
+    .on('mouseenter', '.show-help', function() {
+      showtip(jQuery(this).data('tooltip'))
+    })
+    .on('mouseleave', '.show-help', function() {
+      showtip('')
     })
 
   jQuery('table.database-admin-eefield-list')

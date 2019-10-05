@@ -1,5 +1,6 @@
-/* global desinventar, showtip, blockChars, Ext, checkForm */
+/* global desinventar, Ext */
 import navigation from './datacards_navigation'
+import { showtip } from './common'
 
 function init() {
   jQuery('#divDatacardWindow').hide()
@@ -299,6 +300,14 @@ function init() {
     showtip('', '#fff')
   })
 
+  jQuery('#DICard .show-help')
+    .on('mouseenter', function() {
+      showtip(jQuery(this).data('tooltip'), jQuery(this).data('tooltip-color'))
+    })
+    .on('mouseleave', function() {
+      showtip('', '#ffffff')
+    })
+
   // Dependency between fields
   jQuery('#DICard').on('blur', '#EffectRoads', function() {
     var v = jQuery.trim(jQuery(this).val())
@@ -471,12 +480,12 @@ function doDatacardInitialize() {
     var tooltip = field['description']
     var type = field['type']
 
-    var clone = jQuery('div.EffectAdditional:last', effect_list)
+    var clonedInput = jQuery('div.EffectAdditional:last', effect_list)
       .clone()
       .show()
-    jQuery('span.label', clone).text(label)
-    jQuery('span.label', clone).attr('title', tooltip)
-    jQuery('input.value', clone).hide()
+    jQuery('span.label', clonedInput).text(label)
+    jQuery('span.label', clonedInput).attr('title', tooltip)
+    jQuery('input.value', clonedInput).hide()
     var className = ''
     var value
     switch (type) {
@@ -494,7 +503,7 @@ function doDatacardInitialize() {
         value = ''
         break
     }
-    jQuery('input', clone)
+    jQuery('input', clonedInput)
       .attr('class', 'value line')
       .addClass(className)
       .val(value)
@@ -504,7 +513,7 @@ function doDatacardInitialize() {
       .data('helptext', tooltip)
       .show()
     const column = fieldCount % max_column
-    jQuery('tr:last td:eq(' + column + ')', effect_list).append(clone)
+    jQuery('tr:last td:eq(' + column + ')', effect_list).append(clonedInput)
     fieldCount++
   })
 }
@@ -963,9 +972,7 @@ function doDatacardSave() {
               'EventId',
               'CauseId'
             )
-            if (
-              checkForm('DICard', fl, jQuery('#msgDatacardFieldsError').text())
-            ) {
+            if (checkForm('DICard', fl)) {
               jQuery('#PrevDisasterSerial').val(jQuery('#DisasterSerial').val())
               jQuery('#DICard').submit()
             } else {
@@ -977,6 +984,76 @@ function doDatacardSave() {
       )
     }
   }
+}
+
+function checkForm(prmForm, prmFieldList) {
+  var bReturn = true
+  jQuery.each(prmFieldList, function(index, value) {
+    var selector = '#' + prmForm + ' #' + value
+    if (jQuery(selector).val().length < 1) {
+      jQuery(selector).highlight()
+      bReturn = false
+    }
+  })
+  return bReturn
+}
+
+// Block characters according to type
+function blockChars(e, value, type) {
+  var key = window.event ? e.keyCode : e.which
+
+  // Accept values in numeric keypad
+  if (key >= 96 && key <= 105) {
+    key = key - 48
+  }
+  var keychar = String.fromCharCode(key)
+  if (key == 190 || key == 110 || key == 188) {
+    keychar = '.'
+  }
+  var opt = type.split(':') // 0=type; 1=minlength; 2=minval-maxval
+  // Accept keys: backspace, tab, shift, ctrl, insert, delete
+  //        pagedown, pageup, rows, hyphen
+  var spckey =
+    key == 8 ||
+    key == 9 ||
+    key == 17 ||
+    key == 20 ||
+    key == 189 ||
+    key == 45 ||
+    key == 46 ||
+    (key >= 33 && key <= 40) ||
+    key == 0
+  var chk = true
+  var val = true // validate characters
+  // Check max length
+  var len = true
+  if (value.length >= parseInt(opt[1])) {
+    len = false
+  }
+  var reg
+  // Check datatype
+  switch (opt[0]) {
+    case 'date':
+      reg = /^\d{4}-\d{0,2}-\d{0,2}$/
+      chk = reg.test(keychar)
+      break
+    case 'alphanumber':
+      reg = /^[a-z]|[A-Z]|[0-9]|[-_+.]+/
+      chk = reg.test(keychar)
+      break
+    case 'integer':
+      reg = /\d/
+      chk = reg.test(keychar)
+      break
+    case 'double':
+      reg = /^[-+]?[0-9]|[.]+$/
+      chk = reg.test(keychar)
+      break
+    default:
+  }
+  // Block special characters: (like !@#$%^&'*" etc)
+  val = !(key == 92 || key == 13 || key == 16)
+  return val && ((chk && len) || spckey)
 }
 
 function doDatacardCancel() {
