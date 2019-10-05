@@ -1,6 +1,5 @@
 /* global
   showtip,
-  onReadyDBConfigCauses,
   onReadyCommon,
 */
 
@@ -155,12 +154,10 @@ function init() {
 }
 
 function initTabEvents(cmd) {
-  if (cmd === 'cmdDBInfoCause') {
-    onReadyDBConfigCauses()
+  if (cmd === 'cmdDBInfoEEField') {
+    extraEffects.init()
     return
   }
-  extraEffects.init()
-  return
 }
 
 export default {

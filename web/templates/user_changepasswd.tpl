@@ -15,7 +15,7 @@
     <table class="grid">
       <tr>
         <td>
-          <b style="color:darkred;">{-#toldpassword#-}</b>
+          <b style="color:darkred;">{-#toldpassword#-} xxxx</b>
         </td>
         <td>
           <input type="password" id="txtUserPasswd" name="User[UserPasswd]" size="25" maxlength="25" class="line" />
