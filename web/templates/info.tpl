@@ -23,7 +23,7 @@
         <input name="_REG" type="hidden" value="{-$reg-}" />
         <input id="_infocmd" name="cmd" value="cmdDBInfoUpdate" type="hidden" />
         <input type="submit" value="{-#bsave#-}"  class="save line"/>
-        <input type="reset" value="{-#bcancel#-}"  onclick="mod='info'; uploadMsg('');" class="cancel line" />
+        <input type="reset" value="{-#bcancel#-}" class="cancel line" />
         <br />
         <div id="ifinfo" style="height:30px; width:350px;"></div>
       </div>

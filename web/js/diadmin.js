@@ -21,25 +21,6 @@ function updateList(divSelector, url, pars, callback) {
   })
 }
 
-function updateUserBar(url, cmd, user, pass) {
-  jQuery.post(
-    url,
-    {
-      cmd: cmd,
-      userid: user,
-      password: pass
-    },
-    function(data) {
-      jQuery('#pagecontent').html(data)
-      if (cmd == 'login') {
-        updateList('pagecontent', url, 'cmd=welcome')
-      } else if (cmd == 'logout') {
-        window.location.reload(false)
-      }
-    }
-  )
-}
-
 function getGeoItems(regionId, geoid, l, lev, src) {
   let ele
   let div
@@ -85,7 +66,6 @@ function enab(field) {
   }
 }
 
-// forms management
 function combineForms(dcf, ref) {
   var dc = $(dcf)
   var rf = $(ref).elements

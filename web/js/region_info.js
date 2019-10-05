@@ -1,23 +1,28 @@
+/* global uploadMsg */
 import $ from 'jquery'
 
 function init() {
-  $('body').on('submit', '#frmDatabaseInfo', function() {
-    $.post($(this).attr('action'), $(this).serialize(), function(data) {
-      $('#ifinfo')
-        .html(data)
-        .show()
-      $('body').trigger('cmdDatabaseLoadData', {
-        updateViewport: false,
-        callback: function() {
-          jQuery('.classDBConfig_tabs:first').trigger('click')
-        }
+  $('body')
+    .on('submit', '#frmDatabaseInfo', function() {
+      $.post($(this).attr('action'), $(this).serialize(), function(data) {
+        $('#ifinfo')
+          .html(data)
+          .show()
+        $('body').trigger('cmdDatabaseLoadData', {
+          updateViewport: false,
+          callback: function() {
+            jQuery('.classDBConfig_tabs:first').trigger('click')
+          }
+        })
+        setTimeout(function() {
+          $('#ifinfo').html('')
+        }, 2000)
       })
-      setTimeout(function() {
-        $('#ifinfo').html('')
-      }, 2000)
+      return false
     })
-    return false
-  })
+    .on('click', '#frmDatabaseInfo .cancel', function() {
+      uploadMsg('')
+    })
 
   $('body').on('click', '#frmDatabaseInfo .region-info-edit-label', function() {
     const field = $(this)

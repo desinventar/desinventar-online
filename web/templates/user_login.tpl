@@ -44,8 +44,5 @@
     <span class="status hidden msgConnectionError">{-#msgConnectionError#-}</span>
   </div>
   <form id="uf" action="#">
-    <!-- method="get"
-    action="javascript:updateUserBar(jQuery('#desinventarURL').val() + '/user.php', 'login', $('userid').value, $('password').value);">
-    -->
   </form>
 </div>
