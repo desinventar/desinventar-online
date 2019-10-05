@@ -353,7 +353,12 @@ function genColors() {
 
   */
 
+function getMap() {
+  return map
+}
+
 export default {
   init,
-  createThematicMap
+  createThematicMap,
+  getMap
 }

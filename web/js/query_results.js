@@ -1,4 +1,5 @@
-/* global Ext, selectall, combineForms, map */
+/* global Ext, selectall, combineForms */
+import thematicMap from './thematicmap'
 
 function init() {
   jQuery('#queryBeginYear').blur(function() {
@@ -166,7 +167,7 @@ function sendMap(cmd) {
       jQuery('#prmQueryCommand').val('cmdMapSave')
 
       // to export image save layers and extend..
-      var mm = map
+      var mm = thematicMap.getMap()
       //var mm = dcr.map;
       var extent = mm.getExtent()
       var layers = mm.layers
