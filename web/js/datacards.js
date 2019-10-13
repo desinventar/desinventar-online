@@ -1226,7 +1226,7 @@ function setDICardFromId(
     jQuery('#DICard .clsEffectNumeric').each(function() {
       jQuery(this).jecValue(data[jQuery(this).attr('id')], true)
     })
-    setDICard(prmRegionId, data)
+    setDICard(data)
     jQuery('#divRecordNavigationInfo').hide()
     var RecordNumber = parseInt(jQuery('#cardsRecordNumber').val())
     var RecordCount = parseInt(jQuery('#cardsRecordCount').val())
@@ -1242,7 +1242,7 @@ function setDICardFromId(
   return false
 }
 
-function setDICard(prmRegionId, arr) {
+function setDICard(arr) {
   var diform = null
   var myForm = null
   var varName
@@ -1396,7 +1396,7 @@ function clone() {
       data.GeographyItems[data.GeographyItems.length - 1].GeographyId
     clear()
     create()
-    setDICard(data.RegionId, data)
+    setDICard(data)
     clearEffects()
     jQuery('#DICard #EffectNotes').val(data.EffectNotes)
     jQuery.each(data.GeographyItems, function(key, value) {
