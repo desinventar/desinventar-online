@@ -7,6 +7,7 @@ services:
     image: desinventar/online:latest
     volumes:
       - .:/opt/app
+      - /opt/app/web/scripts
       - /opt/app/vendor
       - /opt/app/node_modules
     environment:

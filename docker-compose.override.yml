@@ -15,6 +15,7 @@ services:
     volumes:
       - .:/opt/app
       - /var/local/desinventar:/var/local/desinventar
+      - /opt/app/web/scripts
       - /opt/app/vendor
       - /opt/app/node_modules
   portal:
