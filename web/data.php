@@ -1,10 +1,11 @@
 <?php
 use Aura\Session\SessionFactory;
 
-use \DesInventar\Legacy\Model\Region;
+use DesInventar\Legacy\Model\Region;
 use DesInventar\Legacy\Model\Disaster;
 use DesInventar\Common\Language;
 use DesInventar\Common\Util;
+use DesInventar\Helpers\Dictionary;
 
 require_once('include/loader.php');
 $post = $_POST;
@@ -140,20 +141,24 @@ if (isset($post['page']) || isset($post['_D+cmd'])) {
                 $lb = '';
                 $sel = array_keys($dislist[0]);
                 $bFirst = true;
-                foreach ($sel as $kk => $ii) {
+                foreach ($sel as $fieldId) {
                     if (! $bFirst) {
                         $lb .= $ColumnSeparator;
                     }
-                    $i3 = substr($ii, 0, -4);
-                    if (isset($dic[$ii][0])) {
-                        $dk[$ii] = $dic[$ii][0];
-                    } elseif (isset($dic[$i3][0])) {
-                        $dk[$ii] = $dic[$i3][0];
+                    $i3 = substr($fieldId, 0, -4);
+
+                    $translation = (new Dictionary())->findById($dic, $fieldId);
+                    if ($translation) {
+                        $dk[$fieldId] = $translation['name'];
+                    } elseif (isset($dic[$fieldId][0])) {
+                        $dk[$fieldId] = $dic[$fieldId][0];
+                    } elseif (isset($dic[$i3]['id'])) {
+                        $dk[$fieldId] = $dic[$i3]['name'];
                     } else {
-                        $dk[$ii] = $ii; // No translation, use default value
+                        $dk[$fieldId] = $fieldId; // No translation, use default value
                     }
                     //Assign Headers..
-                    $lb .= '"'. $dk[$ii] .'"';
+                    $lb .= '"'. $dk[$fieldId] .'"';
                     $bFirst = false;
                 }
                 if (!empty($export)) {
@@ -180,7 +185,7 @@ if (isset($post['page']) || isset($post['_D+cmd'])) {
             $t->assign('ctl_dislist', true);
         }
         $sectorFields = Disaster::getEffectSectorFields();
-        $data_header = array();
+        $data_header = [];
         foreach ($sel as $key => $field_id) {
             $field_type = 'NUMBER';
             if (in_array($field_id, array(
