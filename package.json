@@ -85,7 +85,7 @@
     "config": "^1.31.0",
     "document-ready-promise": "^3.0.1",
     "expand-home-dir": "0.0.3",
-    "jquery": "1.11",
+    "jquery": "3.4",
     "jquery-ui": "^1.12.1",
     "md5": "^2.2.1",
     "moment": "2.19.3",
