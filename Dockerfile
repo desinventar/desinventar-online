@@ -7,7 +7,7 @@ WORKDIR /opt/app
 
 RUN sed -i 's/^mirrorlist/#mirrorlist/; s|#baseurl=http://mirror.centos.org|baseurl=http://mirrors.kernel.org|' /etc/yum.repos.d/CentOS-Base.repo
 
-RUN yum -y install php72-php-pecl-dbase php72-php-pecl-zip php72-php-redis php-pecl-zip
+RUN yum -y install php72-php-pecl-dbase php72-php-pecl-zip php72-php-pecl-redis
 RUN yum -y install yum-plugin-versionlock && yum versionlock php72-php-pecl-dbase-7.0.0
 
 RUN composer config --global repo.packagist composer https://packagist.org
