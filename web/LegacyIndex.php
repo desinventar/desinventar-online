@@ -544,7 +544,7 @@ class LegacyIndex
                     }
                     if ($iReturn > 0) {
                         if ($geography_name_old != $o->get('GeographyName')) {
-                            $g = new DIGeocarto($us, $o->get('GeographyLevel'));
+                            $g = new GeographyCarto($us, $o->get('GeographyLevel'));
                             geographyUpdateDbfRecord(
                                 $g->getDBFFilename(),
                                 $g->get('GeoLevelLayerCode'),
