@@ -26,6 +26,9 @@ services:
       - DESINVENTAR_REDIS_PORT
       - DESINVENTAR_API_RATE_LIMIT
       - DESINVENTAR_API_RATE_WINDOW
+      - TEST_API_URL=${TEST_API_URL:-http://web:80}
+      - TEST_WEB_URL=${TEST_WEB_URL:-http://web:80}
+      - TEST_PORTAL_URL=${TEST_PORTAL_URL:-http://portal:80}
   portal:
     build:
       context: .

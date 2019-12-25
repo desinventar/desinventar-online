@@ -55,18 +55,18 @@
   },
   "test": {
     "web": {
-      "url": "http://web:80",
+      "url": "http://localhost:8080",
       "username": "root",
       "passwd": "desinventar",
       "database": "TEST"
     },
     "portal": {
-      "url": "http://portal:80",
+      "url": "http://localhost:8090",
       "username": "root",
       "passwd": "desinventar"
     },
     "api": {
-      "url": "http://web:80",
+      "url": "http://localhost:8080",
       "username": "root",
       "passwd": "desinventar",
       "database": "TEST"
