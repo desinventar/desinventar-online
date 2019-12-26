@@ -11,7 +11,7 @@ RUN cd /tmp && npm install
 
 COPY . /opt/app
 RUN cp -a /tmp/node_modules /opt/app
-ENV PATH="~/.composer/vendor/bin:./vendor/bin:/opt/app/vendor/bin:${PATH}"
+ENV PATH="~/.composer/vendor/bin:./vendor/bin:/opt/app/vendor/bin:/opt/app/node_modules/.bin:${PATH}"
 
 EXPOSE 80
 CMD [ "/usr/bin/php", "-S", "localhost:80" ]

@@ -1,0 +1,11 @@
+- name: test:unit
+  service: web
+  command: phpunit
+
+- name: test:api
+  service: test
+  command: jest tests/api-app
+
+- name: test:e2e
+  service: test
+  command: testcafe firefox:headless tests/e2e

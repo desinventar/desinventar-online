@@ -1,0 +1,33 @@
+portal:
+  cached: yes
+  build:
+    context: .
+    dockerfile: ./portal/Dockerfile
+
+redis:
+  cached: yes
+  build:
+    context: .
+    dockerfile: docker/redis/Dockerfile
+
+web:
+  cached: yes
+  build: .
+  environment:
+    DESINVENTAR_MODE: ci
+  depends_on:
+    - redis
+
+test:
+  cached: yes
+  build:
+    context: .
+    dockerfile: docker/e2e-test/Dockerfile
+  depends_on:
+    - web
+    - portal
+  environment:
+    TEST_WEB_URL: http://web:80
+    TEST_PORTAL_URL: http://portal:80
+    TEST_API_URL: http://web:80
+
