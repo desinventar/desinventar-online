@@ -15,6 +15,7 @@ web:
   build: .
   environment:
     DESINVENTAR_MODE: ci
+    DESINVENTAR_REDIS_HOST: redis
   depends_on:
     - redis
 
