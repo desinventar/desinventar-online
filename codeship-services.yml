@@ -1,17 +1,20 @@
 portal:
   cached: yes
+  default_cache_branch: develop
   build:
     context: .
     dockerfile: ./portal/Dockerfile
 
 redis:
   cached: yes
+  default_cache_branch: develop
   build:
     context: .
     dockerfile: docker/redis/Dockerfile
 
 web:
   cached: yes
+  default_cache_branch: develop
   build: .
   environment:
     DESINVENTAR_MODE: ci
@@ -21,6 +24,7 @@ web:
 
 test:
   cached: yes
+  default_cache_branch: develop
   build:
     context: .
     dockerfile: docker/e2e-test/Dockerfile
