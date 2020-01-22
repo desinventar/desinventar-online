@@ -92,7 +92,7 @@
     "mysql": "^2.16.0",
     "node-getopt": "^0.3.2",
     "showdown": "^1.9.1",
-    "snyk": "^1.230.5",
+    "snyk": "^1.278.2",
     "sqlite3": "^4.0.6",
     "sweetalert2": "^9.5.4",
     "winston": "^3.2.1"
