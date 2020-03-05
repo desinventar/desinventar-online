@@ -283,9 +283,6 @@ class GeographyItem extends Record
 
                 // New Id must not exist in database...
                 $bExist = self::existId($prmSession, $newGeographyId);
-                if ($bExist) {
-                    $iReturn = self::ERR_UNKNOWN_ERROR;
-                }
             }
             $g = new self($prmSession, $GeographyId);
             if ($GeographyId != $newGeographyId) {
