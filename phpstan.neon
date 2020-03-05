@@ -6,6 +6,9 @@ parameters:
   ignoreErrors:
     - '#Call to an undefined method PDO::sqliteCreateFunction()#'
     - '#Call to an undefined method Aura\\SqlQuery\\Common\\InsertInterface\:\:addRow\(\)#'
+    - '#^Method .+ has parameter .+ with no typehint specified.$#'
+    - '#^Property .+ has no typehint specified.$#'
+    - '#^Method .+ has no return typehint specified.$#'
   excludes_analyse:
     - %rootDir%/../../../web/*.php
     - %rootDir%/../../../web/include/*

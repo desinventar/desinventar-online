@@ -191,24 +191,17 @@ class Disaster extends Record
         $PeriodEndDate     = trim($r->get('PeriodEndDate'));
         $DisasterBeginTime = $this->get('DisasterBeginTime');
 
-        $iReturn = self::ERR_NO_ERROR;
-        if ($iReturn > 0) {
-            if ($PeriodBeginDate != '') {
-                if ($DisasterBeginTime < $PeriodBeginDate) {
-                    $iReturn = $ErrCode;
-                }
-            }
+        if ($PeriodBeginDate != '' && $DisasterBeginTime < $PeriodBeginDate) {
+            return $ErrCode;
         }
 
-        if ($iReturn > 0) {
-            if ($PeriodEndDate != '') {
-                $PeriodEndDate = Date::doCeil($PeriodEndDate);
-                if ($DisasterBeginTime > $PeriodEndDate) {
-                    $iReturn = $ErrCode;
-                }
+        if ($PeriodEndDate != '') {
+            $PeriodEndDate = Date::doCeil($PeriodEndDate);
+            if ($DisasterBeginTime > $PeriodEndDate) {
+                return $ErrCode;
             }
         }
-        return $iReturn;
+        return self::ERR_NO_ERROR;
     }
 
     public function validateEffects($ErrCode, $isError)
@@ -222,6 +215,9 @@ class Disaster extends Record
             }
             foreach ($this->explodeFieldList($sFieldList) as $sField) {
                 $oItem = preg_split('#/#', $sField);
+                if (!$oItem) {
+                    continue;
+                }
                 $sFieldName  = $oItem[0];
                 $sFieldType  = $oItem[1];
                 if ($sFieldName != 'EffectNotes') {

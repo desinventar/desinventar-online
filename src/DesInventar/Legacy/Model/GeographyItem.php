@@ -192,15 +192,11 @@ class GeographyItem extends Record
 
     public function update($withValidate = 1, $bStrict = 1)
     {
-        $iReturn = self::ERR_NO_ERROR;
-        if ($iReturn > 0) {
-            // Update goegraphy children data if needed...
-            if ($this->oOldField['info']['GeographyName'] != $this->oField['info']['GeographyName']) {
-                $this->saveGeographyFQName();
-            }
+        // Update goegraphy children data if needed...
+        if ($this->oOldField['info']['GeographyName'] != $this->oField['info']['GeographyName']) {
+            $this->saveGeographyFQName();
         }
-        $iReturn = parent::update($withValidate, $bStrict);
-        return $iReturn;
+        return parent::update($withValidate, $bStrict);
     }
 
     public function validateCreate($bStrict)
@@ -273,52 +269,47 @@ class GeographyItem extends Record
         /* Move geography to a different parent node, updates
            GeographyId and associated Disaster records
         */
-        $iReturn = self::ERR_NO_ERROR;
-        if ($iReturn > 0) {
-            if ($withChildren) {
-                $Query = "SELECT * FROM Geography WHERE GeographyId LIKE '" . $prmGeographyIdPrefix . "%'";
-            } else {
-                $Query = "SELECT * FROM Geography WHERE GeographyId='" . $prmGeographyIdPrefix . "'";
-            }
-            foreach ($prmSession->q->dreg->query($Query) as $row) {
-                $GeographyId = $row['GeographyId'];
-                $newGeographyId = $GeographyId;
-
-                if ($prmNewGeographyIdPrefix != '') {
-                    $newGeographyId = $prmNewGeographyIdPrefix . substr($GeographyId, strlen($prmNewGeographyIdPrefix));
-
-                    // New Id must not exist in database...
-                    $bExist = self::existId($prmSession, $newGeographyId);
-                    if ($bExist) {
-                        $iReturn = self::ERR_UNKNOWN_ERROR;
-                    }
-                }
-                if ($iReturn > 0) {
-                    $g = new self($prmSession, $GeographyId);
-                    if ($GeographyId != $newGeographyId) {
-                        $Query = trim("
-                            UPDATE Geography
-                            SET GeographyId='" . $newGeographyId . "'
-                            WHERE GeographyId='" . $GeographyId . "'
-                        ");
-                        $prmSession->q->dreg->query($Query);
-                        $Query = trim("
-                            UPDATE Disaster
-                            SET GeographyId='" . $newGeographyId . "'
-                            WHERE GeographyId='" . $GeographyId . "'
-                        ");
-                        $prmSession->q->dreg->query($Query);
-                        $g->set('GeographyId', $newGeographyId);
-                        $g->setGeographyFQName();
-                    }
-                    // Update GeographyCode
-                    $GeographyCode = $g->get('GeographyCode');
-                    $newGeographyCode = $prmNewGeographyCodePrefix;
-                    $g->set('GeographyCode', $newGeographyCode);
-                    $r = $g->update();
-                }
-            }
+        if ($withChildren) {
+            $Query = "SELECT * FROM Geography WHERE GeographyId LIKE '" . $prmGeographyIdPrefix . "%'";
+        } else {
+            $Query = "SELECT * FROM Geography WHERE GeographyId='" . $prmGeographyIdPrefix . "'";
         }
-        return $iReturn;
+        foreach ($prmSession->q->dreg->query($Query) as $row) {
+            $GeographyId = $row['GeographyId'];
+            $newGeographyId = $GeographyId;
+
+            if ($prmNewGeographyIdPrefix != '') {
+                $newGeographyId = $prmNewGeographyIdPrefix . substr($GeographyId, strlen($prmNewGeographyIdPrefix));
+
+                // New Id must not exist in database...
+                $bExist = self::existId($prmSession, $newGeographyId);
+                if ($bExist) {
+                    $iReturn = self::ERR_UNKNOWN_ERROR;
+                }
+            }
+            $g = new self($prmSession, $GeographyId);
+            if ($GeographyId != $newGeographyId) {
+                $Query = trim("
+                    UPDATE Geography
+                    SET GeographyId='" . $newGeographyId . "'
+                    WHERE GeographyId='" . $GeographyId . "'
+                ");
+                $prmSession->q->dreg->query($Query);
+                $Query = trim("
+                    UPDATE Disaster
+                    SET GeographyId='" . $newGeographyId . "'
+                    WHERE GeographyId='" . $GeographyId . "'
+                ");
+                $prmSession->q->dreg->query($Query);
+                $g->set('GeographyId', $newGeographyId);
+                $g->setGeographyFQName();
+            }
+            // Update GeographyCode
+            $GeographyCode = $g->get('GeographyCode');
+            $newGeographyCode = $prmNewGeographyCodePrefix;
+            $g->set('GeographyCode', $newGeographyCode);
+            $r = $g->update();
+        }
+        return self::ERR_NO_ERROR;
     }
 }

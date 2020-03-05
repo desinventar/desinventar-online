@@ -18,12 +18,12 @@ class Role extends Record
     public const ROLE_ADMINREGION = 40;
     public const ROLE_ADMINPORTAL = 50;
 
-    public function getUserRole($userId, $regionId)
+    public function getUserRole(string $userId, string $regionId)
     {
-        if (!$userId || is_null($userId) || $userId === '') {
+        if (!$userId || $userId === '') {
             return self::NONE;
         }
-        if (!$regionId || is_null($regionId) || $regionId === '') {
+        if (!$regionId || $regionId === '') {
             return self::NONE;
         }
         if ($userId === 'root') {

@@ -80,18 +80,16 @@ class Region extends Model
             $this->set('RegionId', $prmRegionId);
             $XMLFile = $this->getXMLFileName();
         }
-        if ($iReturn > 0) {
-            // Attempt to load from XML in Region directory...
-            if (file_exists($XMLFile)) {
-                // XML File Exists, load data...
-                $iReturn = $this->loadFromXML($XMLFile);
-                // Fix RegionId because in some files is wrong when copying data...
-                if ($prmRegionId != '') {
-                    $this->set('RegionId', $prmRegionId);
-                }
-            } else {
-                $this->set('RegionLabel', $prmRegionId);
+        // Attempt to load from XML in Region directory...
+        if (file_exists($XMLFile)) {
+            // XML File Exists, load data...
+            $iReturn = $this->loadFromXML($XMLFile);
+            // Fix RegionId because in some files is wrong when copying data...
+            if ($prmRegionId != '') {
+                $this->set('RegionId', $prmRegionId);
             }
+        } else {
+            $this->set('RegionLabel', $prmRegionId);
         }
         if ($this->get('OptionLanguageList') == '') {
             $this->set('OptionLanguageList', $this->get('LangIsoCode'));
@@ -353,10 +351,8 @@ class Region extends Model
 
     public function updateMapArea()
     {
-        $iReturn = self::ERR_NO_ERROR;
         $IsCRegion = $this->get('IsCRegion');
         if ($IsCRegion > 0) {
-            $iReturn = self::ERR_NO_ERROR;
             $MinX = 180;
             $MaxX = -180;
             $MinY =  90;
@@ -385,13 +381,11 @@ class Region extends Model
                 $r = null;
             }
             $this->session->q->setDBConnection($this->get('RegionId'));
-            if ($iReturn > 0) {
-                $this->set('GeoLimitMinX', $MinX);
-                $this->set('GeoLimitMaxX', $MaxX);
-                $this->set('GeoLimitMinY', $MinY);
-                $this->set('GeoLimitMaxY', $MaxY);
-                $this->update();
-            }
+            $this->set('GeoLimitMinX', $MinX);
+            $this->set('GeoLimitMaxX', $MaxX);
+            $this->set('GeoLimitMinY', $MinY);
+            $this->set('GeoLimitMaxY', $MaxY);
+            $this->update();
         }
     }
 
@@ -514,7 +508,6 @@ class Region extends Model
 
     public function toXML()
     {
-        $iReturn = self::ERR_NO_ERROR;
         $doc = new DomDocument('1.0', 'UTF-8');
         $root = $doc->createElement('RegionInfo');
         $root->setAttribute('Version', '1.0');
@@ -558,14 +551,10 @@ class Region extends Model
                 }
             }
         } catch (Exception $e) {
-            $iReturn = self::ERR_NO_ERROR;
-        }
-        if ($iReturn > 0) {
-            // Save to String...
-            $xml = $doc->saveXML();
-        } else {
             $xml = '';
         }
+        // Save to String...
+        $xml = $doc->saveXML();
         return $xml;
     }
 

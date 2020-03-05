@@ -197,13 +197,12 @@ class RegionRecord extends Region
                 $r = null;
             }
             $this->session->q->setDBConnection($this->get('RegionId'));
-            if ($iReturn > 0) {
-                $this->set('GeoLimitMinX', $MinX);
-                $this->set('GeoLimitMaxX', $MaxX);
-                $this->set('GeoLimitMinY', $MinY);
-                $this->set('GeoLimitMaxY', $MaxY);
-                $this->update();
-            }
+
+            $this->set('GeoLimitMinX', $MinX);
+            $this->set('GeoLimitMaxX', $MaxX);
+            $this->set('GeoLimitMinY', $MinY);
+            $this->set('GeoLimitMaxY', $MaxY);
+            $this->update();
         }
     }
 

@@ -666,19 +666,16 @@ class RegionDatabase extends Region
 
     public function addRegionItemGeography($prmRegionItemId, $prmRegionItemGeographyId)
     {
-        $iReturn = self::ERR_NO_ERROR;
         $q = $this->conn;
 
         // Copy Geography From Database
-        if ($iReturn > 0) {
-            $RegionItemDir = $this->getRegionDatabaseDir($prmRegionItemId);
-            $RegionItemDB = $RegionItemDir . '/desinventar.db';
-            // Attach Database
-            $q->query($this->attachQuery($prmRegionItemId, 'RegItem'));
-            $this->copyData($q, 'Geography', 'GeographyId', $prmRegionItemId, $prmRegionItemGeographyId, false);
-            $q->query($this->detachQuery('RegItem'));
-        }
-        return $iReturn;
+        $RegionItemDir = $this->getRegionDatabaseDir($prmRegionItemId);
+        $RegionItemDB = $RegionItemDir . '/desinventar.db';
+        // Attach Database
+        $q->query($this->attachQuery($prmRegionItemId, 'RegItem'));
+        $this->copyData($q, 'Geography', 'GeographyId', $prmRegionItemId, $prmRegionItemGeographyId, false);
+        $q->query($this->detachQuery('RegItem'));
+        return self::ERR_NO_ERROR;
     }
 
     public function rebuildEventData()

@@ -156,7 +156,7 @@ class DIImport
     public function importFromCSV($prmFileCSV, $prmImport)
     {
         $last_line = $this->params['lineCount'];
-        $skipLines = $this->params['headerCount'] + $this->params['offset'];
+        $skipLines = (int) $this->params['headerCount'] + $this->params['offset'];
 
         $last_line = $last_line + $skipLines + 1;
         $fh = fopen($prmFileCSV, 'r');

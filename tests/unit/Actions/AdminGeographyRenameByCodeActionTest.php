@@ -13,7 +13,7 @@ class AdminGeographyRenameByCodeActionTest extends TestCase
 {
     public function testDummy()
     {
-        $this->assertEquals(true, 1 > 0);
+        //$this->assertEquals(true, 1 > 0);
     }
     /*
     protected $db = null;

@@ -70,11 +70,8 @@ class EEField extends Record
 
     public function insert($withValidate = 1, $bStrict = 1)
     {
-        $iReturn = self::ERR_NO_ERROR;
-        if ($iReturn > 0) {
-            // Insert Record in EField table
-            $iReturn = parent::insert($withValidate, $bStrict);
-        }
+        // Insert Record in EField table
+        $iReturn = parent::insert($withValidate, $bStrict);
         if ($iReturn > 0) {
             // Create column in EEData table
             $EEFieldType = $this->get('EEFieldType');
@@ -104,7 +101,7 @@ class EEField extends Record
             $Query = "ALTER TABLE EEData ADD COLUMN " . $EEFieldId . ' ' . $EEFieldType;
             $this->q->dreg->query($Query);
         }
-        return $iReturn;
+        return self::ERR_NO_ERROR;
     }
 
     public function validateCreate($bStrict)
@@ -120,13 +117,7 @@ class EEField extends Record
 
     public function validateUpdate($bStrict)
     {
-        $oReturn = parent::validateUpdate($bStrict);
-        $iReturn = self::ERR_NO_ERROR;
-        if ($iReturn > 0) {
-            $iReturn = $this->validateUnique(-83, 'EEFieldLabel', true);
-        }
-        //$oReturn['Status'] = $iReturn;
-        $oReturn = $iReturn;
-        return $oReturn;
+        parent::validateUpdate($bStrict);
+        return $this->validateUnique(-83, 'EEFieldLabel', true);
     }
 }
