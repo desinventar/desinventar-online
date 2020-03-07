@@ -14,6 +14,12 @@
       <exclude name="ExcessiveClassComplexity" />
       <exclude name="CyclomaticComplexity" />
       <exclude name="NPathComplexity" />
+      <exclude name="TooManyPublicMethods" />
+    </rule>
+    <rule ref="rulesets/codesize.xml/TooManyPublicMethods">
+      <properties>
+        <property name="maxmethods" value="20" />
+      </properties>
     </rule>
     <rule ref="rulesets/design.xml">
       <exclude name="CouplingBetweenObjects" />
@@ -21,5 +27,12 @@
     <rule ref="rulesets/unusedcode.xml"></rule>
     <rule ref="rulesets/naming.xml">
         <exclude name="ShortVariable"/>
+        <exclude name="LongVariable" />
+    </rule>
+    <rule ref="rulesets/naming.xml/LongVariable">
+      <priority>3</priority>
+      <properties>
+        <property name="maximum" value="30" />
+      </properties>
     </rule>
 </ruleset>
