@@ -5,6 +5,7 @@ use DesInventar\Legacy\Model\DisasterImport;
 use DesInventar\Legacy\Model\Event;
 use DesInventar\Legacy\Model\Cause;
 use DesInventar\Legacy\Model\GeographyItem;
+use \Exception;
 
 class DIImport
 {
@@ -43,12 +44,12 @@ class DIImport
     public static function loadParamsFromFile($fileName)
     {
         if (!file_exists($fileName)) {
-            throw new \Exception('Import Error: Cannot find field definition file');
+            throw new Exception('Import Error: Cannot find field definition file');
         }
         $json = (string) file_get_contents($fileName);
         $params = json_decode($json, true);
         if (empty($params)) {
-            throw new \Exception('Import Error: Cannot import field definitions from file');
+            throw new Exception('Import Error: Cannot import field definitions from file');
         }
         return $params;
     }
@@ -110,7 +111,7 @@ class DIImport
                 $name = $values[$this->geography['index']];
                 $id = $this->findGeographyIdByName($name, $this->geography['separator']);
                 if (empty($id)) {
-                    throw new \Exception('Error trying to match geography name: ' . $name);
+                    throw new Exception('Error trying to match geography name: ' . $name);
                 }
                 return $id;
             case 'code':
@@ -118,7 +119,7 @@ class DIImport
                 $code = $values[$this->geography['code']];
                 $id = GeographyItem::getIdByCode($this->session, $code);
                 if (empty($id)) {
-                    throw new \Exception('Error trying to match geography code: ' . $code);
+                    throw new Exception('Error trying to match geography code: ' . $code);
                 }
                 return $id;
         }
@@ -129,7 +130,7 @@ class DIImport
         $name = $this->getName($values, $this->event);
         $id = Event::getIdByName($this->session, $name);
         if (empty($id)) {
-            throw new \Exception('Error trying to match event: ' . $name);
+            throw new Exception('Error trying to match event: ' . $name);
         }
         return $id;
     }
@@ -139,7 +140,7 @@ class DIImport
         $name = $this->getName($values, $this->cause);
         $id = $name == '' ? 'UNKNOWN' : Cause::getIdByName($this->session, $name);
         if (empty($id)) {
-            throw new \Exception('Error trying to match cause: ' . $name);
+            throw new Exception('Error trying to match cause: ' . $name);
         }
         return $id;
     }
@@ -153,6 +154,15 @@ class DIImport
         return $name;
     }
 
+    public function validateOnCreateOrUpdate($d)
+    {
+        $bExist = $d->exist();
+        if ($bExist < 0) {
+            return $d->validateCreate(1);
+        }
+        return $d->validateUpdate(1);
+    }
+
     public function importFromCSV($prmFileCSV, $prmImport)
     {
         $last_line = $this->params['lineCount'];
@@ -161,7 +171,7 @@ class DIImport
         $last_line = $last_line + $skipLines + 1;
         $fh = fopen($prmFileCSV, 'r');
         if (!$fh) {
-            throw new \Exception('Cannot open CSV file');
+            throw new Exception('Cannot open CSV file');
         }
         $line = 1;
         while ($line <= $skipLines) {
@@ -174,7 +184,8 @@ class DIImport
             if (!is_array($a) || count($a) < 2) {
                 continue;
             }
-            for ($i = 0; $i<count($a); $i++) {
+            $aLength = count($a);
+            for ($i = 0; $i < $aLength; $i++) {
                 $a[$i] = trim($a[$i]);
             }
 
@@ -196,12 +207,7 @@ class DIImport
             }
 
             $bExist = $d->exist();
-            if ($bExist < 0) {
-                // Verificar solamente los datos, no importa nada...
-                $r = $d->validateCreate(1);
-            } else {
-                $r = $d->validateUpdate(1);
-            }
+            $r = $this->validateOnCreateOrUpdate($d);
             if ($r < 0) {
                 fprintf(STDERR, 'Error en validación serial: %s Error: ' . "\n", $DisasterSerial, $r);
             }
@@ -265,7 +271,10 @@ class DIImport
         }
         $res = [];
         while (($data = fgetcsv($handle, 100, ',')) !== false) {
-            $res[] = array($data[0], $data[1], $data[2], $data[3], $data[4]);
+            $row = $data ? $data : [];
+            if (count($row) > 0) {
+                $res[] = array($row[0], $row[1], $row[2], $row[3], $row[4]);
+            }
         }
         fclose($handle);
         return $res;
