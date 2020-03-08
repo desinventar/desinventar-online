@@ -18,6 +18,7 @@ $getopts->addOption('password')->long('password')->required()->argument('passwor
 $getopts->addOption('dry')->long('dry');
 $getopts->addOption('lineCount')->long('count')->argument('count');
 $getopts->addOption('offset')->long('offset')->argument('offset');
+$getopts->addOption('loglevel')->long('loglevel')->required()->argument('loglevel');
 
 try {
     $getopts->parse();
@@ -32,13 +33,15 @@ if ($getopts->get('offset')) {
     $params['offset'] = $getopts->get('offset');
 }
 
+$logLevel = intval($getopts->get('loglevel') ? $getopts->get('loglevel') : Logger::DEBUG);
+
 $us->login($getopts->get('username'), $getopts->get('password'), false);
 $us->open($getopts->get('databaseId'));
 
 $doImport = $getopts->get('dry') ? false : true;
 
 $logger = new Logger('import');
-$logger->pushHandler(new StreamHandler('php://stdout', Logger::DEBUG));
+$logger->pushHandler(new StreamHandler('php://stdout', $logLevel));
 
 $import = new DIImport($us, $logger, $params);
 $import->importFromCSV($getopts->get('csvFile'), $doImport);
