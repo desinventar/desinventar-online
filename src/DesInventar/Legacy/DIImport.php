@@ -207,7 +207,7 @@ class DIImport
             }
 
             if (($line > 0) && (($line % 100) == 0)) {
-                fprintf(STDOUT, '%04d' . "\n", $line);
+                $this->logger->info(sprintf('LineCount: %04d', $line));
             }
 
             if (!$prmImport) {

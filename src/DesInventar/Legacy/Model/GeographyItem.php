@@ -41,14 +41,10 @@ class GeographyItem extends Record
 
     public static function existId($prmSession, $prmGeographyId)
     {
-        $bFound = 0;
         $LangIsoCode = $prmSession->q->getDBInfoValue('LangIsoCode');
         $Query= "SELECT * FROM Geography WHERE GeographyId='" . $prmGeographyId . "' " .
                 " AND LangIsoCode='" . $LangIsoCode . "'";
-        foreach ($prmSession->q->dreg->query($Query) as $row) {
-            $bFound = 1;
-        }
-        return $bFound;
+        return count($prmSession->q->dreg->query($Query)) > 0;
     }
 
     public static function getNameById($prmSession, $prmGeographyId)
@@ -201,7 +197,6 @@ class GeographyItem extends Record
 
     public function validateCreate($bStrict)
     {
-        $iReturn = 1;
         $iReturn = $this->validateNotNull(-41, 'GeographyId');
         if ($iReturn > 0) {
             $iReturn = $this->validatePrimaryKey(-42);
@@ -229,7 +224,7 @@ class GeographyItem extends Record
 
     public function validateUpdate($bStrict)
     {
-        $oReturn = parent::validateUpdate($bStrict);
+        parent::validateUpdate($bStrict);
         $iReturn = $this->validateNotNull(-43, 'GeographyCode');
         if ($iReturn > 0) {
             $iReturn = $this->validateUnique(-44, 'GeographyCode');
@@ -258,31 +253,31 @@ class GeographyItem extends Record
         return $iReturn;
     }
 
+    public static function getMoveNodeToQuery($prmGeographyIdPrefix, $withChildren)
+    {
+        if ($withChildren) {
+            return "SELECT * FROM Geography WHERE GeographyId LIKE '" . $prmGeographyIdPrefix . "%'";
+        }
+        return "SELECT * FROM Geography WHERE GeographyId='" . $prmGeographyIdPrefix . "'";
+    }
+
     public static function moveNodeTo(
         $prmSession,
         $prmGeographyIdPrefix,
         $prmNewGeographyIdPrefix,
-        $prmGeographyCodePrefix,
         $prmNewGeographyCodePrefix,
         $withChildren
     ) {
         /* Move geography to a different parent node, updates
            GeographyId and associated Disaster records
         */
-        if ($withChildren) {
-            $Query = "SELECT * FROM Geography WHERE GeographyId LIKE '" . $prmGeographyIdPrefix . "%'";
-        } else {
-            $Query = "SELECT * FROM Geography WHERE GeographyId='" . $prmGeographyIdPrefix . "'";
-        }
+        $Query = self::getMoveNodeToQuery($prmGeographyIdPrefix, $withChildren);
         foreach ($prmSession->q->dreg->query($Query) as $row) {
             $GeographyId = $row['GeographyId'];
             $newGeographyId = $GeographyId;
 
             if ($prmNewGeographyIdPrefix != '') {
                 $newGeographyId = $prmNewGeographyIdPrefix . substr($GeographyId, strlen($prmNewGeographyIdPrefix));
-
-                // New Id must not exist in database...
-                $bExist = self::existId($prmSession, $newGeographyId);
             }
             $g = new self($prmSession, $GeographyId);
             if ($GeographyId != $newGeographyId) {
@@ -302,10 +297,8 @@ class GeographyItem extends Record
                 $g->setGeographyFQName();
             }
             // Update GeographyCode
-            $GeographyCode = $g->get('GeographyCode');
-            $newGeographyCode = $prmNewGeographyCodePrefix;
-            $g->set('GeographyCode', $newGeographyCode);
-            $r = $g->update();
+            $g->set('GeographyCode', $prmNewGeographyCodePrefix);
+            $g->update();
         }
         return self::ERR_NO_ERROR;
     }
