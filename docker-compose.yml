@@ -63,6 +63,7 @@ services:
       - DESINVENTAR_URL
       - DESINVENTAR_PORTAL_CACHEDIR
       - TEST_PORTAL_URL
+      - DESINVENTAR_PORTAL_TYPE=${DESINVENTAR_PORTAL_TYPE:-desinventar}
   liquibase:
     build:
       context: .

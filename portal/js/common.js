@@ -213,6 +213,7 @@ function displayRegionInfo(RegionId) {
   jQuery('#pageinfo').show()
 }
 
+me.doGetRegionInfo = doGetRegionInfo
 me.displayRegionInfo = displayRegionInfo
 
 export default me

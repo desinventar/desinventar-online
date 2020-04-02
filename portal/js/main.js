@@ -104,7 +104,7 @@ me.init = () => {
   jQuery('.MenuItem').click(function() {
     var MenuItem = jQuery(this).attr('id')
     if (MenuItem == 'mnuShowMap') {
-      displayPortal('portal')
+      displayPortal(jQuery('#desinventarPortalType').val())
       showMap()
     }
     // Prevent default action
@@ -171,7 +171,7 @@ me.init = () => {
 function displayPortal(myPortal) {
   // Select which portal to display : main, gar2009, gar2011
   jQuery('.divBlock').hide()
-  jQuery('#desinventarPortalType').val(myPortal)
+  //jQuery('#desinventarPortalType').val(myPortal)
   switch (myPortal) {
     case 'gar2009':
     case 'gar-isdr-2009':
@@ -180,6 +180,10 @@ function displayPortal(myPortal) {
     case 'gar-isdr-2011':
     case 'gar2011':
       jQuery('.divBlockGAR2011').show()
+      break
+    case 'covid-19-col':
+      common.doGetRegionInfo('COL-2020320184328')
+      jQuery('.divCovid-19-Col').show()
       break
     default:
       jQuery('.divBlockSouthAmerica').show()

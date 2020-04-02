@@ -147,6 +147,7 @@
 								</div>
 							</div>
 							<div class="contentBlock" id="pagemap" style="display:none">
+								{-include file="block_covid-19_col.tpl"-}
 								{-include file="block_southamerica.tpl"-}
 								{-include file="block_gar2009.tpl"-}
 								{-include file="block_gar2011.tpl"-}

@@ -45,7 +45,9 @@ $container['logger'] = function () {
 };
 
 $app->get('/', function (Request $request, Response $response, array $args) use ($container, $t) {
-    $portaltype = $request->getParam('portaltype', 'desinventar');
+    $portaltype = getenv('DESINVENTAR_PORTAL_TYPE')
+      ? getenv('DESINVENTAR_PORTAL_TYPE')
+      : $request->getParam('portaltype', 'desinventar');
     $t->assign('desinventarPortalType', $portaltype);
 
     $version = new Version($container->get('config')->flags['mode']);

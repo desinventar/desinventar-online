@@ -26,3 +26,7 @@ files/database/*.conf
 portal/vendor/*
 .env
 yarn-error.log
+.scannerwork
+.phpunit.result.cache
+*.sqlite3
+sonar-project.properties
