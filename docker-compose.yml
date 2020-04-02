@@ -48,6 +48,7 @@ services:
       - TEST_PORTAL_URL
       - DESINVENTAR_LOGGER_FILE
       - DESINVENTAR_LOGGER_LEVEL
+      - DESINVENTAR_PORTAL_TYPE=${DESINVENTAR_PORTAL_TYPE:-desinventar}
   test:
     build:
       context: .

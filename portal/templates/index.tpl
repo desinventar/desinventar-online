@@ -147,9 +147,10 @@
                                 </div>
                             </div>
                             <div class="contentBlock" id="pagemap" style="display:none">
-                                {-include file="block_southamerica.tpl"-}
-                                {-include file="block_gar2009.tpl"-}
-                                {-include file="block_gar2011.tpl"-}
+                              {-include file="block_covid-19_col.tpl"-}
+                              {-include file="block_southamerica.tpl"-}
+                              {-include file="block_gar2009.tpl"-}
+                              {-include file="block_gar2011.tpl"-}
                             </div>
                         </td>
                         <td class="der" width="10"><img src="{-$desinventarURLPortal-}/images/bgder.gif" width="32" height="5" alt="" />

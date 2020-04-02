@@ -201,5 +201,6 @@ function displayRegionInfo(RegionId) {
 }
 
 common.displayRegionInfo = displayRegionInfo
+common.doGetRegionInfo = doGetRegionInfo
 
 export default common

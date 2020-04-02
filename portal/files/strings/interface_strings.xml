@@ -226,10 +226,10 @@
       <Text LangIsoCode="fre">Pacifique Sud</Text>
     </Message>
     <Message id="tcopyright">
-      <Text LangIsoCode="eng">(c) 1998-2018 Corporación OSSO - Colombia</Text>
-      <Text LangIsoCode="spa">(c) 1998-2018 Corporación OSSO - Colombia</Text>
-      <Text LangIsoCode="por">(c) 1998-2018 Corporação OSSO - Colômbia</Text>
-      <Text LangIsoCode="fre">(c) 1998-2018 Corporación OSSO - Colombia</Text>
+      <Text LangIsoCode="eng">(c) 1998-2020 Corporación OSSO - Colombia</Text>
+      <Text LangIsoCode="spa">(c) 1998-2020 Corporación OSSO - Colombia</Text>
+      <Text LangIsoCode="por">(c) 1998-2020 Corporação OSSO - Colômbia</Text>
+      <Text LangIsoCode="fre">(c) 1998-2020 Corporación OSSO - Colombia</Text>
     </Message>
     <Message id="tcountryARG">
       <Text LangIsoCode="eng">Argentina</Text>
