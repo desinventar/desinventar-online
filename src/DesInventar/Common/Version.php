@@ -4,14 +4,15 @@ namespace DesInventar\Common;
 
 class Version
 {
-    protected $majorVersion = '10';
-    protected $version = '10.03.004';
-    protected $releaseDate = '2020-04-03';
+    protected $majorVersion;
+    protected $version;
+    protected $releaseDate;
     protected $mode = 'devel';
 
     public function __construct($mode)
     {
         $this->mode = $mode;
+        $this->readVersion(dirname(dirname(dirname(dirname(__FILE__)))) . '/package.json');
     }
 
     public function getMajorVersion()
@@ -57,5 +58,23 @@ class Version
             return time();
         }
         return $output;
+    }
+
+    protected function readVersion($filePath)
+    {
+        $package = $this->readJsonFile($filePath);
+        $this->version = $package['version'];
+        $this->releaseDate = $package['desinventar']['releaseDate'];
+        $versionParts = explode('.', $this->version);
+        $this->majorVersion = $versionParts[0];
+    }
+
+    private function readJsonFile($filePath)
+    {
+        $content = file_get_contents($filePath);
+        if (!$content) {
+            return false;
+        }
+        return json_decode($content, true);
     }
 }
