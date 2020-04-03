@@ -1,4 +1,4 @@
-<div class="divBlock divBlockSouthAmerica" style="display:none;">
+<div class="divBlock divBlockSouthAmerica divCovid-19-Col" style="display:none;">
     <table width="133" border="0" cellpadding="0" cellspacing="0" align="center">
     <tr>
         <td width="100%">
