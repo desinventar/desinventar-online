@@ -1,6 +1,6 @@
 {
   "name": "desinventar",
-  "version": "10.0.0",
+  "version": "10.03.004",
   "description": "DesInventar Online",
   "main": ".eslintrc.js",
   "scripts": {
