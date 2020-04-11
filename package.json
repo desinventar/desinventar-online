@@ -1,6 +1,6 @@
 {
   "name": "desinventar",
-  "version": "10.03.004",
+  "version": "10.03.005",
   "description": "DesInventar Online",
   "keywords": [
     "desinventar",
@@ -15,7 +15,7 @@
     "email": "jhcaiced@desinventar.org"
   },
   "desinventar": {
-    "releaseDate": "2020-04-03"
+    "releaseDate": "2020-04-11"
   },
   "main": ".eslintrc.js",
   "scripts": {
