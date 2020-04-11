@@ -20,12 +20,12 @@ RUN yum -y install liberation-fonts-common liberation-sans-fonts
 RUN yum -y install liberation-mono-fonts liberation-serif-fonts
 RUN yum -y install yum-plugin-versionlock
 
-# Update to PHP 7.2
+# Update to PHP 7.3
 RUN yum install -y http://rpms.remirepo.net/enterprise/remi-release-6.rpm
 RUN yum -y install yum-plugin-replace yum-utils
-RUN yum-config-manager --enable remi-php72
-RUN yum -y install php72-php php72-php-cli php72-php-common php72-php-gd php72-php-xml php72-php-pdo php72-php-mbstring php72-php-redis php72-php-pecl-igbinary
-RUN ln -s /usr/bin/php72 /usr/bin/php
+RUN yum-config-manager --enable remi-php73
+RUN yum -y install php73-php php73-php-cli php73-php-common php73-php-gd php73-php-xml php73-php-pdo php73-php-mbstring php73-php-redis php73-php-pecl-igbinary
+RUN ln -s /usr/bin/php73 /usr/bin/php
 
 RUN yum -y --enablerepo=desinventar install liberation-fonts-extras
 RUN yum -y --enablerepo=epel install mapserver proj proj-epsg proj-nad
@@ -41,15 +41,15 @@ RUN install -m 755 -o apache -g apache -d /var/local/desinventar/tmp
 RUN install -m 755 -o apache -g apache -d /var/local/desinventar/db
 
 # Install composer to handle dependencies
-RUN curl --silent --show-error https://getcomposer.org/installer > /tmp/composer-setup.php && \
-  php /tmp/composer-setup.php --no-ansi --install-dir=/usr/local/bin --filename=composer --snapshot
+# Use latest 1.x version (2.x version doesn't work because of some of the required modules)
+RUN curl --silent --show-error https://getcomposer.org/download/1.10.1/composer.phar > /usr/local/bin/composer && chmod 755 /usr/local/bin/composer
 
 # Install nvm + node + npm
 ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 10.16.0
-RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash \
-    && source $NVM_DIR/nvm.sh \
-    && nvm install $NODE_VERSION \
+ENV NODE_VERSION 10.20.0
+RUN mkdir -p $NVM_DIR && curl https://raw.githubusercontent.com/creationix/nvm/v0.35.3/install.sh | bash && \
+    source $NVM_DIR/nvm.sh && \
+    nvm install $NODE_VERSION \
     && nvm alias default $NODE_VERSION \
     && nvm use default
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules

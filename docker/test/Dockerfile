@@ -10,8 +10,8 @@ RUN apt-get -y update
 RUN apt-get -y install git wget tar curl firefox php-cli
 
 # Install composer to handle dependencies
-RUN curl --silent --show-error https://getcomposer.org/installer > /tmp/composer-setup.php && \
-  php /tmp/composer-setup.php --no-ansi --install-dir=/usr/local/bin --filename=composer --snapshot
+# Use latest 1.x version (2.x version doesn't work because of some of the required modules)
+RUN curl --silent --show-error https://getcomposer.org/download/1.10.1/composer.phar > /usr/local/bin/composer && chmod 755 /usr/local/bin/composer
 
 RUN apt-get -q -y install git curl lsb-release software-properties-common apt-transport-https make
 
@@ -22,13 +22,13 @@ RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - \
   && apt-get install -q -y docker-ce
 
 # Docker Compose
-RUN curl -s -L https://github.com/docker/compose/releases/download/1.24.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose \
+RUN curl -s -L https://github.com/docker/compose/releases/download/1.25.4/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose \
   && chmod +x /usr/local/bin/docker-compose
 
 # Install nvm + node + npm
 ENV NVM_DIR /usr/bin
-ENV NODE_VERSION 10.16.0
-RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash \
+ENV NODE_VERSION 12.16.1
+RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.35.3/install.sh | bash \
   && . $NVM_DIR/nvm.sh \
   && nvm install $NODE_VERSION \
   && nvm alias default $NODE_VERSION \
