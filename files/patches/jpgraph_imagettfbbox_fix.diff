@@ -1,0 +1,22 @@
+--- jpgraph_orig/src/gd_image.inc.php	2020-04-10 20:27:27.084634664 -0500
++++ jpgraph/src/gd_image.inc.php	2020-04-10 20:36:20.609020725 -0500
+@@ -696,6 +696,9 @@
+ 
+             $bbox = @imagettfbbox($size, $angle, $fontfile, $text);
+             if( $bbox === false ) {
++                $bbox = @imagettfbbox($size, $angle, $fontfile, $text . ' ');
++            }
++            if( $bbox === false ) {
+                 JpGraphError::RaiseL(25092,$this->font_file);
+                 //("There is either a configuration problem with TrueType or a problem reading font file (".$this->font_file."). Make sure file exists and is in a readable place for the HTTP process. (If 'basedir' restriction is enabled in PHP then the font file must be located in the document root.). It might also be a wrongly installed FreeType library. Try uppgrading to at least FreeType 2.1.13 and recompile GD with the correct setup so it can find the new FT library.");
+             }
+@@ -708,6 +711,9 @@
+         // angle = 0 and then rotate the bounding box manually
+         $bbox = @imagettfbbox($size, 0, $fontfile, $text);
+         if( $bbox === false ) {
++            $bbox = @imagettfbbox($size, 0, $fontfile, $text . ' ');
++        }
++        if( $bbox === false ) {
+             JpGraphError::RaiseL(25092,$this->font_file);
+             //("There is either a configuration problem with TrueType or a problem reading font file (".$this->font_file."). Make sure file exists and is in a readable place for the HTTP process. (If 'basedir' restriction is enabled in PHP then the font file must be located in the document root.). It might also be a wrongly installed FreeType library. Try uppgrading to at least FreeType 2.1.13 and recompile GD with the correct setup so it can find the new FT library.");
+         }

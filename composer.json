@@ -59,7 +59,8 @@
   "extra": {
     "patches": {
       "jpgraph": {
-        "jpgraph patches for PHP7": "files/patches/jpgraph_php7_compatibility.diff"
+        "jpgraph patches for PHP7": "files/patches/jpgraph_php7_compatibility.diff",
+        "jpgraph imagettfbbox": "files/patches/jpgraph_imagettfbbox_fix.diff"
       }
     }
   }
