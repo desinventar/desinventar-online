@@ -1,5 +1,5 @@
 # CentOS 6 + Updates + DesInventar Prerequisites
-FROM desinventar/centos6:v20190531-01
+FROM desinventar/centos6:v20200411-01
 LABEL maintainer="Jhon H. Caicedo"
 LABEL e-mail="jhcaiced@inticol.com"
 
@@ -25,8 +25,8 @@ ENV DESINVENTAR_PORTAL_CACHEDIR=$DESINVENTAR_PORTAL_CACHEDIR
 ENV DESINVENTAR_URL=$DESINVENTAR_URL
 
 RUN yum -y install php-redis
-RUN sed -i 's#"files"#"redis"#' /etc/httpd/conf.d/php72-php.conf
-RUN sed -i 's#"/var/opt/remi/php72/lib/php/session"#"tcp://redis:6379"#' /etc/httpd/conf.d/php72-php.conf
+RUN sed -i 's#"files"#"redis"#' /etc/httpd/conf.d/php73-php.conf
+RUN sed -i 's#"/var/opt/remi/php73/lib/php/session"#"tcp://redis:6379"#' /etc/httpd/conf.d/php73-php.conf
 
 RUN mkdir -p /var/www/html
 RUN echo "<html><head><title>DesInventar</title></head><body><h3>DesInventar</h3></body></html>" > /var/www/html/index.html

@@ -1,5 +1,5 @@
 # CentOS 6 + Updates + DesInventar Prerequisites
-FROM desinventar/centos6:v20190531-01
+FROM desinventar/centos6:v20200411-01
 LABEL maintainer="Jhon H. Caicedo"
 LABEL e-mail="jhcaiced@inticol.com"
 

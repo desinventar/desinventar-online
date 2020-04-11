@@ -27,7 +27,7 @@ RUN curl -s -L https://github.com/docker/compose/releases/download/1.25.4/docker
 
 # Install nvm + node + npm
 ENV NVM_DIR /usr/bin
-ENV NODE_VERSION 12.16.1
+ENV NODE_VERSION 10.20.0
 RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.35.3/install.sh | bash \
   && . $NVM_DIR/nvm.sh \
   && nvm install $NODE_VERSION \

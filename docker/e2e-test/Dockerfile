@@ -1,4 +1,4 @@
-FROM desinventar/test:v20200411-01
+FROM desinventar/test:v20200411-02
 LABEL maintainer="Jhon H. Caicedo"
 LABEL e-mail="jhcaiced@inticol.com"
 
