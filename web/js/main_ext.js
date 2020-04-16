@@ -232,10 +232,10 @@ function doMainMenuHandler(item) {
       Ext.getCmp('wndDialog').show()
       break
     case 'mnuHelpWebsite':
-      window.open('http://www.desinventar.org', '', '')
+      window.open('https://www.desinventar.org', '', '')
       break
     case 'mnuHelpMethodology':
-      var url = 'http://www.desinventar.org'
+      var url = 'https://www.desinventar.org'
       if (jQuery('#desinventarLang').val() == 'spa') {
         url = url + '/es/metodologia'
       } else {
@@ -244,9 +244,19 @@ function doMainMenuHandler(item) {
       window.open(url, '', '')
       break
     case 'mnuHelpDocumentation':
-      window.open('http://www.desinventar.org/', '', '')
+      window.open(getUrlDocumentation(), '', '')
       break
   }
+}
+
+function getUrlDocumentation() {
+  var url = 'https://www.desinventar.org'
+  if (jQuery('#desinventarLang').val() == 'spa') {
+    url = url + '/es/software'
+  } else {
+    url = url + '/en/software'
+  }
+  return url
 }
 
 function menuHandlerForUser(menuCmd) {
