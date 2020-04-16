@@ -385,12 +385,12 @@ class LegacyIndex
                 return htmlspecialchars(json_encode($answer), ENT_NOQUOTES, 'UTF-8');
                 break;
             case 'cmdDatabaseUsersUpdateOptions':
-                $iReturn = ERR_NO_ERROR;
-                $answer = array();
+                $iReturn = true;
+                $answer = [];
                 if ($desinventarUserRoleValue < ROLE_ADMINREGION) {
-                    $iReturn = ERR_ACCESS_DENIED;
+                    $iReturn = false;
                 }
-                if ($iReturn > 0) {
+                if ($iReturn) {
                     $r = new Region($us, $RegionId);
                     $r->set('RegionStatus', $_POST['RegionStatus']);
                     $r->set('RegionOrder', $_POST['RegionOrder']);

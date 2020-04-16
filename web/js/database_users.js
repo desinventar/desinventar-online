@@ -38,7 +38,7 @@ function init() {
       },
       function(data) {
         jQuery('.clsDatabaseUsersStatus').hide()
-        if (parseInt(data.Status) > 0) {
+        if (data.Status) {
           doDatabaseUsersUpdateOptions(data.RegionInfo)
           jQuery('#txtDatabaseUsers_OptionsStatusOk').show()
         } else {
