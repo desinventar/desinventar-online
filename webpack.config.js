@@ -2,7 +2,7 @@ var webpack = require('webpack')
 
 module.exports = {
   mode: 'development',
-  entry: `${__dirname}/web/js/entry.js`,
+  entry: ['@babel/polyfill', `${__dirname}/web/js/entry.js`],
   output: {
     path: `${__dirname}/web/scripts`,
     filename: 'bundle.js'
@@ -38,5 +38,6 @@ module.exports = {
   plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
   performance: {
     hints: false
-  }
+  },
+  devtool: 'source-map'
 }
