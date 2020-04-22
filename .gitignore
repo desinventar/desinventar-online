@@ -20,7 +20,7 @@ config/*.json
 .vscode
 npm-debug.log
 bower_components
-web/scripts/bundle.js
+web/scripts/*
 portal/web/scripts/*
 files/database/*.db
 files/database/*.conf
