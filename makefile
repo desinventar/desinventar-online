@@ -57,6 +57,10 @@ php-lint: .FORCE
 phpcs: .FORCE
 	./vendor/bin/phpcs .
 
+phpcs-security: .FORCE
+	sh vendor/pheromone/phpcs-security-audit/symlink.sh && \
+	./vendor/bin/phpcs -np --standard=./vendor/pheromone/phpcs-security-audit/example_base_ruleset.xml portal scripts src tests web
+
 phpmd: .FORCE
 	find config files src/Api src/DesInventar/Common src/DesInventar/Models src/DesInventar/Services src/DesInventar/Actions tests portal \
 		-name \*.php -exec ./vendor/bin/phpmd {} text phpmd.xml \;
