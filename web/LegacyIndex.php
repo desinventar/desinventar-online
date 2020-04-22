@@ -1189,18 +1189,6 @@ class LegacyIndex
             case 'profiles':
             case 'reports':
             case 'cmdProfiles':
-                require_once($config->paths['jpgraph_dir'] . '/jpgraph.php');
-                require_once($config->paths['jpgraph_dir'] . '/jpgraph_line.php');
-                require_once($config->paths['jpgraph_dir'] . '/jpgraph_log.php');
-                require_once($config->paths['jpgraph_dir'] . '/jpgraph_date.php');
-                require_once($config->paths['jpgraph_dir'] . '/jpgraph_bar.php');
-                require_once($config->paths['jpgraph_dir'] . '/jpgraph_pie.php');
-                require_once($config->paths['jpgraph_dir'] . '/jpgraph_pie3d.php');
-                require_once('include/graphic.class.php');
-                require_once('include/diresult.class.php');
-                require_once('include/digraph.class.php');
-                require_once('include/digraphxml.class.php');
-                require_once('include/diprofile.class.php');
                 $post = $_POST;
                 fixPost($post);
                 $post['Common']['LangIsoCode'] = $lg;
@@ -1219,16 +1207,6 @@ class LegacyIndex
                 break;
             case 'cmdGraphShow':
             case 'cmdGraphSave':
-                require_once($config->paths['jpgraph_dir'] . '/jpgraph.php');
-                require_once($config->paths['jpgraph_dir'] . '/jpgraph_line.php');
-                require_once($config->paths['jpgraph_dir'] . '/jpgraph_log.php');
-                require_once($config->paths['jpgraph_dir'] . '/jpgraph_date.php');
-                require_once($config->paths['jpgraph_dir'] . '/jpgraph_bar.php');
-                require_once($config->paths['jpgraph_dir'] . '/jpgraph_pie.php');
-                require_once($config->paths['jpgraph_dir'] . '/jpgraph_pie3d.php');
-                require_once('include/graphic.class.php');
-                require_once('include/diresult.class.php');
-                require_once('include/digraph.class.php');
                 $post = $_POST;
                 fixPost($post);
                 $post['Common']['LangIsoCode'] = $lg;

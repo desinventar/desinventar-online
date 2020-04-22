@@ -40,7 +40,8 @@ switch ($cmd) {
         if (!iserror($ifo)) {
             $t->assign('ctl_msgupdinfo', true);
             if (isset($_FILES['logofile']) && $_FILES['logofile']['error'] == UPLOAD_ERR_OK) {
-                move_uploaded_file($_FILES['logofile']['tmp_name'], VAR_DIR . '/database/' . $RegionId . '/logo.png');
+                $uploadedLogo = $_FILES['logofile']['tmp_name'];
+                move_uploaded_file($uploadedLogo, VAR_DIR . '/database/' . $RegionId . '/logo.png');
             }
         } else {
             $t->assign('ctl_errupdinfo', true);

@@ -50,7 +50,21 @@
       "Test\\": [
         "tests/unit"
       ]
-    }
+    },
+    "classmap": [
+      "web/include/graphic.class.php",
+      "web/include/diresult.class.php",
+      "web/include/digraph.class.php",
+      "web/include/digraphxml.class.php",
+      "web/include/diprofile.class.php",
+      "vendor/desinventar/jpgraph/src/jpgraph.php",
+      "vendor/desinventar/jpgraph/src/jpgraph_bar.php",
+      "vendor/desinventar/jpgraph/src/jpgraph_pie.php",
+      "vendor/desinventar/jpgraph/src/jpgraph_pie3d.php",
+      "vendor/desinventar/jpgraph/src/jpgraph_line.php",
+      "vendor/desinventar/jpgraph/src/jpgraph_log.php",
+      "vendor/desinventar/jpgraph/src/jpgraph_date.php"
+    ]
   },
   "keywords": [
     "disasters",

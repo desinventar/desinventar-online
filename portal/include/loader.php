@@ -12,27 +12,25 @@ date_default_timezone_set('UTC');
 session_name('DESINVENTAR_SSID');
 session_start();
 
-error_reporting(E_ALL && ~E_NOTICE);
+error_reporting(E_ALL & ~E_NOTICE);
 header('Content-Type: text/html; charset=UTF-8');
 
-$confdir = dirname($_SERVER['SCRIPT_FILENAME']) . '/../conf';
-$confdir = dirname(dirname(__FILE__)) . '/conf';
-$templatedir = dirname($_SERVER['SCRIPT_FILENAME']) . '/../templates';
-
+$confDir = dirname(dirname(__FILE__)) . '/conf';
+$templateDir = dirname(dirname(__FILE__)) . '/templates';
 $t = new Smarty();
 $t->debugging       = false;
-$t->config_dir      = $confdir;
-$t->template_dir    = $templatedir;
-$t->compile_dir     = $config->portal['cache_dir'];
+$t->setConfigDir($confDir);
+$t->setTemplateDir($templateDir);
+$t->setCompileDir($config->get('portal')['cache_dir']);
 $t->left_delimiter  = '{-';
 $t->right_delimiter = '-}';
 $t->force_compile   = true;
 $t->caching         = 0;
 $t->cache_lifetime  = 3600;
-$t->compile_check   = false;
+$t->compile_check   = 0;
 
 // Configure DesInventar application location
-$desinventarURL = $config->portal['app_url'];
+$desinventarURL = $config->get('portal')['app_url'];
 if (empty($desinventarURL) && isset($_SERVER['DESINVENTAR_URL'])) {
     $desinventarURL = $_SERVER['DESINVENTAR_URL'];
 }
@@ -40,7 +38,9 @@ if (substr($desinventarURL, strlen($desinventarURL) - 1, 1) == '/') {
     $desinventarURL = substr($desinventarURL, 0, strlen($desinventarURL) - 1);
 }
 // Configure (portal) application location
-$desinventarURLPortal = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], '/'));
+$scriptName = $_SERVER['SCRIPT_NAME'];
+$lastSlashIndex = strrpos($scriptName, '/');
+$desinventarURLPortal = dirname(substr($scriptName, 0, $lastSlashIndex ? $lastSlashIndex : strlen($scriptName)));
 // Remove trailing slash in URL
 if (substr($desinventarURLPortal, strlen($desinventarURLPortal) - 1, 1) == '/') {
     $desinventarURLPortal = substr($desinventarURLPortal, 0, strlen($desinventarURLPortal) - 1);

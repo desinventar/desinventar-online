@@ -103,12 +103,15 @@ $container['errorHandler'] = function ($container) {
 
 $app->add(new SessionMiddleware($container));
 
-$app->add(RateLimitMiddleware::createDefault(
-    RateLimiterFactory::createRedisBackedRateLimiter([
-        'host' => $config->redis['host'],
-        'port' => intval($config->redis['port']),
-    ], $config->api['rate_limit'], $config->api['rate_window'])
-));
+$env = getenv('APP_ENV');
+if ($env === 'production') {
+    $app->add(RateLimitMiddleware::createDefault(
+        RateLimiterFactory::createRedisBackedRateLimiter([
+            'host' => $config->redis['host'],
+            'port' => intval($config->redis['port']),
+        ], $config->api['rate_limit'], $config->api['rate_window'])
+    ));
+}
 
 if ($config->debug['request']) {
     $app->add(new LoggerMiddleware($container));

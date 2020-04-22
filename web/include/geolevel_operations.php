@@ -12,9 +12,12 @@ function form2data($frm, $RegionId)
     if (isset($_FILES['GeoLevelFileSHP']) && $_FILES['GeoLevelFileSHP']['error'] == UPLOAD_ERR_OK &&
         isset($_FILES['GeoLevelFileSHX']) && $_FILES['GeoLevelFileSHX']['error'] == UPLOAD_ERR_OK &&
         isset($_FILES['GeoLevelFileDBF']) && $_FILES['GeoLevelFileDBF']['error'] == UPLOAD_ERR_OK) {
-        move_uploaded_file($_FILES['GeoLevelFileSHP']['tmp_name'], $cartoPath .'.shp');
-        move_uploaded_file($_FILES['GeoLevelFileSHX']['tmp_name'], $cartoPath .'.shx');
-        move_uploaded_file($_FILES['GeoLevelFileDBF']['tmp_name'], $cartoPath .'.dbf');
+        $uplodedShpFile = $_FILES['GeoLevelFileSHP']['tmp_name'];
+        $uploadedShxFile = $_FILES['GeoLevelFileSHX']['tmp_name'];
+        $uploadedDbfFile = $_FILES['GeoLevelFileDBF']['tmp_name'];
+        move_uploaded_file($uplodedShpFile, $cartoPath .'.shp');
+        move_uploaded_file($uploadedShxFile, $cartoPath .'.shx');
+        move_uploaded_file($uploadedDbfFile, $cartoPath .'.dbf');
     } elseif (!file_exists($cartoPath .'.shp') ||
         !file_exists($cartoPath .'.shx') ||
         !file_exists($cartoPath .'.dbf')

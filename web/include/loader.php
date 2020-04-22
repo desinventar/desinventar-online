@@ -2,17 +2,13 @@
 use DesInventar\Common\ConfigLoader;
 use DesInventar\Helpers\LoggerHelper;
 
-if (! isset($_SERVER['DESINVENTAR_WEB'])) {
-    $_SERVER['DESINVENTAR_WEB'] = dirname(dirname(__FILE__));
-}
-if (! isset($_SERVER['DESINVENTAR_SRC'])) {
-    $_SERVER['DESINVENTAR_SRC'] = dirname(dirname(dirname(__FILE__)));
-}
+$webDir = dirname(dirname(__FILE__));
+$srcDir = dirname(dirname(dirname(__FILE__)));
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-$config = new ConfigLoader($_SERVER['DESINVENTAR_SRC'] . '/config');
-$config->paths['src_dir'] = $_SERVER['DESINVENTAR_SRC'];
+$config = new ConfigLoader("{$srcDir}/config");
+$config->paths['src_dir'] = $srcDir;
 $logger = LoggerHelper::logger($config->logger);
 
 if (isset($_SERVER['HTTP_HOST'])) {
@@ -23,15 +19,12 @@ if (isset($_SERVER['HTTP_HOST'])) {
         $config->flags['arch'] = 'WINDOWS';
         $config->maps['mapserver'] = 'mapserv.exe';
         // 2011-02-25 (jhcaiced) Use DOCUMENT_ROOT to get installation path
-        $Install_Dir = dirname(dirname($_SERVER['DOCUMENT_ROOT']));
+        $documentRoot = $_SERVER['DOCUMENT_ROOT'];
+        $Install_Dir = dirname(dirname(dirname($documentRoot)));
         // MS4W doesn't load the gd extension by default, so we do here now...
         if (!extension_loaded('gd')) {
             //dl( 'php_gd2.'.PHP_SHLIB_SUFFIX);
         }
-        if (! isset($_SERVER['DESINVENTAR_WEB'])) {
-            $_SERVER['DESINVENTAR_WEB'] = $Install_Dir . '/Apache/htdocs';
-        }
-        $Install_Dir = dirname($Install_Dir);
         if (empty($_SERVER['DESINVENTAR_DATADIR'])) {
             $_SERVER['DESINVENTAR_DATADIR'] = $Install_Dir . '/data';
         }
@@ -65,7 +58,7 @@ if (!empty($_SERVER['DESINVENTAR_MODE'])) {
     $config->flags['mode'] = $_SERVER['DESINVENTAR_MODE'];
 }
 
-$config->paths['web_dir'] = $_SERVER['DESINVENTAR_WEB'];
+$config->paths['web_dir'] = $webDir;
 require_once 'define.php';
 require_once(BASE . '/include/usersession.class.php');
 require_once(BASE . '/include/query.class.php');
@@ -111,9 +104,8 @@ if ($config->flags['env'] != 'command') {
     // This header allows connections from non secure clients, we keep it for compatibility
     header('Access-Control-Allow-Origin: *');
 
-    $confdir = dirname($_SERVER['SCRIPT_FILENAME']) . '/conf';
-    $confdir = dirname(dirname(__FILE__)) . '/conf';
-    $templatedir = dirname($_SERVER['SCRIPT_FILENAME']) . '/templates';
+    $confdir = "{$webDir}/conf";
+    $templatedir = "{$webDir}/templates";
 
     // Smarty configuration
     $t = new Smarty();
