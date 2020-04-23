@@ -88,6 +88,7 @@
     "expand-home-dir": "0.0.3",
     "jquery": "1.11",
     "jquery-ui": "^1.12.1",
+    "jquery3": "npm:jquery@^3.5.0",
     "md5": "^2.2.1",
     "moment": "2.19.3",
     "mysql": "^2.16.0",
