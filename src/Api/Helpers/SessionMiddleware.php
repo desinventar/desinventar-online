@@ -2,7 +2,7 @@
 
 namespace Api\Helpers;
 
-use koenster\PHPLanguageDetection\BrowserLocalization;
+use DesInventar\Helpers\LanguageDetect;
 use DesInventar\Common\Util;
 
 class SessionMiddleware
@@ -19,8 +19,7 @@ class SessionMiddleware
         $session = $this->container->get('session')->getSegment('');
         $language = $session->get('language');
         if (empty($language)) {
-            $browser = new BrowserLocalization();
-            $language = $browser->detect();
+            $language = LanguageDetect::detect();
             $session->set('language', $language);
         }
         if (!$next) {

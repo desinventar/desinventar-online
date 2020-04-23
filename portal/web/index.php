@@ -11,14 +11,14 @@ use DesInventar\Common\ConfigLoader;
 use DesInventar\Common\Version;
 
 use DesInventar\Helpers\LoggerHelper;
-
-use koenster\PHPLanguageDetection\BrowserLocalization;
+use DesInventar\Helpers\LanguageDetect;
 
 require_once('../include/loader.php');
 
 $app = new App;
 
 $container = $app->getContainer();
+
 $container['session'] = function ($container) {
     $sessionFactory = new SessionFactory();
     return $sessionFactory->newInstance($_COOKIE);
@@ -28,7 +28,7 @@ $container['util'] = function ($container) {
     return new Util();
 };
 
-$container['config'] = function ($c) use ($config) {
+$container['config'] = function ($c) {
     return new ConfigLoader(__DIR__ . '/../../config');
 };
 
@@ -38,8 +38,8 @@ $container['logger'] = function () {
 
 $app->get('/', function (Request $request, Response $response, array $args) use ($container, $t) {
     $portaltype = getenv('DESINVENTAR_PORTAL_TYPE')
-      ? getenv('DESINVENTAR_PORTAL_TYPE')
-      : $request->getParam('portaltype', 'desinventar');
+        ? getenv('DESINVENTAR_PORTAL_TYPE')
+        : $request->getParam('portaltype', 'desinventar');
     $t->assign('desinventarPortalType', $portaltype);
 
     $version = new Version($container->get('config')->flags['mode']);
@@ -48,8 +48,7 @@ $app->get('/', function (Request $request, Response $response, array $args) use 
     $session = $container->get('session')->getSegment('');
     $language = $session->get('language');
     if (empty($language)) {
-        $browser = new BrowserLocalization();
-        $language = $session->get('language', $browser->detect());
+        $language = LanguageDetect::detect();
         $session->set('language', $language);
     }
     $langCode = (new Language())->getLanguageIsoCode($language, Language::ISO_639_2);

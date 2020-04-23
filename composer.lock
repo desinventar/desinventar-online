@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cff94a41b1725565929caf252e7d7da7",
+    "content-hash": "b4db89b558cb95076b795e2628f76ac6",
     "packages": [
         {
             "name": "aura/session",
@@ -333,46 +333,6 @@
                 "shell"
             ],
             "time": "2017-11-22T19:29:07+00:00"
-        },
-        {
-            "name": "koenster/php-language-detection",
-            "version": "v1.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Koenster/php-language-detection.git",
-                "reference": "43b78d7fe55219a137d44820e059fec9eb899d73"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Koenster/php-language-detection/zipball/43b78d7fe55219a137d44820e059fec9eb899d73",
-                "reference": "43b78d7fe55219a137d44820e059fec9eb899d73",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.9"
-            },
-            "require-dev": {
-                "mockery/mockery": "0.9.*",
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "project",
-            "autoload": {
-                "classmap": [],
-                "psr-4": {
-                    "koenster\\PHPLanguageDetection\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Detects the preferred language from the browser and compares this with the available languages/locales to return the best language/locale to redirect.",
-            "keywords": [
-                "browser localisation",
-                "browser localization detection",
-                "php language detection"
-            ],
-            "time": "2016-11-08T14:20:55+00:00"
         },
         {
             "name": "monolog/monolog",

@@ -14,3 +14,4 @@ parameters:
     - %rootDir%/../../../web/include/*
     - %rootDir%/../../../src/DesInventar/Legacy/Model/Model.php
     - %rootDir%/../../../src/DesInventar/Legacy/Model/Record.php
+    - %rootDir%/../../../portal/web/*.php
