@@ -7,7 +7,7 @@ use \Graph;
 use \PieGraph;
 use \Text;
 use \PiePlot;
-use \PiePlot3d;
+use \PiePlot3D;
 use \BarPlot;
 use \AccBarPlot;
 use \GroupBarPlot;
@@ -641,7 +641,7 @@ class Graphic
     public function pie($opc, $axi, $pal)
     {
         if ($opc['prmGraph']['Feel'] == '3D') {
-            $p = new PiePlot3d(array_values($axi));
+            $p = new PiePlot3D(array_values($axi));
             $p->SetEdge('navy');
             $p->SetStartAngle(45);
             $p->SetAngle(55);
