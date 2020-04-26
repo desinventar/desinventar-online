@@ -1,4 +1,5 @@
-/* global Ext */
+// @ts-ignore
+const Ext = global.Ext
 
 import { showtip } from './common'
 import { enab, disab } from './diadmin'
@@ -40,14 +41,16 @@ function init() {
 
   jQuery('#prmGraphTypeHistogram').change(function() {
     jQuery('#prmGraphType').val('HISTOGRAM')
-    var grp = parseInt(jQuery(this).val())
+    var grp = parseInt(String(jQuery(this).val()))
+    jQuery('#prmGraphSubType').val(grp)
     // Histogram Type
     disab($('_G+K_pie'))
-    jQuery('#prmGraphKind').val('BAR')
+    jQuery('#prmGraphKind')
+      .val('BAR')
+      .trigger('change')
     enab($('prmGraphPeriod'))
-    $('prmGraphPeriod').value = 'YEAR'
+    jQuery('prmGraphPeriod').val('YEAR')
     enab($('prmGraphStat'))
-    jQuery('#prmGraphScale0').enable()
     if (grp > 0) {
       disabAxis2()
       jQuery('#prmGraphMode0').val('NORMAL')
@@ -67,21 +70,22 @@ function init() {
     if (jQuery('#prmGraphTypeComparative').val() != '') {
       jQuery('#prmGraphTypeComparative').val('')
     }
-    jQuery('#prmGraphSubType').val(grp)
   })
 
   jQuery('#prmGraphTypeComparative').change(function() {
     jQuery('#prmGraphType').val('COMPARATIVE')
-    var grp = parseInt(jQuery(this).val())
+    var grp = parseInt(String(jQuery(this).val()))
+    jQuery('#prmGraphSubType').val(grp)
     // Comparatives
     disabAxis2()
     enab($('_G+K_pie'))
-    jQuery('#prmGraphKind').val('PIE')
-    $('prmGraphPeriod').value = ''
+    jQuery('#prmGraphKind')
+      .val('PIE')
+      .trigger('change')
+    jQuery('prmGraphPeriod').val('')
     disab($('prmGraphPeriod'))
-    $('prmGraphStat').value = ''
+    jQuery('prmGraphStat').val('')
     disab($('prmGraphStat'))
-    jQuery('#prmGraphScale0').disable()
     jQuery('#prmGraphMode0').val('NORMAL')
     disab($('prmGraphModeCummulative0'))
     disab($('prmGraphModeStacked0'))
@@ -91,18 +95,12 @@ function init() {
     if (jQuery('#prmGraphTypeHistogram').val() != '') {
       jQuery('#prmGraphTypeHistogram').val('')
     }
-    jQuery('#prmGraphSubType').val(grp)
   })
 
   jQuery('#prmGraphKind').change(function() {
-    let comp = jQuery('#prmGraphTypeComparative').val()
-    if (comp != '') {
-      comp = parseInt(comp)
-    } else {
-      comp = 0
-    }
-    var kind = jQuery(this).val()
-    if (comp > 0) {
+    let subType = parseInt(jQuery('#prmGraphSubType').val() + '') || 0
+    var kind = jQuery(this).val() + ''
+    if (subType > 0) {
       if (kind != 'PIE') {
         disab($('_G+D_perc'))
         disab($('_G+D_perc2'))
@@ -114,22 +112,38 @@ function init() {
         enab($('_G+D_perc2'))
       }
     }
-    if ((kind == 'BAR' || kind == 'LINE' || kind == 'PIE') && comp < 200) {
+    if (
+      subType < 1 ||
+      ((subType >= 200 || [3, 4].indexOf(subType) >= 0) &&
+        ['BAR', 'LINE'].indexOf(kind) >= 0)
+    ) {
       enabAxis2()
       enab($('prmGraphModeCummulative0'))
       disab($('prmGraphModeStacked0'))
       disab($('prmGraphModeStacked1'))
-      jQuery('#prmGraphScale0').enable()
     } else {
       disabAxis2()
       disab($('prmGraphModeCummulative0'))
-      jQuery('#prmGraphScale0').disable()
+      enab($('prmGraphModeStacked0'))
+      enab($('prmGraphModeStacked1'))
     }
-    jQuery('#prmGraphFeel option.3D').enable()
+    if (kind === 'PIE') {
+      jQuery('#prmGraphScale0')
+        .val('textint')
+        .prop('disabled', true)
+        .addClass('disabled')
+    } else {
+      jQuery('#prmGraphScale0')
+        .val('textint')
+        .prop('disabled', false)
+        .removeClass('disabled')
+    }
+
+    jQuery('#prmGraphFeel option.3D').prop('disabled', false)
     jQuery('#prmGraphFeel').val('3D')
     if (kind == 'LINE') {
       jQuery('#prmGraphFeel').val('2D')
-      jQuery('#prmGraphFeel option.3D').disable()
+      jQuery('#prmGraphFeel option.3D').prop('disabled', true)
     }
     // Bug #112: BAR graphs with two variables are 2D by default
     if (kind == 'BAR') {
@@ -168,7 +182,7 @@ function doUpdateGraphParameters() {
   let field1 = jQuery('#prmGraphField1').val()
   if (kind == 'BAR') {
     if (field0 != '' && field1 != '') {
-      jQuery('#prmGraphFeel option.3D').enable()
+      jQuery('#prmGraphFeel option.3D').prop('disabled', false)
       jQuery('#prmGraphFeel').val('2D')
     }
   }
