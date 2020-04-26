@@ -1880,7 +1880,7 @@
         "notes": ""
     },
     "grpMainStrings.gkndpie": {
-        "translation": "Pizza",
+        "translation": "Pie",
         "notes": ""
     },
     "grpMainStrings.gmodnormal": {
@@ -3657,7 +3657,7 @@
         "notes": ""
     },
     "causes.FLOOD.name": {
-        "translation": "Cheias",
+        "translation": "Inundação",
         "notes": ""
     },
     "causes.FLOOD.desc": {
@@ -3689,7 +3689,7 @@
         "notes": ""
     },
     "causes.FOG.name": {
-        "translation": "Nevoeiro",
+        "translation": "Neblina",
         "notes": ""
     },
     "causes.FOG.desc": {
@@ -3721,7 +3721,7 @@
         "notes": ""
     },
     "causes.DROUGHT.name": {
-        "translation": "Seca",
+        "translation": "Estiagem",
         "notes": ""
     },
     "causes.DROUGHT.desc": {
@@ -3729,7 +3729,7 @@
         "notes": ""
     },
     "causes.EARTHQUAKE.name": {
-        "translation": "Terremoto",
+        "translation": "Abalo sísmico",
         "notes": ""
     },
     "causes.EARTHQUAKE.desc": {
@@ -3753,7 +3753,7 @@
         "notes": ""
     },
     "causes.STRONGWIND.name": {
-        "translation": "Ventania",
+        "translation": "Vendaval",
         "notes": ""
     },
     "causes.STRONGWIND.desc": {

@@ -1,22 +1,26 @@
 const fs = require('fs')
+const path = require('path')
 const winston = require('winston')
+
+const outputDir = path.resolve(`${__dirname}/../../web/conf`)
+const localeDir = path.resolve(`${__dirname}`)
 
 const languages = [
   {
-    confFile: 'eng.conf',
-    jsonFile: 'locale/en.json'
+    confFile: `eng.conf`,
+    jsonFile: `locale/en.json`
   },
   {
-    confFile: 'spa.conf',
-    jsonFile: 'locale/es_419.json'
+    confFile: `spa.conf`,
+    jsonFile: `locale/es_419.json`
   },
   {
-    confFile: 'fre.conf',
-    jsonFile: 'locale/fr.json'
+    confFile: `fre.conf`,
+    jsonFile: `locale/fr.json`
   },
   {
-    confFile: 'por.conf',
-    jsonFile: 'locale/pt.json'
+    confFile: `por.conf`,
+    jsonFile: `locale/pt.json`
   }
 ]
 
@@ -42,10 +46,11 @@ function sortByGroup(keys) {
   return stringsByGroup
 }
 
+logger.info(`outputDir: ${outputDir}`)
 languages.forEach(language => {
-  const confFile = `${__dirname}/${language.confFile}`
+  const confFile = `${outputDir}/${language.confFile}`
   logger.info(`${language.jsonFile} => ${language.confFile}`)
-  const fileName = `${__dirname}/${language.jsonFile}`
+  const fileName = `${localeDir}/${language.jsonFile}`
   const keys = require(fileName)
 
   const stringsByGroup = sortByGroup(keys)
