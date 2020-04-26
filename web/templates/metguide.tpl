@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>DesInventar - {-#metguide_Title#-}</title>
-    <script type="text/javascript" src="/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
     <script type="text/javascript">
       jQuery(document).ready(function() {
         jQuery('a.page').on('click', function(event) {
