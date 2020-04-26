@@ -35,7 +35,7 @@ desinventar.db: .FORCE
 	/bin/rm -f desinventar.db && cp ../../migrations/region.sqlite3 desinventar.db
 
 lang:
-	node compileLanguage.js && cp *.conf ../../web/conf/
+	node compileLanguage.js
 
 clean:
 	/bin/rm -f *.db *.conf
