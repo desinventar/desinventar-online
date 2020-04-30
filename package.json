@@ -86,7 +86,7 @@
     "config": "^1.31.0",
     "document-ready-promise": "^3.0.1",
     "expand-home-dir": "0.0.3",
-    "jquery": "1.11",
+    "jquery": "3.5",
     "jquery-ui": "^1.12.1",
     "jquery3": "npm:jquery@^3.5.0",
     "md5": "^2.2.1",
