@@ -89,6 +89,7 @@
     "jquery": "1.11",
     "jquery-ui": "^1.12.1",
     "jquery3": "npm:jquery@^3.5.0",
+    "lodash": "^4.17.15",
     "md5": "^2.2.1",
     "moment": "2.19.3",
     "mysql": "^2.16.0",

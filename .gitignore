@@ -31,3 +31,4 @@ yarn-error.log
 .phpunit.result.cache
 *.sqlite3
 sonar-project.properties
+reports/*
