@@ -15,6 +15,7 @@ use DesInventar\Legacy\Model\Event;
 use DesInventar\Legacy\Model\GeographyCarto;
 use DesInventar\Legacy\Model\GeographyItem;
 use DesInventar\Legacy\DIProfile;
+use DesInventar\Legacy\PersistQuery;
 use DesInventar\Common\Version;
 use DesInventar\Common\Util;
 use DesInventar\Common\QueryOperations;
@@ -1139,7 +1140,7 @@ class LegacyIndex
                         '</diquery>' . "\n" .
                     '</desinventar>' . "\n";
                 break;
-            case 'cmdQueryOpen':
+            case 'cmdQueryOpen2':
                 $answer = array();
                 $iReturn = ERR_NO_ERROR;
                 $xml_filename = BASE . '/test/query_2.0_geography.xml';
@@ -1161,24 +1162,24 @@ class LegacyIndex
                     }
                 }
                 break;
-            case 'cmdQueryOpen2':
-                if (isset($_FILES['qry'])) {
-                    $myfile = $_FILES['qry']['tmp_name'];
-                    $handle = fopen($myfile, 'r');
-                    $cq = fread($handle, filesize($myfile));
-                    fclose($handle);
-                    $xml = '<DIQuery />';
-                    $pos = strpos($cq, $xml);
-                    if (!empty($cq) &&  $pos != false) {
-                        $qy = substr($cq, $pos + strlen($xml));
-                        $qd = unserialize(base64_decode($qy));
-                    } else {
-                        exit();
+            case 'openquery':
+            case 'cmdQueryOpen':
+                try {
+                    $xmlString = getParameter('xmlString', '');
+                    if (!$xmlString) {
+                        throw new Exception('Invalid parameters');
                     }
-                    $RegionId = $qd['_REG'];
-                    $t->assign('qd', $qd);
-                } elseif (isset($get['r']) && !empty($get['r'])) {
-                    $RegionId = $get['r'];
+                    $qd = PersistQuery::getQueryFromXml($xmlString);
+                    if (!$qd) {
+                        throw new Exception('Cannot parse query definition from Xml value');
+                    }
+                    return json_encode([
+                        'data' => [
+                            'queryDefinition' => $qd
+                        ]
+                    ]);
+                } catch (Exception $e) {
+                    return json_encode(['errors' => [ code => '01', message => $e->getMessage()]]);
                 }
                 break;
             case 'cmdReports':

@@ -7,7 +7,7 @@
       <br /><br />
       <input type="hidden" name="cmd" value="openquery" />
       <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
-      <input type="file" id="ofile" name="qry" onChange="$('openquery').submit();"/>
+      <input type="file" id="ofile" name="qry"/>
     </form>
   </div>
   <span id="msgQueryOpenButtonClose" style="display:none;">{-#tclose#-}</span>

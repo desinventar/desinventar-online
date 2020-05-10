@@ -5,7 +5,7 @@ import { combineForms } from './diadmin'
 
 function init() {
   jQuery('#queryBeginYear').blur(function() {
-    validateBeginYear()
+    //validateBeginYear()
   })
   jQuery('#queryEndYear').blur(function() {
     validateEndYear()

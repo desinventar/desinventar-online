@@ -1,4 +1,6 @@
-/* global desinventar */
+/* global desinventar, Ext */
+
+import queryDesign from './queryDesign'
 
 function init() {
   jQuery('body').on('cmdDatabaseLoadData', function(e, params) {
@@ -6,12 +8,37 @@ function init() {
   })
 
   jQuery(window).bind('hashchange', function() {
+    // @ts-ignore
     var url = jQuery.param.fragment()
     var options = url.split('/')
     var RegionId = options[0]
     jQuery('#desinventarRegionId').val(RegionId)
     jQuery('body').trigger('cmdDatabaseLoadData')
   })
+
+  jQuery('#openquery')
+    .find('#ofile')
+    .on('change', async function(evt) {
+      // @ts-ignore
+      Ext.getCmp('wndQueryOpen').hide()
+      // @ts-ignore
+      var files = evt.target.files
+      var file = files[0] || false
+      if (!file) {
+        return
+      }
+      const response = await queryDesign.loadQueryFromFile(file)
+      if (response.data) {
+        const data = response.data.queryDefinition
+        const vue = queryDesign.getQueryDesignInstance()
+        vue._data.beginYear = data.D_DisasterBeginTime[0]
+        vue._data.beginMonth = data.D_DisasterBeginTime[1]
+        vue._data.beginDay = data.D_DisasterBeginTime[2]
+        vue._data.endYear = data.D_DisasterEndTime[0]
+        vue._data.endMonth = data.D_DisasterEndTime[1]
+        vue._data.endDay = data.D_DisasterEndTime[2]
+      }
+    })
 }
 
 function doDatabaseLoadData(params) {
@@ -24,6 +51,7 @@ function doDatabaseLoadData(params) {
     function(data) {
       if (parseInt(data.Status) > 0) {
         jQuery('body').data('params', data.params)
+        // @ts-ignore
         desinventar.info = data.info
         //Compatibility with old methods desinventarinfo.tpl
         jQuery('#desinventarUserId').val(data.params.UserId)
@@ -41,8 +69,8 @@ function doDatabaseLoadData(params) {
 
           var dataItems = jQuery('body').data()
           jQuery.each(dataItems, function(index) {
-            if (index.substr(0, 13) === 'GeographyList') {
-              jQuery('body').removeData(index)
+            if (`${index}`.substr(0, 13) === 'GeographyList') {
+              jQuery('body').removeData(`${index}`)
             }
           })
           jQuery('body').data('GeographyList', data.GeographyList)

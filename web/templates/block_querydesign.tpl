@@ -258,11 +258,11 @@
             </td>
             <td>
               <input class="line withHelpFocus queryBeginYear" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}"
-                type="text" id="queryBeginYear" name="D_DisasterBeginTime[]" size="4" maxlength="4" value="" />
+                type="text" id="queryBeginYear" name="D_DisasterBeginTime[]" size="4" maxlength="4" value="" v-model="beginYear" />
               <input class="line withHelpFocus" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}"
-                type="text" id="queryBeginMonth" name="D_DisasterBeginTime[]" size="2" maxlength="2" value="" />
+                type="text" id="queryBeginMonth" name="D_DisasterBeginTime[]" size="2" maxlength="2" value="" v-model="beginMonth" />
               <input class="line withHelpFocus" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}"
-                type="text" id="queryBeginDay" name="D_DisasterBeginTime[]" size="2" maxlength="2" value="" />
+                type="text" id="queryBeginDay" name="D_DisasterBeginTime[]" size="2" maxlength="2" value="" v-model="beginDay" />
             </td>
           </tr>
           <tr>
@@ -271,11 +271,11 @@
             </td>
             <td>
               <input class="line withHelpFocus queryEndYear" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}"
-                type="text" id="queryEndYear" name="D_DisasterEndTime[]" size="4" maxlength="4" value="" />
+                type="text" id="queryEndYear" name="D_DisasterEndTime[]" size="4" maxlength="4" value="" v-model="endYear" />
               <input class="line withHelpFocus" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}"
-                type="text" id="queryEndMonth" name="D_DisasterEndTime[]" size="2" maxlength="2" value="" />
+                type="text" id="queryEndMonth" name="D_DisasterEndTime[]" size="2" maxlength="2" value="" v-model="endMonth" />
               <input class="line withHelpFocus" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}"
-                type="text" id="queryEndDay" name="D_DisasterEndTime[]" size="2" maxlength="2" value="" />
+                type="text" id="queryEndDay" name="D_DisasterEndTime[]" size="2" maxlength="2" value="" v-model="endDay" />
             </td>
           </tr>
         </table>
@@ -370,4 +370,7 @@
     <!-- BEGIN CUSTOMQUERY SECTION -->
   </dl>
 </form> <!-- id="DC" -->
+<script>
+  queryDesignInit()
+</script>
 </div>

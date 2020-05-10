@@ -25,6 +25,7 @@ import userAccount from './user_account'
 import extraEffects from './extraeffects'
 import queryResults from './query_results'
 import common from './common'
+import './queryDesign'
 
 function init() {
   initialize.init()

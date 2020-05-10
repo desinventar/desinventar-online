@@ -178,13 +178,13 @@ function init() {
   jQuery('div.QueryDesign').on('cmdInitialize', function() {
     var params = jQuery('body').data('params')
 
-    jQuery('div.QueryDesign input:text,textarea').val('')
+    //jQuery('div.QueryDesign input:text,textarea').val('')
 
     // Initialize fields
     jQuery('input.RegionId', this).val(jQuery('body').data('RegionId'))
     jQuery('input.MinYear', this).val(params.MinYear)
     jQuery('input.MaxYear', this).val(params.MaxYear)
-    jQuery('input.queryBeginYear', this).val(params.MinYear)
+    //jQuery('input.queryBeginYear', this).val(params.MinYear)
     jQuery('input.queryEndYear', this).val(params.MaxYear)
 
     // Load Geolevels List

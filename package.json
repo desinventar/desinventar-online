@@ -100,6 +100,7 @@
     "snyk": "^1.305.0",
     "sqlite3": "^4.0.6",
     "sweetalert2": "^9.5.4",
+    "vue": "^2.6.11",
     "winston": "^3.2.1"
   },
   "snyk": true

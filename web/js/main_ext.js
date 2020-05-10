@@ -656,7 +656,7 @@ function doMainMenuCreate() {
       this.add('->', {
         id: 'mnuHelpWebsiteLabel',
         text:
-          '<img src="' +
+          '<img id="diLogo" src="' +
           jQuery('#desinventarURL').val() +
           '/images/di_logo4.png" alt="" />'
       })

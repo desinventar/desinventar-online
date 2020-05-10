@@ -29,7 +29,10 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx'],
+    alias: {
+      vue$: 'vue/dist/vue.esm.js'
+    },
+    extensions: ['*', '.js', '.jsx', '.vue'],
     modules: [`${__dirname}/node_modules`],
     descriptionFiles: ['package.json'],
     mainFields: ['main', 'browser'],
