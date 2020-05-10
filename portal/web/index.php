@@ -48,7 +48,7 @@ $app->get('/', function (Request $request, Response $response, array $args) use 
     $session = $container->get('session')->getSegment('');
     $language = $session->get('language');
     if (empty($language)) {
-        $language = LanguageDetect::detect();
+        $language = (new LanguageDetect())->detect();
         $session->set('language', $language);
     }
     $langCode = (new Language())->getLanguageIsoCode($language, Language::ISO_639_2);

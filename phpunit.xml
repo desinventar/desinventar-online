@@ -3,6 +3,7 @@
     bootstrap="bootstrap.php"
     executionOrder="random"
     resolveDependencies="true"
+    colors="true"
 >
     <testsuites>
         <testsuite name="unit">

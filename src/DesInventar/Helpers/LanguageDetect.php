@@ -4,7 +4,7 @@ namespace DesInventar\Helpers;
 
 class LanguageDetect
 {
-    public static function detect()
+    public function detect()
     {
         $acceptLanguage = getenv('HTTP_ACCEPT_LANGUAGE') ? getenv('HTTP_ACCEPT_LANGUAGE') : '';
         $languages = explode(',', "{$acceptLanguage}");

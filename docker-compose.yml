@@ -53,6 +53,10 @@ services:
     build:
       context: .
       dockerfile: docker/e2e-test/Dockerfile
+    environment:
+      - TEST_API_URL=${TEST_API_URL:-http://web:80}
+      - TEST_WEB_URL=${TEST_WEB_URL:-http://web:80}
+      - TEST_PORTAL_URL=${TEST_PORTAL_URL:-http://portal:80}
   redis:
     build:
       context: .

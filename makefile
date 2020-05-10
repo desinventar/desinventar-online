@@ -40,7 +40,7 @@ test-unit: .FORCE
 test-api: test-api-app test-api-portal
 
 test-api-app: .FORCE
-	TEST_API_URL=http://localhost:8080 ./node_modules/.bin/jest tests/api-app
+	./node_modules/.bin/jest tests/api-app
 
 test-api-portal: .FORCE
 	TEST_PORTAL_URL=http://localhost:8090 ./node_modules/.bin/jest tests/api-portal

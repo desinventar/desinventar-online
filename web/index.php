@@ -45,7 +45,7 @@ $container = $app->getContainer();
 
 $container['session'] = function ($container) {
     $sessionFactory = new SessionFactory();
-    return $sessionFactory->newInstance($_COOKIE);
+    return $session = $sessionFactory->newInstance($_COOKIE);
 };
 
 $container['util'] = function ($container) {

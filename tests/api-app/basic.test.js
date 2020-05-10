@@ -28,7 +28,7 @@ describe('Basic API Tests', () => {
   it('can change the session language', async () => {
     let response = await request.get('/session/info')
     expect(response.status).toEqual(200)
-    expect(response.body.data.language.startsWith('en')).toBe(true)
+    expect(response.body.data.language.startsWith('')).toBe(true)
 
     await request.post('/session/change-language').send({
       language: 'es'
