@@ -44,7 +44,17 @@
       <input type="hidden" name="QueryEvent[OP]" value="AND" />
       <span class="dlgmsg">{-#tcntclick#-}</span>
       <br />
-      <select class="Event line" id="qevelst" name="D_EventId[]" multiple style="width:100%; height: 200px;">
+      <select class="Event line" id="qevelst" name="D_EventId[]"
+        multiple style="width:100%; height: 200px;"
+        v-model="eventTypeSelected"
+      >
+        <option v-for="option in eventTypeList"
+          class="withHelpOver"
+          v-bind:data-help="option.helpText"
+          v-bind:value="option.value"
+        >
+          {{ option.text }}
+        </option>
       </select>
       <br /><br />
       <span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_EventDuration_Helptext#-}">{-#msgDatacard_EventDuration#-}</span>
@@ -63,7 +73,17 @@
     <dd>
       <input type="hidden" name="QueryCause[OP]" value="AND" />
       <span class="dlgmsg">{-#tcntclick#-}</span><br />
-      <select class="Cause line" id="qcaulst" name="D_CauseId[]" multiple style="width: 250px; height: 200px;">
+      <select class="Cause line" id="qcaulst" name="D_CauseId[]"
+        multiple style="width: 250px; height: 200px;"
+        v-model="causeTypeSelected"
+      >
+        <option v-for="option in causeTypeList"
+          class="withHelpOver"
+          v-bind:data-help="option.helpText"
+          v-bind:value="option.value"
+        >
+          {{ option.text }}
+        </option>
       </select>
       <br />
       <span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_CauseNotes_Helptext#-}">{-#msgDatacard_CauseNotes#-}</span>
@@ -282,13 +302,13 @@
         <br />
         <span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_DisasterSource_Helptext#-}">{-#msgDatacard_DisasterSource#-}</span>
         <br />
-        <select name="D_DisasterSource[0]" class="dlgmsg small line">
+        <select name="D_DisasterSource[0]" class="dlgmsg small line" v-model="sourceOp">
           <option class="small" value="AND">{-#tand#-}</option>
           <option class="small" value="OR" >{-#tor#-}</option>
         </select>
         <br />
         <textarea id="txtDisasterSource" name="D_DisasterSource[1]" style="width:220px; height:40px;"
-          class="inputText withHelpFocus" data-help="{-#msgDatacard_DisasterSource_Helptext#-}"></textarea>
+          class="inputText withHelpFocus" data-help="{-#msgDatacard_DisasterSource_Helptext#-}" v-model="sourceNotes"></textarea>
         <br />
         <div id="divQueryRecordStatus">
           <span class="fieldLabel">{-#tdcstatus#-}</span>
@@ -303,14 +323,14 @@
         <br />
         </div>
         <span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_DisasterSerial_Helptext#-}">{-#tserial#-}</span>
-        <select name="D_DisasterSerial[0]" class="small line">
+        <select name="D_DisasterSerial[0]" class="small line" v-model="serialOp">
           <option class="small" value=""       >{-#tonly#-}</option>
           <option class="small" value="NOT"    >{-#texclude#-}</option>
           <option class="small" value="INCLUDE">{-#tinclude#-}</option>
         </select>
         <br />
         <input  class="line fixw withHelpFocus" data-help="{-#msgDatacard_DisasterSerial_Helptext#-}"
-          type="text" name="D_DisasterSerial[1]" value="" />
+          type="text" name="D_DisasterSerial[1]" value="" v-model="serialList" />
       </div>
     </dd>
     <!-- END DATETIME SECTION -->

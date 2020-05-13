@@ -1,5 +1,6 @@
 import { showtip } from './common'
 import { enab, disab } from './diadmin'
+import { QueryDesign } from './queryDesign'
 
 function init() {
   jQuery('div.QueryDesign')
@@ -177,6 +178,10 @@ function init() {
 
   jQuery('div.QueryDesign').on('cmdInitialize', function() {
     var params = jQuery('body').data('params')
+    new QueryDesign()
+      .initForm(params)
+      .fillEventList(jQuery('body').data('EventList'))
+      .fillCauseList(jQuery('body').data('CauseList'))
 
     jQuery('div.QueryDesign input:text,textarea').val('')
 
@@ -184,8 +189,6 @@ function init() {
     jQuery('input.RegionId', this).val(jQuery('body').data('RegionId'))
     jQuery('input.MinYear', this).val(params.MinYear)
     jQuery('input.MaxYear', this).val(params.MaxYear)
-    jQuery('input.queryBeginYear', this).val(params.MinYear)
-    jQuery('input.queryEndYear', this).val(params.MaxYear)
 
     // Load Geolevels List
     var geolevel_list = jQuery('body').data('GeolevelsList')
@@ -198,6 +201,7 @@ function init() {
       jQuery('span', clone).data('help', value.GeoLevelDesc)
       jQuery('div.QueryDesign div.GeolevelsHeader table tr').append(clone)
     })
+
     // Load Geography List
     var geography_list = jQuery('div.QueryDesign div.GeographyList ul.mainlist')
     geography_list.find('li:gt(0)').remove()
@@ -213,51 +217,7 @@ function init() {
       jQuery(item).data('GeographyLevel', 0)
       geography_list.append(item)
     })
-    // Load Event List
-    jQuery('div.QueryDesign select.Event').empty()
-    jQuery.each(jQuery('body').data('EventList'), function(key, value) {
-      if (parseInt(value.EventPredefined) > 0) {
-        let option = jQuery('<option>', { value: key }).text(value.EventName)
-        option.data('help', value.EventDesc)
-        option.addClass('withHelpOver')
-        jQuery('div.QueryDesign select.Event').append(option)
-      }
-    })
-    let optionDefault = jQuery('<option>', { value: '' }).text('---')
-    optionDefault.attr('disabled', 'disabled')
-    jQuery('div.QueryDesign select.Event').append(optionDefault)
 
-    jQuery.each(jQuery('body').data('EventList'), function(key, value) {
-      if (parseInt(value.EventPredefined) < 1) {
-        let option = jQuery('<option>', { value: key }).text(value.EventName)
-        option.data('help', value.EventDesc)
-        option.addClass('withHelpOver')
-        jQuery('div.QueryDesign select.Event').append(option)
-      }
-    })
-    // Load Cause List
-    jQuery('div.QueryDesign select.Cause').empty()
-    jQuery.each(jQuery('body').data('CauseList'), function(key, value) {
-      if (parseInt(value.CausePredefined) > 0) {
-        let option = jQuery('<option>', { value: key }).text(value.CauseName)
-        option.data('help', value.CauseDesc)
-        option.addClass('withHelpOver')
-        jQuery('div.QueryDesign select.Cause').append(option)
-      }
-    })
-
-    optionDefault = jQuery('<option>', { value: '' }).text('---')
-    optionDefault.attr('disabled', 'disabled')
-    jQuery('div.QueryDesign select.Cause').append(optionDefault)
-
-    jQuery.each(jQuery('body').data('CauseList'), function(key, value) {
-      if (parseInt(value.CausePredefined) < 1) {
-        let option = jQuery('<option>', { value: key }).text(value.CauseName)
-        option.data('help', value.CauseDesc)
-        option.addClass('withHelpOver')
-        jQuery('div.QueryDesign select.Cause').append(option)
-      }
-    })
     // Load EffectPeople List (ef1)
     var effect_list = jQuery('div.QueryDesign table.EffectPeopleList')
     effect_list.find('tr:gt(0)').remove()

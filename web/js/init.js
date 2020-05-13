@@ -1,6 +1,7 @@
 /* global desinventar, Ext */
 
 import queryDesign from './queryDesign'
+import { QueryDesign } from './queryDesign'
 
 function init() {
   jQuery('body').on('cmdDatabaseLoadData', function(e, params) {
@@ -29,14 +30,7 @@ function init() {
       }
       const response = await queryDesign.loadQueryFromFile(file)
       if (response.data) {
-        const data = response.data.queryDefinition
-        const vue = queryDesign.getQueryDesignInstance()
-        vue._data.beginYear = data.D_DisasterBeginTime[0]
-        vue._data.beginMonth = data.D_DisasterBeginTime[1]
-        vue._data.beginDay = data.D_DisasterBeginTime[2]
-        vue._data.endYear = data.D_DisasterEndTime[0]
-        vue._data.endMonth = data.D_DisasterEndTime[1]
-        vue._data.endDay = data.D_DisasterEndTime[2]
+        new QueryDesign().setForm(response.data.queryDefinition)
       }
     })
 }
