@@ -16,6 +16,8 @@ class DIImport
     protected $geography = [];
     protected $event = [];
     protected $cause = [];
+    protected $begintime = [];
+    protected $serial = [];
     protected $values = [];
     protected $fixedValues = [];
     protected $defaultParams = [
@@ -25,6 +27,8 @@ class DIImport
         'geography' => [],
         'event' => [],
         'cause' => [],
+        'begintime' => [],
+        'serial' => [],
         'values' => [],
         'fields' => []
     ];
@@ -38,6 +42,8 @@ class DIImport
         $this->geography = $this->params['geography'];
         $this->event = $this->params['event'];
         $this->cause = $this->params['cause'];
+        $this->begintime = $this->params['begintime'];
+        $this->serial = $this->params['serial'];
         $this->fixedValues = $this->params['values'];
     }
 
@@ -85,22 +91,22 @@ class DIImport
         return $list;
     }
 
-    public function validateFromCSV($FileName, $ObjectType)
+    public function validateFromCSV($fileName, $objectType)
     {
-        return $this->importFromCSV($FileName, $ObjectType);
+        return $this->importFromCSV($fileName, $objectType);
     }
 
     public function findGeographyIdByName($fullName, $separator)
     {
-        $id = '';
+        $geographyId = '';
         $names = explode($separator, $fullName);
         if (!$names) {
             $names= [];
         }
         foreach ($names as $name) {
-            $id = GeographyItem::getIdByName($this->session, $name, $id);
+            $geographyId = GeographyItem::getIdByName($this->session, $name, $geographyId);
         }
-        return $id;
+        return $geographyId;
     }
 
     public function getGeographyId($values)
@@ -117,6 +123,9 @@ class DIImport
             case 'code':
             default:
                 $code = $values[$this->geography['code']];
+                if (isset($this->geography['width'])) {
+                    $code = str_pad($code, $this->geography['width'], '0', STR_PAD_LEFT);
+                }
                 $id = GeographyItem::getIdByCode($this->session, $code);
                 if (empty($id)) {
                     throw new Exception('Error trying to match geography code: ' . $code);
@@ -127,6 +136,12 @@ class DIImport
 
     public function getEventId($values)
     {
+        $type = !empty($this->event['type']) ? $this->event['type'] : 'name';
+        if ($type === 'fixed') {
+            return $this->event['id'];
+        }
+
+        // search eventId by name
         $name = $this->getName($values, $this->event);
         $id = Event::getIdByName($this->session, $name);
         if (empty($id)) {
@@ -137,12 +152,31 @@ class DIImport
 
     public function getCauseId($values)
     {
+        $type = !empty($this->cause['type']) ? $this->cause['type'] : 'name';
+
+        if ($type === 'fixed') {
+            return $this->cause['id'];
+        }
+
+        // search causeId by name
         $name = $this->getName($values, $this->cause);
         $id = $name == '' ? 'UNKNOWN' : Cause::getIdByName($this->session, $name);
         if (empty($id)) {
             throw new Exception('Error trying to match cause: ' . $name);
         }
         return $id;
+    }
+
+    public function getDisasterBeginTime($values)
+    {
+        $datetime = $values[$this->begintime['column']];
+        return substr($datetime, 0, 10);
+    }
+
+    public function getDisasterSerial($year, $values)
+    {
+        $number = $values[$this->serial['column']];
+        return $year . '-' . str_pad($number, 5, '0', STR_PAD_LEFT);
     }
 
     public function getName($values, $data)
@@ -243,6 +277,9 @@ class DIImport
     {
         $d = new DisasterImport($this->session, '', $this->fields);
         $d->importFromArray($values);
+        $disasterBeginTime = $this->getDisasterBeginTime($values);
+        $d->set('DisasterSerial', $this->getDisasterSerial(substr($disasterBeginTime, 0, 4), $values));
+        echo $d->get('DisasterSerial') . "\n";
 
         $disasterId = $d->findIdBySerial($d->get('DisasterSerial'));
         if (!empty($disasterId)) {
@@ -250,6 +287,7 @@ class DIImport
             $d->load();
             $d->importFromArray($values);
         }
+        $d->set('DisasterBeginTime', $disasterBeginTime);
 
         foreach ($this->fixedValues as $fieldName => $value) {
             $d->set($fieldName, $value);
