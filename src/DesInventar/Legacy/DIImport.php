@@ -115,22 +115,22 @@ class DIImport
         switch ($type) {
             case 'fullname':
                 $name = $values[$this->geography['index']];
-                $id = $this->findGeographyIdByName($name, $this->geography['separator']);
-                if (empty($id)) {
+                $geographyId = $this->findGeographyIdByName($name, $this->geography['separator']);
+                if (empty($geographyId)) {
                     throw new Exception('Error trying to match geography name: ' . $name);
                 }
-                return $id;
+                return $geographyId;
             case 'code':
             default:
                 $code = $values[$this->geography['code']];
                 if (isset($this->geography['width'])) {
                     $code = str_pad($code, $this->geography['width'], '0', STR_PAD_LEFT);
                 }
-                $id = GeographyItem::getIdByCode($this->session, $code);
-                if (empty($id)) {
+                $geographyId = GeographyItem::getIdByCode($this->session, $code);
+                if (empty($geographyId)) {
                     throw new Exception('Error trying to match geography code: ' . $code);
                 }
-                return $id;
+                return $geographyId;
         }
     }
 
@@ -143,11 +143,11 @@ class DIImport
 
         // search eventId by name
         $name = $this->getName($values, $this->event);
-        $id = Event::getIdByName($this->session, $name);
-        if (empty($id)) {
+        $eventId = Event::getIdByName($this->session, $name);
+        if (empty($eventId)) {
             throw new Exception('Error trying to match event: ' . $name);
         }
-        return $id;
+        return $eventId;
     }
 
     public function getCauseId($values)
@@ -160,11 +160,11 @@ class DIImport
 
         // search causeId by name
         $name = $this->getName($values, $this->cause);
-        $id = $name == '' ? 'UNKNOWN' : Cause::getIdByName($this->session, $name);
-        if (empty($id)) {
+        $causeId = $name == '' ? 'UNKNOWN' : Cause::getIdByName($this->session, $name);
+        if (empty($causeId)) {
             throw new Exception('Error trying to match cause: ' . $name);
         }
-        return $id;
+        return $causeId;
     }
 
     public function getDisasterBeginTime($values)
@@ -188,13 +188,13 @@ class DIImport
         return $name;
     }
 
-    public function validateOnCreateOrUpdate($d)
+    public function validateOnCreateOrUpdate($disaster)
     {
-        $bExist = $d->exist();
+        $bExist = $disaster->exist();
         if ($bExist < 0) {
-            return $d->validateCreate(1);
+            return $disaster->validateCreate(1);
         }
-        return $d->validateUpdate(1);
+        return $disaster->validateUpdate(1);
     }
 
     public function importFromCSV($prmFileCSV, $prmImport)
@@ -225,8 +225,8 @@ class DIImport
 
             $DisasterSerial = '';
             try {
-                $d = $this->getImportObjectFromArray($a);
-                $DisasterSerial = $d->get('DisasterSerial');
+                $disaster = $this->getImportObjectFromArray($a);
+                $DisasterSerial = $disaster->get('DisasterSerial');
                 $this->logger->debug(sprintf('%d %s', $line, $DisasterSerial));
             } catch (\Exception $e) {
                 fprintf(STDERR, '%4d,%s,%s' . "\n", $line, $DisasterSerial, $e->getMessage());
@@ -236,14 +236,14 @@ class DIImport
             $line++;
 
             // Validate Effects and Save as DRAFT if needed
-            if ($d->validateEffects(-61, 0) < 0) {
-                $d->set('RecordStatus', 'DRAFT');
+            if ($disaster->validateEffects(-61, 0) < 0) {
+                $disaster->set('RecordStatus', 'DRAFT');
             }
 
-            $bExist = $d->exist();
-            $r = $this->validateOnCreateOrUpdate($d);
+            $bExist = $disaster->exist();
+            $r = $this->validateOnCreateOrUpdate($disaster);
             if ($r < 0) {
-                fprintf(STDERR, 'Error en validación serial: %s Error: ' . "\n", $DisasterSerial, $r);
+                fprintf(STDERR, "Error en validación serial: %s Error: %d\n", $DisasterSerial, $r);
             }
 
             if (($line > 0) && (($line % 100) == 0)) {
@@ -257,14 +257,14 @@ class DIImport
             $Cmd = '';
             $i = 0;
             if ($bExist < 0) {
-                $i = $d->insert(true, false);
+                $i = $disaster->insert(true, false);
                 if ($i < 0) {
                     fprintf(STDERR, '%5d %-10s %3d' . "\n", $line, $DisasterSerial, $i);
                 }
                 $Cmd = 'INSERT';
                 continue;
             }
-            $i = $d->update(true, false);
+            $i = $disaster->update(true, false);
             $Cmd = 'UPDATE';
 
             if ($i < 0) {
@@ -275,30 +275,62 @@ class DIImport
 
     public function getImportObjectFromArray($values)
     {
-        $d = new DisasterImport($this->session, '', $this->fields);
-        $d->importFromArray($values);
+        $disaster = new DisasterImport($this->session, '', $this->fields);
+        $disaster->importFromArray($values);
         $disasterBeginTime = $this->getDisasterBeginTime($values);
-        $d->set('DisasterSerial', $this->getDisasterSerial(substr($disasterBeginTime, 0, 4), $values));
-        echo $d->get('DisasterSerial') . "\n";
+        $disaster->set('DisasterSerial', $this->getDisasterSerial(substr($disasterBeginTime, 0, 4), $values));
 
-        $disasterId = $d->findIdBySerial($d->get('DisasterSerial'));
+        $disasterId = $disaster->findIdBySerial($disaster->get('DisasterSerial'));
         if (!empty($disasterId)) {
-            $d->set('DisasterId', $disasterId);
-            $d->load();
-            $d->importFromArray($values);
+            $disaster->set('DisasterId', $disasterId);
+            $disaster->load();
+            $disaster->importFromArray($values);
         }
-        $d->set('DisasterBeginTime', $disasterBeginTime);
+        $disaster->set('DisasterBeginTime', $disasterBeginTime);
 
         foreach ($this->fixedValues as $fieldName => $value) {
-            $d->set($fieldName, $value);
+            $disaster->set($fieldName, $value);
         }
 
         $geographyId = $this->getGeographyId($values);
-        $d->set('GeographyId', $geographyId);
+        $disaster->set('GeographyId', $geographyId);
 
-        $d->set('EventId', $this->getEventId($values));
-        $d->set('CauseId', $this->getCauseId($values));
-        return $d;
+        $disaster->set('EventId', $this->getEventId($values));
+        $disaster->set('CauseId', $this->getCauseId($values));
+
+        $sex = trim($values[7]);
+        if ($sex === 'M') {
+            $disaster->set('EEF001', 1);
+            $disaster->set('EEF002', 0);
+        }
+        if ($sex === 'F') {
+            $disaster->set('EEF001', 0);
+            $disaster->set('EEF002', 1);
+        }
+        $ageRanges = [
+            0 => 'EEF003',
+            1 => 'EEF004',
+            2 => 'EEF005',
+            3 => 'EEF006',
+            4 => 'EEF007',
+            5 => 'EEF008',
+            6 => 'EEF009',
+            7 => 'EEF010',
+            8 => 'EEF011',
+            9 => 'EEF013'
+        ];
+        for ($index = 0; $index < count($ageRanges); $index++) {
+            $disaster->set($ageRanges[$index], 0);
+        }
+        $age = intval($values[6]);
+        $ageField = 'EEF013';
+        if ($age < 100) {
+            $ageIndex = floor($age/10);
+            $ageField = $ageRanges[$ageIndex];
+        }
+        $disaster->set($ageField, 1);
+
+        return $disaster;
     }
 
     public function loadCSV($ocsv)
