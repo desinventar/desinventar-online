@@ -278,7 +278,8 @@ class DIImport
         $disaster = new DisasterImport($this->session, '', $this->fields);
         $disaster->importFromArray($values);
         $disasterBeginTime = $this->getDisasterBeginTime($values);
-        $disaster->set('DisasterSerial', $this->getDisasterSerial(substr($disasterBeginTime, 0, 4), $values));
+        $serial = $this->getDisasterSerial(substr($disasterBeginTime, 0, 4), $values);
+        $disaster->set('DisasterSerial', $serial);
 
         $disasterId = $disaster->findIdBySerial($disaster->get('DisasterSerial'));
         if (!empty($disasterId)) {
@@ -298,6 +299,25 @@ class DIImport
         $disaster->set('EventId', $this->getEventId($values));
         $disaster->set('CauseId', $this->getCauseId($values));
 
+        // effect fields
+        $status = trim($values[5]);
+        $disaster->set('EffectPeopleDead', $status === 'Fallecido' ? 1 : 0);
+
+        $disaster->set('EffectPeopleAffected', 1);
+
+        $isInjured = !in_array($status, ['Fallecido', 'Recuperado']) ? 1 : 0;
+        $disaster->set('EffectPeopleInjured', $isInjured);
+
+        $disaster->set('EEF099', $status === 'Recuperado' ? 1 : 0);
+
+        // event notes
+        $eventNotesList = array_filter(explode(',', trim($disaster->get('EventNotes'))));
+        if (!in_array($status, $eventNotesList)) {
+            $eventNotesList[] = $status;
+        }
+        $disaster->set('EventNotes', implode(',', $eventNotesList));
+
+        // extended fields
         $sex = trim($values[7]);
         if ($sex === 'M') {
             $disaster->set('EEF001', 1);
