@@ -123,7 +123,10 @@ class DIImport
             case 'code':
             default:
                 $code = $values[$this->geography['code']];
-                if (isset($this->geography['width'])) {
+                if (isset($this->geography['width']) &&
+                    isset($this->geography['minlength']) &&
+                    strlen($code) >= $this->geography['minlength']
+                ) {
                     $code = str_pad($code, $this->geography['width'], '0', STR_PAD_LEFT);
                 }
                 $geographyId = GeographyItem::getIdByCode($this->session, $code);
@@ -167,10 +170,21 @@ class DIImport
         return $causeId;
     }
 
+    public function getDate($value)
+    {
+        if (strlen($value) < 10) {
+            return '';
+        }
+        if (substr($value, 0, 4) === 'Asin') {
+            return '';
+        }
+        return substr($value, 0, 10);
+    }
+
     public function getDisasterBeginTime($values)
     {
         $datetime = $values[$this->begintime['column']];
-        return substr($datetime, 0, 10);
+        return $this->getDate($datetime);
     }
 
     public function getDisasterSerial($year, $values)
@@ -301,14 +315,24 @@ class DIImport
 
         // effect fields
         $status = trim($values[5]);
-        $disaster->set('EffectPeopleDead', $status === 'Fallecido' ? 1 : 0);
+        $statusLowercase = strtolower($status);
+        $disaster->set('EffectPeopleDead', in_array($statusLowercase, ['fallecido']) ? 1 : 0);
 
         $disaster->set('EffectPeopleAffected', 1);
 
-        $isInjured = !in_array($status, ['Fallecido', 'Recuperado']) ? 1 : 0;
+        $isInjured = !in_array($statusLowercase, ['fallecido', 'recuperado']) ? 1 : 0;
         $disaster->set('EffectPeopleInjured', $isInjured);
 
-        $disaster->set('EEF099', $status === 'Recuperado' ? 1 : 0);
+        $disaster->set('EEF016', in_array($statusLowercase, ['recuperado']) ? 1 : 0);
+        $disaster->set('EEF017', in_array($statusLowercase, ['casa']) ? 1 : 0);
+        $disaster->set('EEF018', in_array($statusLowercase, ['hospital', 'hospital uci']) ? 1 : 0);
+
+        $disaster->set('EEF019', trim($values[9]));
+        $disaster->set('EEF020', $this->getDate($values[11])); // FIS
+        $disaster->set('EEF021', $this->getDate($values[14])); // Fecha Recuperación
+        $disaster->set('EEF022', $this->getDate($values[13])); // Fecha diagnóstico
+        $disaster->set('EEF023', $this->getDate($values[12])); // Fecha muerte
+        $disaster->set('EEF024', isset($values[16]) ? $values[16] : ''); // Tipo Recuperación
 
         // event notes
         $eventNotesList = array_filter(explode(',', trim($disaster->get('EventNotes'))));
@@ -348,7 +372,11 @@ class DIImport
             $ageIndex = floor($age/10);
             $ageField = $ageRanges[$ageIndex];
         }
+        if ($age >= 100) {
+            $ageField = 'EEF014';
+        }
         $disaster->set($ageField, 1);
+        $disaster->set('EEF015', intval($values[6])); // Age
 
         return $disaster;
     }
