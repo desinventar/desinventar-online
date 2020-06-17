@@ -123,16 +123,17 @@ class DIImport
             case 'code':
             default:
                 $code = $values[$this->geography['code']];
-                if (isset($this->geography['width']) &&
-                    isset($this->geography['minlength'])
+                if (isset($this->geography['level1_width']) &&
+                    isset($this->geography['level1_minlength'])
                 ) {
-                    if (strlen($code) >= $this->geography['minlength']) {
-                        $code = str_pad($code, $this->geography['width'], '0', STR_PAD_LEFT);
+                    if (strlen($code) >= $this->geography['level1_minlength']) {
+                        $code = str_pad($code, $this->geography['level1_width'], '0', STR_PAD_LEFT);
                     } else {
                         $code = str_pad($code, 2, '0', STR_PAD_LEFT);
                     }
+                } else {
+                    $code = str_pad($code, $this->geography['level0_width'], '0', STR_PAD_LEFT);
                 }
-                $code = str_pad($code, $this->geography['width'], '0', STR_PAD_LEFT);
                 $geographyId = GeographyItem::getIdByCode($this->session, $code);
                 if (empty($geographyId)) {
                     throw new Exception('Error trying to match geography code: ' . $code);
