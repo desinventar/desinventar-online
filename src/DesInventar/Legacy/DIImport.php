@@ -265,7 +265,7 @@ class DIImport
                 fprintf(STDERR, "Error en validación serial: %s Error: %d\n", $DisasterSerial, $r);
             }
 
-            if (($line > 0) && (($line % 100) == 0)) {
+            if (($line > 0) && (($line % 1000) == 0)) {
                 $this->logger->info(sprintf('LineCount: %04d', $line));
             }
 
