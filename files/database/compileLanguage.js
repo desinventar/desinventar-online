@@ -19,6 +19,10 @@ const languages = [
     jsonFile: `locale/fr.json`
   },
   {
+    confFile: `czech.conf`,
+    jsonFile: `locale/cs.json`
+  },
+  {
     confFile: `por.conf`,
     jsonFile: `locale/pt.json`
   }
