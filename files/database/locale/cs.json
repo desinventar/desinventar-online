@@ -1,0 +1,3763 @@
+{
+    "portal.di_slogan": {
+        "translation": "Inventarizační systém účinků katastrof",
+        "notes": ""
+    },
+    "portal.tdititle": {
+        "translation": "Inventarizační systém účinků katastrof",
+        "notes": ""
+    },
+    "portal.tcountries": {
+        "translation": "Regiony",
+        "notes": ""
+    },
+    "portal.tvirtualreg": {
+        "translation": "Virtuální regiony",
+        "notes": ""
+    },
+    "portal.hlostconn": {
+        "translation": "Selhání komunikace. Zkontrolujte připojení k internetu.",
+        "notes": ""
+    },
+    "portal.tdbavail": {
+        "translation": "Dostupné databáze dopadů",
+        "notes": ""
+    },
+    "portal.tdbnotavail": {
+        "translation": "V tuto chvíli nejsou k dispozici žádné databáze.",
+        "notes": ""
+    },
+    "portal.tmoreinfo": {
+        "translation": "Více informací",
+        "notes": ""
+    },
+    "portal.talerdiwin": {
+        "translation": "DesInventar se používá. Opravdu chcete skončit?",
+        "notes": ""
+    },
+    "portal.tstartpage": {
+        "translation": "Domů",
+        "notes": ""
+    },
+    "portal.tlang": {
+        "translation": "Jazyk",
+        "notes": ""
+    },
+    "portal.tusers": {
+        "translation": "Uživatelé",
+        "notes": ""
+    },
+    "portal.msgUserAccess": {
+        "translation": "Přístup uživatelů",
+        "notes": ""
+    },
+    "portal.msgUserLogin": {
+        "translation": "Přihlásit se",
+        "notes": ""
+    },
+    "portal.msgUserLogout": {
+        "translation": "Odhlášení",
+        "notes": ""
+    },
+    "portal.msgRegionList": {
+        "translation": "Seznam regionů",
+        "notes": ""
+    },
+    "portal.msgRegionOpenDB": {
+        "translation": "Otevřít databázi",
+        "notes": ""
+    },
+    "portal.tcredits": {
+        "translation": "Ve strategickém spojenectví s",
+        "notes": ""
+    },
+    "portal.msgRegionAfrica": {
+        "translation": "Afrika",
+        "notes": ""
+    },
+    "portal.msgRegionAsia": {
+        "translation": "Asie",
+        "notes": ""
+    },
+    "portal.msgRegionSouthAmerica": {
+        "translation": "Jižní America",
+        "notes": ""
+    },
+    "portal.msgRegionCentralAmerica": {
+        "translation": "Střední Amerika",
+        "notes": ""
+    },
+    "portal.msgRegionNorthAmerica": {
+        "translation": "severní America",
+        "notes": ""
+    },
+    "portal.msgRegionSouthernCone": {
+        "translation": "Jizní cíp Ameriky",
+        "notes": ""
+    },
+    "portal.msgregionGranChaco": {
+        "translation": "Gran Chaco",
+        "notes": ""
+    },
+    "portal.msgRegionAndean": {
+        "translation": "Andský subregion",
+        "notes": ""
+    },
+    "portal.msgRegionCities": {
+        "translation": "Města",
+        "notes": ""
+    },
+    "portal.msgRegionGreatAmericanChaco": {
+        "translation": "Great American Chaco",
+        "notes": ""
+    },
+    "portal.msgRegionLatinAmerica": {
+        "translation": "Latin America",
+        "notes": ""
+    },
+    "portal.msgRegionCaribbean": {
+        "translation": "Karibský Region",
+        "notes": ""
+    },
+    "portal.msgRegionPacific": {
+        "translation": "Jižní Pacifik",
+        "notes": ""
+    },
+    "portal.tcopyright": {
+        "translation": "(c) 1998-2018 Corporación OSSO - Kolumbie",
+        "notes": ""
+    },
+    "portal.tcountryARG": {
+        "translation": "Argentina",
+        "notes": ""
+    },
+    "portal.tcountryBOL": {
+        "translation": "Bolívie",
+        "notes": ""
+    },
+    "portal.tcountryCHL": {
+        "translation": "Chile",
+        "notes": ""
+    },
+    "portal.tcountryCOL": {
+        "translation": "Kolumbie",
+        "notes": ""
+    },
+    "portal.tcountryCRI": {
+        "translation": "Kostarika",
+        "notes": ""
+    },
+    "portal.tcountryDOM": {
+        "translation": "Dominikánská republika",
+        "notes": ""
+    },
+    "portal.tcountryECU": {
+        "translation": "Ekvádor",
+        "notes": ""
+    },
+    "portal.tcountryGTM": {
+        "translation": "Guatemala",
+        "notes": ""
+    },
+    "portal.tcountryGUY": {
+        "translation": "Guyana",
+        "notes": ""
+    },
+    "portal.tcountryHND": {
+        "translation": "Honduras",
+        "notes": ""
+    },
+    "portal.tcountryHTI": {
+        "translation": "Haiti",
+        "notes": ""
+    },
+    "portal.tcountryIDN": {
+        "translation": "Indonesie",
+        "notes": ""
+    },
+    "portal.tcountryIND": {
+        "translation": "Indie",
+        "notes": ""
+    },
+    "portal.tcountryIRN": {
+        "translation": "Iran",
+        "notes": ""
+    },
+    "portal.tcountryJAM": {
+        "translation": "Jamajka",
+        "notes": ""
+    },
+    "portal.tcountryJOR": {
+        "translation": "Jordán",
+        "notes": ""
+    },
+    "portal.tcountryLKA": {
+        "translation": "Sri Lanka",
+        "notes": ""
+    },
+    "portal.tcountryMEX": {
+        "translation": "Mexiko",
+        "notes": ""
+    },
+    "portal.tcountryMOZ": {
+        "translation": "Mosambik",
+        "notes": ""
+    },
+    "portal.tcountryNPL": {
+        "translation": "Nepál",
+        "notes": ""
+    },
+    "portal.tcountryNIC": {
+        "translation": "Nikaragua",
+        "notes": ""
+    },
+    "portal.tcountryPAN": {
+        "translation": "Panama",
+        "notes": ""
+    },
+    "portal.tcountryPER": {
+        "translation": "Peru",
+        "notes": ""
+    },
+    "portal.tcountryPRY": {
+        "translation": "Paraguay",
+        "notes": ""
+    },
+    "portal.tcountrySLV": {
+        "translation": "Salvador",
+        "notes": ""
+    },
+    "portal.tcountryTTO": {
+        "translation": "Trinidad a Tobago",
+        "notes": ""
+    },
+    "portal.tcountryVEN": {
+        "translation": "Venezuela",
+        "notes": ""
+    },
+    "portal.tcountryVUT": {
+        "translation": "Vanuatu",
+        "notes": ""
+    },
+    "portal.txtVersion": {
+        "translation": "Verze",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFile": {
+        "translation": "Soubor",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileCreate": {
+        "translation": "Vytvořit databázi",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileOpen": {
+        "translation": "Otevřít databázi",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileDownload": {
+        "translation": "Stáhnout",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileUpload": {
+        "translation": "Nahrát",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileUploadCopy": {
+        "translation": "Nové",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileUploadReplace": {
+        "translation": "Nahradit",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileInfo": {
+        "translation": "Popis databáze",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileLanguage": {
+        "translation": "Jazyk",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileLanguageEnglish": {
+        "translation": "angličtina",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileLanguageSpanish": {
+        "translation": "španělština \/ Español",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileLanguagePortuguese": {
+        "translation": "portugalština \/ portugal",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileLanguageFrench": {
+        "translation": "francouzština \/ française",
+        "notes": ""
+    },
+    "grpMainMenu.mnuFileLogout": {
+        "translation": "Zavřít relaci",
+        "notes": ""
+    },
+    "grpMainMenu.mnuUser": {
+        "translation": "Uživatel",
+        "notes": ""
+    },
+    "grpMainMenu.mnuUserLogin": {
+        "translation": "Přihlásit se",
+        "notes": ""
+    },
+    "grpMainMenu.mnuUserChangeLogin": {
+        "translation": "Přihlaste se pomocí jiného účtu",
+        "notes": ""
+    },
+    "grpMainMenu.mnuUserChangePasswd": {
+        "translation": "Změnit heslo",
+        "notes": ""
+    },
+    "grpMainMenu.mnuUserAccountManagement": {
+        "translation": "Vytvořit \ / Upravit uživatelské účty",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQuery": {
+        "translation": "Dotazy",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryViewDesign": {
+        "translation": "Dotaz na design",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryViewData": {
+        "translation": "Zobrazit datové karty",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryViewMap": {
+        "translation": "Mapy",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryViewGraph": {
+        "translation": "Grafy",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryViewStd": {
+        "translation": "Souhrnné",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryOption": {
+        "translation": "Možnosti",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryOptionNew": {
+        "translation": "Nový dotaz",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryOptionSave": {
+        "translation": "Uložit dotaz",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryOptionOpen": {
+        "translation": "Otevřít dotaz",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryResultSave": {
+        "translation": "Uložit",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryResultSaveAs": {
+        "translation": "Uložit jako",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryResultSaveAsXLS": {
+        "translation": "Uložit jako soubor Excel",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryResultSaveAsCSV": {
+        "translation": "Uložit jako soubor CSV",
+        "notes": ""
+    },
+    "grpMainMenu.mnuQueryResultPrint": {
+        "translation": "Tisk",
+        "notes": ""
+    },
+    "grpMainMenu.mnuDatacard": {
+        "translation": "Zadávání údajů",
+        "notes": ""
+    },
+    "grpMainMenu.mnuDatacardEdit": {
+        "translation": "Vytvořit \/ upravit datové karty",
+        "notes": ""
+    },
+    "grpMainMenu.mnuDatacardSetup": {
+        "translation": "Nastavení",
+        "notes": ""
+    },
+    "grpMainMenu.mnuDatacardSetupEnd": {
+        "translation": "Dokončit nastavení",
+        "notes": ""
+    },
+    "grpMainMenu.mnuDatacardImport": {
+        "translation": "Importovat datové karty",
+        "notes": ""
+    },
+    "grpMainMenu.mnuHelp": {
+        "translation": "Nápověda",
+        "notes": ""
+    },
+    "grpMainMenu.mnuHelpWebsite": {
+        "translation": "Webové stránky DesInventar",
+        "notes": ""
+    },
+    "grpMainMenu.mnuHelpMethodology": {
+        "translation": "Metodický průvodce",
+        "notes": ""
+    },
+    "grpMainMenu.mnuHelpDocumentation": {
+        "translation": "Dokumentace k softwaru",
+        "notes": ""
+    },
+    "grpMainMenu.mnuHelpAbout": {
+        "translation": "O nás...",
+        "notes": ""
+    },
+    "grpMenuUser.tuser": {
+        "translation": "Uživatel",
+        "notes": ""
+    },
+    "grpMenuUser.tname": {
+        "translation": "Jméno",
+        "notes": ""
+    },
+    "grpMenuUser.tpassword": {
+        "translation": "Heslo",
+        "notes": ""
+    },
+    "grpMenuUser.temail": {
+        "translation": "E-mail",
+        "notes": ""
+    },
+    "grpMenuUser.toldpassword": {
+        "translation": "Zadejte své heslo",
+        "notes": ""
+    },
+    "grpMenuUser.tnewpassword": {
+        "translation": "Nové heslo",
+        "notes": ""
+    },
+    "grpMenuUser.tnewpassword2": {
+        "translation": "Znovu zadejte heslo",
+        "notes": ""
+    },
+    "grpMenuUser.tcountry": {
+        "translation": "Země",
+        "notes": ""
+    },
+    "grpMenuUser.tcity": {
+        "translation": "Město",
+        "notes": ""
+    },
+    "grpMenuUser.tactive": {
+        "translation": "Aktivní",
+        "notes": ""
+    },
+    "grpMenuUser.baddoption": {
+        "translation": "Přidat",
+        "notes": ""
+    },
+    "grpMenuUser.bsave": {
+        "translation": "Uložit",
+        "notes": ""
+    },
+    "grpMenuUser.bsend": {
+        "translation": "Generovat",
+        "notes": ""
+    },
+    "grpMenuUser.bcancel": {
+        "translation": "Zrušit",
+        "notes": ""
+    },
+    "grpMenuUser.benter": {
+        "translation": "Přihlásit se",
+        "notes": ""
+    },
+    "grpMenuUser.tpasslost": {
+        "translation": "Zapomněli jste heslo?",
+        "notes": ""
+    },
+    "grpMenuUser.msgEmptyFields": {
+        "translation": "Pole nemohou být prázdná",
+        "notes": ""
+    },
+    "grpMenuUser.msgUserLoggedIn": {
+        "translation": "Přihlášení bylo úspěšné.",
+        "notes": ""
+    },
+    "grpMenuUser.msgInvalidPasswd": {
+        "translation": "Neplatné uživatelské jméno nebo heslo",
+        "notes": ""
+    },
+    "grpMenuUser.msgConnectionError": {
+        "translation": "Připojení se nezdařilo",
+        "notes": ""
+    },
+    "grpMenuUser.toptions": {
+        "translation": "Možnosti",
+        "notes": ""
+    },
+    "grpMenuUser.tmyregions": {
+        "translation": "Moje databáze",
+        "notes": ""
+    },
+    "grpMenuUser.thello": {
+        "translation": "Ahoj!",
+        "notes": ""
+    },
+    "grpMenuUser.tdetails": {
+        "translation": "Přístup",
+        "notes": ""
+    },
+    "grpMenuUser.tuserprefer": {
+        "translation": "Upravit uživatelský účet",
+        "notes": ""
+    },
+    "grpMenuUser.tuseremail": {
+        "translation": "Elektronická pošta (<i>e-mail<\/i>)",
+        "notes": ""
+    },
+    "grpMenuUser.tadminperms": {
+        "translation": "Správní orgán",
+        "notes": ""
+    },
+    "grpMenuUser.tyourrol": {
+        "translation": "Vaše role a databáze je:",
+        "notes": ""
+    },
+    "grpMenuUser.tadminof": {
+        "translation": "Manažer",
+        "notes": ""
+    },
+    "grpMenuUser.tobservof": {
+        "translation": "Pozorovatel",
+        "notes": ""
+    },
+    "grpMenuUser.tuserof": {
+        "translation": "Poskytovatel dat",
+        "notes": ""
+    },
+    "grpMenuUser.tsupervof": {
+        "translation": "Kontrolor",
+        "notes": ""
+    },
+    "grpMenuUser.tnorol": {
+        "translation": "Žádná",
+        "notes": ""
+    },
+    "grpMenuUser.tgetemailpass": {
+        "translation": "Připomenutí pro uživatele a heslo",
+        "notes": ""
+    },
+    "grpMenuUser.tmsgpasslost": {
+        "translation": "Pokud jste zapomněli heslo",
+        "notes": ""
+    },
+    "grpMenuUser.msgsendemail": {
+        "translation": "Vaše uživatelské jméno je:",
+        "notes": ""
+    },
+    "grpMenuUser.msgsendemail2": {
+        "translation": "Vaše heslo je:",
+        "notes": ""
+    },
+    "grpMenuUser.errsendemail": {
+        "translation": "E-mailová adresa není zaregistrována. Zkuste to znovu.",
+        "notes": ""
+    },
+    "grpMenuUser.terror": {
+        "translation": "Chyba",
+        "notes": ""
+    },
+    "grpMenuUser.errinvaliduser": {
+        "translation": "Neplatné uživatelské jméno nebo heslo",
+        "notes": ""
+    },
+    "grpMenuUser.errmsgfrmregist": {
+        "translation": "Chyba při odesílání REGISTRACE. Vyplňte všechna povinná pole a zkuste to znovu.",
+        "notes": ""
+    },
+    "grpMenuUser.msginsertsucc": {
+        "translation": "Nový vstup uživatele úspěšný",
+        "notes": ""
+    },
+    "grpMenuUser.msgupdatesucc": {
+        "translation": "Aktualizace uživatele úspěšná",
+        "notes": ""
+    },
+    "grpMenuUser.errinsert": {
+        "translation": "Nelze zadat uživatele",
+        "notes": ""
+    },
+    "grpMenuUser.errupdate": {
+        "translation": "Nelze aktualizovat uživatele",
+        "notes": ""
+    },
+    "grpMenuUser.errbadpasswd": {
+        "translation": "Nesprávné heslo",
+        "notes": ""
+    },
+    "grpMenuUser.errnomatch": {
+        "translation": "Nové heslo a nové zadání se neshodují.",
+        "notes": ""
+    },
+    "grpMenuUser.erremptyfields": {
+        "translation": "Pole nemohou být prázdná",
+        "notes": ""
+    },
+    "grpMenuUser.msgUserEditFormStatusOk": {
+        "translation": "Informace o uživateli aktualizovány",
+        "notes": ""
+    },
+    "grpMenuUser.msgUserEditFormStatusError": {
+        "translation": "Chyba při aktualizaci informací o uživateli",
+        "notes": ""
+    },
+    "grpMenuUser.msgUserEditFormStatusDuplicateId": {
+        "translation": "Uživatelské jméno duplikováno",
+        "notes": ""
+    },
+    "grpMenuUser.msgUserEditFormStatusEmptyFields": {
+        "translation": "Pole musí mít hodnotu",
+        "notes": ""
+    },
+    "grpMenuRegion.ttname": {
+        "translation": "Správa databáze",
+        "notes": ""
+    },
+    "grpMenuRegion.tregionuuid": {
+        "translation": "ID databáze",
+        "notes": ""
+    },
+    "grpMenuRegion.tregnamlist": {
+        "translation": "Název databáze",
+        "notes": ""
+    },
+    "grpMenuRegion.tregcntlist": {
+        "translation": "Země",
+        "notes": ""
+    },
+    "grpMenuRegion.tregadmlist": {
+        "translation": "správce",
+        "notes": ""
+    },
+    "grpMenuRegion.tregactlist": {
+        "translation": "Aktivní",
+        "notes": ""
+    },
+    "grpMenuRegion.tregpublist": {
+        "translation": "veřejné",
+        "notes": ""
+    },
+    "grpMenuRegion.tcredits": {
+        "translation": "Credits",
+        "notes": ""
+    },
+    "grpMenuRegion.tmethodology": {
+        "translation": "Metdologie",
+        "notes": ""
+    },
+    "grpMenuRegion.tstaff": {
+        "translation": "Landmark",
+        "notes": ""
+    },
+    "grpMenuRegion.tsupport": {
+        "translation": "Údržba",
+        "notes": ""
+    },
+    "grpMenuRegion.tdescription": {
+        "translation": "Popis",
+        "notes": ""
+    },
+    "grpMenuRegion.tnopublic": {
+        "translation": "Databáze je ve výstavbě. Pouze pro členy databáze.",
+        "notes": ""
+    },
+    "grpMenuRegion.tvalregid": {
+        "translation": "Dostupné ID databáze",
+        "notes": ""
+    },
+    "grpMenuRegion.tinvregid": {
+        "translation": "ID databáze není k dispozici",
+        "notes": ""
+    },
+    "grpMenuRegion.tinsert": {
+        "translation": "Vytvořeno a",
+        "notes": ""
+    },
+    "grpMenuRegion.tupdate": {
+        "translation": "Aktualizováno a",
+        "notes": ""
+    },
+    "grpMenuRegion.tsetrole": {
+        "translation": "Přiřazeno",
+        "notes": ""
+    },
+    "grpMenuRegion.terrinsupd": {
+        "translation": "Nelze vstoupit do databáze",
+        "notes": ""
+    },
+    "grpMenuRegion.terrsetrole": {
+        "translation": "Nepřiřazeno",
+        "notes": ""
+    },
+    "grpMenuRegion.baddoption": {
+        "translation": "Přidat",
+        "notes": ""
+    },
+    "grpMenuRegion.bloaddir": {
+        "translation": "Načíst adresář",
+        "notes": ""
+    },
+    "grpMenuRegion.bupzipfile": {
+        "translation": "Nahrát soubor ZIP databáze",
+        "notes": ""
+    },
+    "grpMenuRegion.bsave": {
+        "translation": "Uložit",
+        "notes": ""
+    },
+    "grpMenuRegion.bcancel": {
+        "translation": "Zrušit",
+        "notes": ""
+    },
+    "grpMenuRegion.tviewdbase": {
+        "translation": "Vyberte databázi, kterou chcete zobrazit",
+        "notes": ""
+    },
+    "grpMenuRegion.tmoddescon": {
+        "translation": "generování map",
+        "notes": ""
+    },
+    "grpMenuRegion.tmoddesinv": {
+        "translation": "správa databáze",
+        "notes": ""
+    },
+    "grpMenuRegion.RegionDatabasePeriod": {
+        "translation": "Období",
+        "notes": ""
+    },
+    "grpMenuRegion.trepnum": {
+        "translation": "Záznamy",
+        "notes": ""
+    },
+    "grpMenuRegion.tlastupd": {
+        "translation": "Poslední aktualizace",
+        "notes": ""
+    },
+    "grpMenuRegion.RegionDatacardPeriod": {
+        "translation": "Období Datacard",
+        "notes": ""
+    },
+    "grpMenuRegion.msgInfoGeneral": {
+        "translation": "Obecné informace",
+        "notes": ""
+    },
+    "grpMenuRegion.msgInfoCredits": {
+        "translation": "Credits",
+        "notes": ""
+    },
+    "grpMenuRegion.msgInfoSources": {
+        "translation": "Zdroje",
+        "notes": ""
+    },
+    "grpMenuRegion.msgInfoSynopsis": {
+        "translation": "Synopse",
+        "notes": ""
+    },
+    "grpRegionInfo.baddoption": {
+        "translation": "Přidat",
+        "notes": ""
+    },
+    "grpRegionInfo.bsave": {
+        "translation": "Uložit",
+        "notes": ""
+    },
+    "grpRegionInfo.bcancel": {
+        "translation": "Zrušit",
+        "notes": ""
+    },
+    "grpRegionInfo.terror": {
+        "translation": "Chyba",
+        "notes": ""
+    },
+    "grpRegionInfo.msgupdinfo": {
+        "translation": "Databáze byla úspěšně aktualizována!",
+        "notes": ""
+    },
+    "grpRegionInfo.errupdinfo": {
+        "translation": "Chyba při aktualizaci databáze",
+        "notes": ""
+    },
+    "grpRegionInfo.msgupdrole": {
+        "translation": "Role uživatele byla úspěšně aktualizována!",
+        "notes": ""
+    },
+    "grpRegionInfo.errupdrole": {
+        "translation": "Chyba při aktualizaci uživatelské role",
+        "notes": ""
+    },
+    "grpRegionInfo.msginslog": {
+        "translation": "Protokol byl úspěšně vytvořen!",
+        "notes": ""
+    },
+    "grpRegionInfo.errinslog": {
+        "translation": "Chyba při vytváření protokolu",
+        "notes": ""
+    },
+    "grpRegionInfo.msgupdlog": {
+        "translation": "Protokol byl úspěšně aktualizován",
+        "notes": ""
+    },
+    "grpRegionInfo.errupdlog": {
+        "translation": "Chyba při aktualizaci protokolu",
+        "notes": ""
+    },
+    "grpRegionInfo.errmsgfrm": {
+        "translation": "Zaregistrovat všechna pole v RECORD DESINVENTAR. Vyplňte všechna povinná pole a zkuste to znovu.",
+        "notes": ""
+    },
+    "grpRegionInfo.errmsgfrmrol": {
+        "translation": "ROLE: Vyplňte všechna povinná pole a zkuste to znovu.",
+        "notes": ""
+    },
+    "grpRegionInfo.errmsgfrmlog": {
+        "translation": "LOG: Vyplňte všechna povinná pole a zkuste to znovu.",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Title": {
+        "translation": "Geografické jednotky",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Header1": {
+        "translation": "Vyberte úroveň pro přidání nebo úpravu geografických jednotek",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Header2": {
+        "translation": "Kliknutím na řádek upravíte geografickou jednotku",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_All": {
+        "translation": "Vše",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Edit": {
+        "translation": "Upravit",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Code": {
+        "translation": "Kód",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Name": {
+        "translation": "Název",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Active": {
+        "translation": "Aktivní",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Inactive": {
+        "translation": "Neaktivní",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_New": {
+        "translation": "Nové",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Check": {
+        "translation": "Zkontrolovat",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Status": {
+        "translation": "Stav",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Export": {
+        "translation": "Export",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_ExportTooltip": {
+        "translation": "Exportovat geografii jako soubor CSV",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Add": {
+        "translation": "Přidat",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Save": {
+        "translation": "Uložit",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_Cancel": {
+        "translation": "Zrušit",
+        "notes": ""
+    },
+    "grpAdminGeography.baddoption": {
+        "translation": "Přidat",
+        "notes": ""
+    },
+    "grpAdminGeography.bsave": {
+        "translation": "Uložit",
+        "notes": ""
+    },
+    "grpAdminGeography.bcancel": {
+        "translation": "Zrušit",
+        "notes": ""
+    },
+    "grpAdminGeography.terror": {
+        "translation": "Chyba",
+        "notes": ""
+    },
+    "grpAdminGeography.errchkname": {
+        "translation": "Nelze použít typ názvu příčiny, protože již existuje.",
+        "notes": ""
+    },
+    "grpAdminGeography.msginslev": {
+        "translation": "Úroveň byla úspěšně vytvořena!",
+        "notes": ""
+    },
+    "grpAdminGeography.errinslev": {
+        "translation": "Nelze zadat novou úroveň",
+        "notes": ""
+    },
+    "grpAdminGeography.msgupdlev": {
+        "translation": "Úroveň úspěšně aktualizována!",
+        "notes": ""
+    },
+    "grpAdminGeography.errupdlev": {
+        "translation": "Nelze aktualizovat úroveň",
+        "notes": ""
+    },
+    "grpAdminGeography.errchkcode": {
+        "translation": "Zeměpisný kód již existuje",
+        "notes": ""
+    },
+    "grpAdminGeography.errchkstatus": {
+        "translation": "Nelze deaktivovat typ příčiny, protože byl přiřazen.",
+        "notes": ""
+    },
+    "grpAdminGeography.msgDBConfigGeographyInsert": {
+        "translation": "Zeměpis byl úspěšně vytvořen!",
+        "notes": ""
+    },
+    "grpAdminGeography.errinsgeo": {
+        "translation": "Nelze vytvořit geografický prvek",
+        "notes": ""
+    },
+    "grpAdminGeography.msgDBConfigGeographyUpdate": {
+        "translation": "Geografie úspěšně aktualizována!",
+        "notes": ""
+    },
+    "grpAdminGeography.msgDBConfigGeographyError": {
+        "translation": "Nelze aktualizovat geografický prvek",
+        "notes": ""
+    },
+    "grpAdminGeography.errmsgfrmlev": {
+        "translation": "LEVEL: Vyplňte všechna povinná pole a zkuste to znovu.",
+        "notes": ""
+    },
+    "grpAdminGeography.errmsgfrmgeo": {
+        "translation": "GEOGRAFIE: Vyplňte všechna povinná pole a zkuste to znovu.",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_StatusOk": {
+        "translation": "Geografie úspěšně aktualizována!",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_StatusDuplicatedCode": {
+        "translation": "Geografický kód již existuje",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_StatusWithDatacards": {
+        "translation": "Nelze zakázat zeměpisné jednotky s přiřazenými datovými kartami",
+        "notes": ""
+    },
+    "grpAdminGeography.msgGeography_StatusError": {
+        "translation": "Chyba při ukládání geografických změn",
+        "notes": ""
+    },
+    "grpDatabaseEvents.msgDatabaseEvents_CustomEventTitle": {
+        "translation": "Typy událostí",
+        "notes": ""
+    },
+    "grpDatabaseEvents.msgEvents_Predefined": {
+        "translation": "Předdefinovaná událost",
+        "notes": ""
+    },
+    "grpDatabaseEvents.msgEvents_Custom": {
+        "translation": "Personalizovaná událost",
+        "notes": ""
+    },
+    "grpDatabaseEvents.msgDatabaseEvents_Add": {
+        "translation": "Přidat",
+        "notes": ""
+    },
+    "grpDatabaseEvents.msgDatabaseEvents_Save": {
+        "translation": "Uložit",
+        "notes": ""
+    },
+    "grpDatabaseEvents.msgDatabaseEvents_Cancel": {
+        "translation": "Zrušit",
+        "notes": ""
+    },
+    "grpDatabaseEvents.msgDatabaseEvents_UpdateOk": {
+        "translation": "Typ události byl úspěšně aktualizován!",
+        "notes": ""
+    },
+    "grpDatabaseEvents.msgDatabaseEvents_UpdateError": {
+        "translation": "Chyba při aktualizaci typu události",
+        "notes": ""
+    },
+    "grpDatabaseEvents.msgDatabaseEvents_ErrorEmptyFields": {
+        "translation": "Zaregistrovat všechna pole v RECORD DESINVENTAR. Vyplňte všechna povinná pole a zkuste to znovu.",
+        "notes": ""
+    },
+    "grpDatabaseEvents.msgDatabaseUsers_ErrorDuplicateName": {
+        "translation": "Nelze použít typ názvu události, protože již existuje.",
+        "notes": ""
+    },
+    "grpDatabaseEvents.msgDatabaseEvents_ErrorCannotDelete": {
+        "translation": "Nelze deaktivovat typ události, protože byla přiřazena jedné nebo více datovým kartám.",
+        "notes": ""
+    },
+    "grpDatabaseCauses.msgDatabaseCauses_CustomCauseTitle": {
+        "translation": "Typy příčin",
+        "notes": ""
+    },
+    "grpDatabaseCauses.msgCauses_Predefined": {
+        "translation": "Předdefinovaná příčina",
+        "notes": ""
+    },
+    "grpDatabaseCauses.msgCauses_Custom": {
+        "translation": "Personalizovaná příčina",
+        "notes": ""
+    },
+    "grpDatabaseCauses.msgDatabaseCauses_Add": {
+        "translation": "Přidat",
+        "notes": ""
+    },
+    "grpDatabaseCauses.msgDatabaseCauses_Save": {
+        "translation": "Uložit",
+        "notes": ""
+    },
+    "grpDatabaseCauses.msgDatabaseCauses_Cancel": {
+        "translation": "Zrušit",
+        "notes": ""
+    },
+    "grpDatabaseCauses.msgDatabaseCauses_UpdateOk": {
+        "translation": "Typ příčiny úspěšně aktualizován!",
+        "notes": ""
+    },
+    "grpDatabaseCauses.msgDatabaseCauses_UpdateError": {
+        "translation": "Chyba při aktualizaci typu příčiny",
+        "notes": ""
+    },
+    "grpDatabaseCauses.msgDatabaseCauses_ErrorEmptyFields": {
+        "translation": "Zaregistrovat všechna pole v RECORD DESINVENTAR. Vyplňte všechna povinná pole a zkuste to znovu.",
+        "notes": ""
+    },
+    "grpDatabaseCauses.msgDatabaseUsers_ErrorDuplicateName": {
+        "translation": "Nelze použít typ názvu události, protože již existuje.",
+        "notes": ""
+    },
+    "grpDatabaseCauses.msgDatabaseCauses_ErrorCannotDelete": {
+        "translation": "Nelze deaktivovat typ události, protože byla přiřazena jedné nebo více datovým kartám.",
+        "notes": ""
+    },
+    "grpAdminExtraEffects.baddoption": {
+        "translation": "Přidat",
+        "notes": ""
+    },
+    "grpAdminExtraEffects.bsave": {
+        "translation": "Uložit",
+        "notes": ""
+    },
+    "grpAdminExtraEffects.bcancel": {
+        "translation": "Zrušit",
+        "notes": ""
+    },
+    "grpAdminExtraEffects.terror": {
+        "translation": "Chyba",
+        "notes": ""
+    },
+    "grpAdminExtraEffects.msgupdeef": {
+        "translation": "Pole efektu bylo úspěšně aktualizováno!",
+        "notes": ""
+    },
+    "grpAdminExtraEffects.errupdeef": {
+        "translation": "Nelze aktualizovat, existuje pole se stejným názvem",
+        "notes": ""
+    },
+    "grpAdminExtraEffects.errmsgfrmeef": {
+        "translation": "EFEKTY: Vyplňte všechna povinná pole a zkuste to znovu.",
+        "notes": ""
+    },
+    "grpAdminExtraEffects.typeinteger": {
+        "translation": "Celé číslo",
+        "notes": ""
+    },
+    "grpAdminExtraEffects.typefloat": {
+        "translation": "Měna",
+        "notes": ""
+    },
+    "grpAdminExtraEffects.typedate": {
+        "translation": "Datum",
+        "notes": ""
+    },
+    "grpAdminExtraEffects.typetext": {
+        "translation": "Text",
+        "notes": ""
+    },
+    "grpAdminImport.ttitle": {
+        "translation": "Soubory CSV",
+        "notes": ""
+    },
+    "grpAdminImport.tsuccess": {
+        "translation": "Úspěšný import",
+        "notes": ""
+    },
+    "grpAdminImport.tfail": {
+        "translation": "Nelze importovat soubor",
+        "notes": ""
+    },
+    "grpAdminImport.tfound1": {
+        "translation": "Exist some",
+        "notes": ""
+    },
+    "grpAdminImport.tfound2": {
+        "translation": "chyby.",
+        "notes": ""
+    },
+    "grpAdminImport.tfile": {
+        "translation": "Row",
+        "notes": ""
+    },
+    "grpAdminImport.tsend": {
+        "translation": "Generovat",
+        "notes": ""
+    },
+    "grpDatacard.ttitle": {
+        "translation": "DesInventar",
+        "notes": ""
+    },
+    "grpDatacard.mprint": {
+        "translation": "Tisk",
+        "notes": ""
+    },
+    "grpDatacard.mloading": {
+        "translation": "One moment",
+        "notes": ""
+    },
+    "grpDatacard.bnew": {
+        "translation": "Nové",
+        "notes": ""
+    },
+    "grpDatacard.tnewtitle": {
+        "translation": "Vytvořit datovou kartu",
+        "notes": ""
+    },
+    "grpDatacard.tnewdesc": {
+        "translation": "Vložte nový registr do databáze",
+        "notes": ""
+    },
+    "grpDatacard.bupdate": {
+        "translation": "Upravit",
+        "notes": ""
+    },
+    "grpDatacard.tupdtitle": {
+        "translation": "Upravit datovou kartu",
+        "notes": ""
+    },
+    "grpDatacard.tupddesc": {
+        "translation": "Upravit existující záznam v databázi",
+        "notes": ""
+    },
+    "grpDatacard.bsave": {
+        "translation": "Uložit",
+        "notes": ""
+    },
+    "grpDatacard.tsavtitle": {
+        "translation": "Uložit datovou kartu",
+        "notes": ""
+    },
+    "grpDatacard.tsavdesc": {
+        "translation": "Uložit záznam do databáze, nezapomeňte zahrnout všechna povinná pole",
+        "notes": ""
+    },
+    "grpDatacard.datacardCloneTitle": {
+        "translation": "Kopírovat datovou kartu",
+        "notes": ""
+    },
+    "grpDatacard.datacardCloneTooltip": {
+        "translation": "Vytvořit novou datovou kartu pomocí informací z této datové karty",
+        "notes": ""
+    },
+    "grpDatacard.bcancel": {
+        "translation": "Zrušit",
+        "notes": ""
+    },
+    "grpDatacard.tcantitle": {
+        "translation": "Zahodit datovou kartu",
+        "notes": ""
+    },
+    "grpDatacard.tcandesc": {
+        "translation": "Změny nebudou uloženy.",
+        "notes": ""
+    },
+    "grpDatacard.bclean": {
+        "translation": "Vymazat",
+        "notes": ""
+    },
+    "grpDatacard.tclntitle": {
+        "translation": "Vymazat datovou kartu",
+        "notes": ""
+    },
+    "grpDatacard.tclndesc": {
+        "translation": "informace budou vymazány aktuálním způsobem",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardSerialFind": {
+        "translation": "Hledat",
+        "notes": ""
+    },
+    "grpDatacard.tooltipDatacardFind": {
+        "translation": "Vyhledat datovou kartu",
+        "notes": ""
+    },
+    "grpDatacard.texpdesc": {
+        "translation": "Najít datovou kartu pomocí seriálu",
+        "notes": ""
+    },
+    "grpDatacard.bfirst": {
+        "translation": "První",
+        "notes": ""
+    },
+    "grpDatacard.bprev": {
+        "translation": "Předchozí",
+        "notes": ""
+    },
+    "grpDatacard.bnext": {
+        "translation": "Další",
+        "notes": ""
+    },
+    "grpDatacard.blast": {
+        "translation": "Poslední",
+        "notes": ""
+    },
+    "grpDatacard.ttotal": {
+        "translation": "Celkem",
+        "notes": ""
+    },
+    "grpDatacard.thelp": {
+        "translation": "Definice",
+        "notes": ""
+    },
+    "grpDatacard.tdidescinfo": {
+        "translation": "Kliknutím na název zobrazíte popis prvku",
+        "notes": ""
+    },
+    "grpDatacard.mgeography": {
+        "translation": "Geografické jednotky",
+        "notes": ""
+    },
+    "grpDatacard.mevents": {
+        "translation": "Typy událostí",
+        "notes": ""
+    },
+    "grpDatacard.mcauses": {
+        "translation": "Typy příčin",
+        "notes": ""
+    },
+    "grpDatacard.tbaseffects": {
+        "translation": "Základní efekty",
+        "notes": ""
+    },
+    "grpDatacard.textraeffect": {
+        "translation": "Další efekty",
+        "notes": ""
+    },
+    "grpDatacard.teffects": {
+        "translation": "Osoby a majetek",
+        "notes": ""
+    },
+    "grpDatacard.tsectors": {
+        "translation": "Dotčené sektory",
+        "notes": ""
+    },
+    "grpDatacard.tlosses": {
+        "translation": "Ekonomické ztráty",
+        "notes": ""
+    },
+    "grpDatacard.tcreatedate": {
+        "translation": "Vytvořeno:",
+        "notes": ""
+    },
+    "grpDatacard.tcreateby": {
+        "translation": "Autor:",
+        "notes": ""
+    },
+    "grpDatacard.tcreateupdate": {
+        "translation": "Změněno:",
+        "notes": ""
+    },
+    "grpDatacard.tstatus": {
+        "translation": "Status",
+        "notes": ""
+    },
+    "grpDatacard.tsend": {
+        "translation": "Generovat",
+        "notes": ""
+    },
+    "grpDatacard.tclear": {
+        "translation": "Vymazat",
+        "notes": ""
+    },
+    "grpDatacard.tclose": {
+        "translation": "Zavřít",
+        "notes": ""
+    },
+    "grpDatacard.tsince": {
+        "translation": "Od",
+        "notes": ""
+    },
+    "grpDatacard.tuntil": {
+        "translation": "Dokud",
+        "notes": ""
+    },
+    "grpDatacard.tqueryresults": {
+        "translation": "Výsledky",
+        "notes": ""
+    },
+    "grpDatacard.tqueryshowcard": {
+        "translation": "Zobrazit datovou kartu",
+        "notes": ""
+    },
+    "grpDatacard.tcheckquit": {
+        "translation": "Opravdu chcete ukončit DesInventar?",
+        "notes": ""
+    },
+    "grpDatacard.tmsgeditcard": {
+        "translation": "Chcete-li upravit tento záznam",
+        "notes": ""
+    },
+    "grpDatacard.tmsgnewcard": {
+        "translation": "Vyberte Nový pro zadání záznamu",
+        "notes": ""
+    },
+    "grpDatacard.tmsgsearchdup": {
+        "translation": "Zadejte slova pro vyhledávání existujících záznamů",
+        "notes": ""
+    },
+    "grpDatacard.tmsgsearchcards": {
+        "translation": "Zadejte slova, která definují vaše hledání",
+        "notes": ""
+    },
+    "grpDatacard.tmsgnewcardfill": {
+        "translation": "Vyplňte pole a vyberte Připraveno k uložení.",
+        "notes": ""
+    },
+    "grpDatacard.tmsgeditcardfill": {
+        "translation": "Upravte pole a vyberte Připraveno k uložení",
+        "notes": ""
+    },
+    "grpDatacard.tmsgviewcard": {
+        "translation": "Klikněte na řádek, který chcete zobrazit",
+        "notes": ""
+    },
+    "grpDatacard.errmsgfrm": {
+        "translation": "Zaregistrovat všechna pole v RECORD DESINVENTAR. Vyplňte všechna povinná pole a zkuste to znovu.",
+        "notes": ""
+    },
+    "grpDatacard.tstatpublished": {
+        "translation": "Publikováno",
+        "notes": ""
+    },
+    "grpDatacard.tstatready": {
+        "translation": "Čeká na schválení",
+        "notes": ""
+    },
+    "grpDatacard.tstatdraft": {
+        "translation": "Koncept",
+        "notes": ""
+    },
+    "grpDatacard.tstatrash": {
+        "translation": "Čeká na smazání",
+        "notes": ""
+    },
+    "grpDatacard.tstatdeleted": {
+        "translation": "Smazat!",
+        "notes": ""
+    },
+    "grpDatacard.tdcerror": {
+        "translation": "Datová karta nebyla uložena",
+        "notes": ""
+    },
+    "grpDatacard.tdisererr": {
+        "translation": "Žádné platné číslo (přiřazeno nesprávné)",
+        "notes": ""
+    },
+    "grpDatacard.tdiserok": {
+        "translation": "Platné číslo",
+        "notes": ""
+    },
+    "grpDatacard.tdccreated": {
+        "translation": "Datová karta vytvořena úspěšně",
+        "notes": ""
+    },
+    "grpDatacard.tdcupdated": {
+        "translation": "Datová karta byla úspěšně aktualizována",
+        "notes": ""
+    },
+    "grpDatacard.tdconuse": {
+        "translation": "Datovou kartu upravuje jiný uživatel",
+        "notes": ""
+    },
+    "grpDatacard.teffhav": {
+        "translation": "Byly",
+        "notes": ""
+    },
+    "grpDatacard.teffhavnot": {
+        "translation": "Nebyly žádné",
+        "notes": ""
+    },
+    "grpDatacard.teffdontknow": {
+        "translation": "Nevím",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardDuplicatedSerial": {
+        "translation": "Hodnota sériového pole již existuje; záznam nelze uložit",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardInvalidIntegerNumber": {
+        "translation": "Neplatný formát čísla",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardInvalidFloatNumber": {
+        "translation": "Neplatný formát čísla používá tečku jako oddělovač desetinných míst",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_WithoutStatus": {
+        "translation": "Nelze uložit datovou kartu bez stavu.",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardInvalidStatus": {
+        "translation": "Nedostatek oprávnění k uložení datové karty s tímto stavem",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardWithoutSource": {
+        "translation": "Datovou kartu bez informací o zdroji nelze zveřejnit, vyplňte zdroj nebo jej uložte jako koncept",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardInvalidGeography": {
+        "translation": "Zeměpis nebyl vybrán",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardWithoutEffects": {
+        "translation": "Záznam bez efektů nelze uložit",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardOutsideOfPeriod": {
+        "translation": "Datum zahájení katastrofy je mimo období databáze",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardNetworkError": {
+        "translation": "Chyba sítě; zkuste to znovu.",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_ErrorSaving": {
+        "translation": "Chyba při ukládání datové karty, zkontrolujte prosím vstupní data",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardNotFound": {
+        "translation": "Žádost o datovou kartu neexistuje",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacardFound": {
+        "translation": "Datová karta nalezena a načtena",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterBeginTime": {
+        "translation": "Počáteční datum",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterBeginTime_Helptext": {
+        "translation": "V tomto poli; rok; měsíc a datum výskytu katastrofy jsou registrovány.",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterSource": {
+        "translation": "Zdroje",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterSource_Tooltip": {
+        "translation": "Formátovaný text",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterSource_Helptext": {
+        "translation": "Zdroje informací použité k získání údajů zaznamenaných v záznamu. Může být zahrnut jeden nebo více zdrojů; v závislosti na konkrétním případě. Může to být: jeden nebo více zdrojů informací o médiích; již existující databáze a organizace nebo organisations from which the information was obtained.",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_RecordStatus": {
+        "translation": "Status",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterSerial": {
+        "translation": "Serial",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterSerial_Tooltip": {
+        "translation": "Žádné duplikáty. Max. 40 znaků",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterSerial_Helptext": {
+        "translation": "Číslo, které identifikuje každý záznam. Mohou být použity symboly \/ Zkratky \/ Zkratky nebo kódy. Doporučuje se použití postupného číslování. Písmena; Mohou být použity pomlčky a další znaky. Identifikátor nebo sériové číslo je pro každý záznam jedinečné.",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterGeographyId": {
+        "translation": "Geografie",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterSiteNotes": {
+        "translation": "Místo",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterSiteNotes_Helptext": {
+        "translation": "Specific place in which the disaster occurred. If the Place name is the same as the lowest of the geographic levels reported; it is not necessary to re-input this. In the case of rural disasters; Place can be a location; a village; a river; a territory which covers various geographic units; a farm or country house; a geographic accident; etc. In the case of urban disasters; Place should include the address and\/or neighbourhood.",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterLatitude": {
+        "translation": "Zeměpisná šířka",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_DisasterLongitude": {
+        "translation": "Zeměpisná délka",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EventName": {
+        "translation": "Typ události",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EventMagnitude": {
+        "translation": "Magnituda",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EventDuration": {
+        "translation": "Trvání",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EventDuration_Helptext": {
+        "translation": "Počet dní, kdy událost trvala. Většina událostí může trvat několik minut (tj. Zemětřesení; sesuvy půdy; bleskové povodně) nebo hodiny (tj. Záplavy nebo požáry). Události, jako je sucho nebo dlouhodobé záplavy, mohou trvat měsíce.",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EventNotes": {
+        "translation": "Postřehy k události",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EventNotes_Helptext": {
+        "translation": "Stručný popis výskytu události. V případě řetězových událostí nebo současných událostí; tyto by měly být také zahrnuty do popisu.",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_CauseName": {
+        "translation": "Typ příčiny",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_CauseNotes": {
+        "translation": "Pozorování příčiny",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_CauseNotes_Helptext": {
+        "translation": "A brief annotation of the relationship between the cause and the event. This field is a very important in terms of analysis of the database because here would be described those causes which complement or contextualise the one registered in the field Cause.",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_InputDoubleTooltip": {
+        "translation": "Plovoucí číslo používá tečku jako oddělovač desetinných míst",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EffectOtherLosses": {
+        "translation": "Ostatní ztráty",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EffectOtherLosses_Tooltip": {
+        "translation": "Text",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EffectOtherLosses_Helptext": {
+        "translation": "Popis dalších ztrát nezahrnutých do polí základního záznamu. Například: církevní budovy a památky; budovy architektonického nebo kulturního dědictví; divadla a veřejná zařízení; budovy veřejné správy týkající se bank; obchod a cestovní ruch; vozidla nebo autobusy ztraceny; mosty.",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EffectNotes": {
+        "translation": "Pozorování účinků",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EffectNotes_Tooltip": {
+        "translation": "Text",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_EffectNotes_Helptext": {
+        "translation": "Poznámky nebo podrobnosti o dopadech katastrofy. Toto pole by mělo být použito k registraci nesrovnalostí mezi čísly účinků, pokud existuje více než jeden zdroj.",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_RecordAuthor": {
+        "translation": "Autor",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_RecordCreation": {
+        "translation": "datum vytvoření",
+        "notes": ""
+    },
+    "grpDatacard.msgDatacard_RecordUpdate": {
+        "translation": "Aktualizováno",
+        "notes": ""
+    },
+    "grpMainStrings.twelcome": {
+        "translation": "Vítejte",
+        "notes": ""
+    },
+    "grpMainStrings.tdititle": {
+        "translation": "Inventarizační systém účinků katastrof",
+        "notes": ""
+    },
+    "grpMainStrings.hlostconn": {
+        "translation": "Selhání komunikace. Zkontrolujte připojení k internetu.",
+        "notes": ""
+    },
+    "grpMainStrings.tdbnotavail": {
+        "translation": "V tuto chvíli nejsou k dispozici žádné databáze.",
+        "notes": ""
+    },
+    "grpMainStrings.msgMain_NoPerms": {
+        "translation": "K používání této databáze nemáte oprávnění",
+        "notes": ""
+    },
+    "grpMainStrings.tmoreinfo": {
+        "translation": "Více informací",
+        "notes": ""
+    },
+    "grpMainStrings.talerdiwin": {
+        "translation": "DesInventar se používá. Jste si jisti, že chcete skončit?",
+        "notes": ""
+    },
+    "grpMainStrings.tstartpage": {
+        "translation": "Úvodní strana",
+        "notes": ""
+    },
+    "grpMainStrings.tcopyright": {
+        "translation": "(c) 1998-2018 společnost OSSO - Kolumbie",
+        "notes": ""
+    },
+    "grpMainStrings.labelsoftwareversion": {
+        "translation": "Verze Software",
+        "notes": ""
+    },
+    "grpMainStrings.ttitle": {
+        "translation": "DesInventar",
+        "notes": ""
+    },
+    "grpMainStrings.tsubtitle": {
+        "translation": "Návrh databázového Query",
+        "notes": ""
+    },
+    "grpMainStrings.tsubtitlemsg": {
+        "translation": "Zadejte svůj dotaz výběrem polí, která vás zajímají.",
+        "notes": ""
+    },
+    "grpMainStrings.tsubtitle2": {
+        "translation": "Výsledky",
+        "notes": ""
+    },
+    "grpMainStrings.tsubtitle2msg": {
+        "translation": "vyberte jeden z nástrojů pro analýzu dat",
+        "notes": ""
+    },
+    "grpMainStrings.mfile": {
+        "translation": "Soubor",
+        "notes": ""
+    },
+    "grpMainStrings.mprint": {
+        "translation": "Tisk",
+        "notes": ""
+    },
+    "grpMainStrings.mgeosection": {
+        "translation": "Geografie",
+        "notes": ""
+    },
+    "grpMainStrings.mmapsection": {
+        "translation": "Mapa",
+        "notes": ""
+    },
+    "grpMainStrings.meffsection": {
+        "translation": "Účinky",
+        "notes": ""
+    },
+    "grpMainStrings.mextsection": {
+        "translation": "Další účinky",
+        "notes": ""
+    },
+    "grpMainStrings.mevesection": {
+        "translation": "Typy událostí",
+        "notes": ""
+    },
+    "grpMainStrings.mcausection": {
+        "translation": "Typy příčin",
+        "notes": ""
+    },
+    "grpMainStrings.mdcsection": {
+        "translation": "Datové karty",
+        "notes": ""
+    },
+    "grpMainStrings.madvsection": {
+        "translation": "Pokročilý databázový dotaz",
+        "notes": ""
+    },
+    "grpMainStrings.mreginfo": {
+        "translation": "Technické info",
+        "notes": ""
+    },
+    "grpMainStrings.msgDBConfig_Geolevels": {
+        "translation": "Zeměpisné úrovně",
+        "notes": ""
+    },
+    "grpMainStrings.msgGeolevels_Tooltip": {
+        "translation": "Zeměpisné úrovně: označuje správní politické rozdělení, na které je každá země nebo region rozdělena. Například Kolumbie je rozdělena do dvou správních úrovní: departementy a obce.",
+        "notes": ""
+    },
+    "grpMainStrings.msgGeolevels_HelpText": {
+        "translation": "Pro správu geografie v DesInventar je nutné vzít v úvahu koncepty řešení a hierarchie. Rozlišení je úroveň prostorových detailů, na které budou data odkazována; všechny záznamy \/ formuláře pak musí souviset se stejnou prostorovou jednotkou, například obcí. Hierarchie geografických úrovní odkazuje na hierarchicky zřetězené podřízené územní jednotky, tj. Vyšší nebo nižší rozlišení geografické úrovně (například země nebo stát) zahrnují nižší nebo vyšší úrovně rozlišení (například země obsahuje regiony, regiony obsahují státy, státy obsahují obce atd.), které jsou navzájem podřízené, dokud nedosáhnou úrovně rozlišení databáze.",
+        "notes": ""
+    },
+    "grpMainStrings.mgeography": {
+        "translation": "Zeměpisné jednotky",
+        "notes": ""
+    },
+    "grpMainStrings.msgGeography_Tooltip": {
+        "translation": "Zeměpisné jednotky. Pro každou uvažovanou geografickou úroveň musí být zahrnuty všechny geografické nebo správní jednotky, které ji tvoří. Například v Kolumbii jsou na první úrovni (1) začleněny názvy a kódy 33 departementů (ekvivalent brazilského státu), do nichž je tato země politicky rozdělena.",
+        "notes": ""
+    },
+    "grpMainStrings.msgDBConfig_Events": {
+        "translation": "Typy událostí",
+        "notes": ""
+    },
+    "grpMainStrings.mcauses": {
+        "translation": "Druhy příčin",
+        "notes": ""
+    },
+    "grpMainStrings.meeffects": {
+        "translation": "Dodatečné účinky",
+        "notes": ""
+    },
+    "grpMainStrings.msgDBConfig_RolesAndDiffusion": {
+        "translation": "Rozdělení a role",
+        "notes": ""
+    },
+    "grpMainStrings.tmapnotavail": {
+        "translation": "Mapa je nedostupná",
+        "notes": ""
+    },
+    "grpMainStrings.msgResultSaveTooltip": {
+        "translation": "Umožňuje uložit zobrazené výsledky (tabulky a obrázky)",
+        "notes": ""
+    },
+    "grpMainStrings.msgResultPrintTooltip": {
+        "translation": "Výsledek otisku obrazovky",
+        "notes": ""
+    },
+    "grpMainStrings.msgViewData": {
+        "translation": "Zobrat datové karty",
+        "notes": ""
+    },
+    "grpMainStrings.msgViewDataTooltip": {
+        "translation": "Vizualizujte záznamy ve formátu tabulky",
+        "notes": ""
+    },
+    "grpMainStrings.msgViewMap": {
+        "translation": "Mapy",
+        "notes": ""
+    },
+    "grpMainStrings.msgViewMapTooltip": {
+        "translation": "Vytvářejte tematické mapy účinků",
+        "notes": ""
+    },
+    "grpMainStrings.msgViewGraph": {
+        "translation": "Grafy",
+        "notes": ""
+    },
+    "grpMainStrings.msgViewGraphTooltip": {
+        "translation": "Představujte data v histogramech a srovnávacích grafech",
+        "notes": ""
+    },
+    "grpMainStrings.msgViewStd": {
+        "translation": "Konsolidace",
+        "notes": ""
+    },
+    "grpMainStrings.msgViewStdTooltip": {
+        "translation": "Sčítejte účinky pomocí různých úrovní sdružování",
+        "notes": ""
+    },
+    "grpMainStrings.gopttitle": {
+        "translation": "Nadpis",
+        "notes": ""
+    },
+    "grpMainStrings.goptsubtit": {
+        "translation": "Podnadpis",
+        "notes": ""
+    },
+    "grpMainStrings.ghistogram": {
+        "translation": "Histogram",
+        "notes": ""
+    },
+    "grpMainStrings.gcomparative": {
+        "translation": "Srovnávací",
+        "notes": ""
+    },
+    "grpMainStrings.gseaday": {
+        "translation": "Denní",
+        "notes": ""
+    },
+    "grpMainStrings.gtendline": {
+        "translation": "Křivka trendu",
+        "notes": ""
+    },
+    "grpMainStrings.glinearreg": {
+        "translation": "Lineární regrese",
+        "notes": ""
+    },
+    "grpMainStrings.GHISTOANNUAL": {
+        "translation": "Víceletý histogram",
+        "notes": ""
+    },
+    "grpMainStrings.gseaweek": {
+        "translation": "Týdně",
+        "notes": ""
+    },
+    "grpMainStrings.gseamonth": {
+        "translation": "Měsíčně",
+        "notes": ""
+    },
+    "grpMainStrings.gperannual": {
+        "translation": "Ročně",
+        "notes": ""
+    },
+    "grpMainStrings.gperweek": {
+        "translation": "Týdně",
+        "notes": ""
+    },
+    "grpMainStrings.gpermonth": {
+        "translation": "Měsíčně",
+        "notes": ""
+    },
+    "grpMainStrings.gperday": {
+        "translation": "Denně",
+        "notes": ""
+    },
+    "grpMainStrings.gscalin": {
+        "translation": "Lineání",
+        "notes": ""
+    },
+    "grpMainStrings.gscalog": {
+        "translation": "Logaritmické",
+        "notes": ""
+    },
+    "grpMainStrings.gfee2d": {
+        "translation": "2D",
+        "notes": ""
+    },
+    "grpMainStrings.gfee3d": {
+        "translation": "3D",
+        "notes": ""
+    },
+    "grpMainStrings.gkndbars": {
+        "translation": "Sloupce",
+        "notes": ""
+    },
+    "grpMainStrings.gkndlines": {
+        "translation": "Čáry",
+        "notes": ""
+    },
+    "grpMainStrings.gkndpie": {
+        "translation": "Výseč",
+        "notes": ""
+    },
+    "grpMainStrings.gmodnormal": {
+        "translation": "Normální",
+        "notes": ""
+    },
+    "grpMainStrings.gmodaccumul": {
+        "translation": "Nahromaděné",
+        "notes": ""
+    },
+    "grpMainStrings.gmodovercome": {
+        "translation": "Sobreposto",
+        "notes": ""
+    },
+    "grpMainStrings.gshwval": {
+        "translation": "Hodnoty",
+        "notes": ""
+    },
+    "grpMainStrings.gshwperce": {
+        "translation": "Proocenta",
+        "notes": ""
+    },
+    "grpMainStrings.gshwnone": {
+        "translation": "Deaktivovat",
+        "notes": ""
+    },
+    "grpMainStrings.ghoraxis": {
+        "translation": "Vodorovná osa",
+        "notes": ""
+    },
+    "grpMainStrings.gveraxis": {
+        "translation": "Svislá osa",
+        "notes": ""
+    },
+    "grpMainStrings.mareaid": {
+        "translation": "Identifikace oblastí",
+        "notes": ""
+    },
+    "grpMainStrings.mareashownam": {
+        "translation": "Zobrazit názvy",
+        "notes": ""
+    },
+    "grpMainStrings.mareashowcod": {
+        "translation": "Zobrazit kódy",
+        "notes": ""
+    },
+    "grpMainStrings.mareashowval": {
+        "translation": "Zobrazit hodnoty",
+        "notes": ""
+    },
+    "grpMainStrings.mareanotshow": {
+        "translation": "Nezobrazovat identifikaci",
+        "notes": ""
+    },
+    "grpMainStrings.mranlegcol": {
+        "translation": "Legendy a barvy",
+        "notes": ""
+    },
+    "grpMainStrings.mrange": {
+        "translation": "Stanovit rozsah",
+        "notes": ""
+    },
+    "grpMainStrings.mlegend": {
+        "translation": "Legenda",
+        "notes": ""
+    },
+    "grpMainStrings.mcolor": {
+        "translation": "Barva",
+        "notes": ""
+    },
+    "grpMainStrings.mbetween": {
+        "translation": "Mezi",
+        "notes": ""
+    },
+    "grpMainStrings.mrepreselev": {
+        "translation": "Úroveň zastoupení",
+        "notes": ""
+    },
+    "grpMainStrings.mviewfields": {
+        "translation": "Proměnná, která má být zastoupena",
+        "notes": ""
+    },
+    "grpMainStrings.mcolorgrad": {
+        "translation": "Barevný přechod",
+        "notes": ""
+    },
+    "grpMainStrings.mcoltransp": {
+        "translation": "Průhlednost",
+        "notes": ""
+    },
+    "grpMainStrings.savailfields": {
+        "translation": "Dostupná pole",
+        "notes": ""
+    },
+    "grpMainStrings.sviewfields": {
+        "translation": "Viditelná pole a pořadí",
+        "notes": ""
+    },
+    "grpMainStrings.sresxpage": {
+        "translation": "Výsledky podle stránky",
+        "notes": ""
+    },
+    "grpMainStrings.stotallevels": {
+        "translation": "Vyberte úrovně, které chcete sečíst",
+        "notes": ""
+    },
+    "grpMainStrings.txtOrderBy": {
+        "translation": "Seřadit podle",
+        "notes": ""
+    },
+    "grpMainStrings.txtOrderBySerial": {
+        "translation": "Serie",
+        "notes": ""
+    },
+    "grpMainStrings.txtOrderByDateEventGeography": {
+        "translation": "Datum\/Událost\/Geografie",
+        "notes": ""
+    },
+    "grpMainStrings.txtOrderByDateGeographyEvent": {
+        "translation": "Datum\/Geografue\/Událost",
+        "notes": ""
+    },
+    "grpMainStrings.txtOrderByGeographyEventDate": {
+        "translation": "Geografie\/Událost\/Datum",
+        "notes": ""
+    },
+    "grpMainStrings.txtOrderByEventDateGeography": {
+        "translation": "Událost\/Datum\/Geografie",
+        "notes": ""
+    },
+    "grpMainStrings.txtOrderByRecordCreation": {
+        "translation": "Datum vytvoření záznamu",
+        "notes": ""
+    },
+    "grpMainStrings.txtOrderByRecordUpdate": {
+        "translation": "Datum aktualizace záznamu",
+        "notes": ""
+    },
+    "grpMainStrings.serrmsgfrm": {
+        "translation": "Vyberte úroveň, která má být sečtena, a alespoň jedno pole, které chcete vizualizovat",
+        "notes": ""
+    },
+    "grpMainStrings.derrmsgfrm": {
+        "translation": "Musíte vybrat alespoň jedno pole",
+        "notes": ""
+    },
+    "grpMainStrings.balls": {
+        "translation": "Vše",
+        "notes": ""
+    },
+    "grpMainStrings.bnone": {
+        "translation": "Vymazat",
+        "notes": ""
+    },
+    "grpMainStrings.msgViewStd_EventDuration": {
+        "translation": "Doba trvání události",
+        "notes": ""
+    },
+    "grpMainStrings.tand": {
+        "translation": "a",
+        "notes": ""
+    },
+    "grpMainStrings.tor": {
+        "translation": "nebo",
+        "notes": ""
+    },
+    "grpMainStrings.ttitegp": {
+        "translation": "Osoby a majetek",
+        "notes": ""
+    },
+    "grpMainStrings.ttiteis": {
+        "translation": "Sektory",
+        "notes": ""
+    },
+    "grpMainStrings.ttitloss": {
+        "translation": "Ekonomické ztráty",
+        "notes": ""
+    },
+    "grpMainStrings.msgQueryDesign_DateRange": {
+        "translation": "Rozsah",
+        "notes": ""
+    },
+    "grpMainStrings.ttitsince": {
+        "translation": "Od",
+        "notes": ""
+    },
+    "grpMainStrings.ttituntil": {
+        "translation": "Do",
+        "notes": ""
+    },
+    "grpMainStrings.tonly": {
+        "translation": "Pouze",
+        "notes": ""
+    },
+    "grpMainStrings.texclude": {
+        "translation": "Kromě",
+        "notes": ""
+    },
+    "grpMainStrings.tinclude": {
+        "translation": "Včetně",
+        "notes": ""
+    },
+    "grpMainStrings.tclear": {
+        "translation": "Vymazat",
+        "notes": ""
+    },
+    "grpMainStrings.tsend": {
+        "translation": "Generovat",
+        "notes": ""
+    },
+    "grpMainStrings.tclose": {
+        "translation": "Zavřít",
+        "notes": ""
+    },
+    "grpMainStrings.tmguidedef": {
+        "translation": "Definice",
+        "notes": ""
+    },
+    "grpMainStrings.hmoreinfo": {
+        "translation": "Metodologický průvodce",
+        "notes": ""
+    },
+    "grpMainStrings.tdescinfo": {
+        "translation": "Kliknutím na pole zobrazíte popis prvku",
+        "notes": ""
+    },
+    "grpMainStrings.tcntclick": {
+        "translation": "Ctrl + kliknutí pro vícenásobný výběr nebo zrušení výběru",
+        "notes": ""
+    },
+    "grpMainStrings.tauxhave": {
+        "translation": "Tady je\/jsou",
+        "notes": ""
+    },
+    "grpMainStrings.tauxaffect": {
+        "translation": "Zasaženo",
+        "notes": ""
+    },
+    "grpMainStrings.trepnum": {
+        "translation": "Záznamy",
+        "notes": ""
+    },
+    "grpMainStrings.tabout": {
+        "translation": "E-Mail desinventar@desinventar.org",
+        "notes": ""
+    },
+    "grpMainStrings.tserialmsg": {
+        "translation": "Můžete zahrnout nebo vyloučit jednu nebo více serií. Serie musí být odděleny mezerou.",
+        "notes": ""
+    },
+    "grpMainStrings.tserial": {
+        "translation": "Serie",
+        "notes": ""
+    },
+    "grpMainStrings.tdcstatus": {
+        "translation": "stav Datových karet",
+        "notes": ""
+    },
+    "grpMainStrings.tdcpublished": {
+        "translation": "Publikováno",
+        "notes": ""
+    },
+    "grpMainStrings.tdcready": {
+        "translation": "Ke schválení",
+        "notes": ""
+    },
+    "grpMainStrings.tdcdraft": {
+        "translation": "Návrh",
+        "notes": ""
+    },
+    "grpMainStrings.tdctrash": {
+        "translation": "ke smazání",
+        "notes": ""
+    },
+    "grpMainStrings.tdcdeleted": {
+        "translation": "Smazáno",
+        "notes": ""
+    },
+    "grpMainStrings.msgQueryDesign_DateFormat": {
+        "translation": "Formát data RRRR MM DD",
+        "notes": ""
+    },
+    "grpMainStrings.thlpquery": {
+        "translation": "Pokud není vybrána žádná možnost, bude dotazována celá databáze",
+        "notes": ""
+    },
+    "grpMainStrings.teffhav": {
+        "translation": "Byly",
+        "notes": ""
+    },
+    "grpMainStrings.teffhavnot": {
+        "translation": "Žádní nebyli",
+        "notes": ""
+    },
+    "grpMainStrings.teffdontknow": {
+        "translation": "Nevíme",
+        "notes": ""
+    },
+    "grpMainStrings.teffmajor": {
+        "translation": "Větší než nebo rovno",
+        "notes": ""
+    },
+    "grpMainStrings.teffminor": {
+        "translation": "Méně než nebo rovno",
+        "notes": ""
+    },
+    "grpMainStrings.teffequal": {
+        "translation": "Rovná se",
+        "notes": ""
+    },
+    "grpMainStrings.teffbetween": {
+        "translation": "Mezi",
+        "notes": ""
+    },
+    "grpMainStrings.tlike": {
+        "translation": "Jako",
+        "notes": ""
+    },
+    "grpMainStrings.tadvqryhelp": {
+        "translation": "Vyberte pole následného operátoru a hodnoty",
+        "notes": ""
+    },
+    "grpMainStrings.taqlessthan": {
+        "translation": "Najde formuláře s hodnotami menšími, než jsou zadány, například < 1920 nebo mrtví < 10.",
+        "notes": ""
+    },
+    "grpMainStrings.taqgreathan": {
+        "translation": "Najde formuláře s hodnotami vyššími, než je uvedeno, například počáteční datum > 1999 nebo poškozených > 1000",
+        "notes": ""
+    },
+    "grpMainStrings.taqequalto": {
+        "translation": "Najde karty s hodnotami přesně stejnými, jaké jsou uvedeny: např. zavřít start",
+        "notes": ""
+    },
+    "grpMainStrings.taqnoteqto": {
+        "translation": "Najde karty s různými hodnotami podle zadané hodnoty: např. Mrtví <> 10",
+        "notes": ""
+    },
+    "grpMainStrings.taqlike": {
+        "translation": "Najde slovo nebo frázi v textových polích.",
+        "notes": ""
+    },
+    "grpMainStrings.taqwere": {
+        "translation": "Najde karty, kde došlo k účinku nebo ovlivnění sektoru.",
+        "notes": ""
+    },
+    "grpMainStrings.taqwerent": {
+        "translation": "Najde karty, kde nenastal účinek nebo neovlivnil sektor.",
+        "notes": ""
+    },
+    "grpMainStrings.taqdntknow": {
+        "translation": "Najde karty tam, kde nevíte, zda byly nebo nebyly účinné nebo ovlivnily sektor.",
+        "notes": ""
+    },
+    "grpMainStrings.taqandopt": {
+        "translation": "Najde karty, pro které platí podmínka DVOU připojených prvků.",
+        "notes": ""
+    },
+    "grpMainStrings.taqoropt": {
+        "translation": "Najde karty, pro které platí podmínka některých nebo obou připojených prvků.",
+        "notes": ""
+    },
+    "dc_qdetails.geo": {
+        "translation": "Geografie",
+        "notes": ""
+    },
+    "dc_qdetails.eve": {
+        "translation": "Typ událostí",
+        "notes": ""
+    },
+    "dc_qdetails.cau": {
+        "translation": "Typ příčin",
+        "notes": ""
+    },
+    "dc_qdetails.eff": {
+        "translation": "Účinky",
+        "notes": ""
+    },
+    "dc_qdetails.beg": {
+        "translation": "Od",
+        "notes": ""
+    },
+    "dc_qdetails.end": {
+        "translation": "Do",
+        "notes": ""
+    },
+    "dc_qdetails.sou": {
+        "translation": "Zdroje Dat",
+        "notes": ""
+    },
+    "dc_qdetails.ser": {
+        "translation": "Serie",
+        "notes": ""
+    },
+    "dc_data.ttitle": {
+        "translation": "Data",
+        "notes": ""
+    },
+    "dc_data.tpage": {
+        "translation": "Strany:",
+        "notes": ""
+    },
+    "dc_data.msgData_PageOf": {
+        "translation": "z",
+        "notes": ""
+    },
+    "dc_data.trepnum": {
+        "translation": "Záznamy",
+        "notes": ""
+    },
+    "dc_data.trow": {
+        "translation": "Řádek",
+        "notes": ""
+    },
+    "dc_thematicmap.ttitle": {
+        "translation": "Metodický průvodce",
+        "notes": ""
+    },
+    "dc_thematicmap.tmapof": {
+        "translation": "Mapa",
+        "notes": ""
+    },
+    "dc_thematicmap.tdrawpoint": {
+        "translation": "Body a polygony",
+        "notes": ""
+    },
+    "dc_thematicmap.trepnum": {
+        "translation": "Záznamy",
+        "notes": ""
+    },
+    "dc_thematicmap.tgetgearth": {
+        "translation": "Zobrazit na GoogleEarth",
+        "notes": ""
+    },
+    "dc_thematicmap.msgMapNoData": {
+        "translation": "Nejsou data",
+        "notes": ""
+    },
+    "dc_thematicmap.msgViewMap_Level": {
+        "translation": "Úroveň",
+        "notes": ""
+    },
+    "dc_thematicmap.msgViewMap_From": {
+        "translation": "Od",
+        "notes": ""
+    },
+    "dc_thematicmap.msgViewMap_Until": {
+        "translation": "Do",
+        "notes": ""
+    },
+    "dc_thematicmap.msgViewMap_Records": {
+        "translation": "Záznamy",
+        "notes": ""
+    },
+    "dc_graphic.ttitle": {
+        "translation": "Shrnutí metodického průvodce",
+        "notes": ""
+    },
+    "dc_graphic.trepnum": {
+        "translation": "Záznamy",
+        "notes": ""
+    },
+    "dc_graphic.tnodata": {
+        "translation": "Nejsou data",
+        "notes": ""
+    },
+    "dc_statistic.ttitle": {
+        "translation": "Shrnutí metodického průvodce",
+        "notes": ""
+    },
+    "dc_statistic.tpage": {
+        "translation": "Strany:",
+        "notes": ""
+    },
+    "dc_statistic.msgStatistic_PageOf": {
+        "translation": "z",
+        "notes": ""
+    },
+    "dc_statistic.trepnum": {
+        "translation": "Záznamy",
+        "notes": ""
+    },
+    "dc_statistic.tsumnum": {
+        "translation": "Počet konsolidovaných",
+        "notes": ""
+    },
+    "dc_statistic.ttotals": {
+        "translation": "Součty",
+        "notes": ""
+    },
+    "dc_statistic.trow": {
+        "translation": "Řádek",
+        "notes": ""
+    },
+    "di_doc.metguide_Title": {
+        "translation": "Metodický průvodce",
+        "notes": ""
+    },
+    "di_doc.tintro": {
+        "translation": "Úvod",
+        "notes": ""
+    },
+    "di_doc.twhatis": {
+        "translation": "Co je DesInventar",
+        "notes": ""
+    },
+    "di_doc.tgenpres": {
+        "translation": "Obecná prezentace",
+        "notes": ""
+    },
+    "di_doc.tregion": {
+        "translation": "Region",
+        "notes": ""
+    },
+    "di_doc.tgeography": {
+        "translation": "Geografie",
+        "notes": ""
+    },
+    "di_doc.tevents": {
+        "translation": "Typ událostí",
+        "notes": ""
+    },
+    "di_doc.tcauses": {
+        "translation": "Typ příčin",
+        "notes": ""
+    },
+    "di_doc.textraeff": {
+        "translation": "Dodatečné účinky",
+        "notes": ""
+    },
+    "di_doc.tdatacards": {
+        "translation": "Datové karty",
+        "notes": ""
+    },
+    "di_doc.treferences": {
+        "translation": "Reference",
+        "notes": ""
+    },
+    "di_doc.thlptitle": {
+        "translation": "Úvod do DesInventar",
+        "notes": ""
+    },
+    "di_doc.thlpintro": {
+        "translation": "Úvod",
+        "notes": ""
+    },
+    "di_doc.thlpportal": {
+        "translation": "Potál DesInventar",
+        "notes": ""
+    },
+    "di_doc.thlppordemo": {
+        "translation": "Demo portál",
+        "notes": ""
+    },
+    "di_doc.thlpdimod": {
+        "translation": "DesInventar modul",
+        "notes": ""
+    },
+    "di_doc.thlpdcmod": {
+        "translation": "DesConsultar modul",
+        "notes": ""
+    },
+    "di_doc.thlpdemreg": {
+        "translation": "Demo Regionu",
+        "notes": ""
+    },
+    "di_doc.thlpdemgeo": {
+        "translation": "Demo Geografie",
+        "notes": ""
+    },
+    "di_doc.thlpdemeve": {
+        "translation": "Demo Události",
+        "notes": ""
+    },
+    "di_doc.thlpdemcau": {
+        "translation": "Demo Příčiny",
+        "notes": ""
+    },
+    "di_doc.thlpdemdc": {
+        "translation": "Demo Datové karty",
+        "notes": ""
+    },
+    "grpUserEdit.msgUserEdit_UserId": {
+        "translation": "Uživatel",
+        "notes": ""
+    },
+    "grpUserEdit.msgUserEdit_UserName": {
+        "translation": "Jméno",
+        "notes": ""
+    },
+    "grpUserEdit.msgUserEdit_UserEmail": {
+        "translation": "E-mail",
+        "notes": ""
+    },
+    "grpUserEdit.msgUserEdit_UserActive": {
+        "translation": "Aktivní",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_Title": {
+        "translation": "Geografické úrovně a mapa",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_GeoLevelName": {
+        "translation": "Název úrovně",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_GeoLevelDesc": {
+        "translation": "Popis úrovně",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_HasMap": {
+        "translation": "Mapa",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_GeoLevelActive": {
+        "translation": "Aktivní",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_Add": {
+        "translation": "Přidat",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_GeoLevelSubtitle": {
+        "translation": "Zeměpisná úroveň",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_Save": {
+        "translation": "Uložit",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_Cancel": {
+        "translation": "Zrušit",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_UpdateOk": {
+        "translation": "Záznam byl úspěšně aktualizován!",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_UpdateError": {
+        "translation": "Chyba při aktualizaci záznamu",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_Subtitle": {
+        "translation": "Kartografie",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_Code": {
+        "translation": "Sloupec kódu",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_CodeTooltip": {
+        "translation": "Toto je název sloupce s identifikačním kódem pro zeměpisné jednotky (tj. Kód nebo id)",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_ParentCode": {
+        "translation": "Sloupec nadřazeného kódu",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_ParentCodeTooltip": {
+        "translation": "",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_Name": {
+        "translation": "Sloupec názvu",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_NameTooltip": {
+        "translation": "Toto je název sloupce s popisným názvem zeměpisných jednotek (tj. Název)",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_ImportGeography": {
+        "translation": "Vytvořit zeměpisné jednotky",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_ImportGeographyTooltip": {
+        "translation": "Tuto možnost použijte k vynucení vytváření geografických jednotek pro tuto úroveň, všechny existující jednotky budou odstraněny.",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_File": {
+        "translation": "Soubor",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_UploadOk": {
+        "translation": "Soubor byl úspěšně nahrán",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_UploadError": {
+        "translation": "Chyba při nahrávání souboru",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_UpdateOk": {
+        "translation": "Kartografie byla úspěšně aktualizována",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_UpdateError": {
+        "translation": "Chyba při aktualizaci kartografie",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_MissingFiles": {
+        "translation": "Před uložením je třeba nahrát všechny soubory",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_RequiredFields": {
+        "translation": "Povinná pole nesmí být prázdná",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeocarto_CreatingGeography": {
+        "translation": "Vytváření zeměpisných prvků",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_UploadChooseFile": {
+        "translation": "Vybrat soubor",
+        "notes": ""
+    },
+    "grpGeolevels.msgGeolevels_UploadCancel": {
+        "translation": "Zrušit",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_TitleOptions": {
+        "translation": "Rozptyl databáze",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_TitleRoles": {
+        "translation": "Uživatelské role",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RegionActive": {
+        "translation": "Aktivní",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RegionPublic": {
+        "translation": "Veřejný",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RegionOrder": {
+        "translation": "Kategorie",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_CategoryNormal": {
+        "translation": "Normální",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_CategoryOfficial": {
+        "translation": "Oficiální",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RegionActiveTooltip": {
+        "translation": "Databáze bude k dispozici ve vašem seznamu databází",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RegionPublicTooltip": {
+        "translation": "Zaškrtnutím této možnosti povolíte veřejné dotazy do databáze",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_UserId": {
+        "translation": "Uživatel",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_UserRole": {
+        "translation": "Role",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RoleNone": {
+        "translation": "Žádná",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RoleObserver": {
+        "translation": "Pozorovatel",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RoleFeeder": {
+        "translation": "Poskytovatel",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RoleSupervisor": {
+        "translation": "Kontrolor",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RoleAdminRegion": {
+        "translation": "Manažer",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_Edit": {
+        "translation": "Upravit",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_Add": {
+        "translation": "Přidat",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_Save": {
+        "translation": "Uložit",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_Cancel": {
+        "translation": "Zrušit",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_OptionsStatusOk": {
+        "translation": "Databáze úspěšně aktualizována!",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_OptionsStatusError": {
+        "translation": "Chyba při aktualizaci databáze",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RoleListStatusOk": {
+        "translation": "Databáze úspěšně aktualizována!",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RoleListStatusError": {
+        "translation": "Chyba při aktualizaci databáze",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RoleListEmptyFields": {
+        "translation": "Pole nemohou být prázdná",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_RoleListCannotRemoveAdminRole": {
+        "translation": "Litujeme, že nemůžete odebrat svou roli správce",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_ConfirmManagerTitle": {
+        "translation": "Potvrdit",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_ConfirmManagerPrompt1": {
+        "translation": "Chcete převést roli správce z",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_ConfirmManagerPrompt2": {
+        "translation": "na",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_ConfirmManagerPrompt3": {
+        "translation": "Po této změně se stránka aplikace znovu načte",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_Yes": {
+        "translation": "Ok",
+        "notes": ""
+    },
+    "grpDatabaseUsers.msgDatabaseUsers_No": {
+        "translation": "Zrušit",
+        "notes": ""
+    },
+    "grpDatabaseEdit.msgDatabaseEditCountryIso": {
+        "translation": "Země",
+        "notes": ""
+    },
+    "grpDatabaseEdit.msgDatabaseEditRegionId": {
+        "translation": "Identifikátor",
+        "notes": ""
+    },
+    "grpDatabaseEdit.msgDatabaseEditRegionLabel": {
+        "translation": "Název databáze",
+        "notes": ""
+    },
+    "grpDatabaseEdit.msgDatabaseEditLangIsoCode": {
+        "translation": "Jazyk",
+        "notes": ""
+    },
+    "grpDatabaseEdit.msgDatabaseEditRegionActive": {
+        "translation": "Aktivní",
+        "notes": ""
+    },
+    "grpDatabaseEdit.msgDatabaseEditRegionPublic": {
+        "translation": "Veřejný",
+        "notes": ""
+    },
+    "grpDatabaseEdit.msgDatabaseEditRegionActiveTooltip": {
+        "translation": "Databáze bude k dispozici ve vašem seznamu databází",
+        "notes": ""
+    },
+    "grpDatabaseEdit.msgDatabaseEditRegionPublicTooltip": {
+        "translation": "Zaškrtnutím této možnosti povolíte veřejné dotazy do databáze",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateTitle": {
+        "translation": "Vytvořit novou databázi",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateSend": {
+        "translation": "Vytvořit",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateCancel": {
+        "translation": "Zrušit",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateOk": {
+        "translation": "Správně vytvořená databáze otevírá novou databázi ...",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateError": {
+        "translation": "Při vytváření databáze došlo k chybě. Zkontrolujte prosím data a zkuste to znovu.",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateFormError": {
+        "translation": "Formulář obsahuje neplatná data nebo některá povinná pole jsou prázdná. Zkontrolujte prosím data a zkuste to znovu.",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateMsg1": {
+        "translation": "Databáze byla vytvořena s identifikátorem",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateMsg2": {
+        "translation": "Nyní musíte nakonfigurovat databázi pomocí možnosti Nastavit databázi v nabídce Zadávání dat. Následující položky jsou povinné",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateMsg2A": {
+        "translation": "Vytvořit zeměpisné úrovně",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateMsg2B": {
+        "translation": "Vložit geografické jednotky na každé úrovni",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateMsg3": {
+        "translation": "Databázi lze přizpůsobit pomocí následujících možností",
+        "notes": ""
+    },
+    "grpDatabaseCreate.msgDatabaseCreateMsg4": {
+        "translation": "Ok",
+        "notes": ""
+    },
+    "grpUserPermAdmin.msgUserPermAdminTitle": {
+        "translation": "Správce Databáze",
+        "notes": ""
+    },
+    "grpUserPermAdmin.msgUserPermAdminMsg1": {
+        "translation": "Pomocí tohoto formuláře můžete konfigurovat, který uživatel je správcem databáze.",
+        "notes": ""
+    },
+    "grpUserPermAdmin.msgUserPermAdminCurrentAdmin": {
+        "translation": "Aktuální správce",
+        "notes": ""
+    },
+    "grpUserPermAdmin.msgUserPermAdminNewAdmin": {
+        "translation": "Nový správce",
+        "notes": ""
+    },
+    "grpUserPermAdmin.msgUserPermAdminSend": {
+        "translation": "Odeslat",
+        "notes": ""
+    },
+    "grpUserPermAdmin.msgUserPermAdminCancel": {
+        "translation": "Zrušit",
+        "notes": ""
+    },
+    "grpUserPermAdmin.msgUserPermAdminOk": {
+        "translation": "Správce Databáze úsppěšně aktualizován",
+        "notes": ""
+    },
+    "grpUserPermAdmin.msgUserPermAdminError": {
+        "translation": "Chyba při aktualizaci správce databáze, zkuste to znovu",
+        "notes": ""
+    },
+    "grpUserPermAdmin.msgUserPermAdminFormError": {
+        "translation": "Formulář obsahuje neplatná data nebo některá povinná pole jsou prázdná. Zkontrolujte prosím data a zkuste to znovu.",
+        "notes": ""
+    },
+    "grpAdminUsers.msgAdminUsers_Title": {
+        "translation": "Správa uživatelů",
+        "notes": ""
+    },
+    "grpAdminUsers.msgAdminUsers_AddUser": {
+        "translation": "Přidat",
+        "notes": ""
+    },
+    "grpDatabaseExport.msgDatabaseExportTitle": {
+        "translation": "Stáhnout databázi",
+        "notes": ""
+    },
+    "grpDatabaseExport.msgDatabaseExportComplete": {
+        "translation": "Soubor byl vytvořen a lze jej stáhnout hned.",
+        "notes": ""
+    },
+    "grpDatabaseExport.msgDatabaseExportWait": {
+        "translation": "Počkejte prosím, než bude soubor vytvořen. To může trvat několik minut v závislosti na vašem připojení k internetu a velikosti databáze.",
+        "notes": ""
+    },
+    "grpDatabaseExport.msgDatabaseExportError": {
+        "translation": "Při vytváření zálohy došlo k chybě",
+        "notes": ""
+    },
+    "grpDatabaseExport.msgDatabaseExportButtonSend": {
+        "translation": "Vytvořit",
+        "notes": ""
+    },
+    "grpDatabaseExport.msgDatabaseExportButtonClose": {
+        "translation": "Zavřít",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadTitle": {
+        "translation": "Nahrát databázi",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadMsg1": {
+        "translation": "Vyberte databázi, kterou chcete nahrát",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadFilename": {
+        "translation": "Název souboru",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadCancel": {
+        "translation": "Zrušit",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadUpdateOk": {
+        "translation": "Databáze byla správně aktualizována",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadErrorNoInfo": {
+        "translation": "Nahraný soubor se nejeví jako databáze DesInventar",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadErrorOnUpload": {
+        "translation": "Chyba při nahrávání souboru",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadUpdateError": {
+        "translation": "Databázi nelze na serveru aktualizovat",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadWaitForUpload": {
+        "translation": "Soubor se kopíruje",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadWaitForUpdate": {
+        "translation": "Počkejte prosím, než se databáze aktualizuje ...",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadWaitForCopy": {
+        "translation": "Počkejte prosím, než se databáze zkopíruje ...",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadRegionId": {
+        "translation": "Identifikátor",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadRegionLabel": {
+        "translation": "Název",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadCountryIso": {
+        "translation": "Země",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadLastUpdate": {
+        "translation": "Poslední aktualizace",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadNumberOfRecords": {
+        "translation": "Záznamy",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadCopyComplete": {
+        "translation": "Database was copied correctly",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadReplaceComplete": {
+        "translation": "Databáze byla správně aktualizována",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadConfirmStart": {
+        "translation": "Chystáte se nahradit obsah následující databáze",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadConfirmReplace": {
+        "translation": "Aktuální databáze bude nahrazena souborem:",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadConfirmCopy": {
+        "translation": "Soubor ke kopírování je:",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadButtonStart": {
+        "translation": "Pokračovat",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadButtonCopy": {
+        "translation": "Ok",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadButtonCancel": {
+        "translation": "Zrušit",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadButtonReplace": {
+        "translation": "Nahradit",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadChooseFile": {
+        "translation": "Vybrat soubor",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadButtonClose": {
+        "translation": "Zavřít",
+        "notes": ""
+    },
+    "grpDatabaseUpload.msgDatabaseUploadFileSpec": {
+        "translation": "Soubor by měl mít příponu zip a musí být stažen z DesInventar Online",
+        "notes": ""
+    },
+    "grpDBEdit.msgDBEditRegionId": {
+        "translation": "Identifikace oblastí",
+        "notes": ""
+    },
+    "grpDBEdit.msgDBEDitRegionLabel": {
+        "translation": "Název",
+        "notes": ""
+    },
+    "grpDBEdit.msgDBEDitLangIsoCode": {
+        "translation": "Jazyk",
+        "notes": ""
+    },
+    "grpDBEdit.msgDBEditCountryIso": {
+        "translation": "Země",
+        "notes": ""
+    },
+    "querydef.msgOperator": {
+        "translation": "Operátor",
+        "notes": ""
+    },
+    "grpDatabaseFind.msgDatabaseFind_Title": {
+        "translation": "Dostupné seznamy katastrof",
+        "notes": ""
+    },
+    "grpDatabaseFind.msgDatabaseFind_NoDatabases": {
+        "translation": "Na tomto serveru nejsou nainstalovány žádné databáze",
+        "notes": ""
+    },
+    "grpDatabaseFind.msgDatabaseFind_RoleADMINREGION": {
+        "translation": "Manažer",
+        "notes": ""
+    },
+    "grpDatabaseFind.msgDatabaseFind_RoleSUPERVISOR": {
+        "translation": "Kontrolor",
+        "notes": ""
+    },
+    "grpDatabaseFind.msgDatabaseFind_RoleUSER": {
+        "translation": "Poskytovatel",
+        "notes": ""
+    },
+    "grpDatabaseFind.msgDatabaseFind_RoleOBSERVER": {
+        "translation": "Pozorovatel",
+        "notes": ""
+    },
+    "grpDatabaseFind.msgDatabaseFind_RoleNONE": {
+        "translation": "Veřejné databáze",
+        "notes": ""
+    },
+    "grpDatabaseFind.msgDatabaseFind_Delete": {
+        "translation": "Smazat",
+        "notes": ""
+    },
+    "grpDatabaseDelete.msgDatabaseDelete_Title": {
+        "translation": "Smazat databázi",
+        "notes": ""
+    },
+    "grpDatabaseDelete.msgDatabaseDelete_Subtitle": {
+        "translation": "Chystáte se smazat následující databázi",
+        "notes": ""
+    },
+    "grpDatabaseDelete.msgDatabaseDelete_RegionId": {
+        "translation": "Identifikátor",
+        "notes": ""
+    },
+    "grpDatabaseDelete.msgDatabaseDelete_RegionLabel": {
+        "translation": "Název",
+        "notes": ""
+    },
+    "grpDatabaseDelete.msgDatabaseDelete_Ok": {
+        "translation": "Ok",
+        "notes": ""
+    },
+    "grpDatabaseDelete.msgDatabaseDelete_Cancel": {
+        "translation": "Zrušit",
+        "notes": ""
+    },
+    "grpDatabaseDelete.msgDatabaseDelete_Close": {
+        "translation": "Zavřít",
+        "notes": ""
+    },
+    "grpDatabaseDelete.msgDatabaseDelete_StatusOk": {
+        "translation": "Databáze byla smazána",
+        "notes": ""
+    },
+    "grpDatabaseDelete.msgDatabaseDelete_StatusError": {
+        "translation": "Při mazání databáze došlo k chybě",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_01": {
+        "translation": "Led",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_02": {
+        "translation": "Úno",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_03": {
+        "translation": "Bře",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_04": {
+        "translation": "Dub",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_05": {
+        "translation": "Kvě",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_06": {
+        "translation": "Čer",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_07": {
+        "translation": "Čvc",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_08": {
+        "translation": "Srp",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_09": {
+        "translation": "Zář",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_10": {
+        "translation": "Říj",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_11": {
+        "translation": "Lis",
+        "notes": ""
+    },
+    "grpGraphParams.msgMonth_12": {
+        "translation": "Pro",
+        "notes": ""
+    },
+    "user.msgUser_Username": {
+        "translation": "Uživatel",
+        "notes": ""
+    },
+    "user.msgUser_Password": {
+        "translation": "Heslo",
+        "notes": ""
+    },
+    "user.msgUser_Login": {
+        "translation": "Login",
+        "notes": ""
+    },
+    "user.msgUser_EmptyFields": {
+        "translation": "Pole nemohou být prázdná",
+        "notes": ""
+    },
+    "user.msgUser_LoggedIn": {
+        "translation": "Přihlášení úspěšné.",
+        "notes": ""
+    },
+    "user.msgUser_InvalidPasswd": {
+        "translation": "Neplatné uživatelské jméno nebo heslo",
+        "notes": ""
+    },
+    "portal.tcountryBLZ": {
+        "translation": "Belize",
+        "notes": ""
+    },
+    "portal.tcountryBRB": {
+        "translation": "Barbados",
+        "notes": ""
+    },
+    "portal.tcountryMLI": {
+        "translation": "Mali",
+        "notes": ""
+    },
+    "portal.tcountryURY": {
+        "translation": "Uruguay",
+        "notes": ""
+    },
+    "portal.tcountryUSA": {
+        "translation": "U.S.A",
+        "notes": ""
+    },
+    "region_list.txtRoleADMINREGION": {
+        "translation": "Manažer",
+        "notes": ""
+    },
+    "region_list.txtRoleSUPERVISOR": {
+        "translation": "Kontrolor",
+        "notes": ""
+    },
+    "region_list.txtRoleUSER": {
+        "translation": "Poskytovatel",
+        "notes": ""
+    },
+    "region_list.txtRoleOBSERVER": {
+        "translation": "Pozorovatel",
+        "notes": ""
+    },
+    "region_list.txtRoleNONE": {
+        "translation": "Veřejné databáze",
+        "notes": ""
+    },
+    "region_list.txtAvailableDB": {
+        "translation": "Dostupné soupisy katastrof",
+        "notes": ""
+    },
+    "region_info.RegionDatabasePeriod": {
+        "translation": "Období",
+        "notes": ""
+    },
+    "region_info.trepnum": {
+        "translation": "Záznamy",
+        "notes": ""
+    },
+    "region_info.tlastupd": {
+        "translation": "Poslední aktualizace",
+        "notes": ""
+    },
+    "region_info.RegionDatacardPeriod": {
+        "translation": "Období datové karty",
+        "notes": ""
+    },
+    "region_info.msgInfoGeneral": {
+        "translation": "Obecná informace",
+        "notes": ""
+    },
+    "region_info.msgInfoCredits": {
+        "translation": "Kredity",
+        "notes": ""
+    },
+    "region_info.msgInfoSources": {
+        "translation": "Zdroje",
+        "notes": ""
+    },
+    "region_info.msgInfoSynopsis": {
+        "translation": "Synopse",
+        "notes": "",
+        "context": "Obrazovka s informacemi o regionu na portálu DesInventar"
+    },
+    "grpGeoLevels.msgGeocarto_Charset": {
+        "translation": "Kódování znaků",
+        "notes": "Kódování znaků použité v importovaném souboru DBF"
+    },
+    "grpGeoLevels.msgGeocarto_CharsetTooltip": {
+        "translation": "Vyberte kódování znaků použité pro zeměpisné názvy v souboru DBF",
+        "notes": ""
+    },
+    "events.ACCIDENT.name": {
+        "translation": "Nehoda",
+        "notes": ""
+    },
+    "events.ACCIDENT.desc": {
+        "translation": "Dopravní, železniční, letecká nebo námořní dopravní nehoda. Tento pojem je omezen na nehody způsobené přírodními jevy, jako jsou sesuvy půdy, zemětřesení, hurikány, srážky nebo nepříznivé atmosférické podmínky atd. Zahrnuje ty dopravní nehody, které způsobují úniky toxických látek bez ohledu na jejich příčinu. Klíčová slova: dopravní nehoda, nehoda vlaku, letecká nehoda, dopravní nehody.",
+        "notes": ""
+    },
+    "events.AVALANCHE.name": {
+        "translation": "Lavina",
+        "notes": ""
+    },
+    "events.AVALANCHE.desc": {
+        "translation": "Pád nebo uvolnění masy ledu a \/ nebo sněhu. Klíčová slova: lavina.",
+        "notes": ""
+    },
+    "events.ALLUVION.name": {
+        "translation": "Naplaveniny",
+        "notes": ""
+    },
+    "events.ALLUVION.desc": {
+        "translation": "Proudy vody, které táhnou velké množství pevného materiálu (oblázky, štěrk a kameny). Tento termín je použitelný, když se odkazuje na účinky náhlých srážek na dosud suché oblasti nebo suchá koryta řek. Klíčová slova: proud, sesuv půdy, naplaveniny.",
+        "notes": ""
+    },
+    "events.SPATE.name": {
+        "translation": "Přívalový tok",
+        "notes": ""
+    },
+    "events.SPATE.desc": {
+        "translation": "Násilný proud vody v rokli, někdy označovaný jako náhlý vzestup nebo jako bystřina. Tento termín se používá například tehdy, když je hlášen –sesuv půdy-, když bystřina nese kmeny stromů a \/ nebo hojný sediment, od jemnozrnných po velké kusy hornin. Může to být způsobeno srážkami, prasknutím přehrady nebo bohatými sesuvy půdy v rokli. Nezahrnuje laviny, protože z nich vyplývá sníh nebo led. Klíčová slova: blesková povodeň, peřeje,",
+        "notes": ""
+    },
+    "events.BIOLOGICAL.name": {
+        "translation": "Biologická migrace nebo úhyn",
+        "notes": ""
+    },
+    "events.BIOLOGICAL.desc": {
+        "translation": "Úhyn nebo migrace biologických druhů. To lze v konečném důsledku připsat kontaminaci nebo drastickým změnám parametrů prostředí. Jedním příkladem je - rudý příliv - oteplování vod v důsledku jevu El Niño nebo snižování optimálního množství kyslíku v důsledku překážek kladených lidmi, jako jsou přehrady a hráze.",
+        "notes": ""
+    },
+    "events.POLLUTION.name": {
+        "translation": "Kontaminace",
+        "notes": ""
+    },
+    "events.POLLUTION.desc": {
+        "translation": "Koncentrace kontaminujících látek ve vzduchu, vodě nebo půdě na úrovních, které poškozují život lidí, zvířat nebo rostlin.",
+        "notes": ""
+    },
+    "events.LANDSLIDE.name": {
+        "translation": "Sesuv půdy",
+        "notes": ""
+    },
+    "events.LANDSLIDE.desc": {
+        "translation": "Hromadný pohyb zemského povrchu. Klíčová slova: sesuv půdy, pokles nebo usazování, drift, zatopení, tvorba trhlin, zhroucení jeskyní nebo dolů, padání skal, rozpadání se hornin nebo hornin (pomalu nebo rychle) ze svahů nebo strání, blokování silnic, kanálů, výkopů.",
+        "notes": ""
+    },
+    "events.EPIDEMIC.name": {
+        "translation": "Epidemie",
+        "notes": ""
+    },
+    "events.EPIDEMIC.desc": {
+        "translation": "Onemocnění, které napadá jednoho nebo více jedinců ve stejné oblasti (v průběhu dnů, týdnů, měsíců) překračujících očekávanou frekvenci: jako je cholera, tyfus, dýmějový mor atd. Je třeba vzít v úvahu, že vyhlášení epidemie závisí na endemické podmínky nemoci a regionu. Klíčová slova: nemoc, endemická, pandemická.",
+        "notes": ""
+    },
+    "events.ERUPTION.name": {
+        "translation": "Sopečná aktivita",
+        "notes": ""
+    },
+    "events.ERUPTION.desc": {
+        "translation": "Výbuch nebo emise pevného materiálu, kapaliny nebo plynu otvory nebo prasklinami v zemském povrchu. Zahrnuje erupce sopek bahna (diapiry). Klíčová slova: emise lávy, emise par, emise popela, emise bahna nebo horniny, emise vody, emise hornin.",
+        "notes": ""
+    },
+    "events.LEAK.name": {
+        "translation": "Únik",
+        "notes": ""
+    },
+    "events.LEAK.desc": {
+        "translation": "Průsak nebo únik toxických a / nebo radioaktivních látek, kapalin, pevných látek nebo plynů (např. Únik plynu). To může být způsobeno technologickými nehodami, lidskou chybou nebo nedbalostí.",
+        "notes": ""
+    },
+    "events.STRUCTURE.name": {
+        "translation": "Strukturální kolaps",
+        "notes": ""
+    },
+    "events.STRUCTURE.desc": {
+        "translation": "Poškození nebo zhroucení jakéhokoli druhu konstrukce (včetně těch, které jsou spojeny s elektrickými sítěmi, vodovody nebo odvodněním) v důsledku jevu jako přeplnění veřejných prostranství, nedostatek údržby, namáhané materiály, nevhodný design. Tento pojem zahrnuje strukturální poškození, které, i když nemusí nutně vést ke kolapsu, činí strukturu nepoužitelnou. Tento typ poškození může být nahlášen jako - porucha- (jako při strukturální chybě). Poškození struktur způsobené přírodními jevy (např. zemětřesení, sesuvy půdy, záplavy atd.) Se uvádí jako účinek těchto jevů. Klíčová slova: strukturální porucha.",
+        "notes": ""
+    },
+    "events.EXPLOSION.name": {
+        "translation": "Výbuch",
+        "notes": ""
+    },
+    "events.EXPLOSION.desc": {
+        "translation": "Náhlé uvolnění velkého množství energie (tepelné, chemické nebo jaderné), doprovázené bouřlivým hlukem a prudkým prasknutím vybuchujícího předmětu, produkujícím teplo, světlo a plyny. Zahrnuje výbuchy související s lidskou chybou nebo poruchami v systémech infrastruktury. V běžných inventářích -DesInventar- tento termín vylučuje válečné nebo teroristické činy.",
+        "notes": ""
+    },
+    "events.FORESTFIRE.name": {
+        "translation": "Lesní požár",
+        "notes": ""
+    },
+    "events.FORESTFIRE.desc": {
+        "translation": "Zahrnuje všechny typy požárů na otevřeném prostranství ve venkovských oblastech, v přírodních lesích, obdělávaných lesích, loukách, prériích atd.",
+        "notes": ""
+    },
+    "events.HAILSTORM.name": {
+        "translation": "Krupobití",
+        "notes": ""
+    },
+    "events.HAILSTORM.desc": {
+        "translation": "Malé kuličky zmrzlé vody, které prudce padají z mraků, většinou tvrdé a silné, ale ne ve vločkách jako sníh. Klíčová slova: plískanice, krupobití.",
+        "notes": ""
+    },
+    "events.FROST.name": {
+        "translation": "Mráz",
+        "notes": ""
+    },
+    "events.FROST.desc": {
+        "translation": "Pokles teploty s škodlivými účinky na lidi, plodiny, zboží a služby. Klíčová slova: studená fronta, studená vlna, zmrazení.",
+        "notes": ""
+    },
+    "events.HURRICANE.name": {
+        "translation": "Hurikán",
+        "notes": ""
+    },
+    "events.HURRICANE.desc": {
+        "translation": "Tropická níže související s násilnou atmosférickou anomálií, charakterizovanou silným větrem a deštěm, které působí jako vichřice. Vyskytuje se v Karibském moři a tropickém Tichém oceánu. Tam, kde byl termín „hurikán“ použit ve zdrojích k označení hurikánových větrů, místních vichřic, vichřic, bouří atd., Budou označeny jako –vichřice-. Místní bouře jsou hlášeny jako „bouře“. Klíčová slova: tropická níže, cyklón, tajfun.",
+        "notes": ""
+    },
+    "events.FIRE.name": {
+        "translation": "Požár",
+        "notes": ""
+    },
+    "events.FIRE.desc": {
+        "translation": "Městské, průmyslové nebo venkovské požáry, na rozdíl od lesních požárů.",
+        "notes": ""
+    },
+    "events.FLOOD.name": {
+        "translation": "Záplavy",
+        "notes": ""
+    },
+    "events.FLOOD.desc": {
+        "translation": "Zaplavení nebo pokrytí vodou oblasti, kde se nacházejí lidé, plodiny, zboží nebo infrastruktura. Záplavy způsobené mořskými vlnami v pobřežních oblastech budou hlášeny pomocí výrazu „vzedmutí oceánu“.",
+        "notes": ""
+    },
+    "events.LIQUEFACTION.name": {
+        "translation": "Nestabilní půda",
+        "notes": ""
+    },
+    "events.LIQUEFACTION.desc": {
+        "translation": "Okamžité chování, jako když je zrnitá půda nasycena vodou a ztrácí schopnost nést váhu. Přestože se jedná o sekundární jev nebo způsobený zemětřesením, byl zde zahrnut jako příčina ztráty nebo poškození v mnoha obydlených oblastech, pobřežních i kontinentálních. Klíčová slova: zkapalňování",
+        "notes": ""
+    },
+    "events.COASTLINE.name": {
+        "translation": "Změny pobřeží",
+        "notes": ""
+    },
+    "events.COASTLINE.desc": {
+        "translation": "Proměny v pobřežní linii a / nebo v námořních oblastech poblíž pobřeží. Zahrnuje formování a ničení ostrovů, pláží a písečných dun, erozi útesů s dopady na obyvatelstvo, na navigaci atd.",
+        "notes": ""
+    },
+    "events.RAIN.name": {
+        "translation": "Srážky",
+        "notes": ""
+    },
+    "events.RAIN.desc": {
+        "translation": "Fluviální srážky. Zahrnuje izolované, přetrvávající nebo přívalové srážky v konkrétní oblasti i delší období srážek. Klíčová slova: bouře, povodeň, průtrž mračen, liják, přeháňky (trvalé mrholení při katastrofách, například v suchých nebo polosuchých oblastech), bouře.",
+        "notes": ""
+    },
+    "events.SURGE.name": {
+        "translation": "Vlnobití",
+        "notes": ""
+    },
+    "events.SURGE.desc": {
+        "translation": "Mohutné vlny podél pobřeží způsobené hurikány, vichřicemi, bouřemi; konvergence směru větru a období přílivu, nebo zvýšením hladiny moře v důsledku jevu El Niño. V některých oblastech je vzestup hladin moří na maximální čtrnáctidenní výšky známý jako „příliv a odliv“ a platí pro roční maxima. Klíčová slova: příliv, příliv, bouře, bobtnání.",
+        "notes": ""
+    },
+    "events.FOG.name": {
+        "translation": "Mlha",
+        "notes": ""
+    },
+    "events.FOG.desc": {
+        "translation": "Mraky, které sestupují k zemi nebo stoupají od zemského povrchu a které mají vliv na ztrátu viditelnosti vliv na dopravu nebo jiné činnosti. Tento pojem vylučuje ztrátu viditelnosti v důsledku kontaminace generované znečištěním, včetně požárů jakéhokoli typu. Klíčová slova: mlha.",
+        "notes": ""
+    },
+    "events.SNOWSTORM.name": {
+        "translation": "Sněhová bouře",
+        "notes": ""
+    },
+    "events.SNOWSTORM.desc": {
+        "translation": "Sněžení a navátí sněhu. Klíčová slova: sníh.",
+        "notes": ""
+    },
+    "events.HEATWAVE.name": {
+        "translation": "Vlny horka",
+        "notes": ""
+    },
+    "events.HEATWAVE.desc": {
+        "translation": "Zvýšení teploty v oblasti, která ovlivňuje lidi, plodiny, zboží a služby.",
+        "notes": ""
+    },
+    "events.PANIC.name": {
+        "translation": "Panika",
+        "notes": ""
+    },
+    "events.PANIC.desc": {
+        "translation": "Panika nebo kolektivní hysterie při hromadných akcích (stadiony, kinosály atd.), Které vedou k úmrtí, zranění a / nebo ke zničení materiálů. Když je panika vyvolána přírodními jevy (např. Zemětřesení, sesuvy půdy, povodně atd.), Bude označena jako účinky těchto událostí, vždy za předpokladu, že dojde k poškození nebo souvisejícím účinkům.",
+        "notes": ""
+    },
+    "events.PLAGUE.name": {
+        "translation": "Morové rány",
+        "notes": ""
+    },
+    "events.PLAGUE.desc": {
+        "translation": "Invaze organismů, které mají vliv na společenství, zemědělství, hospodářská zvířata nebo rybářské zboží. Například: krysy, kobylky, africké včely atd.",
+        "notes": ""
+    },
+    "events.SEDIMENTATION.name": {
+        "translation": "Sedimentace",
+        "notes": ""
+    },
+    "events.SEDIMENTATION.desc": {
+        "translation": "Ukládání pevného materiálu produkované hromadným pohybem svahu v důsledku povrchové eroze podél břehů řek povodněmi, přívalovými povodněmi, přívalovým proudem vody, lavinou, přílivovými vlnami nebo vlnou tsunami.",
+        "notes": ""
+    },
+    "events.DROUGHT.name": {
+        "translation": "Sucho",
+        "notes": ""
+    },
+    "events.DROUGHT.desc": {
+        "translation": "Období sucha, bez srážek nebo nedostatečných srážek. Obecně se jedná o prodloužená období (měsíce, roky nebo dokonce desetiletí), která se mohou vyskytovat v omezených kontinentálních oblastech nebo v regionálních stepních stupních. Nezahrnuje - vlna veder - i když - se může během období sucha objevit - vlna veder.",
+        "notes": ""
+    },
+    "events.EARTHQUAKE.name": {
+        "translation": "Zemětřesení",
+        "notes": ""
+    },
+    "events.EARTHQUAKE.desc": {
+        "translation": "Zemětřesení nebo otřesy jsou prudké otřesy Země způsobené pohybem tektonických desek. Klíčová slova: třes, zemětřesení, otřesy, seismické pohyby.",
+        "notes": ""
+    },
+    "events.STORM.name": {
+        "translation": "Bouře",
+        "notes": ""
+    },
+    "events.STORM.desc": {
+        "translation": "Srážky doprovázené silným větrem a \/ nebo elektrickým výbojem (blesky). Obecně a také kvůli regionálním konotacím může být nemožné rozlišit mezi - bouří a - vichřicí. Klíčová slova: bouře.",
+        "notes": ""
+    },
+    "events.ELECTRICSTORM.name": {
+        "translation": "Blesková bouře",
+        "notes": ""
+    },
+    "events.ELECTRICSTORM.desc": {
+        "translation": "Koncentrace atmosférického elektrického výboje (blesk) s účinky na lidi, zvířata a domácí zboží, infrastrukturu (například na elektrické sítě vedoucí k výpadkům proudu) nebo průmysl. Tento termín se liší od „bouře“ v tom, že není doprovázen deštěm a silným větrem.",
+        "notes": ""
+    },
+    "events.TORNADO.name": {
+        "translation": "Tornádo",
+        "notes": ""
+    },
+    "events.TORNADO.desc": {
+        "translation": "Sloup silného točícího se větru ve tvaru trychtýře, který přichází na Zemi z mraků kumulonimbů. Může zahrnovat déšť, krupobití a blesky.",
+        "notes": ""
+    },
+    "events.TSUNAMI.name": {
+        "translation": "Tsunami",
+        "notes": ""
+    },
+    "events.TSUNAMI.desc": {
+        "translation": "Vzniká jako vlny generované pohybem na dně moře zemětřesením, sopečnými erupcemi nebo sesuvy půdy. Termíny - bouřka, příliv, povodeň nebo vzestup hladiny se budou označovat jako - bouře, pokud přesně neodpovídají –Tsunami-.",
+        "notes": ""
+    },
+    "events.STRONGWIND.name": {
+        "translation": "Vichřice",
+        "notes": ""
+    },
+    "events.STRONGWIND.desc": {
+        "translation": "Atmosférické poruchy, které generují silné ničivé větry, obvykle bez deště. Nezahrnuje –Tornádo- a –Cyklon- Klíčová slova: vítr, silný vítr, vítr s hurikánovými silami, vichřice, bouře, vánice, tajfun, poryv.",
+        "notes": ""
+    },
+    "events.OTHER.name": {
+        "translation": "Ostatní",
+        "notes": ""
+    },
+    "events.OTHER.desc": {
+        "translation": "Když katastrofa nesouvisí s žádným z výše uvedených podmínek. Před použitím tohoto výrazu pro označení události by měla být vyloučena možnost použití již uvedených událostí. Pokud se událost v inventáři opakuje a v seznamu není nic, co by tuto událost pokrývalo, doporučujeme vytvořit novou událost.",
+        "notes": ""
+    },
+    "causes.UNKNOWN.name": {
+        "translation": "Neznámý",
+        "notes": ""
+    },
+    "causes.UNKNOWN.desc": {
+        "translation": "Příčina události není známa a pro událost neexistuje žádné vysvětlení.",
+        "notes": ""
+    },
+    "causes.ATMOSPHCONDITION.name": {
+        "translation": "Atmosferické podmínky",
+        "notes": ""
+    },
+    "causes.ATMOSPHCONDITION.desc": {
+        "translation": "Týká se nepříznivých atmosférických podmínek, jako jsou silné srážky, mlha, vítr, elektrická bouře nebo kombinace těchto událostí. Může to být způsobeno regionální nebo kontinentální oceánskou cirkulací atmosférických hmot, jako jsou studené fronty nebo zóny intertropické konvergence.",
+        "notes": ""
+    },
+    "causes.BEHAVIOR.name": {
+        "translation": "Chování",
+        "notes": ""
+    },
+    "causes.BEHAVIOR.desc": {
+        "translation": "Zvyky nebo kulturní praktiky, které vedou k existenci sociálně-přírodní nebo antropologické události. Může odkazovat na katastrofu nebo nouzové situace způsobené panikou; zapálené lampy nebo svíčky; nepřijetí preventivních opatření; lidské obydlí v záplavových oblastech nebo oblastech náchylných k sesuvům půdy z důvodu neznalosti jejich účinků nebo proto, že jde proti normě. Klíčová slova: nedbalost, nedostatek předvídavosti.",
+        "notes": ""
+    },
+    "causes.CONTAMINATION.name": {
+        "translation": "Kontaminace",
+        "notes": ""
+    },
+    "causes.CONTAMINATION.desc": {
+        "translation": "Koncentrace kontaminujících látek ve vzduchu, vodě nebo půdě na úrovních, které mohou být škodlivé pro život lidí, zvířat nebo rostlin. Může způsobit biologickou intoxikaci, nákazy atd.",
+        "notes": ""
+    },
+    "causes.SHORTCIRCUIT.name": {
+        "translation": "Zkrat",
+        "notes": ""
+    },
+    "causes.SHORTCIRCUIT.desc": {
+        "translation": "Obvod, který je vytvořen náhodným kontaktem mezi dvěma vodiči protilehlých pólů a obvykle způsobuje výboj. V domech, průmyslu, obchodu nebo v externích elektrických sítích to může být příčina požáru.",
+        "notes": ""
+    },
+    "causes.OVERFLOW.name": {
+        "translation": "Přetečení",
+        "notes": ""
+    },
+    "causes.OVERFLOW.desc": {
+        "translation": "Náhlý nebo pomalý vzestup hladiny vody v malých oblastech nebo širších oblastech, který způsobí únik vody z přirozených hranic (břehy řek, hranice jezer nebo rybníků), nádrží nebo přetokových systémů. Příčina povodní, přívalové povodně, bystřiny.",
+        "notes": ""
+    },
+    "causes.LANDSLIDE.name": {
+        "translation": "Sesuv půdy",
+        "notes": ""
+    },
+    "causes.LANDSLIDE.desc": {
+        "translation": "Hromadný pohyb zemského povrchu. Příčina přívalových povodní, tsunami, sedimentace atd. Klíčová slova: sesuv půdy, pokles nebo usazování, drift, zatopení, tvorba trhlin, zhroucení jeskyní nebo dolů, padání kamenů, rozpad země nebo hornin (pomalé nebo rychlé) ze svahů nebo strání , blokování silnic, kanálů, výkopů.",
+        "notes": ""
+    },
+    "causes.DETERIORATION.name": {
+        "translation": "Zhoršení",
+        "notes": ""
+    },
+    "causes.DETERIORATION.desc": {
+        "translation": "Ztráta nebo zmírnění běžných podmínek stavby nebo infrastruktury. Platí pro zhoršení způsobené používáním nebo nedostatečnou údržbou a \/ nebo účinky některých vnějších jevů na budovy, jako jsou bydlení, budovy služeb, budovy institucí a \/ nebo životně důležité síťové systémy, mosty atd., Které mohou vést k poruše, kolapsu, požárům atd.",
+        "notes": ""
+    },
+    "causes.DESIGNERROR.name": {
+        "translation": "Konstrukce",
+        "notes": ""
+    },
+    "causes.DESIGNERROR.desc": {
+        "translation": "Chyby nebo selhání v konstrukci a \/ nebo konstrukci stavebních prací, průmyslových zařízení, systémů infrastruktury atd., Které vedou ke kolapsu, nehodám, výbuchům, únikům, poklesům, přívalovým tokům a povodním (např. Při přetržení hráze).",
+        "notes": ""
+    },
+    "causes.ENSO_KID.name": {
+        "translation": "El Niño – Jižní oscilace (ENSO)",
+        "notes": ""
+    },
+    "causes.ENSO_KID.desc": {
+        "translation": "Fenomén, který vytváří globální nebo regionální anomálie počasí, jako jsou sucha, vlny veder, epidemie, ale také déšť, záplavy, záplavy v důsledku naplavenin a mráz. Mnoho novinových zpráv připisuje El Niňovi období nadměrných nebo snížených srážek. Měly by však být zahrnuty pouze události striktně přičitatelné El Niňo. V posledních dvou desetiletích to jsou: 1982 - 1983 (velmi silný), 1987 (střední) 1991 - 1992 (střední?) a 1997 až 1998 (střední). El Niño nebo La Niña by měly být označovány jako příčiny pouze v případě, že došlo k oficiálnímu a \/ nebo akademickému potvrzení jejich vztahu k události. Klíčová slova: teplá fáze nebo epizoda ENSO.",
+        "notes": ""
+    },
+    "causes.ENSO_GIRL.name": {
+        "translation": "La Niña (Pacific cold episode)",
+        "notes": ""
+    },
+    "causes.ENSO_GIRL.desc": {
+        "translation": "Symetrický jev pro El Niño. Klíčová slova: studená fáze nebo epizoda ENSO",
+        "notes": ""
+    },
+    "causes.HUMANERROR.name": {
+        "translation": "Lidské selhání",
+        "notes": ""
+    },
+    "causes.HUMANERROR.desc": {
+        "translation": "Omyl nebo chybné jednání při provozu průmyslových závodů, řízení strojů nebo infrastrukturních systémů, které způsobují technologické události, jako jsou požáry, výbuchy, úniky, nehody, kolaps konstrukce atd.",
+        "notes": ""
+    },
+    "causes.EROSION.name": {
+        "translation": "Eroze",
+        "notes": ""
+    },
+    "causes.EROSION.desc": {
+        "translation": "Opotřebení zemského povrchu vnějšími činiteli, jako je voda nebo vítr. Zahrnuje hydraulickou erozi, větrnou erozi a erozi způsobenou podzemní vodou. Příčina sesuvů půdy.",
+        "notes": ""
+    },
+    "causes.ERUPTION.name": {
+        "translation": "Sopečná aktivita",
+        "notes": ""
+    },
+    "causes.ERUPTION.desc": {
+        "translation": "Erupce nebo emise pevného materiálu, kapaliny nebo plynu otvory nebo prasklinami v zemském povrchu. Příčina přívalových povodní, tsunami, znečištění (plyny nebo pádem popela). Klíčová slova: emise lávy, emise par, emise popela, emise bahna nebo země, emise vody, emise hornin.",
+        "notes": ""
+    },
+    "causes.LEAK.name": {
+        "translation": "Průsak",
+        "notes": ""
+    },
+    "causes.LEAK.desc": {
+        "translation": "Prosakování nebo únik toxických a / nebo radioaktivních látek, kapalin, pevných látek nebo plynů. Příčina sesuvů půdy, požárů, otravy atd. Nezahrnuje účinky –sopečné erupce-.",
+        "notes": ""
+    },
+    "causes.EXPLOSION.name": {
+        "translation": "Výbuch",
+        "notes": ""
+    },
+    "causes.EXPLOSION.desc": {
+        "translation": "Náhlé uvolnění velkého množství energie (tepelné, chemické nebo jaderné), doprovázené hlasitým hlukem a prudkým prasknutím přijímajícího příjemce, produkujícím teplo, světlo a plyny. Příčina požáru, sesuvy půdy atd.",
+        "notes": ""
+    },
+    "causes.FAILURE.name": {
+        "translation": "Protržení",
+        "notes": ""
+    },
+    "causes.FAILURE.desc": {
+        "translation": "Roztržení zemské kůry v důsledku akumulace tektonických sil nebo tlaku v sopkách. Příčina zemětřesení. Nezahrnuje vše, co lze označit jako „výchozí“ z důvodu poruchy zařízení nebo sítí nebo jako příčinu sesuvů půdy",
+        "notes": ""
+    },
+    "causes.FLOOD.name": {
+        "translation": "Zaplavení",
+        "notes": ""
+    },
+    "causes.FLOOD.desc": {
+        "translation": "Zaplavení nebo pokrytí vodou oblasti, kde se nacházejí lidé, plodiny, zboží nebo infrastruktura. Příčina sedimentace, epidemie, sesuvy půdy.",
+        "notes": ""
+    },
+    "causes.THERMALINVERSION.name": {
+        "translation": "Termická inverze",
+        "notes": ""
+    },
+    "causes.THERMALINVERSION.desc": {
+        "translation": "Přítomnost vrstvy teplého vzduchu mezi dvěma studenými frontami. Vyskytuje se často za chladného rána v údolích, kde je malá atmosférická cirkulace. Tento termín se používá ve spojení s atmosférickými kontaminanty, které poškozují zdraví živých bytostí.",
+        "notes": ""
+    },
+    "causes.LOCALIZATION.name": {
+        "translation": "Lokalita",
+        "notes": ""
+    },
+    "causes.LOCALIZATION.desc": {
+        "translation": "Fyzické podmínky související s plánovaným nebo neplánovaným osídlením osob nebo zranitelnou infrastrukturou v nestabilních nebo povodňových oblastech (nelegální osady, slumy nebo jejich místní označení, jako jsou chudinské čtvrti, „favely“ nebo „prekarios“).",
+        "notes": ""
+    },
+    "causes.RAIN.name": {
+        "translation": "Srážky",
+        "notes": ""
+    },
+    "causes.RAIN.desc": {
+        "translation": "Fluviální srážky. Hlavní příčina nebo katalyzátor povodní, přívalové povodně, sesuvy půdy, nehody atd. Klíčová slova: bouře, povodeň, bouřka, liják, přeháňky.",
+        "notes": ""
+    },
+    "causes.FOG.name": {
+        "translation": "Mlha",
+        "notes": ""
+    },
+    "causes.FOG.desc": {
+        "translation": "Mračna, které sestupují nebo vystupují ze zemského povrchu. Znamená ztrátu viditelnosti. Příčina nehod. Klíčová slova: mlha.",
+        "notes": ""
+    },
+    "causes.NEGLIGENCE.name": {
+        "translation": "Nedbalost",
+        "notes": ""
+    },
+    "causes.NEGLIGENCE.desc": {
+        "translation": "Akce nebo opomenutí, které vyvolávají nepříznivé důsledky pro jednotlivce nebo komunitu. Připisovatelné osobám vykonávajícím moc, vládním, nevládním nebo soukromým institucím nebo subjektům. Platí pro katastrofy, u nichž je hlavní zjištěnou příčinou nedbalost odpovědných osob, a to buď při poskytování základních služeb, nebo v důsledku nezabrání nebo zmírní aktivity specificky identifikované před událostí.",
+        "notes": ""
+    },
+    "causes.OTHER.name": {
+        "translation": "Ostatní",
+        "notes": ""
+    },
+    "causes.OTHER.desc": {
+        "translation": "Tento termín by měl být použit pouze v případě, že příčina zůstane nedefinovaná v seznamu - oficiálních příčin - DesInventaru. Měl by být uveden stejný popis. Pokud jde o častou příčinu v inventáři a nelze ji zahrnout do žádné z předdefinovaných příčin, měla by být definována nová příčina.",
+        "notes": ""
+    },
+    "causes.PLAGUE.name": {
+        "translation": "Morové rány",
+        "notes": ""
+    },
+    "causes.PLAGUE.desc": {
+        "translation": "Invaze organismů, které mají vliv na společenství, zemědělství, hospodářská zvířata nebo rybářství. Příčina epidemií, kontaminace atd.",
+        "notes": ""
+    },
+    "causes.DROUGHT.name": {
+        "translation": "Sucho",
+        "notes": ""
+    },
+    "causes.DROUGHT.desc": {
+        "translation": "Období sucha, bez srážek nebo nedostatečných srážek. Příčina lesních požárů, biologická migrace nebo úhyny.",
+        "notes": ""
+    },
+    "causes.EARTHQUAKE.name": {
+        "translation": "Zemětřesení",
+        "notes": ""
+    },
+    "causes.EARTHQUAKE.desc": {
+        "translation": "Náhlé otřesy Země způsobené pohybem tektonických desek. Vytváří tsunami, sesuvy půdy, tání, přívalové povodně, kolaps struktur, požár, výbuch, nehody, změna pobřeží atd. Klíčová slova: třes, zemětřesení, pozdvižení.",
+        "notes": ""
+    },
+    "causes.DEFORESTATION.name": {
+        "translation": "Kácení",
+        "notes": ""
+    },
+    "causes.DEFORESTATION.desc": {
+        "translation": "Ekvivalent k odlesňování. Příčina záplav, sesuvů půdy, biologické migrace nebo úhynům atd.",
+        "notes": ""
+    },
+    "causes.STORM.name": {
+        "translation": "Bouře",
+        "notes": ""
+    },
+    "causes.STORM.desc": {
+        "translation": "Déšť, doprovázený silným větrem a \/ nebo elektrickým výbojem. Příčina povodní.",
+        "notes": ""
+    },
+    "causes.STRONGWIND.name": {
+        "translation": "Vichřice",
+        "notes": ""
+    },
+    "causes.STRONGWIND.desc": {
+        "translation": "Atmosférické poruchy, které generují silné ničivé větry, obvykle bez deště. Příčina sesuvů půdy. Klíčová slova: vítr, silný vítr, hurikán, vichřice, bouře, vánice, tajfun, poryv větru.",
+        "notes": ""
+    }
+}
